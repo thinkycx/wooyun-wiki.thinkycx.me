@@ -1,0 +1,138 @@
+====== Cross-site Request Forgery/CSRF ======
+
+
+
+
+
+==== 1、相关背景介绍 ====
+
+----
+**跨站请求伪造（Cross-Site Request Forgery，CSRF）**是一种使已登录用户在不知情的情况下执行某种动作的攻击。因为攻击者看不到伪造请求的响应结果，所以CSRF攻击主要用来执行动作，而非窃取用户数据。当受害者是一个普通用户时，CSRF可以实现在其不知情的情况下转移用户资金、发送邮件等操作；但是如果受害者是一个具有管理员权限的用户时CSRF则可能威胁到整个Web系统的安全。
+
+==== 2、成因 ====
+
+----
+由于开发人员对CSRF的了解不足，错把“经过认证的浏览器发起的请求”当成“经过认证的用户发起的请求”，当已认证的用户点击攻击者构造的恶意链接后就“被”执行了相应的操作。例如，一个银行的转账功能（将100元转到BOB的账上）是通过如下方式实现的：
+
+<code>GET http://bank.com/transfer.do?acct=BOB&amount=100 HTTP/1.1</code>
+    
+当攻击者MARIA诱导用户点击下面的链接时，如果该用户登录该银行网站的凭证尚未过期，那么他便在不知情的情况下转给了MARIA 100000元钱：
+
+<code>http://bank.com/transfer.do?acct=MARIA&amount=100000</code>
+    
+简单的身份验证只能保证请求发自某个用户的浏览器，却不能保证请求本身是用户自愿发出的。
+
+==== 3、攻击方式及危害 ====
+
+----
+**GET型与POST型CSRF**
+
+GET型与POST型CSRF主要取决于相应操作对提交方式的限制，其原理都是事先构造出一个恶意的请求，然后诱导用户点击或访问，从而假借用户身份完成相应的操作。另外，有些POST型CSRF也可能会利用javascript进行自动提交表单完成操作。
+
+**Flash CSRF**
+
+Flash CSRF通常是由于Crossdomain.xml文件配置不当造成的，利用方法是使用swf来发起跨站请求伪造，如:
+
+Flash跨域权限管理文件设置为允许所有主机/域名跨域对本站进行读写数据：
+<code XML>
+This XML file does not appear to have any style information associated with it. The document tree is shown below.
+<cross-domain-policy>
+    <allow-access-from domain="*"/>
+</cross-domain-policy>
+</code>
+    
+Flash跨域权限管理文件过滤规则不严(domain=”*”)，导致可以从其它任何域传Flash产生CSRF。
+
+**CSRF蠕虫**
+
+CSRF常见的危害是攻击者可以在用户不知情的情况下以用户的身份进行指定的操作，但实际上CSRF的危害远不止于此，经过特意构造的CSRF可以产生蠕虫的效果。如：某社区私信好友的接口和获取好友列表的接口都存在CSRF漏洞，攻击者就可以将其组合成一个CSRF蠕虫——当一个用户访问恶意页面后通过CSRF获取其好友列表信息，然后再利用私信好友的CSRF漏洞给其每个好友发送一条指向恶意页面的信息，只要有人查看这个信息里的链接，CSRF蠕虫就会不断传播下去，其可能造成的危害和影响非常巨大！
+
+==== 4、实际案例 ====
+
+----
+**VIP：WooYun-2013-27258：http://www.wooyun.org/bugs/wooyun-2013-027258**
+
+虽然请求是POST类型，但仍可以使用GET进行提交，因此，攻击者可以直接将恶意的请求链接放在img标签的src处。如用户登录时看到这张图就会执行相应的操作。
+
+**blue：WooYun-2010-00780：http://www.wooyun.org/bugs/wooyun-2010-0780**
+
+该漏洞可导致用户点击攻击者构造的恶意页面后，在不知情的情况下将攻击者加入可访问的用户列表或空间访问密码被修改。
+
+**VIP：WooYun-2013-26825：http://www.wooyun.org/bugs/wooyun-2013-026825**
+
+由于TP-LINK路由器内所有操作均为GET，且未对CSRF进行防御，因此导致攻击者可以利用CSRF漏洞实现如：修改DNS、关闭防火防火墙等重要操作。
+
+==== 5、修复方案 ====
+
+----
+
+因为攻击者获取不到伪造请求的响应结果，所以我们仅对那些会产生数据改变的服务进行重点防护即可，主要方式如下：
+
+* **验证HTTP Referer字段**：
+
+    在通常情况下，访问一个安全受限页面的请求来自于同一个网站， HTTP 头中的Referer字段记录了该 HTTP 请求的来源地址，如果Referer中的地址不是来源于本网站则可认为是不安全的请求，对于该请求应予以拒绝。
+    
+    这种方法简单易行，对于现有的系统只需在加上一个检查Referer值的过滤器，无需改变当前系统的任何已有代码和逻辑。
+    
+    但是，这种方法存在一些问题需要考虑：首先，Referer 的值是由浏览器提供的，虽然HTTP协议上有明确的要求，但是每个浏览器对于Referer的具体实现可能有差别，并且不能保证浏览器自身没有安全漏洞，将安全性交给第三方（即浏览器）保证，从理论上来讲是不可靠的；其次，用户可能会出于保护隐私等原因禁止浏览器提供Referer，这样的话正常的用户请求也可能因没有Referer信息被误判为不不安全的请求，无法提供正常的使用。
+    
+* **添加token**：
+
+    CSRF攻击之所以能够成功是因为攻击者可以伪造用户的请求，对此最好的防御手段就是让攻击者无法伪造这个请求。因此，我们可以在HTTP请求中以参数的形式添加一个随机的token，并在服务器端检查这个token是否正确，如不正确或不存在 ，则可以认为是不安全的请求，拒绝提供相关服务。
+    
+    注意：如果网站同时还存在xss漏洞时，上述token的方法将可能失效，因为xss可以模拟浏览器执行操作，攻击者通过xss漏洞读取token值后，便可以构造出合法的用户请求了。所以在做好CSRF防护的同时，相应的安全防护也应做好。
+
+* **添加验证码**：
+
+    在用户提交数据之前，让用户输入验证码，或者用户在进行关键操作时，让用户重新输入密码进行验证。
+    
+    
+    
+对于Flash CSRF要对站点根目录CrossDomain.xml跨域获取信息权限做好控制，精确到子域，例如：
+
+<code XML>
+<?xml version="1.0"?>
+<cross-domain-policy>
+    <allow-access-from domain="http://a.example.com" secure="true”/>
+    <allow-access-from domain="http://b.example.com" secure="true”/>
+</cross-domain-policy>
+</code>
+精确配置好信任域的同时，同时也要验证用户上传的文件内容，攻击者可以上传任意后缀但是内容为flash的文件继续进行CSRF攻击
+
+
+==== 6、漏洞扫描与发现 ====
+
+----
+
+=== 6.1 GET类型的CSRF的检测 ===
+
+如果有token等验证参数，先去掉参数尝试能否正常请求。如果可以，即存在CSRF漏洞。
+
+=== 6.2 POST类型的CSRF的检测 ===
+
+如果有token等验证参数，先去掉参数尝试能否正常请求。
+如果可以，再去掉referer参数的内容，如果仍然可以，说明存在CSRF漏洞，可以利用构造外部form表单的形式，实现攻击。
+如果直接去掉referer参数请求失败，这种还可以继续验证对referer的判断是否严格，是否可以绕过。
+一般用这种形式的进行判断，http://wooyun.org.xxx.com/a/b.php 或者 http://xxx.com?r=http://wooyun.org
+这样如果对referer判断直接用的indexOf判断的话，或者正则表达式不够严格的情况，就可以被绕过从而形成CSRF攻击。
+
+=== 6.3 特殊情况的POST类型的CSRF检测 ===
+
+如果上述post方式对referer验证的特别严格，有的时候由于程序员对请求类型判断不是很严格，可以导致post请求改写为get请求，从而CSRF。
+比如post请求为 http://xxx.com/yy.php   postdata为aa=xx1&bb=xx2
+然后将请求改为  http://xxx.comyy.php?aa=xx1&bb=xx2  直接以get请求的方式进行访问，如果请求成功，即可以此种方式绕过对referer的检测，从而CSRF。
+==== 7、相关其他安全问题 ====
+
+----
+未知
+
+==== 8、相关资源 ====
+
+----
+[[https://www.owasp.org/index.php/CSRF|Cross-Site Request Forgery (CSRF)]]
+
+[[http://zh.wikipedia.org/wiki/%E8%B7%A8%E7%AB%99%E8%AF%B7%E6%B1%82%E4%BC%AA%E9%80%A0|跨站请求伪造]]
+
+[[http://drops.wooyun.org/tips/688|Flash CSRF]]
+
+[[https://www.ibm.com/developerworks/cn/web/1102_niugang_csrf/|CSRF 攻击的应对之道]]

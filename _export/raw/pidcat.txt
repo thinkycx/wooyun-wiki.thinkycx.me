@@ -1,0 +1,54 @@
+====== pidcat ======
+
+
+下载地址[https://github.com/JakeWharton/pidcat](https://github.com/JakeWharton/pidcat)
+
+==== 1.安装环境 ==== 
+
+---
+
+确保环境变量中有android SDK的两个 tools 目录
+
+	export PATH=$PATH:<path to Android SDK>/platform-tools
+	export PATH=$PATH:<path to Android SDK>/tools
+
+- OSX
+
+		brew install pidcat
+		
+- win/linux
+
+	下载`pidcat.py`后加入环境变量即可
+	
+==== 2.使用方法 ==== 
+
+---
+
+	pidcat com.oprah.bees.android
+
+==== 3.参数说明 ==== 
+
+---
+
+	» pidcat -h                                                                                                         
+	usage: pidcat [-h] [-w N] [-l {V,D,I,W,E,F}] [--color-gc]
+	              [--always-display-tags] [-s DEVICE_SERIAL] [-d] [-e]
+	              [package [package ...]]
+
+	Filter logcat by package name
+
+	positional arguments:
+	  package               Application package name(s)
+
+	optional arguments:
+	  -h, --help            show this help message and exit
+	  -w N, --tag-width N   Width of log tag
+	  -l {V,D,I,W,E,F}, --min-level {V,D,I,W,E,F}
+	                        Minimum level to be displayed
+	  --color-gc            Color garbage collection
+	  --always-display-tags
+	                        Always display the tag name
+	  -s DEVICE_SERIAL, --serial DEVICE_SERIAL
+	                        Device serial number (adb -s option)
+	  -d, --device          Use first device for log input (adb -d option).
+	  -e, --emulator        Use first emulator for log input (adb -e option).

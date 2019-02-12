@@ -1,0 +1,18 @@
+====== maltego使用说明 ======
+
+==== 1、工具简介 ====
+
+----
+有时候你可曾想过，从一个Email，或者Twitter，或是网站，甚至姓名等等，能找到一个人千丝万缕的联系，并把这些联系整合，利用起 来？Maltego就是这样一款优秀而强大的工具。Maltego允许从服务器中更新，整合数据，并允许用户很大程度上的自定义，从而实现整合出最适合用户的“情报拓扑”。
+
+Maltego的Commercial版是需要收费的，只有Community Editions（以下简称CE）版本才是对用户免费的版本。
+
+
+==== 2、相关资源 ====
+
+----
+[[http://www.paterva.com/web5/client/overview.php|Overview of Maltego]]
+
+[[http://www.ethicalhacker.net/content/view/202/24/|Maltego Introduction and Personal Recon]]
+
+[[http://blog.domaintools.com/2014/07/visualizing-domaintools-data-with-maltego/|Visualizing DomainTools Data with Maltego]]

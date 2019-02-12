@@ -1,0 +1,62 @@
+====== Github导致文件泄露 ======
+
+
+==== 1、Github简介 ====
+
+----
+GitHub是一个共享虚拟主机服务，用于存放使用Git版本控制的软件代码和内容项目。它由GitHub公司（曾称Logical Awesome）的开发者Chris Wanstrath、PJ Hyett和Tom Preston-Werner使用Ruby on Rails编写而成。
+
+作为开源代码库以及版本控制系统，Github目前已拥有超过350万的开发者用户。随着越来越多的应用程序转移到了云上，Github已经成为了管理软件开发以及发现已有代码的首选方法。
+
+==== 2、漏洞成因及危害 ====
+
+----
+Github是目前全球最热门的在线协作网站，大量的程序员都会在Github上分享自己的代码以及协力进行软件开发。
+但与此同时，部分的程序员出于各种原因而没有删除所分享代码中的重要敏感信息，而被黑客利用与攻击系统。
+
+在Github中被泄露的敏感信息主要包括以下几类
+  * 邮箱信息
+  * SVN信息
+  * 内部账号及密码
+  * 数据库连接信息
+  * 服务器配置信息
+
+这些敏感信息有的只是导致一些无法被外网连接的内网账户信息或者数据库连接信息泄露，但时也可能会导致公司重要的商业秘密或程序源代码被他人窃取，管理员账户被控制或者数据库泄露等，造成巨大的损失。
+==== 3、漏洞检测及利用 ====
+
+----
+使用搜索引擎搜索语法便可快速从Github上找到需要的信息，以下是几个示例。
+
+Google hack:
+<code>
+site:Github.com smtp 
+site:Github.com sa password
+site:Github.com root password
+site:Github.com User ID='sa';Password
+site:Github.com svn
+site:Github.com ftp
+</code>
+
+也可使用Github敏感信息收集工具[[https://github.com/lijiejie/GitHack|GitHack]]。
+
+==== 4、实际案例 ====
+
+----
+[[http://www.wooyun.org/bugs/wooyun-2010-0100238|北京大学内部邮件账号泄漏]]
+
+[[http://www.wooyun.org/bugs/wooyun-2010-0108535|阿里巴巴某系统弱口令]]
+
+[[http://www.wooyun.org/bugs/wooyun-2010-095466|泄露youku各种信息内含数据库论队友的重要性]]
+
+[[http://www.wooyun.org/bugs/wooyun-2010-094921|高德软件多个信息泄露，影响公司安全]]
+
+[[http://www.wooyun.org/bugs/wooyun-2010-091525|UC某业务导致敏感内部邮件信息泄露]]
+
+==== 5、漏洞修复 ====
+
+----
+将源码上传至Github公开仓库前注意对敏感信息打码或者删除。
+==== 6、相关资源 ====
+
+----
+[[http://michenriksen.com/blog/gitrob-putting-the-open-source-in-osint/|Gitrob: Putting the Open Source in OSINT]]

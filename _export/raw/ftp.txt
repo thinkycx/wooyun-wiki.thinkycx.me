@@ -1,0 +1,129 @@
+====== FTP服务器安全配置 ======
+
+==== 1、FTP简介 ====
+
+----
+
+FTP 是File Transfer Protocol（文件传输协议）的英文简称，而中文简称为“文传协议”。用于Internet上的控制文件的双向传输。同时，它也是一个应用程序（Application）。基于不同的操作系统有不同的FTP应用程序，而所有这些应用程序都遵守同一种协议以传输文件。在FTP的使用当中，用户经常遇到两个概念："下载"（Download）和"上传"（Upload）。"下载"文件就是从远程主机拷贝文件至自己的计算机上；"上传"文件就是将文件从自己的计算机中拷贝至远程主机上。用Internet语言来说，用户可通过客户机程序向（从）远程主机上传（下载）文件。
+
+
+==== 2、FTP服务器架设 ====
+
+----
+
+测试环境 centos 6.6，ftp选择vsftp
+
+安装vsftpd
+<code bash>yum install vsftpd -y</code>
+运行服务
+<code bash>/etc/init.d/vsftpd -y</code>
+    
+初始安装完成，初始安装完成后允许任意用户直接登录，可以下载其中的文件
+
+
+==== 3、错误配置及利用 ====
+
+----
+
+=== 3.1 允许匿名用户直接登录,下载文件 ===
+
+=== 3.2 配置不当存在弱口令 ===
+
+=== 3.3 权限配置不当 ===
+
+=== 3.4 proFTPd 未授权的文件拷贝(CVE-2015-3306) ===
+
+在proFTPd版本小于1.3.5的条件下，登陆proftp后(未授权或者爆破)，使用cpfr和cpto，能够拷贝主机中的文件，如果在知道web目录的绝对情况下，有可能写入webshell
+
+具体攻击方法参考
+
+[[http://zone.wooyun.org/content/19890|ProFTPd 1.3.5 - File Copy]]
+
+==== 4、实际案例 ====
+
+----
+
+=== 4.1 FTP未授权访问 ===
+
+
+[[http://www.wooyun.org/bugs/wooyun-2010-0107341|武汉科技大学某处FTP未授权访问]]
+
+[[http://www.wooyun.org/bugs/wooyun-2010-0105901|中国海油FTP未授权导致大量数据泄露]]
+
+=== 4.2 FTP弱口令 ===
+
+
+[[http://www.wooyun.org/bugs/wooyun-2010-0102552|长虹FTP弱口令可导致全网数据泄漏]]
+
+[[http://www.wooyun.org/bugs/wooyun-2010-0100787|KONKA康佳某系统服务器FTP弱口令]]
+
+
+
+==== 5、修复方案 ====
+
+----
+
+修复方案使用vsftp的配置文件作为标准
+=== 5.1 禁止匿名访问 ===
+
+<code bash>
+vim /etc/vsftpd/vsftpd.conf
+anonymous_enable=NO
+</code>
+
+=== 5.2 增强口令强度 ===
+
+避免弱口令
+
+=== 5.3 进行访问限制 ===
+
+使用iptables做ACL
+FTP分为主动式和被动式，书写防火墙规则是要注意
+
+== 5.3.1 主动式 ==
+
+
+<code bash>
+iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+iptables -A INPUT -p tcp  -m multiport --dport 20,21  -m state --state NEW -j ACCEPT
+</code>
+== 5.3.2 被动式 ==
+<code bash>
+vim /etc/modprobe.conf
+alias ip_conntrack ip_conntract_ftp ip_nat_ftp 
+vim /etc/rc.local
+/sbin/modprobe ip_conntract
+/sbin/modprobe ip_conntrack_ftp
+/sbin/modprobe ip_nat_ftp
+</code>
+假设vsftpd.conf中得相关配置如下
+<code bash>
+pasv_enable=YES
+pasv_min_port=2222
+pasv_max_port=2225
+</code>
+防火墙规则可写为
+<code bash>
+iptables -A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
+iptables -A INPUT -p tcp -m state --state NEW -m tcp --dport 21 -j ACCEPT
+iptables -A INPUT -p tcp --dport 2222:2225 -j ACCEPT
+</code>
+==== 6、漏洞扫描与发现 ====
+
+----
+
+先使用nmap对21端口的开放情况进行扫描，然后使用hydra或者medusa进行登陆验证或者暴力破解
+端口扫描
+<code bash>nmap -Pn -p21 ip</code>
+登陆验证或者端口扫描
+<code bash>
+medusa -H ip.txt -U user.txt -P passwd.txt -M ftp
+#hydra不支持批量的导入
+hydra -L username.txt -P passwd.txt  ftp://ip
+</code>
+
+==== 7、相关资源 ====
+
+----
+
+[[https://security.appspot.com/vsftpd.html|vsftpd官网]]

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/tools:dnstracer by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:25:25 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8" />
+  <title>tools:dnstracer</title>
+<meta name="generator" content="DokuWiki"/>
+<meta name="robots" content="index,follow"/>
+<meta name="keywords" content="tools,dnstracer"/>
+<link rel="search" type="application/opensearchdescription+xml" href="../../lib/exe/opensearch.php" title="WooYun WiKi"/>
+<link rel="start" href="../../index.html"/>
+<link rel="contents" href="../../tools_dnstracerdecf.html?do=index" title="网站地图"/>
+<link rel="alternate" type="application/rss+xml" title="最近更改" href="../../feed.php"/>
+<link rel="alternate" type="application/rss+xml" title="当前命名空间" href="../../feed022e.php?mode=list&amp;ns=tools"/>
+<link rel="alternate" type="text/html" title="纯HTML" href="tools_dnstracer.html"/>
+<link rel="alternate" type="text/plain" title="Wiki Markup 语言" href="../raw/dnstracer.txt"/>
+<link rel="canonical" href="../../tools_dnstracer.html"/>
+<link rel="stylesheet" type="text/css" href="../../lib/exe/css70b4.css?t=bootstrap3&amp;tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"/>
+<script type="text/javascript">/*<![CDATA[*/var NS='tools';var JSINFO = {"id":"tools:dnstracer","namespace":"tools","plugin_codeprettify":{"loader_base":"\/lib\/plugins\/codeprettify\/google-code-prettify"}};
+/*!]]>*/</script>
+<script type="text/javascript" charset="utf-8" src="../../lib/exe/js1e16.php?tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"></script>
+<script type="text/javascript" charset="utf-8" src="../../lib/plugins/codeprettify/google-code-prettify/run_prettifyeb11.js?lang=css"></script>
+</head>
+<body>
+<div class="dokuwiki export">
+<!-- TOC START -->
+<div id="dw__toc">
+<h3 class="toggle">目录</h3>
+<div>
+
+<ul class="toc">
+<li class="level1"><div class="li"><a href="#dnstracer_使用说明">dnstracer 使用说明</a></div>
+<ul class="toc">
+<li class="clear">
+<ul class="toc">
+<li class="level3"><div class="li"><a href="#工具简介">1、工具简介</a></div></li>
+<li class="level3"><div class="li"><a href="#使用方法">2、使用方法</a></div></li>
+<li class="level3"><div class="li"><a href="#使用示范">3、使用示范</a></div></li>
+<li class="level3"><div class="li"><a href="#相关资源">4、相关资源</a></div></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<!-- TOC END -->
+
+<h1 class="sectionedit1" id="dnstracer_使用说明">dnstracer 使用说明</h1>
+<div class="level1">
+
+</div>
+<!-- EDIT1 SECTION "dnstracer 使用说明" [1-38] -->
+<h3 class="sectionedit2" id="工具简介">1、工具简介</h3>
+<div class="level3">
+<hr />
+
+<p>
+dnstracker可以追踪dns的解析过程。
+</p>
+
+</div>
+<!-- EDIT2 SECTION "1、工具简介" [39-116] -->
+<h3 class="sectionedit3" id="使用方法">2、使用方法</h3>
+<div class="level3">
+<hr />
+
+<p>
+kali终端直接输入“dnstracer”可以查看其相关参数用法：
+</p>
+<pre class="code bash"><span class="co4">light@kali:~# </span>dnstracer 
+DNSTRACER version 1.8.1 - <span class="br0">&#40;</span>c<span class="br0">&#41;</span> Edwin Groothuis - http:<span class="sy0">//</span>www.mavetju.org
+Usage: dnstracer <span class="br0">&#91;</span>options<span class="br0">&#93;</span> <span class="br0">&#91;</span>host<span class="br0">&#93;</span>
+	-c: disable <span class="kw3">local</span> caching, default enabled
+	-C: <span class="kw3">enable</span> negative caching, default disabled
+	-o: <span class="kw3">enable</span> overview of received answers, default disabled
+	<span class="re5">-q</span> <span class="sy0">&lt;</span>querytype<span class="sy0">&gt;</span>: query-type to use <span class="kw1">for</span> the DNS requests, default A
+	<span class="re5">-r</span> <span class="sy0">&lt;</span>retries<span class="sy0">&gt;</span>: amount of retries <span class="kw1">for</span> DNS requests, default <span class="nu0">3</span>
+	<span class="re5">-s</span> <span class="sy0">&lt;</span>server<span class="sy0">&gt;</span>: use this server <span class="kw1">for</span> the initial request, default localhost
+	             If . is specified, A.ROOT-SERVERS.NET will be used.
+	<span class="re5">-t</span> <span class="sy0">&lt;</span>maximum timeout<span class="sy0">&gt;</span>: Limit <span class="kw1">time</span> to <span class="kw3">wait</span> per try
+	-v: verbose
+	<span class="re5">-S</span> <span class="sy0">&lt;</span><span class="kw2">ip</span> address<span class="sy0">&gt;</span>: use this <span class="kw3">source</span> address.
+	-<span class="nu0">4</span>: don<span class="st_h">'t query IPv6 servers</span></pre>
+
+</div>
+<!-- EDIT3 SECTION "2、使用方法" [117-928] -->
+<h3 class="sectionedit4" id="使用示范">3、使用示范</h3>
+<div class="level3">
+<hr />
+
+<p>
+查询<a href="http://1ight.co/" class="urlextern" title="http://1ight.co"  rel="nofollow">1ight.co</a>的DNS解析过程：
+</p>
+<pre class="code bash"><span class="co4">light@kali:~# </span>dnstracer <span class="re5">-o</span> 1ight.co
+Tracing to 1ight.co<span class="br0">&#91;</span>a<span class="br0">&#93;</span> via 192.168.75.2, maximum of <span class="nu0">3</span> retries
+192.168.75.2 <span class="br0">&#40;</span>192.168.75.2<span class="br0">&#41;</span> 
+ <span class="sy0">|</span>\___ F1G1NS1.DNSPOD.NET <span class="br0">&#91;</span>1ight.co<span class="br0">&#93;</span> <span class="br0">&#40;</span>180.153.9.189<span class="br0">&#41;</span> Got authoritative answer 
+ <span class="sy0">|</span>\___ F1G1NS1.DNSPOD.NET <span class="br0">&#91;</span>1ight.co<span class="br0">&#93;</span> <span class="br0">&#40;</span>182.140.167.166<span class="br0">&#41;</span> <span class="sy0">*</span> Got authoritative answer 
+ <span class="sy0">|</span>\___ F1G1NS1.DNSPOD.NET <span class="br0">&#91;</span>1ight.co<span class="br0">&#93;</span> <span class="br0">&#40;</span>113.108.80.138<span class="br0">&#41;</span> Got authoritative answer 
+ <span class="sy0">|</span>\___ F1G1NS1.DNSPOD.NET <span class="br0">&#91;</span>1ight.co<span class="br0">&#93;</span> <span class="br0">&#40;</span>111.30.132.180<span class="br0">&#41;</span> <span class="sy0">*</span> <span class="sy0">*</span> <span class="sy0">*</span> 
+ <span class="sy0">|</span>\___ F1G1NS1.DNSPOD.NET <span class="br0">&#91;</span>1ight.co<span class="br0">&#93;</span> <span class="br0">&#40;</span>125.39.208.193<span class="br0">&#41;</span> Got authoritative answer 
+  \___ F1G1NS2.DNSPOD.NET <span class="br0">&#91;</span>1ight.co<span class="br0">&#93;</span> <span class="br0">&#40;</span>112.90.82.194<span class="br0">&#41;</span> Got authoritative answer 
+  \___ F1G1NS2.DNSPOD.NET <span class="br0">&#91;</span>1ight.co<span class="br0">&#93;</span> <span class="br0">&#40;</span>101.226.30.224<span class="br0">&#41;</span> Got authoritative answer 
+  \___ F1G1NS2.DNSPOD.NET <span class="br0">&#91;</span>1ight.co<span class="br0">&#93;</span> <span class="br0">&#40;</span>182.140.167.188<span class="br0">&#41;</span> <span class="sy0">*</span> Got authoritative answer 
+  \___ F1G1NS2.DNSPOD.NET <span class="br0">&#91;</span>1ight.co<span class="br0">&#93;</span> <span class="br0">&#40;</span>115.236.137.40<span class="br0">&#41;</span> Got authoritative answer 
+  \___ F1G1NS2.DNSPOD.NET <span class="br0">&#91;</span>1ight.co<span class="br0">&#93;</span> <span class="br0">&#40;</span>115.236.151.191<span class="br0">&#41;</span> <span class="sy0">*</span> Got authoritative answer 
+&nbsp;
+F1G1NS2.DNSPOD.NET <span class="br0">&#40;</span>115.236.151.191<span class="br0">&#41;</span>    1ight.co -<span class="sy0">&gt;</span> 112.74.102.78
+F1G1NS2.DNSPOD.NET <span class="br0">&#40;</span>115.236.137.40<span class="br0">&#41;</span>     1ight.co -<span class="sy0">&gt;</span> 112.74.102.78
+F1G1NS2.DNSPOD.NET <span class="br0">&#40;</span>182.140.167.188<span class="br0">&#41;</span>    1ight.co -<span class="sy0">&gt;</span> 112.74.102.78
+F1G1NS2.DNSPOD.NET <span class="br0">&#40;</span>101.226.30.224<span class="br0">&#41;</span>     1ight.co -<span class="sy0">&gt;</span> 112.74.102.78
+F1G1NS2.DNSPOD.NET <span class="br0">&#40;</span>112.90.82.194<span class="br0">&#41;</span>      1ight.co -<span class="sy0">&gt;</span> 112.74.102.78
+F1G1NS1.DNSPOD.NET <span class="br0">&#40;</span>125.39.208.193<span class="br0">&#41;</span>     1ight.co -<span class="sy0">&gt;</span> 112.74.102.78
+F1G1NS1.DNSPOD.NET <span class="br0">&#40;</span>113.108.80.138<span class="br0">&#41;</span>     1ight.co -<span class="sy0">&gt;</span> 112.74.102.78
+F1G1NS1.DNSPOD.NET <span class="br0">&#40;</span>182.140.167.166<span class="br0">&#41;</span>    1ight.co -<span class="sy0">&gt;</span> 112.74.102.78
+F1G1NS1.DNSPOD.NET <span class="br0">&#40;</span>180.153.9.189<span class="br0">&#41;</span>      1ight.co -<span class="sy0">&gt;</span> 112.74.102.78</pre>
+
+</div>
+<!-- EDIT4 SECTION "3、使用示范" [929-2550] -->
+<h3 class="sectionedit5" id="相关资源">4、相关资源</h3>
+<div class="level3">
+<hr />
+
+<p>
+暂无
+</p>
+
+</div>
+<!-- EDIT5 SECTION "4、相关资源" [2551-] --></div>
+</body>
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/tools:dnstracer by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:25:25 GMT -->
+</html>

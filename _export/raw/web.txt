@@ -1,0 +1,50 @@
+===== WEB应用 ====
+
+----
+
+==== 常规WEB漏洞 ====
+  * [[web:xss|XSS(cross site scripting)]]
+  * [[web:sql|SQL注入（SQL Injection）]]
+  * [[web:code-injection|代码注入（CODE Injection）]]
+  * [[web:os-commanding|命令执行（OS Commanding）]]
+  * [[web:LFI|本地文件包含（Local File Include）]]
+  * [[web:RFI|远程文件包含（Remote File Include）]]
+  * [[web:CSRF|CSRF（Cross-site Request Forgery）]]
+  * [[web:SSRF|SSRF（Server Side Request Forgery）]]
+  * [[web:file-upload|文件上传（File Upload）]]
+  * [[web:click-jacking|点击劫持（Click Jacking）]]
+  * [[web:url-redirection|URL重定向（URL Redirection）]]
+  * [[web:race-condtion|条件竞争（Race Condtion）]]
+  * [[web:XXE-attack|XML外部实体攻击（XML External Entity attack）]]
+  * [[web:XSCH|XSCH (Cross Site Content Hijacking)]]
+  * [[web:xml|XML注入（XML Injection）]]
+  * [[web:ldap|LDAP注入（LDAP Injection）]]
+  * [[web:xpath|XPATH注入(XPATH Injection)]]
+
+==== 业务逻辑漏洞 ====
+  * [[web:user system|用户体系]]
+  * [[web:online-payment|在线支付]]
+  * [[web:execution|顺序执行]]
+  * [[web:oauth|oauth授权]]
+  * [[web:client-bypass:本地限制，抓包绕过]]
+
+==== Web已公开漏洞 ====
+  * [[web:struts|struts]]
+  * [[web:elasticsearch|elasticsearch]]
+  * [[web:jboss|jboss]]
+  * [[web:thinkphp|thinkphp]]
+  * [[web:zabbix|zabbix]]
+  * [[web:discuz|Discuz!]]
+  * [[web:phpcms|phpcms]]
+  * [[web:fck-editor|CKEditor]]
+  * [[web:resin-FI|resin文件读取]]
+
+==== 敏感web系统弱口令或可直接访问 ====
+  * [[web:tomcat|Apache Tomcat弱口令]]
+  * [[web:zebra|zebra路由]]
+  * [[web:ganglia|ganglia信息泄露]]
+  * [[web:rundeck|rundeck]]
+  * [[web:jenkins|jenkins平台]]
+  * [[web:zenoss|zenoss监控系统]]
+  * [[web:weblogic|weblogic弱口令]]
+  * [[web:server-status|server-status信息泄露]]

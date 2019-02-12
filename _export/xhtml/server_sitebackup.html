@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/server:sitebackup by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:25:25 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8" />
+  <title>server:sitebackup</title>
+<meta name="generator" content="DokuWiki"/>
+<meta name="robots" content="index,follow"/>
+<meta name="keywords" content="server,sitebackup"/>
+<link rel="search" type="application/opensearchdescription+xml" href="../../lib/exe/opensearch.php" title="WooYun WiKi"/>
+<link rel="start" href="../../index.html"/>
+<link rel="contents" href="../../server_sitebackupdecf.html?do=index" title="网站地图"/>
+<link rel="alternate" type="application/rss+xml" title="最近更改" href="../../feed.php"/>
+<link rel="alternate" type="application/rss+xml" title="当前命名空间" href="../../feed0688.php?mode=list&amp;ns=server"/>
+<link rel="alternate" type="text/html" title="纯HTML" href="server_sitebackup.html"/>
+<link rel="alternate" type="text/plain" title="Wiki Markup 语言" href="../raw/sitebackup.txt"/>
+<link rel="canonical" href="../../server_sitebackup.html"/>
+<link rel="stylesheet" type="text/css" href="../../lib/exe/css70b4.css?t=bootstrap3&amp;tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"/>
+<script type="text/javascript">/*<![CDATA[*/var NS='server';var JSINFO = {"id":"server:sitebackup","namespace":"server","plugin_codeprettify":{"loader_base":"\/lib\/plugins\/codeprettify\/google-code-prettify"}};
+/*!]]>*/</script>
+<script type="text/javascript" charset="utf-8" src="../../lib/exe/js1e16.php?tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"></script>
+<script type="text/javascript" charset="utf-8" src="../../lib/plugins/codeprettify/google-code-prettify/run_prettifyeb11.js?lang=css"></script>
+</head>
+<body>
+<div class="dokuwiki export">
+<!-- TOC START -->
+<div id="dw__toc">
+<h3 class="toggle">目录</h3>
+<div>
+
+<ul class="toc">
+<li class="level1"><div class="li"><a href="#网站备份压缩文件">网站备份压缩文件</a></div>
+<ul class="toc">
+<li class="clear">
+<ul class="toc">
+<li class="level3"><div class="li"><a href="#相关背景">1、相关背景</a></div></li>
+<li class="level3"><div class="li"><a href="#漏洞成因及危害">2、漏洞成因及危害</a></div></li>
+<li class="level3"><div class="li"><a href="#漏洞检测">3、漏洞检测</a></div></li>
+<li class="level3"><div class="li"><a href="#实际案例">4、实际案例</a></div></li>
+<li class="level3"><div class="li"><a href="#漏洞修复">5、漏洞修复</a></div></li>
+<li class="level3"><div class="li"><a href="#相关资源">6、相关资源</a></div></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<!-- TOC END -->
+
+<h1 class="sectionedit1" id="网站备份压缩文件">网站备份压缩文件</h1>
+<div class="level1">
+
+</div>
+<!-- EDIT1 SECTION "网站备份压缩文件" [1-40] -->
+<h3 class="sectionedit2" id="相关背景">1、相关背景</h3>
+<div class="level3">
+<hr />
+
+<p>
+在网站的使用过程中，往往需要对网站中的文件进行修改、升级。此时就需要对网站整站或者其中某一页面进行备份。当备份文件或者修改过程中的缓存文件因为各种原因而被留在网站web目录下，而该目录又没有设置访问权限时，便有可能导致备份文件或者编辑器的缓存文件被下载，导致敏感信息泄露，给服务器的安全埋下隐患。
+</p>
+
+</div>
+<!-- EDIT2 SECTION "1、相关背景" [41-512] -->
+<h3 class="sectionedit3" id="漏洞成因及危害">2、漏洞成因及危害</h3>
+<div class="level3">
+<hr />
+
+<p>
+该漏洞的成因主要有以下两种：
+</p>
+<ol>
+<li class="level1"><div class="li"> 服务器管理员错误地将网站或者网页的备份文件放置到服务器web目录下。</div>
+</li>
+<li class="level1"><div class="li"> 编辑器在使用过程中自动保存的备份文件或者临时文件因为各种原因没有被删除而保存在web目录下。</div>
+</li>
+</ol>
+
+<p>
+该漏洞往往会导致服务器整站源代码或者部分页面的源代码被下载，利用。源代码中所包含的各类敏感信息，如服务器数据库连接信息，服务器配置信息等会因此而泄露，造成巨大的损失。被泄露的源代码还可能会被用于代码审计，进一步利用而对整个系统的安全埋下隐患。
+</p>
+
+</div>
+<!-- EDIT3 SECTION "2、漏洞成因及危害" [513-1201] -->
+<h3 class="sectionedit4" id="漏洞检测">3、漏洞检测</h3>
+<div class="level3">
+<hr />
+
+<p>
+该漏洞的检测方法较为简单，只需要不断尝试访问服务器上的备份文件即可。提升成功率的关键在于所使用好的字典。
+</p>
+
+<p>
+常见的备份文件文件后缀有以下几类：
+</p>
+<pre class="code">.rar
+.zip
+.7z
+.tar.gz
+.bak
+.swp
+.txt
+.html
+……</pre>
+
+<p>
+常见的备份文件文件名有以下几种
+</p>
+<pre class="code">www
+back
+backup
+web
+temp
+data
+新建文件夹
+……</pre>
+
+<p>
+一般需要将网站的页面文件路径，网站文件夹路径，还有常见的备份文件文件名还有文件后缀组合起来生成字典，用于备份文件扫描。
+</p>
+
+<p>
+该漏洞本质上是在对网站中的备份文件路径进行爆破。有时候即使网站web目录中有备份文件存在也不一定能被猜到地址。
+</p>
+
+</div>
+<!-- EDIT4 SECTION "3、漏洞检测" [1202-1965] -->
+<h3 class="sectionedit5" id="实际案例">4、实际案例</h3>
+<div class="level3">
+<hr />
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-098569" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-098569"  rel="nofollow">某市机场sql注入及备份文件文件下载</a>
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-095135" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-095135"  rel="nofollow">某银行整站备份文件被下载</a>
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-0105929" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-0105929"  rel="nofollow">南京信息工程大学管理员奇葩备份导致源码泄漏</a>
+</p>
+
+</div>
+<!-- EDIT5 SECTION "4、实际案例" [1966-2301] -->
+<h3 class="sectionedit6" id="漏洞修复">5、漏洞修复</h3>
+<div class="level3">
+<hr />
+
+<p>
+删除相应的压缩备份文件或将压缩备份文件移出web目录已防止其被下载。
+</p>
+
+</div>
+<!-- EDIT6 SECTION "5、漏洞修复" [2302-2431] -->
+<h3 class="sectionedit7" id="相关资源">6、相关资源</h3>
+<div class="level3">
+<hr />
+
+<p>
+<a href="http://zone.wooyun.org/content/19523" class="urlextern" title="http://zone.wooyun.org/content/19523"  rel="nofollow">动态多线程敏感信息泄露检测工具--weakfilescan</a>
+</p>
+
+</div>
+<!-- EDIT7 SECTION "6、相关资源" [2432-] --></div>
+</body>
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/server:sitebackup by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:25:25 GMT -->
+</html>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/server:nagios by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:02:53 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8" />
+  <title>server:nagios</title>
+<meta name="generator" content="DokuWiki"/>
+<meta name="robots" content="index,follow"/>
+<meta name="keywords" content="server,nagios"/>
+<link rel="search" type="application/opensearchdescription+xml" href="../../lib/exe/opensearch.php" title="WooYun WiKi"/>
+<link rel="start" href="../../index.html"/>
+<link rel="contents" href="../../server_nagiosdecf.html?do=index" title="网站地图"/>
+<link rel="alternate" type="application/rss+xml" title="最近更改" href="../../feed.php"/>
+<link rel="alternate" type="application/rss+xml" title="当前命名空间" href="../../feed0688.php?mode=list&amp;ns=server"/>
+<link rel="alternate" type="text/html" title="纯HTML" href="server_nagios.html"/>
+<link rel="alternate" type="text/plain" title="Wiki Markup 语言" href="../raw/nagios.txt"/>
+<link rel="canonical" href="../../server_nagios.html"/>
+<link rel="stylesheet" type="text/css" href="../../lib/exe/css70b4.css?t=bootstrap3&amp;tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"/>
+<script type="text/javascript">/*<![CDATA[*/var NS='server';var JSINFO = {"id":"server:nagios","namespace":"server","plugin_codeprettify":{"loader_base":"\/lib\/plugins\/codeprettify\/google-code-prettify"}};
+/*!]]>*/</script>
+<script type="text/javascript" charset="utf-8" src="../../lib/exe/js1e16.php?tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"></script>
+<script type="text/javascript" charset="utf-8" src="../../lib/plugins/codeprettify/google-code-prettify/run_prettifyeb11.js?lang=css"></script>
+</head>
+<body>
+<div class="dokuwiki export">
+<!-- TOC START -->
+<div id="dw__toc">
+<h3 class="toggle">目录</h3>
+<div>
+
+<ul class="toc">
+<li class="level1"><div class="li"><a href="#nagios安全配置">Nagios安全配置</a></div>
+<ul class="toc">
+<li class="clear">
+<ul class="toc">
+<li class="level3"><div class="li"><a href="#nagios简介">1、Nagios简介</a></div></li>
+<li class="level3"><div class="li"><a href="#nagios服务器假设">2、Nagios服务器假设</a></div></li>
+<li class="level3"><div class="li"><a href="#错误配置及利用">3、错误配置及利用</a></div></li>
+<li class="level3"><div class="li"><a href="#实际案例">4、实际案例</a></div></li>
+<li class="level3"><div class="li"><a href="#修复方案">5、修复方案</a></div></li>
+<li class="level3"><div class="li"><a href="#漏洞扫描与发现">6、漏洞扫描与发现</a></div></li>
+<li class="level3"><div class="li"><a href="#相关资源">7、相关资源</a></div></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<!-- TOC END -->
+
+<h1 class="sectionedit1" id="nagios安全配置">Nagios安全配置</h1>
+<div class="level1">
+
+</div>
+<!-- EDIT1 SECTION "Nagios安全配置" [0-20] -->
+<h3 class="sectionedit2" id="nagios简介">1、Nagios简介</h3>
+<div class="level3">
+<hr />
+
+<p>
+Nagios是一款开源的免费网络监视工具，能有效监控Windows、Linux和Unix的主机状态，交换机路由器等网络设置，打印机等。在系统或服务状态异常时发出邮件或短信报警第一时间通知网站运维人员，在状态恢复后发出正常的邮件或短信通知。
+</p>
+
+</div>
+<!-- EDIT2 SECTION "1、Nagios简介" [21-362] -->
+<h3 class="sectionedit3" id="nagios服务器假设">2、Nagios服务器假设</h3>
+<div class="level3">
+<hr />
+
+<p>
+具体的安装步骤参考官方文档：
+</p>
+
+<p>
+<a href="http://www.nagios.org/documentation" class="urlextern" title="http://www.nagios.org/documentation"  rel="nofollow">Nagios Documentation</a>
+</p>
+
+</div>
+<!-- EDIT3 SECTION "2、Nagios服务器假设" [363-505] -->
+<h3 class="sectionedit4" id="错误配置及利用">3、错误配置及利用</h3>
+<div class="level3">
+<hr />
+
+</div>
+
+<h4 id="弱口令">3.1 弱口令</h4>
+<div class="level4">
+
+</div>
+
+<h4 id="插件漏洞">3.2 插件漏洞</h4>
+<div class="level4">
+
+</div>
+
+<h5 id="nrpe远程命令执行">3.2.1 NRPE远程命令执行</h5>
+<div class="level5">
+
+<p>
+NRPE是nagios用来检查其他节点的主机健康状态的插件，基本每个机器都会安装。它运行在TCP的5666端口，如果NRPE插件允许任何主机都来连接，在配置时允许自定义命令，同是版本小于等于2.15，则存在远程命令执行漏洞。
+</p>
+
+</div>
+
+<h5 id="其他插件漏洞">3.2.2 其他插件漏洞</h5>
+<div class="level5">
+
+<p>
+具体参考：
+</p>
+
+<p>
+<a href="https://www.exploit-db.com/search/?order_by=date&amp;order=desc&amp;pg=1&amp;action=search&amp;text=nagios" class="urlextern" title="https://www.exploit-db.com/search/?order_by=date&amp;order=desc&amp;pg=1&amp;action=search&amp;text=nagios"  rel="nofollow">exploit-db nagios</a>
+</p>
+
+</div>
+<!-- EDIT4 SECTION "3、错误配置及利用" [506-1066] -->
+<h3 class="sectionedit5" id="实际案例">4、实际案例</h3>
+<div class="level3">
+<hr />
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-022370" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-022370"  rel="nofollow">新浪漏洞系列第五弹-sina nagios信息泄露漏洞</a>
+</p>
+
+</div>
+<!-- EDIT5 SECTION "4、实际案例" [1067-1202] -->
+<h3 class="sectionedit6" id="修复方案">5、修复方案</h3>
+<div class="level3">
+<hr />
+
+</div>
+
+<h4 id="修改弱口令">5.1 修改弱口令</h4>
+<div class="level4">
+
+</div>
+
+<h4 id="对于低版本的插件_进行升级或者设置acl">5.2 对于低版本的插件，进行升级或者设置ACL</h4>
+<div class="level4">
+
+</div>
+<!-- EDIT6 SECTION "5、修复方案" [1203-1317] -->
+<h3 class="sectionedit7" id="漏洞扫描与发现">6、漏洞扫描与发现</h3>
+<div class="level3">
+<hr />
+
+</div>
+
+<h4 id="npre插件">6.1 NPRE插件</h4>
+<div class="level4">
+
+<p>
+扫描端口
+</p>
+<pre class="code bash"><span class="kw2">nmap</span> <span class="re5">-Pn</span> <span class="re5">-p5666</span> <span class="re5">--open</span> x.x.x.x.<span class="sy0">/</span><span class="nu0">24</span></pre>
+
+<p>
+再使用exp去检测
+</p>
+
+<p>
+<a href="https://www.exploit-db.com/exploits/34461/" class="urlextern" title="https://www.exploit-db.com/exploits/34461/"  rel="nofollow">NRPE 2.15 - Remote Code Execution Vulnerability</a>
+</p>
+
+</div>
+<!-- EDIT7 SECTION "6、漏洞扫描与发现" [1318-1559] -->
+<h3 class="sectionedit8" id="相关资源">7、相关资源</h3>
+<div class="level3">
+<hr />
+
+<p>
+<a href="http://www.nagios.org/" class="urlextern" title="http://www.nagios.org/"  rel="nofollow">nagios官网</a>
+</p>
+
+</div>
+<!-- EDIT8 SECTION "7、相关资源" [1560-] --></div>
+</body>
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/server:nagios by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:02:53 GMT -->
+</html>

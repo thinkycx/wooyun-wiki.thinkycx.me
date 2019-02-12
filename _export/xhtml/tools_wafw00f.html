@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/tools:wafw00f by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:25:28 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8" />
+  <title>tools:wafw00f</title>
+<meta name="generator" content="DokuWiki"/>
+<meta name="robots" content="index,follow"/>
+<meta name="keywords" content="tools,wafw00f"/>
+<link rel="search" type="application/opensearchdescription+xml" href="../../lib/exe/opensearch.php" title="WooYun WiKi"/>
+<link rel="start" href="../../index.html"/>
+<link rel="contents" href="../../tools_wafw00fdecf.html?do=index" title="网站地图"/>
+<link rel="alternate" type="application/rss+xml" title="最近更改" href="../../feed.php"/>
+<link rel="alternate" type="application/rss+xml" title="当前命名空间" href="../../feed022e.php?mode=list&amp;ns=tools"/>
+<link rel="alternate" type="text/html" title="纯HTML" href="tools_wafw00f.html"/>
+<link rel="alternate" type="text/plain" title="Wiki Markup 语言" href="../raw/wafw00f.txt"/>
+<link rel="canonical" href="../../tools_wafw00f.html"/>
+<link rel="stylesheet" type="text/css" href="../../lib/exe/css70b4.css?t=bootstrap3&amp;tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"/>
+<script type="text/javascript">/*<![CDATA[*/var NS='tools';var JSINFO = {"id":"tools:wafw00f","namespace":"tools","plugin_codeprettify":{"loader_base":"\/lib\/plugins\/codeprettify\/google-code-prettify"}};
+/*!]]>*/</script>
+<script type="text/javascript" charset="utf-8" src="../../lib/exe/js1e16.php?tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"></script>
+<script type="text/javascript" charset="utf-8" src="../../lib/plugins/codeprettify/google-code-prettify/run_prettifyeb11.js?lang=css"></script>
+</head>
+<body>
+<div class="dokuwiki export">
+<!-- TOC START -->
+<div id="dw__toc">
+<h3 class="toggle">目录</h3>
+<div>
+
+<ul class="toc">
+<li class="level1"><div class="li"><a href="#wafw00f使用说明">wafw00f使用说明</a></div>
+<ul class="toc">
+<li class="clear">
+<ul class="toc">
+<li class="level3"><div class="li"><a href="#工具简介">1、工具简介</a></div></li>
+<li class="level3"><div class="li"><a href="#使用方法">2、使用方法</a></div></li>
+<li class="level3"><div class="li"><a href="#相关资源">3、相关资源</a></div></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<!-- TOC END -->
+
+<h1 class="sectionedit1" id="wafw00f使用说明">wafw00f使用说明</h1>
+<div class="level1">
+
+</div>
+<!-- EDIT1 SECTION "wafw00f使用说明" [1-35] -->
+<h3 class="sectionedit2" id="工具简介">1、工具简介</h3>
+<div class="level3">
+<hr />
+
+<p>
+用python编写的一个WAF指纹探测和识别小工具。
+</p>
+
+<p>
+Wafw00f用来判断WAF设备的函数如下：
+</p>
+<pre class="code bash">   AdminFolder = <span class="st_h">'/Admin_Files/'</span>
+    xssstring = <span class="st_h">'&lt;script&gt;alert(1)&lt;/script&gt;'</span>
+    dirtravstring = <span class="st_h">'../../../../etc/passwd'</span>
+    cleanhtmlstring = <span class="st_h">'&lt;invalid&gt;hello'</span>
+    isaservermatch = <span class="st_h">'Forbidden ( The server denied the specified Uniform Resource Locator (URL). Contact the server administrator.  )'</span></pre>
+
+</div>
+<!-- EDIT2 SECTION "1、工具简介" [36-496] -->
+<h3 class="sectionedit3" id="使用方法">2、使用方法</h3>
+<div class="level3">
+<hr />
+
+<p>
+使用“python wafw00f.py -h”可以查看工具的使用方法，运行示例：
+</p>
+<pre class="code bash">python wafw00f.py http:<span class="sy0">//</span>www.victim.org<span class="sy0">/</span></pre>
+
+<p>
+基于Cookie的检测
+Wafw00f的探测大部分是基于Cookie的检测。
+</p>
+
+<p>
+F5asm的检测规则如下：
+</p>
+<pre class="code bash">def isf5asm<span class="br0">&#40;</span>self<span class="br0">&#41;</span>:
+        <span class="co0"># credit goes to W3AF</span>
+        <span class="kw3">return</span> self.matchcookie<span class="br0">&#40;</span><span class="st_h">'^TS[a-zA-Z0-9]{3,6}='</span><span class="br0">&#41;</span></pre>
+
+<p>
+基于响应头的检测
+Profense在响应头会包含&#039;server&#039;,&#039;profense&#039;的信息。
+</p>
+<pre class="code bash">    def isprofense<span class="br0">&#40;</span>self<span class="br0">&#41;</span>:
+        <span class="st0">&quot;&quot;</span><span class="st0">&quot;
+        Checks for server headers containing &quot;</span>profense<span class="st0">&quot;
+        &quot;</span><span class="st0">&quot;&quot;</span>
+        <span class="kw3">return</span> self.matchheader<span class="br0">&#40;</span><span class="br0">&#40;</span><span class="st_h">'server'</span>,<span class="st_h">'profense'</span><span class="br0">&#41;</span><span class="br0">&#41;</span></pre>
+
+</div>
+<!-- EDIT3 SECTION "2、使用方法" [497-1190] -->
+<h3 class="sectionedit4" id="相关资源">3、相关资源</h3>
+<div class="level3">
+<hr />
+
+<p>
+<a href="http://code.google.com/p/waffit/source/browse/trunk/wafw00f.py" class="urlextern" title="http://code.google.com/p/waffit/source/browse/trunk/wafw00f.py"  rel="nofollow">wafw00f git</a>
+</p>
+
+</div>
+<!-- EDIT4 SECTION "3、相关资源" [1191-] --></div>
+</body>
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/tools:wafw00f by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:25:28 GMT -->
+</html>

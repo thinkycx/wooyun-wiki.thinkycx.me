@@ -1,0 +1,7 @@
+====== Cisco攻击 ======
+
+  * [[tools:cisco-auditing-tool|cisco-auditing-tool]]
+  * [[tools:cisco-global-exploiter|cisco-global-exploiter]]
+  * [[tools:cisco-ocs|cisco-ocs]]
+  * [[tools:cisco-torch|cisco-torch]]
+  * [[tools:yersinia|yersinia]]

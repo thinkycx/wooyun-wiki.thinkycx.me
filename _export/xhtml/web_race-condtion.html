@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/web:race-condtion by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:03:07 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8" />
+  <title>web:race-condtion</title>
+<meta name="generator" content="DokuWiki"/>
+<meta name="robots" content="index,follow"/>
+<meta name="keywords" content="web,race-condtion"/>
+<link rel="search" type="application/opensearchdescription+xml" href="../../lib/exe/opensearch.php" title="WooYun WiKi"/>
+<link rel="start" href="../../index.html"/>
+<link rel="contents" href="../../web_race-condtiondecf.html?do=index" title="网站地图"/>
+<link rel="alternate" type="application/rss+xml" title="最近更改" href="../../feed.php"/>
+<link rel="alternate" type="application/rss+xml" title="当前命名空间" href="../../feed4fbc.php?mode=list&amp;ns=web"/>
+<link rel="alternate" type="text/html" title="纯HTML" href="web_race-condtion.html"/>
+<link rel="alternate" type="text/plain" title="Wiki Markup 语言" href="../raw/race-condtion.txt"/>
+<link rel="canonical" href="../../web_race-condtion.html"/>
+<link rel="stylesheet" type="text/css" href="../../lib/exe/css70b4.css?t=bootstrap3&amp;tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"/>
+<script type="text/javascript">/*<![CDATA[*/var NS='web';var JSINFO = {"id":"web:race-condtion","namespace":"web","plugin_codeprettify":{"loader_base":"\/lib\/plugins\/codeprettify\/google-code-prettify"}};
+/*!]]>*/</script>
+<script type="text/javascript" charset="utf-8" src="../../lib/exe/js1e16.php?tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"></script>
+<script type="text/javascript" charset="utf-8" src="../../lib/plugins/codeprettify/google-code-prettify/run_prettifyeb11.js?lang=css"></script>
+</head>
+<body>
+<div class="dokuwiki export">
+<!-- TOC START -->
+<div id="dw__toc">
+<h3 class="toggle">目录</h3>
+<div>
+
+<ul class="toc">
+<li class="level1"><div class="li"><a href="#race_conditions_条件竞争">Race Conditions/条件竞争</a></div>
+<ul class="toc">
+<li class="clear">
+<ul class="toc">
+<li class="level3"><div class="li"><a href="#相关背景介绍">1、相关背景介绍</a></div></li>
+<li class="level3"><div class="li"><a href="#成因">2、成因</a></div></li>
+<li class="level3"><div class="li"><a href="#攻击方式及危害">3、攻击方式及危害</a></div></li>
+<li class="level3"><div class="li"><a href="#实际案例">4、实际案例</a></div></li>
+<li class="level3"><div class="li"><a href="#修复方案">5、修复方案</a></div></li>
+<li class="level3"><div class="li"><a href="#漏洞扫描与发现">6、漏洞扫描与发现</a></div></li>
+<li class="level3"><div class="li"><a href="#相关其他安全问题">7、相关其他安全问题</a></div></li>
+<li class="level3"><div class="li"><a href="#相关资源">8、相关资源</a></div></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<!-- TOC END -->
+
+<h1 class="sectionedit1" id="race_conditions_条件竞争">Race Conditions/条件竞争</h1>
+<div class="level1">
+
+</div>
+<!-- EDIT1 SECTION "Race Conditions/条件竞争" [1-48] -->
+<h3 class="sectionedit2" id="相关背景介绍">1、相关背景介绍</h3>
+<div class="level3">
+<hr />
+
+<p>
+<strong>条件竞争漏洞</strong>是一种服务器端的漏洞，由于服务器端在处理不同用户的请求时是并发进行的，因此，如果并发处理不当或相关操作逻辑顺序设计的不合理时，将会导致此类问题的发生。
+</p>
+
+</div>
+<!-- EDIT2 SECTION "1、相关背景介绍" [49-337] -->
+<h3 class="sectionedit3" id="成因">2、成因</h3>
+<div class="level3">
+<hr />
+
+<p>
+下面以相关操作逻辑顺序设计的不合理为例，具体讨论一下这类问题的成因。在很多系统中都会包含上传文件或者从远端获取文件保存在服务器的功能（如：允许用户使用网络上的图片作为自己的头像的功能），下面是一段简单的上传文件释义代码：
+</p>
+<pre class="code php"><span class="kw2">&lt;?php</span>
+  <span class="kw1">if</span><span class="br0">&#40;</span><a href="http://www.php.net/isset"><span class="kw3">isset</span></a><span class="br0">&#40;</span><span class="re0">$_GET</span><span class="br0">&#91;</span><span class="st_h">'src'</span><span class="br0">&#93;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+    <a href="http://www.php.net/copy"><span class="kw3">copy</span></a><span class="br0">&#40;</span><span class="re0">$_GET</span><span class="br0">&#91;</span><span class="st_h">'src'</span><span class="br0">&#93;</span><span class="sy0">,</span><span class="re0">$_GET</span><span class="br0">&#91;</span><span class="st_h">'dst'</span><span class="br0">&#93;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="co1">//...</span>
+    <span class="co1">//check file</span>
+    <a href="http://www.php.net/unlink"><span class="kw3">unlink</span></a><span class="br0">&#40;</span><span class="re0">$_GET</span><span class="br0">&#91;</span><span class="st_h">'dst'</span><span class="br0">&#93;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="co1">//...</span>
+ <span class="br0">&#125;</span>
+<span class="sy1">?&gt;</span></pre>
+
+<p>
+这段代码看似一切正常，先通过<code>copy($<em>GET[&#039;src&#039;],$</em>GET[&#039;dst&#039;])</code>将文件从源地址复制到目的地址，然后检查<code>$<em>GET[&#039;dst&#039;]<code>的安全性，如果发现</code>$</em>GET[&#039;dst&#039;]</code>不安全就马上通过<code>unlink($_GET[&#039;dst&#039;])</code>将其删除。但是，当程序在服务端并发处理用户请求时问题就来了。如果在文件上传成功后但是在相关安全检查发现它是不安全文件删除它以前这个文件就被执行了那么会怎样呢？
+</p>
+
+<p>
+假设攻击者上传了一个用来生成恶意shell的文件，在上传完成和安全检查完成并删除它的间隙，攻击者通过不断地发起访问请求的方法访问了该文件，该文件就会被执行，并且在服务器上生成一个恶意shell的文件。至此，该文件的任务就已全部完成，至于后面发现它是一个不安全的文件并把它删除的问题都已经不重要了，因为攻击者已经成功的在服务器中植入了一个shell文件，后续的一切就都不是问题了。
+</p>
+
+<p>
+由上述过程我们可以看到这种“先将猛兽放进屋，再杀之”的处理逻辑在并发的情况下是十分危险的，极易导致条件竞争漏洞的发生。
+</p>
+
+</div>
+<!-- EDIT3 SECTION "2、成因" [338-2054] -->
+<h3 class="sectionedit4" id="攻击方式及危害">3、攻击方式及危害</h3>
+<div class="level3">
+<hr />
+
+<p>
+仍以上述情境为例，攻击者通过不断地发起访问上传的恶意文件请求的方法成功的将原有处理不安全文件
+</p>
+<pre class="code">上传文件E→删除不安全文件E</pre>
+
+<p>
+的业务逻辑变成了
+</p>
+<pre class="code">上传文件E→访问执行文件E，生成shell文件S→删除不安全文件E</pre>
+
+<p>
+不安全文件E虽然被删除了，但是有它生成出来的shell文件S却保留在了服务器中，对攻击者来说这个shell文件S才是后续攻击的关键。
+</p>
+
+</div>
+<!-- EDIT4 SECTION "3、攻击方式及危害" [2055-2568] -->
+<h3 class="sectionedit5" id="实际案例">4、实际案例</h3>
+<div class="level3">
+<hr />
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2014-049794" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2014-049794"  rel="nofollow">felixk3y：WooYun-2014-49794：PHPCMS前台设计缺陷导致任意代码执行</a>
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2014-048202" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2014-048202"  rel="nofollow">felixk3y：WooYun-2014-48202：国内外多家vpn设备厂商批量漏洞(续集一) </a>
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2015-099622" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2015-099622"  rel="nofollow">乌云某处刷人民币漏洞成功套现</a>
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2013-025489" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2013-025489"  rel="nofollow">利用数据库缺陷实现刷乌云币</a>
+</p>
+
+</div>
+<!-- EDIT5 SECTION "4、实际案例" [2569-3054] -->
+<h3 class="sectionedit6" id="修复方案">5、修复方案</h3>
+<div class="level3">
+<hr />
+
+<p>
+注意并发操作及相关操作逻辑是否得当，如上述获取远端文件时，尽量在将文件保存在本地前就进行相应的安全检查。其他建议待补充。
+</p>
+
+</div>
+<!-- EDIT6 SECTION "5、修复方案" [3055-3270] -->
+<h3 class="sectionedit7" id="漏洞扫描与发现">6、漏洞扫描与发现</h3>
+<div class="level3">
+<hr />
+
+<p>
+未知
+</p>
+
+</div>
+<!-- EDIT7 SECTION "6、漏洞扫描与发现" [3271-3321] -->
+<h3 class="sectionedit8" id="相关其他安全问题">7、相关其他安全问题</h3>
+<div class="level3">
+<hr />
+
+<p>
+未知
+</p>
+
+</div>
+<!-- EDIT8 SECTION "7、相关其他安全问题" [3322-3375] -->
+<h3 class="sectionedit9" id="相关资源">8、相关资源</h3>
+<div class="level3">
+<hr />
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2014-049794" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2014-049794"  rel="nofollow">PHPCMS前台设计缺陷导致任意代码执行</a>
+</p>
+
+<p>
+<a href="http://drops.wooyun.org/papers/1957" class="urlextern" title="http://drops.wooyun.org/papers/1957"  rel="nofollow">代码审计之逻辑上传漏洞挖掘</a>
+</p>
+
+</div>
+<!-- EDIT9 SECTION "8、相关资源" [3376-] --></div>
+</body>
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/web:race-condtion by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:03:07 GMT -->
+</html>

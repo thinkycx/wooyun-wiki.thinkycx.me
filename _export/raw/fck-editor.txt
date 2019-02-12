@@ -1,0 +1,55 @@
+====== CKEditor ======
+
+==== 1、CKEditor简介 ====
+
+----
+CKEditor，旧称FCKeditor，是一个开放源代码的可见即可得网页编辑器。它志于轻量化，不需要太复杂的安装步骤即可使用。它可和PHP、JavaScript、ASP、ASP.NET、ColdFusion、Java、以及ABAP等不同的编程语言相结合。“FCKeditor”名称中的“FCK” 是这个编辑器的作者的名字Frederico Caldeira Knabben的缩写。
+
+FCKeditor 兼容绝大部分的网页浏览器，如：Internet Explorer 5.5+ (Windows)、Mozilla Firefox 1.0+、Mozilla 1.3+、Opera9.50+和Netscape 7+。
+
+FCKeditor已经存在超过10年了。自从2003年它建立了一个强大的用户群体从而成为市场中用户最多的编辑器。在2009年FCKeditor更名为CKEditor,并发布了CKEditor3.0。
+==== 2、重要漏洞及利用 ====
+
+CKEditor除了作为一个独立的编辑器被网站开发者使用以外，也被整合进许多开源的CMS中作为一个辅助编辑器使用。这些CMS中部分没有及时地对其中的CKEditor进行升级，导致了许多的安全漏洞的产生，但根本上还是CKEditor本身的漏洞。
+
+CKEditor在历史上有很多的漏洞，包括以下几类：
+  * 任意文件上传
+  * 目录遍历
+  * 导致DDOS拒绝服务
+
+其中最重要的还是很可能会导致服务器沦陷的任意文件上传漏洞。
+
+以下是几个CKEditor历史中的重要漏洞：
+
+[[https://www.exploit-db.com/exploits/1484/|FCKEditor 2.0 <= 2.2 (connector.php) - Remote Shell Upload Exploit]]
+
+[[https://www.exploit-db.com/exploits/15484/|FCKeditor 2.x <= 2.4.3 - Arbitrary File Upload Vulnerability]]
+
+[[https://www.exploit-db.com/exploits/17644/|FCKeditor - Arbitrary File Upload Vulnerability]]
+
+[[https://www.exploit-db.com/exploits/23005/|FCKEditor ASP 2.6.8 - File Upload Protection Bypass]]
+
+[[http://www.wooyun.org/bugs/wooyun-2010-01684|fckeditor <= 2.6.4 任意文件上传漏洞]]
+
+[[http://www.cnnvd.org.cn/vulnerability/show/cv_cnnvdid/CNNVD-201005-362|FCKeditor.Java 拒绝服务漏洞]]
+==== 3、修复方案 ====
+
+----
+升级CKEditor编辑器。最新版本的CKEditor可以在[[http://ckeditor.com/download|CKEditor官方下载地址]]找到。
+==== 4、实际案例 ====
+
+----
+[[http://www.wooyun.org/bugs/wooyun-2010-039662|中华人民共和国国土资源部下属某系统漏洞]]
+
+[[http://www.wooyun.org/bugs/wooyun-2010-0109739|广东财经大学存在上传漏洞]]
+
+[[http://www.wooyun.org/bugs/wooyun-2010-08356|正方软件教务系统fckeditor任意文件遍历问题]]
+
+[[http://www.wooyun.org/bugs/wooyun-2010-032754|7天连锁酒店fckeditor目录读取]]
+
+==== 5、参考资料 ====
+
+----
+[[http://ckeditor.com/|ckeditor官网]]
+
+[[http://sourceforge.net/projects/fckeditor/files/FCKeditor/|FCKeditor各历史版本下载地址]]

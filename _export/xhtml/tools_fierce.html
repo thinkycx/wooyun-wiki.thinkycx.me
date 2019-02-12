@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/tools:fierce by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:25:26 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8" />
+  <title>tools:fierce</title>
+<meta name="generator" content="DokuWiki"/>
+<meta name="robots" content="index,follow"/>
+<meta name="keywords" content="tools,fierce"/>
+<link rel="search" type="application/opensearchdescription+xml" href="../../lib/exe/opensearch.php" title="WooYun WiKi"/>
+<link rel="start" href="../../index.html"/>
+<link rel="contents" href="../../tools_fiercedecf.html?do=index" title="网站地图"/>
+<link rel="alternate" type="application/rss+xml" title="最近更改" href="../../feed.php"/>
+<link rel="alternate" type="application/rss+xml" title="当前命名空间" href="../../feed022e.php?mode=list&amp;ns=tools"/>
+<link rel="alternate" type="text/html" title="纯HTML" href="tools_fierce.html"/>
+<link rel="alternate" type="text/plain" title="Wiki Markup 语言" href="../raw/fierce.txt"/>
+<link rel="canonical" href="../../tools_fierce.html"/>
+<link rel="stylesheet" type="text/css" href="../../lib/exe/css70b4.css?t=bootstrap3&amp;tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"/>
+<script type="text/javascript">/*<![CDATA[*/var NS='tools';var JSINFO = {"id":"tools:fierce","namespace":"tools","plugin_codeprettify":{"loader_base":"\/lib\/plugins\/codeprettify\/google-code-prettify"}};
+/*!]]>*/</script>
+<script type="text/javascript" charset="utf-8" src="../../lib/exe/js1e16.php?tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"></script>
+<script type="text/javascript" charset="utf-8" src="../../lib/plugins/codeprettify/google-code-prettify/run_prettifyeb11.js?lang=css"></script>
+</head>
+<body>
+<div class="dokuwiki export">
+<!-- TOC START -->
+<div id="dw__toc">
+<h3 class="toggle">目录</h3>
+<div>
+
+<ul class="toc">
+<li class="level1"><div class="li"><a href="#fierce使用说明">fierce使用说明</a></div>
+<ul class="toc">
+<li class="clear">
+<ul class="toc">
+<li class="level3"><div class="li"><a href="#工具简介">1、工具简介</a></div></li>
+<li class="level3"><div class="li"><a href="#使用方法">2、使用方法</a></div></li>
+<li class="level3"><div class="li"><a href="#使用示范">3、使用示范</a></div></li>
+<li class="level3"><div class="li"><a href="#相关资源">4、相关资源</a></div></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<!-- TOC END -->
+
+<h1 class="sectionedit1" id="fierce使用说明">fierce使用说明</h1>
+<div class="level1">
+
+</div>
+<!-- EDIT1 SECTION "fierce使用说明" [1-34] -->
+<h3 class="sectionedit2" id="工具简介">1、工具简介</h3>
+<div class="level3">
+<hr />
+
+<p>
+在得到主域名信息之后，如果能通过主域名得到所有子域名信息，在通过子域名查询其对应的主机IP，这样我们能得到一个较为完整的信息。
+使用fierse工具，可以进行域名列表查询。
+</p>
+
+</div>
+<!-- EDIT2 SECTION "1、工具简介" [35-309] -->
+<h3 class="sectionedit3" id="使用方法">2、使用方法</h3>
+<div class="level3">
+<hr />
+
+<p>
+终端直接输入“fierce -h”可以查看其相关参数用法：
+</p>
+<pre class="code bash"><span class="co4">light@kali:~# </span>fierce <span class="re5">-h</span>
+fierce.pl <span class="br0">&#40;</span>C<span class="br0">&#41;</span> Copywrite <span class="nu0">2006</span>,<span class="nu0">2007</span> - By RSnake at http:<span class="sy0">//</span>ha.ckers.org<span class="sy0">/</span>fierce<span class="sy0">/</span>
+&nbsp;
+	Usage: <span class="kw2">perl</span> fierce.pl <span class="br0">&#91;</span>-dns example.com<span class="br0">&#93;</span> <span class="br0">&#91;</span>OPTIONS<span class="br0">&#93;</span>
+&nbsp;
+Overview:
+	Fierce is a semi-lightweight scanner that helps <span class="kw2">locate</span> non-contiguous
+	IP space and hostnames against specified domains.  It<span class="st_h">'s really meant
+	as a pre-cursor to nmap, unicornscan, nessus, nikto, etc, since all 
+	of those require that you already know what IP space you are looking 
+	for.  This does not perform exploitation and does not scan the whole 
+	internet indiscriminately.  It is meant specifically to locate likely 
+	targets both inside and outside a corporate network.  Because it uses 
+	DNS primarily you will often find mis-configured networks that leak 
+	internal address space. That'</span>s especially useful <span class="kw1">in</span> targeted malware.
+&nbsp;
+Options:
+	<span class="re5">-connect</span>	Attempt to <span class="kw2">make</span> http connections to any non RFC1918
+		<span class="br0">&#40;</span>public<span class="br0">&#41;</span> addresses.  This will output the <span class="kw3">return</span> headers but
+		be warned, this could take a long <span class="kw1">time</span> against a company with
+		many targets, depending on network<span class="sy0">/</span>machine lag.  I wouldn<span class="st_h">'t
+		recommend doing this unless it'</span>s a small company or you have a
+		lot of <span class="kw2">free</span> <span class="kw1">time</span> on your hands <span class="br0">&#40;</span>could take hours-days<span class="br0">&#41;</span>.  
+		Inside the <span class="kw2">file</span> specified the text <span class="st0">&quot;Host:<span class="es1">\n</span>&quot;</span> will be replaced
+		by the host specified. Usage:
+&nbsp;
+	<span class="kw2">perl</span> fierce.pl <span class="re5">-dns</span> example.com <span class="re5">-connect</span> headers.txt
+&nbsp;
+	<span class="re5">-delay</span>		The number of seconds to <span class="kw3">wait</span> between lookups.
+	<span class="re5">-dns</span>		The domain you would like scanned.
+	<span class="re5">-dnsfile</span>  	Use DNS servers provided by a <span class="kw2">file</span> <span class="br0">&#40;</span>one per line<span class="br0">&#41;</span> <span class="kw1">for</span>
+                reverse lookups <span class="br0">&#40;</span>brute force<span class="br0">&#41;</span>.
+	<span class="re5">-dnsserver</span>	Use a particular DNS server <span class="kw1">for</span> reverse lookups 
+		<span class="br0">&#40;</span>probably should be the DNS server of the target<span class="br0">&#41;</span>.  Fierce
+		uses your DNS server <span class="kw1">for</span> the initial SOA query and <span class="kw1">then</span> uses
+		the target<span class="st_h">'s DNS server for all additional queries by default.
+	-file		A file you would like to output to be logged to.
+	-fulloutput	When combined with -connect this will output everything
+		the webserver sends back, not just the HTTP headers.
+	-help		This screen.
+	-nopattern	Don'</span>t use a search pattern when looking <span class="kw1">for</span> nearby
+		hosts.  Instead dump everything.  This is really noisy but
+		is useful <span class="kw1">for</span> finding other domains that spammers might be
+		using.  It will also give you lots of <span class="kw2">false</span> positives, 
+		especially on large domains.
+	<span class="re5">-range</span>		Scan an internal IP range <span class="br0">&#40;</span>must be combined with 
+		-dnsserver<span class="br0">&#41;</span>.  Note, that this does not support a pattern
+		and will simply output anything it finds.  Usage:
+&nbsp;
+	<span class="kw2">perl</span> fierce.pl <span class="re5">-range</span> 111.222.333.0-<span class="nu0">255</span> <span class="re5">-dnsserver</span> ns1.example.co
+&nbsp;
+	<span class="re5">-search</span>		Search list.  When fierce attempts to traverse up and
+		down ipspace it may encounter other servers within other
+		domains that may belong to the same company.  If you supply a 
+		comma delimited list to fierce it will report anything found.
+		This is especially useful <span class="kw1">if</span> the corporate servers are named
+		different from the public facing website.  Usage:
+&nbsp;
+	<span class="kw2">perl</span> fierce.pl <span class="re5">-dns</span> examplecompany.com <span class="re5">-search</span> corpcompany,blahcompany 
+&nbsp;
+		Note that using search could also greatly expand the number of
+		hosts found, <span class="kw2">as</span> it will <span class="kw3">continue</span> to traverse once it locates
+		servers that you specified <span class="kw1">in</span> your search list.  The <span class="kw2">more</span> the
+		better.
+	<span class="re5">-suppress</span>	Suppress all TTY output <span class="br0">&#40;</span>when combined with -file<span class="br0">&#41;</span>.
+	<span class="re5">-tcptimeout</span>	Specify a different timeout <span class="br0">&#40;</span>default <span class="nu0">10</span> seconds<span class="br0">&#41;</span>.  You
+		may want to increase this <span class="kw1">if</span> the DNS server you are querying
+		is slow or has a lot of network lag.
+	<span class="re5">-threads</span>  Specify how many threads to use <span class="kw1">while</span> scanning <span class="br0">&#40;</span>default
+	  is single threaded<span class="br0">&#41;</span>.
+	<span class="re5">-traverse</span>	Specify a number of IPs above and below whatever IP you
+		have found to look <span class="kw1">for</span> nearby IPs.  Default is <span class="nu0">5</span> above and 
+		below.  Traverse will not move into other C blocks.
+	<span class="re5">-version</span>	Output the version number.
+	<span class="re5">-wide</span>		Scan the entire class C after finding any matching
+		hostnames <span class="kw1">in</span> that class C.  This generates a lot <span class="kw2">more</span> traffic
+		but can uncover a lot <span class="kw2">more</span> information.
+	<span class="re5">-wordlist</span>	Use a seperate wordlist <span class="br0">&#40;</span>one word per line<span class="br0">&#41;</span>.  Usage:
+&nbsp;
+	<span class="kw2">perl</span> fierce.pl <span class="re5">-dns</span> examplecompany.com <span class="re5">-wordlist</span> dictionary.txt</pre>
+
+</div>
+<!-- EDIT3 SECTION "2、使用方法" [310-4437] -->
+<h3 class="sectionedit4" id="使用示范">3、使用示范</h3>
+<div class="level3">
+<hr />
+
+<p>
+查询<a href="http://1ight.co/" class="urlextern" title="http://1ight.co"  rel="nofollow">1ight.co</a>的域名列表信息：
+</p>
+<pre class="code bash"><span class="co4">light@kali:~# </span>fierce <span class="re5">-dns</span> 1ight.co
+DNS Servers <span class="kw1">for</span> 1ight.co:
+	f1g1ns1.dnspod.net
+	f1g1ns2.dnspod.net
+&nbsp;
+Trying zone transfer first...
+	Testing f1g1ns1.dnspod.net
+		Request timed out or transfer not allowed.
+	Testing f1g1ns2.dnspod.net
+		Request timed out or transfer not allowed.
+&nbsp;
+Unsuccessful <span class="kw1">in</span> zone transfer <span class="br0">&#40;</span>it was worth a shot<span class="br0">&#41;</span>
+Okay, trying the good old fashioned way... brute force
+&nbsp;
+Checking <span class="kw1">for</span> wildcard DNS...
+Nope. Good.
+Now performing <span class="nu0">2280</span> <span class="kw3">test</span><span class="br0">&#40;</span>s<span class="br0">&#41;</span>...
+....</pre>
+
+</div>
+<!-- EDIT4 SECTION "3、使用示范" [4438-5014] -->
+<h3 class="sectionedit5" id="相关资源">4、相关资源</h3>
+<div class="level3">
+<hr />
+
+<p>
+<a href="http://ha.ckers.org/fierce/" class="urlextern" title="http://ha.ckers.org/fierce/"  rel="nofollow">工具官方网站</a>
+</p>
+
+</div>
+<!-- EDIT5 SECTION "4、相关资源" [5015-] --></div>
+</body>
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/tools:fierce by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:25:26 GMT -->
+</html>

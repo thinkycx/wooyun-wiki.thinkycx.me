@@ -1,0 +1,32 @@
+====== dnsrevenum6使用说明 ======
+
+==== 1、工具简介 ====
+
+----
+该工具可以执行一个快速反向DNS枚举。
+
+==== 2、使用方法 ====
+
+----
+终端直接输入“dnsrevenum6 -h”可以查看其相关参数用法：
+<code bash>
+light@kali:~# dnsrevenum6 -h
+dnsrevenum6 v2.5 (c) 2013 by van Hauser / THC <vh@thc.org> www.thc.org
+
+Syntax: dnsrevenum6 dns-server ipv6address
+
+Performs a fast reverse DNS enumeration and is able to cope with slow servers.
+Examples:
+  dnsrevenum6 dns.test.com 2001:db8:42a8::/48
+  dnsrevenum6 dns.test.com 8.a.2.4.8.b.d.0.1.0.0.2.ip6.arpa
+
+</code>
+
+==== 3、使用示范 ====
+
+----
+
+
+==== 4、相关资源 ====
+
+----

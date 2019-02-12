@@ -1,0 +1,65 @@
+#Nagios安全配置
+
+###1、Nagios简介
+
+----
+
+Nagios是一款开源的免费网络监视工具，能有效监控Windows、Linux和Unix的主机状态，交换机路由器等网络设置，打印机等。在系统或服务状态异常时发出邮件或短信报警第一时间通知网站运维人员，在状态恢复后发出正常的邮件或短信通知。
+
+###2、Nagios服务器假设
+
+----
+
+具体的安装步骤参考官方文档：
+
+[[http://www.nagios.org/documentation|Nagios Documentation]]
+
+
+###3、错误配置及利用
+
+----
+
+####3.1 弱口令
+####3.2 插件漏洞
+#####3.2.1 NRPE远程命令执行
+
+NRPE是nagios用来检查其他节点的主机健康状态的插件，基本每个机器都会安装。它运行在TCP的5666端口，如果NRPE插件允许任何主机都来连接，在配置时允许自定义命令，同是版本小于等于2.15，则存在远程命令执行漏洞。
+
+#####3.2.2 其他插件漏洞
+
+
+具体参考：
+
+[[https://www.exploit-db.com/search/?order_by=date&order=desc&pg=1&action=search&text=nagios|exploit-db nagios]]
+
+###4、实际案例
+
+----
+
+[[http://www.wooyun.org/bugs/wooyun-2010-022370|新浪漏洞系列第五弹-sina nagios信息泄露漏洞]]
+
+###5、修复方案
+
+----
+
+####5.1 修改弱口令
+####5.2 对于低版本的插件，进行升级或者设置ACL
+
+###6、漏洞扫描与发现
+
+----
+
+####6.1 NPRE插件
+扫描端口
+
+<code bash>nmap -Pn -p5666 --open x.x.x.x./24</code>
+
+再使用exp去检测
+
+[[https://www.exploit-db.com/exploits/34461/|NRPE 2.15 - Remote Code Execution Vulnerability]]
+
+###7、相关资源
+
+----
+
+[[http://www.nagios.org/|nagios官网]]

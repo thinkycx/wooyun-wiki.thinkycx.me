@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/server:directory-list by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:03:04 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8" />
+  <title>server:directory-list</title>
+<meta name="generator" content="DokuWiki"/>
+<meta name="robots" content="index,follow"/>
+<meta name="keywords" content="server,directory-list"/>
+<link rel="search" type="application/opensearchdescription+xml" href="../../lib/exe/opensearch.php" title="WooYun WiKi"/>
+<link rel="start" href="../../index.html"/>
+<link rel="contents" href="../../server_directory-listdecf.html?do=index" title="网站地图"/>
+<link rel="alternate" type="application/rss+xml" title="最近更改" href="../../feed.php"/>
+<link rel="alternate" type="application/rss+xml" title="当前命名空间" href="../../feed0688.php?mode=list&amp;ns=server"/>
+<link rel="alternate" type="text/html" title="纯HTML" href="server_directory-list.html"/>
+<link rel="alternate" type="text/plain" title="Wiki Markup 语言" href="../raw/directory-list.txt"/>
+<link rel="canonical" href="../../server_directory-list.html"/>
+<link rel="stylesheet" type="text/css" href="../../lib/exe/css70b4.css?t=bootstrap3&amp;tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"/>
+<script type="text/javascript">/*<![CDATA[*/var NS='server';var JSINFO = {"id":"server:directory-list","namespace":"server","plugin_codeprettify":{"loader_base":"\/lib\/plugins\/codeprettify\/google-code-prettify"}};
+/*!]]>*/</script>
+<script type="text/javascript" charset="utf-8" src="../../lib/exe/js1e16.php?tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"></script>
+<script type="text/javascript" charset="utf-8" src="../../lib/plugins/codeprettify/google-code-prettify/run_prettifyeb11.js?lang=css"></script>
+</head>
+<body>
+<div class="dokuwiki export">
+<!-- TOC START -->
+<div id="dw__toc">
+<h3 class="toggle">目录</h3>
+<div>
+
+<ul class="toc">
+<li class="level1"><div class="li"><a href="#目录遍历">目录遍历</a></div>
+<ul class="toc">
+<li class="clear">
+<ul class="toc">
+<li class="level3"><div class="li"><a href="#漏洞简介">1、漏洞简介</a></div></li>
+<li class="level3"><div class="li"><a href="#漏洞成因及利用">2、漏洞成因及利用</a></div></li>
+<li class="level3"><div class="li"><a href="#实际案例">3、实际案例</a></div></li>
+<li class="level3"><div class="li"><a href="#漏洞修复">4、漏洞修复</a></div></li>
+<li class="level3"><div class="li"><a href="#相关资源">5、相关资源</a></div></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<!-- TOC END -->
+
+<h1 class="sectionedit1" id="目录遍历">目录遍历</h1>
+<div class="level1">
+
+</div>
+<!-- EDIT1 SECTION "目录遍历" [1-29] -->
+<h3 class="sectionedit2" id="漏洞简介">1、漏洞简介</h3>
+<div class="level3">
+<hr />
+
+<p>
+当web服务器目录浏览的功能被开启时，若客户端浏览器在请求未指定文档名称且web服务器无法返回默认文档时便会启用目录浏览，显示一个列出目录内容的网页，或者当网站的代码存在缺陷，导致可以获取到服务器目录内容、结构，进而影响网站的敏感信息，威胁系统安全。
+</p>
+
+</div>
+<!-- EDIT2 SECTION "1、漏洞简介" [30-428] -->
+<h3 class="sectionedit3" id="漏洞成因及利用">2、漏洞成因及利用</h3>
+<div class="level3">
+<hr />
+
+<p>
+该漏洞的成因主要包括两类：
+</p>
+<ul>
+<li class="level1"><div class="li"> web服务器的配置引起的目录遍历</div>
+</li>
+<li class="level1"><div class="li"> 网站代码缺陷引起的目录遍历</div>
+</li>
+</ul>
+
+<p>
+IIS和Nginx默认不开启目录遍历的功能，而Apached默认开启了目录遍历的功能。
+</p>
+
+<p>
+当web服务器目录遍历的功能被开启时，若客户端浏览器在请求未指定文档名称且web服务器无法返回默认文档时，便会启用目录浏览，显示一个列出目录内容的网页。
+</p>
+
+<p>
+网站代码的缺陷也会引起目录遍历，常见的是一些开源的编辑器的页面未授权访问，以及一些限制被绕过。参见：<a href="http://drops.wooyun.org/tips/3978" class="urlextern" title="http://drops.wooyun.org/tips/3978"  rel="nofollow">PHP绕过open_basedir列目录的研究</a>。
+</p>
+
+<p>
+因各种原因导致的目录遍历，将对系统安全形成巨大的威胁。其将造成网站上非可执行文件的泄露，进而可能导致网站的数据库连接信息等泄露。
+</p>
+
+</div>
+<!-- EDIT3 SECTION "2、漏洞成因及利用" [429-1349] -->
+<h3 class="sectionedit4" id="实际案例">3、实际案例</h3>
+<div class="level3">
+<hr />
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-067409" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-067409"  rel="nofollow">乌云某处存在可以列目录以及绝对路径泄漏漏洞（第三方应用）</a>
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-0103565" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-0103565"  rel="nofollow">大庆某教育类网站已被提权</a>
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-0100286" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-0100286"  rel="nofollow">TCL某重要站点从目录遍历到成功提权</a>
+</p>
+
+</div>
+<!-- EDIT4 SECTION "3、实际案例" [1350-1707] -->
+<h3 class="sectionedit5" id="漏洞修复">4、漏洞修复</h3>
+<div class="level3">
+<hr />
+
+<p>
+<strong>网站代码缺陷引起的目录遍历</strong>
+</p>
+
+<p>
+对网站代码进行更新，升级。
+</p>
+
+<p>
+<strong>web服务器配置引起的目录遍历</strong>
+</p>
+
+<p>
+Apached禁止目录浏览:
+</p>
+
+<p>
+配置httpd.conf
+</p>
+
+<p>
+将Options Indexes FollowSymLinks改为Options -Indexes FollowSymLinks
+</p>
+
+<p>
+Nginx禁止目录浏览:
+</p>
+
+<p>
+配置nginx.conf，找到WebServer配置处,删除类似内容:
+</p>
+<pre class="code bash">location <span class="sy0">/</span>soft<span class="sy0">/</span> <span class="br0">&#123;</span>
+root <span class="sy0">/</span>var<span class="sy0">/</span>www<span class="sy0">/</span>;  此处为soft的上一级目录
+autoindex on;
+autoindex_exact_size off;
+autoindex_localtime on;
+<span class="br0">&#125;</span></pre>
+
+<p>
+保存退出,重启nginx服务即可。
+</p>
+<pre class="code bash"><span class="br0">&#91;</span>root<span class="sy0">@</span>localhost Soft<span class="br0">&#93;</span><span class="co0">#ps aux | grep -v grep | grep nginx | awk ‘{print $2}’ | xargs kill -9    #结束进程</span>
+<span class="br0">&#91;</span>root<span class="sy0">@</span>localhost Soft<span class="br0">&#93;</span><span class="co0">#nginx  #启动进程</span></pre>
+
+<p>
+IIS禁止列目录
+</p>
+<pre class="code cmd">appcmd set config /section:directoryBrowse /enabled:false</pre>
+
+</div>
+<!-- EDIT5 SECTION "4、漏洞修复" [1708-2546] -->
+<h3 class="sectionedit6" id="相关资源">5、相关资源</h3>
+<div class="level3">
+<hr />
+
+<p>
+<a href="http://drops.wooyun.org/运维安全/2727" class="urlextern" title="http://drops.wooyun.org/%E8%BF%90%E7%BB%B4%E5%AE%89%E5%85%A8/2727"  rel="nofollow">Apache安全配置</a>
+</p>
+
+<p>
+<a href="https://technet.microsoft.com/zh-cn/library/cc731109" class="urlextern" title="https://technet.microsoft.com/zh-cn/library/cc731109"  rel="nofollow">在 IIS 7 中启用或禁用目录浏览</a>
+</p>
+
+<p>
+<a href="http://drops.wooyun.org/tips/3978" class="urlextern" title="http://drops.wooyun.org/tips/3978"  rel="nofollow">PHP绕过open_basedir列目录的研究</a>
+</p>
+
+</div>
+<!-- EDIT6 SECTION "5、相关资源" [2547-] --></div>
+</body>
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/server:directory-list by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:03:04 GMT -->
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/android:tools:pidcat by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:25:25 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8" />
+  <title>android:tools:pidcat</title>
+<meta name="generator" content="DokuWiki"/>
+<meta name="robots" content="index,follow"/>
+<meta name="keywords" content="android,tools,pidcat"/>
+<link rel="search" type="application/opensearchdescription+xml" href="../../lib/exe/opensearch.php" title="WooYun WiKi"/>
+<link rel="start" href="../../index.html"/>
+<link rel="contents" href="../../android_tools_pidcatdecf.html?do=index" title="网站地图"/>
+<link rel="alternate" type="application/rss+xml" title="最近更改" href="../../feed.php"/>
+<link rel="alternate" type="application/rss+xml" title="当前命名空间" href="../../feed31a9.php?mode=list&amp;ns=android:tools"/>
+<link rel="alternate" type="text/html" title="纯HTML" href="android_tools_pidcat.html"/>
+<link rel="alternate" type="text/plain" title="Wiki Markup 语言" href="../raw/pidcat.txt"/>
+<link rel="canonical" href="../../android_tools_pidcat.html"/>
+<link rel="stylesheet" type="text/css" href="../../lib/exe/css70b4.css?t=bootstrap3&amp;tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"/>
+<script type="text/javascript">/*<![CDATA[*/var NS='android:tools';var JSINFO = {"id":"android:tools:pidcat","namespace":"android:tools","plugin_codeprettify":{"loader_base":"\/lib\/plugins\/codeprettify\/google-code-prettify"}};
+/*!]]>*/</script>
+<script type="text/javascript" charset="utf-8" src="../../lib/exe/js1e16.php?tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"></script>
+<script type="text/javascript" charset="utf-8" src="../../lib/plugins/codeprettify/google-code-prettify/run_prettifyeb11.js?lang=css"></script>
+</head>
+<body>
+<div class="dokuwiki export">
+<!-- TOC START -->
+<div id="dw__toc">
+<h3 class="toggle">目录</h3>
+<div>
+
+<ul class="toc">
+<li class="level1"><div class="li"><a href="#pidcat">pidcat</a></div>
+<ul class="toc">
+<li class="clear">
+<ul class="toc">
+<li class="level3"><div class="li"><a href="#安装环境">1.安装环境</a></div></li>
+<li class="level3"><div class="li"><a href="#使用方法">2.使用方法</a></div></li>
+<li class="level3"><div class="li"><a href="#参数说明">3.参数说明</a></div></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<!-- TOC END -->
+
+<h1 class="sectionedit1" id="pidcat">pidcat</h1>
+<div class="level1">
+
+<p>
+下载地址<a href="https://github.com/JakeWharton/pidcat" class="urlextern" title="https://github.com/JakeWharton/pidcat"  rel="nofollow">https://github.com/JakeWharton/pidcat</a>
+</p>
+
+</div>
+<!-- EDIT1 SECTION "pidcat" [1-115] -->
+<h3 class="sectionedit2" id="安装环境">1.安装环境</h3>
+<div class="level3">
+<hr />
+
+<p>
+确保环境变量中有android SDK的两个 tools 目录
+</p>
+<pre class="code">export PATH=$PATH:&lt;path to Android SDK&gt;/platform-tools
+export PATH=$PATH:&lt;path to Android SDK&gt;/tools</pre>
+
+<p>
+- OSX
+</p>
+<pre class="code">	brew install pidcat
+	</pre>
+
+<p>
+- win/linux
+</p>
+<pre class="code">下载`pidcat.py`后加入环境变量即可</pre>
+
+</div>
+<!-- EDIT2 SECTION "1.安装环境" [116-403] -->
+<h3 class="sectionedit3" id="使用方法">2.使用方法</h3>
+<div class="level3">
+<hr />
+<pre class="code">pidcat com.oprah.bees.android</pre>
+
+</div>
+<!-- EDIT3 SECTION "2.使用方法" [404-467] -->
+<h3 class="sectionedit4" id="参数说明">3.参数说明</h3>
+<div class="level3">
+<hr />
+<pre class="code">» pidcat -h                                                                                                         
+usage: pidcat [-h] [-w N] [-l {V,D,I,W,E,F}] [--color-gc]
+              [--always-display-tags] [-s DEVICE_SERIAL] [-d] [-e]
+              [package [package ...]]</pre>
+<pre class="code">Filter logcat by package name</pre>
+<pre class="code">positional arguments:
+  package               Application package name(s)</pre>
+<pre class="code">optional arguments:
+  -h, --help            show this help message and exit
+  -w N, --tag-width N   Width of log tag
+  -l {V,D,I,W,E,F}, --min-level {V,D,I,W,E,F}
+                        Minimum level to be displayed
+  --color-gc            Color garbage collection
+  --always-display-tags
+                        Always display the tag name
+  -s DEVICE_SERIAL, --serial DEVICE_SERIAL
+                        Device serial number (adb -s option)
+  -d, --device          Use first device for log input (adb -d option).
+  -e, --emulator        Use first emulator for log input (adb -e option).</pre>
+
+</div>
+<!-- EDIT4 SECTION "3.参数说明" [468-] --></div>
+</body>
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/android:tools:pidcat by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:25:25 GMT -->
+</html>

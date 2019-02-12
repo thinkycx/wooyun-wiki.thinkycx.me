@@ -1,0 +1,3 @@
+====== beEF XSS Framework ======
+
+  * [[tools:beef|beef]]

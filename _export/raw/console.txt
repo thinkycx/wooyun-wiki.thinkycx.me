@@ -1,0 +1,87 @@
+# WooyunWifi 命令行功能 #
+
+WooyunWifi为一些常用的安全测试功能提供了WEB控制界面，但是一些工具&功能由于各种原因仍然只能在命令行界面下运行，本章节介绍WooyunWifi命令行功能的使用方法。
+
+## 配置路由器SSH服务 ##
+
+----
+
+*如果您按照之前的《WooyunWifi 初始化配置》正确配置了全部选项，您已经开启了路由器的SSH服务
+
+路由器的SSH服务在Openwrt Luci中，点击标题栏中的 系统->管理权 选项卡，在 SSH访问->DropBear设置 中依次选择 接口->“未指定”，端口 -> 22，勾选“密码验证”和“root权限登录”，然后点击 保存&应用 以使设置生效。
+
+## SSH登录WooyunWifi ##
+
+----
+
+在*nix系统下，您可以通过ssh登入WooyunWifi命令行界面
+
+示例：`ssh 192.168.1.1 -l root`
+
+在Windows系统下，您可以通过putty等工具登入WooyunWifi命令行界面
+
+[https://www.baidu.com/s?wd=putty](https://www.baidu.com/s?wd=putty)
+
+运行界面如图：
+
+{{:wooyunwifi:putty.png?nolink&600|}}
+
+IP address 填写路由器的IP（*如果没有修改过，默认是192.168.1.1）
+端口设置为22 ， 连接类型选择SSH
+
+Login as 填写 root
+密码与Openwrt Luci设置的密码相同
+
+第一次登录时可能会提示RSA指纹未知，输入yes/点击“是”即可
+
+登陆成功后您将看到命令提示符：
+root@OpenWrt:~#
+
+## 命令行功能使用示例 ##
+
+----
+
+无线破解集成工具：
+
+    wifite.py
+
+穿墙系列工具：
+
+    ptunnel --help
+    
+    iodine --help
+    
+    htc  --help
+
+usb系列工具：
+
+    usbipd --help
+
+网络数据包截获：
+
+    tcpdump --help
+    
+    ngrep --help
+
+用SSH隧道实现的VPN：
+
+    /usr/local/sshuttle/sshuttle --help
+
+手动破解WIFI：
+
+    aircrack-ng --help
+    以及aircrack相关那一整套工具都在里面
+    
+    reaver --help
+    
+    pixiewps --help
+
+
+或者你也可以自己写一些python脚本：
+
+    python
+
+
+*工具未全部列出
+
+*没有你中意的工具？去Openwrt Luci管理界面中安装其他的软件包吧！

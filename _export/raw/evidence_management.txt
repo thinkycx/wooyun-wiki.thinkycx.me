@@ -1,0 +1,8 @@
+====== 证据管理 ======
+
+  * [[tools:casefile|casefile]]
+  * [[tools:magictree|magictree]]
+  * [[tools:maltego|maltego]]
+  * [[tools:metagoofil|metagoofil]]
+  * [[tools:pipal|pipal]]
+  * [[tools:truecrypt|truecrypt]]

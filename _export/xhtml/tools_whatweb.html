@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/tools:whatweb by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:27:34 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8" />
+  <title>tools:whatweb</title>
+<meta name="generator" content="DokuWiki"/>
+<meta name="robots" content="index,follow"/>
+<meta name="keywords" content="tools,whatweb"/>
+<link rel="search" type="application/opensearchdescription+xml" href="../../lib/exe/opensearch.php" title="WooYun WiKi"/>
+<link rel="start" href="../../index.html"/>
+<link rel="contents" href="../../tools_whatwebdecf.html?do=index" title="网站地图"/>
+<link rel="alternate" type="application/rss+xml" title="最近更改" href="../../feed.php"/>
+<link rel="alternate" type="application/rss+xml" title="当前命名空间" href="../../feed022e.php?mode=list&amp;ns=tools"/>
+<link rel="alternate" type="text/html" title="纯HTML" href="tools_whatweb.html"/>
+<link rel="alternate" type="text/plain" title="Wiki Markup 语言" href="../raw/whatweb.txt"/>
+<link rel="canonical" href="../../tools_whatweb.html"/>
+<link rel="stylesheet" type="text/css" href="../../lib/exe/css70b4.css?t=bootstrap3&amp;tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"/>
+<script type="text/javascript">/*<![CDATA[*/var NS='tools';var JSINFO = {"id":"tools:whatweb","namespace":"tools","plugin_codeprettify":{"loader_base":"\/lib\/plugins\/codeprettify\/google-code-prettify"}};
+/*!]]>*/</script>
+<script type="text/javascript" charset="utf-8" src="../../lib/exe/js1e16.php?tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"></script>
+<script type="text/javascript" charset="utf-8" src="../../lib/plugins/codeprettify/google-code-prettify/run_prettifyeb11.js?lang=css"></script>
+</head>
+<body>
+<div class="dokuwiki export">
+<!-- TOC START -->
+<div id="dw__toc">
+<h3 class="toggle">目录</h3>
+<div>
+
+<ul class="toc">
+<li class="level1"><div class="li"><a href="#whatweb使用说明">whatweb使用说明</a></div>
+<ul class="toc">
+<li class="clear">
+<ul class="toc">
+<li class="level3"><div class="li"><a href="#工具简介">1、工具简介</a></div></li>
+<li class="level3"><div class="li"><a href="#使用方法">2、使用方法</a></div></li>
+<li class="level3"><div class="li"><a href="#使用示范">3、使用示范</a></div></li>
+<li class="level3"><div class="li"><a href="#相关资源">4、相关资源</a></div></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<!-- TOC END -->
+
+<h1 class="sectionedit1" id="whatweb使用说明">whatweb使用说明</h1>
+<div class="level1">
+
+</div>
+<!-- EDIT1 SECTION "whatweb使用说明" [1-35] -->
+<h3 class="sectionedit2" id="工具简介">1、工具简介</h3>
+<div class="level3">
+<hr />
+
+<p>
+whatweb可以识别Web应用类型，包括内容管理系统（CMS），博客平台，统计分析软件包，JavaScript库，Web服务器，以及嵌入式设备。
+whatweb拥有超过1000的插件，可以识别版本号，电子邮件地址，账号ID，Web框架模块，SQL错误等信息。
+</p>
+
+</div>
+<!-- EDIT2 SECTION "1、工具简介" [36-368] -->
+<h3 class="sectionedit3" id="使用方法">2、使用方法</h3>
+<div class="level3">
+<hr />
+
+<p>
+终端直接输入“whatweb -h”可以查看其相关参数用法：
+</p>
+<pre class="code bash"><span class="co4">light@kali:~# </span>whatweb <span class="re5">-h</span>
+&nbsp;
+<span class="co4">.$</span><span class="re4">$$</span>     $.                                   .<span class="re4">$$</span>$     $.         
+<span class="re4">$$</span><span class="re4">$$</span>     <span class="re4">$$</span>. .<span class="re4">$$</span>$  <span class="re4">$$</span>$ .<span class="re4">$$</span><span class="re4">$$</span><span class="re4">$$</span>.  .<span class="re4">$$</span><span class="re4">$$</span><span class="re4">$$</span><span class="re4">$$</span><span class="re4">$$</span>. <span class="re4">$$</span><span class="re4">$$</span>     <span class="re4">$$</span>. .<span class="re4">$$</span><span class="re4">$$</span><span class="re4">$$</span>$. .<span class="re4">$$</span><span class="re4">$$</span><span class="re4">$$</span>. 
+$ <span class="re4">$$</span>     <span class="re4">$$</span>$ $ <span class="re4">$$</span>  <span class="re4">$$</span>$ $ <span class="re4">$$</span><span class="re4">$$</span><span class="re4">$$</span>. <span class="re4">$$</span><span class="re4">$$</span>$ <span class="re4">$$</span><span class="re4">$$</span><span class="re4">$$</span> $ <span class="re4">$$</span>     <span class="re4">$$</span>$ $ <span class="re4">$$</span>   <span class="re4">$$</span> $ <span class="re4">$$</span><span class="re4">$$</span><span class="re4">$$</span>.
+$ <span class="sy0">`</span>$     <span class="re4">$$</span>$ $ <span class="sy0">`</span>$  <span class="re4">$$</span>$ $ <span class="sy0">`</span>$  <span class="re4">$$</span>$ <span class="re4">$$</span><span class="st_h">' $ `$ `$$ $ `$     $$$ $ `$      $ `$  $$$'</span>
+$. $     <span class="re4">$$</span>$ $. <span class="re4">$$</span><span class="re4">$$</span><span class="re4">$$</span> $. <span class="re4">$$</span><span class="re4">$$</span><span class="re4">$$</span> <span class="sy0">`</span>$  $. $  :<span class="st_h">' $. $     $$$ $. $$$$   $. $$$$$.
+$::$  .  $$$ $::$  $$$ $::$  $$$     $::$     $::$  .  $$$ $::$      $::$  $$$$
+$;;$ $$$ $$$ $;;$  $$$ $;;$  $$$     $;;$     $;;$ $$$ $$$ $;;$      $;;$  $$$$
+$$$$$$ $$$$$ $$$$  $$$ $$$$  $$$     $$$$     $$$$$$ $$$$$ $$$$$$$$$ $$$$$$$$$'</span>
+&nbsp;
+WhatWeb - Next generation web scanner.
+Version 0.4.8-dev by Andrew Horton aka urbanadventurer
+Homepage: http:<span class="sy0">//</span>www.morningstarsecurity.com<span class="sy0">/</span>research<span class="sy0">/</span>whatweb
+&nbsp;
+Usage: whatweb <span class="br0">&#91;</span>options<span class="br0">&#93;</span> <span class="sy0">&lt;</span>URLs<span class="sy0">&gt;</span>
+&nbsp;
+TARGET SELECTION:
+  <span class="sy0">&lt;</span>URLs<span class="sy0">&gt;</span>		Enter URLs, filenames or nmap-format IP ranges.
+			Use <span class="sy0">/</span>dev<span class="sy0">/</span>stdin to pipe HTML directly
+  <span class="re5">--input-file</span>=FILE, <span class="re5">-i</span>	Identify URLs found <span class="kw1">in</span> FILE, eg. <span class="re5">-i</span> <span class="sy0">/</span>dev<span class="sy0">/</span>stdin
+&nbsp;
+TARGET MODIFICATION:
+  <span class="re5">--url-prefix</span>		Add a prefix to target URLs
+  <span class="re5">--url-suffix</span>		Add a suffix to target URLs
+  <span class="re5">--url-pattern</span>		Insert the targets into a URL. Requires --input-file,
+			eg. www.example.com<span class="sy0">/%</span>insert<span class="sy0">%/</span>robots.txt 
+&nbsp;
+AGGRESSION:
+  The aggression level controls the trade-off between speed<span class="sy0">/</span>stealth and
+  reliability.
+  --aggression, <span class="re5">-a</span>=LEVEL Set the aggression level. Default: <span class="nu0">1</span>
+  Aggression levels are:
+  <span class="nu0">1</span>. Stealthy	Makes one HTTP request per target. Also follows redirects.
+  <span class="nu0">2</span>. Unused
+  <span class="nu0">3</span>. Aggressive	Can <span class="kw2">make</span> a handful of HTTP requests per target. This triggers
+  		aggressive plugins <span class="kw1">for</span> targets only when those plugins are
+  		identified with a level <span class="nu0">1</span> request first.
+  <span class="nu0">4</span>. Heavy	Makes a lot of HTTP requests per target. Aggressive tests from
+  		all plugins are used <span class="kw1">for</span> all URLs.
+&nbsp;
+HTTP OPTIONS:
+  --user-agent, <span class="re5">-U</span>=AGENT Identify <span class="kw2">as</span> AGENT instead of WhatWeb<span class="sy0">/</span>0.4.8-dev.
+  --header, <span class="re5">-H</span>		Add an HTTP header. eg <span class="st0">&quot;Foo:Bar&quot;</span>. Specifying a default
+			header will replace it. Specifying an empty value, eg.
+			<span class="st0">&quot;User-Agent:&quot;</span> will remove the header.
+  <span class="re5">--follow-redirect</span>=WHEN Control when to follow redirects. WHEN may be <span class="sy0">`</span>never<span class="st_h">',
+			`http-only'</span>, <span class="sy0">`</span>meta-only<span class="st_h">', `same-site'</span>, <span class="sy0">`</span>same-domain<span class="st_h">'
+			or `always'</span>. Default: always
+  <span class="re5">--max-redirects</span>=NUM	Maximum number of contiguous redirects. Default: <span class="nu0">10</span>
+&nbsp;
+AUTHENTICATION:
+  --user, <span class="re5">-u</span>=<span class="sy0">&lt;</span>user:password<span class="sy0">&gt;</span> HTTP basic authentication
+  Add session cookies with --header, e.g. <span class="re5">--header</span> <span class="st0">&quot;Cookie: SESSID=1a2b3c;&quot;</span>
+&nbsp;
+PROXY:
+  <span class="re5">--proxy</span>		<span class="sy0">&lt;</span><span class="kw2">hostname</span><span class="br0">&#91;</span>:port<span class="br0">&#93;</span><span class="sy0">&gt;</span> Set proxy <span class="kw2">hostname</span> and port
+			Default: <span class="nu0">8080</span>
+  <span class="re5">--proxy-user</span>		<span class="sy0">&lt;</span>username:password<span class="sy0">&gt;</span> Set proxy user and password
+&nbsp;
+PLUGINS:
+  --list-plugins, <span class="re5">-l</span>	List all plugins
+  --plugins, <span class="re5">-p</span>=LIST	Select plugins. LIST is a comma delimited <span class="kw1">set</span> of 
+			selected plugins. Default is all.
+			Each element can be a directory, <span class="kw2">file</span> or plugin name and
+			can optionally have a modifier, eg. + or -
+			Examples: +<span class="sy0">/</span>tmp<span class="sy0">/</span>moo.rb,+<span class="sy0">/</span>tmp<span class="sy0">/</span>foo.rb
+			title,md5,+.<span class="sy0">/</span>plugins-disabled<span class="sy0">/</span>
+			.<span class="sy0">/</span>plugins-disabled,-md5
+			<span class="re5">-p</span> + is a shortcut <span class="kw1">for</span> <span class="re5">-p</span> +plugins-disabled
+  --info-plugins, <span class="re5">-I</span>=PLUGINS	Display detailed information <span class="kw1">for</span> plugins.
+			Optionally search with keywords <span class="kw1">in</span> a comma delimited
+			list.
+  --grep, <span class="re5">-g</span>=STRING	Search <span class="kw1">for</span> STRING <span class="kw1">in</span> HTTP responses. Reports with a
+			plugin named Grep
+  <span class="re5">--custom-plugin</span>=DEFINITION	Define a custom plugin named Custom-Plugin,
+			Examples: <span class="st0">&quot;:text=&gt;'powered by abc'&quot;</span>
+			<span class="st0">&quot;:version=&gt;/powered[ ]?by ab[0-9]/&quot;</span>
+			<span class="st0">&quot;:ghdb=&gt;'intitle:abc <span class="es1">\&quot;</span>powered by abc<span class="es1">\&quot;</span>'&quot;</span>
+			<span class="st0">&quot;:md5=&gt;'8666257030b94d3bdb46e05945f60b42'&quot;</span>
+			<span class="st0">&quot;{:text=&gt;'powered by abc'},{:regexp=&gt;/abc [ ]?1/i}&quot;</span>
+  <span class="re5">--dorks</span>=PLUGIN	List google dorks <span class="kw1">for</span> the selected plugin
+  --example-urls, <span class="re5">-e</span>=PLUGIN Update the target list with example URLs from
+			the selected plugins.
+&nbsp;
+OUTPUT:
+  --verbose, <span class="re5">-v</span>		Verbose output includes plugin descriptions. Use twice
+			<span class="kw1">for</span> debugging.
+  --colour,--color=WHEN	control whether colour is used. WHEN may be <span class="sy0">`</span>never<span class="st_h">',
+			`always'</span>, or <span class="sy0">`</span>auto<span class="st_h">'
+  --quiet, -q		Do not display brief logging to STDOUT
+  --no-errors		Suppress error messages
+&nbsp;
+LOGGING:
+  --log-brief=FILE	Log brief, one-line output
+  --log-verbose=FILE	Log verbose output
+  --log-xml=FILE	Log XML format
+  --log-json=FILE	Log JSON format
+  --log-json-verbose=FILE Log JSON Verbose format
+  --log-magictree=FILE	Log MagicTree XML format
+  --log-object=FILE	Log Ruby object inspection format
+  --log-mongo-database	Name of the MongoDB database
+  --log-mongo-collection Name of the MongoDB collection. Default: whatweb
+  --log-mongo-host	MongoDB hostname or IP address. Default: 0.0.0.0
+  --log-mongo-username	MongoDB username. Default: nil
+  --log-mongo-password	MongoDB password. Default: nil
+  --log-errors=FILE	Log errors
+&nbsp;
+PERFORMANCE &amp; STABILITY:
+  --max-threads, -t	Number of simultaneous threads. Default: 25.
+  --open-timeout	Time in seconds. Default: 15
+  --read-timeout	Time in seconds. Default: 30
+  --wait=SECONDS	Wait SECONDS between connections
+			This is useful when using a single thread.
+&nbsp;
+HELP &amp; MISCELLANEOUS:
+  --help, -h		This help
+  --debug		Raise errors in plugins
+  --version		Display version information. (WhatWeb 0.4.8-dev)
+&nbsp;
+EXAMPLE USAGE:
+* Scan example.com
+  whatweb example.com
+* Scan reddit.com slashdot.org with verbose plugin descriptions
+  whatweb -v reddit.com slashdot.org
+* An aggressive scan of mashable.com detects the exact version of Wordpress
+  whatweb -a 3 mashable.com
+* Scan the local network quickly with 255 threads and suppress errors
+  whatweb --no-errors -t 255 192.168.0.0/24
+&nbsp;
+OPTIONAL DEPENDENCIES
+--------------------------------------------------------------------------------
+To enable MongoDB logging install the mongo gem.
+&nbsp;
+WARNING: Ruby 1.9 support is experimental. For stable usage use Ruby 1.8 instead. Please report bugs at https://github.com/urbanadventurer/WhatWeb/issue</span></pre>
+
+</div>
+<!-- EDIT3 SECTION "2、使用方法" [369-6252] -->
+<h3 class="sectionedit4" id="使用示范">3、使用示范</h3>
+<div class="level3">
+<hr />
+
+<p>
+查询<a href="http://1ight.co/" class="urlextern" title="http://1ight.co"  rel="nofollow">1ight.co</a>的whatweb信息：
+</p>
+<pre class="code bash"><span class="co4">light@kali:~# </span>whatweb 1ight.co
+http:<span class="sy0">//</span>1ight.co <span class="br0">&#91;</span><span class="nu0">200</span><span class="br0">&#93;</span> Apache<span class="br0">&#91;</span>2.4.10<span class="br0">&#93;</span><span class="br0">&#91;</span>mod_perl<span class="sy0">/</span>2.0.8-dev<span class="br0">&#93;</span>, Country<span class="br0">&#91;</span>CHINA<span class="br0">&#93;</span><span class="br0">&#91;</span>CN<span class="br0">&#93;</span>, HTML5, HTTPServer<span class="br0">&#91;</span>Unix<span class="br0">&#93;</span><span class="br0">&#91;</span>Apache<span class="sy0">/</span>2.4.10 <span class="br0">&#40;</span>Unix<span class="br0">&#41;</span> OpenSSL<span class="sy0">/</span>1.0.1j PHP<span class="sy0">/</span>5.6.3 mod_perl<span class="sy0">/</span>2.0.8-dev Perl<span class="sy0">/</span>v5.16.3<span class="br0">&#93;</span>, IP<span class="br0">&#91;</span>112.74.102.78<span class="br0">&#93;</span>, MetaGenerator<span class="br0">&#91;</span>Typecho <span class="nu0">1.0</span><span class="sy0">/</span>14.10.10<span class="br0">&#93;</span>, OpenSSL<span class="br0">&#91;</span>1.0.1j<span class="br0">&#93;</span>, PHP<span class="br0">&#91;</span>5.6.3<span class="br0">&#93;</span>, Perl<span class="br0">&#91;</span>5.16.3<span class="br0">&#93;</span>, Script, Title<span class="br0">&#91;</span>Not only Security<span class="br0">&#93;</span>, UncommonHeaders<span class="br0">&#91;</span>x-pingback<span class="br0">&#93;</span>, X-Powered-By<span class="br0">&#91;</span>PHP<span class="sy0">/</span>5.6.3<span class="br0">&#93;</span>, X-UA-Compatible<span class="br0">&#91;</span><span class="re2">IE</span>=edge<span class="br0">&#93;</span>, x-pingback<span class="br0">&#91;</span>http:<span class="sy0">//</span>1ight.co<span class="sy0">/</span>action<span class="sy0">/</span>xmlrpc<span class="br0">&#93;</span></pre>
+
+</div>
+<!-- EDIT4 SECTION "3、使用示范" [6253-6829] -->
+<h3 class="sectionedit5" id="相关资源">4、相关资源</h3>
+<div class="level3">
+<hr />
+
+<p>
+<a href="http://whatweb.net/" class="urlextern" title="http://whatweb.net"  rel="nofollow">whatweb在线检测平台</a>
+</p>
+
+</div>
+<!-- EDIT5 SECTION "4、相关资源" [6830-] --></div>
+</body>
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/tools:whatweb by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:27:34 GMT -->
+</html>

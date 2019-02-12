@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh"
+  lang="zh" dir="ltr" class="no-js">
+
+<!-- Mirrored from wiki.wooyun.org/web:code-injection by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 02:53:33 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>web:code-injection [WooYun WiKi]</title>
+  <script>(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)</script>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="shortcut icon" href="lib/tpl/bootstrap3/images/favicon.ico" />
+<link rel="apple-touch-icon" href="lib/tpl/bootstrap3/images/apple-touch-icon.png" />
+      <link type="text/css" rel="stylesheet" href="lib/tpl/bootstrap3/assets/bootstrap/css/bootstrap.min.css" />
+    <script type="text/javascript">/*<![CDATA[*/
+    var TPL_CONFIG = {"tableFullWidth":1};
+  /*!]]>*/</script>
+  <meta name="generator" content="DokuWiki"/>
+<meta name="robots" content="index,follow"/>
+<meta name="keywords" content="web,code-injection"/>
+<link rel="search" type="application/opensearchdescription+xml" href="lib/exe/opensearch.php" title="WooYun WiKi"/>
+<link rel="start" href="index.html"/>
+<link rel="contents" href="web_code-injectiondecf.html?do=index" title="网站地图"/>
+<link rel="alternate" type="application/rss+xml" title="最近更改" href="feed.php"/>
+<link rel="alternate" type="application/rss+xml" title="当前命名空间" href="feed4fbc.php?mode=list&amp;ns=web"/>
+<link rel="alternate" type="text/html" title="纯HTML" href="_export/xhtml/web_code-injection.html"/>
+<link rel="alternate" type="text/plain" title="Wiki Markup 语言" href="_export/raw/code-injection.txt"/>
+<link rel="canonical" href="web_code-injection.html"/>
+<link rel="stylesheet" type="text/css" href="lib/exe/css70b4.css?t=bootstrap3&amp;tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"/>
+<script type="text/javascript">/*<![CDATA[*/var NS='web';var JSINFO = {"id":"web:code-injection","namespace":"web","plugin_codeprettify":{"loader_base":"\/lib\/plugins\/codeprettify\/google-code-prettify"}};
+/*!]]>*/</script>
+<script type="text/javascript" charset="utf-8" src="lib/exe/js1e16.php?tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"></script>
+<script type="text/javascript" charset="utf-8" src="lib/plugins/codeprettify/google-code-prettify/run_prettifyeb11.js?lang=css"></script>
+  <script type="text/javascript" src="lib/tpl/bootstrap3/assets/bootstrap/js/bootstrap.min.js"></script>
+  <style type="text/css">
+    body { padding-top: 20px; }
+  </style>
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script type="text/javascript" src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+  <script type="text/javascript" src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body class="default page-on-panel">
+  <!--[if lte IE 7 ]><div id="IE7"><![endif]--><!--[if IE 8 ]><div id="IE8"><![endif]-->
+
+  <div id="dokuwiki__site" class="container">
+    <div id="dokuwiki__top" class="site dokuwiki mode_show tpl_bootstrap3    hasSidebar">
+
+      
+      <!-- header -->
+      <div id="dokuwiki__header">
+        <nav class="navbar  navbar-default" role="navigation">
+
+  <div class="container-fluid">
+
+    <div class="navbar-header">
+
+      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      <a href="WooYun%20WiKi.html"  accesskey="h" title="[H]" class="navbar-brand"><img src="lib/tpl/bootstrap3/images/logo.png" alt="WooYun WiKi" class="pull-left" id="dw__logo" width="20" height="20" /> <span id="dw__title" >WooYun WiKi</span></a>
+    </div>
+
+    <div class="collapse navbar-collapse">
+
+      <ul class="nav navbar-nav" id="dw__navbar">
+        <li class="active">
+  <a href="WooYun%20WiKi.html" ><i class="glyphicon glyphicon-home"></i> Home</a></li>
+      </ul>
+
+      <div class="navbar-right">
+
+        <form action="http://wiki.wooyun.org/WooYun WiKi" accept-charset="utf-8" class="search" id="dw__search" method="get" role="search"><div class="no"><input type="hidden" name="do" value="search" /><input type="text" id="qsearch__in" accesskey="f" name="id" class="edit" title="[F]" /><input type="submit" value="搜索" class="button" title="搜索" /><div id="qsearch__out" class="ajax_qsearch JSpopup"></div></div></form>
+        <ul class="nav navbar-nav" id="dw__tools">
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="工具"><i class="glyphicon glyphicon-wrench"></i> <span class="hidden-lg hidden-md hidden-sm">工具</span> <span class="caret"></span></a>
+    <ul class="dropdown-menu tools" role="menu">
+
+      <!-- dokuwiki__usertools -->
+      <li class="dropdown-header"><i class="glyphicon glyphicon-user"></i> 用户工具</li>
+      
+      <li class="divider"></li>
+
+      <!-- dokuwiki__sitetools -->
+      <li class="dropdown-header"><i class="glyphicon glyphicon-cog"></i> 站点工具</li>
+      <li><a href="web_code-injection810b.html?do=recent"  class="action recent" accesskey="r" rel="nofollow" title="最近更改 [R]"><i class="glyphicon glyphicon-list-alt"></i> 最近更改</a></li><li><a href="web_code-injection5b20.html?do=media&amp;ns=web"  class="action media" rel="nofollow" title="媒体管理器"><i class="glyphicon glyphicon-picture"></i> 媒体管理器</a></li><li><a href="web_code-injectiondecf.html?do=index"  class="action index" accesskey="x" rel="nofollow" title="网站地图 [X]"><i class="glyphicon glyphicon-list"></i> 网站地图</a></li>
+      <li class="divider"></li>
+
+      <!-- dokuwiki__pagetools -->
+      <li class="dropdown-header"><i class="glyphicon glyphicon-file"></i> 页面工具</li>
+      <li><a href="web_code-injection39b4.html?do=edit"  class="action source" accesskey="v" rel="nofollow" title="显示源文件 [V]"><i class="glyphicon glyphicon-edit"></i> 显示源文件</a></li><li><a href="web_code-injection5f35.html?do=revisions"  class="action revs" accesskey="o" rel="nofollow" title="修订记录 [O]"><i class="glyphicon glyphicon-time"></i> 修订记录</a></li><li><a href="web_code-injection2271.html?do=backlink"  class="action backlink" rel="nofollow" title="反向链接"><i class="glyphicon glyphicon-link"></i> 反向链接</a></li><li><a href="#dokuwiki__top"  class="action top" accesskey="t" rel="nofollow" title="回到顶部 [T]"><i class="glyphicon glyphicon-chevron-up"></i> 回到顶部</a></li>
+    </ul>
+  </li>
+</ul>
+
+        <ul class="nav navbar-nav">
+          <li>
+                      </li>
+                    <li><a href="http://api.wooyun.org/login?client_id=Af29c304"  class="action login" rel="nofollow" title="登录"><i class="glyphicon glyphicon-log-in"></i> 登录</a></li>        </ul>
+
+      </div>
+
+    </div>
+  </div>
+</nav>
+      </div>
+      <!-- /header -->
+
+      
+            <div id="dw__breadcrumbs">
+        <hr/>
+                        <div class="breadcrumb hidden-print"><span class="bchead">您的足迹:</span> <span class="bcsep">•</span> <bdi><a href="server_directory-list.html"  class="breadcrumbs" title="server:directory-list">directory-list</a></bdi> <span class="bcsep">•</span> <bdi><a href="server_padding-oracle-attack.html"  class="breadcrumbs" title="server:padding-oracle-attack">padding-oracle-attack</a></bdi> <span class="bcsep">•</span> <bdi><a href="server_host.html"  class="breadcrumbs" title="server:host">host</a></bdi> <span class="bcsep">•</span> <bdi><a href="server_zone-transfer.html"  class="breadcrumbs" title="server:zone-transfer">zone-transfer</a></bdi> <span class="bcsep">•</span> <bdi><a href="server_squid.html"  class="breadcrumbs" title="server:squid">squid</a></bdi> <span class="bcsep">•</span> <bdi><a href="server_openssl.html"  class="breadcrumbs" title="server:openssl">openssl</a></bdi> <span class="bcsep">•</span> <bdi><a href="server_bash.html"  class="breadcrumbs" title="server:bash">bash</a></bdi> <span class="bcsep">•</span> <bdi><a href="web_xss.html"  class="breadcrumbs" title="web:xss">xss</a></bdi> <span class="bcsep">•</span> <bdi><a href="web_sql.html"  class="breadcrumbs" title="web:sql">sql</a></bdi> <span class="bcsep">•</span> <span class="curid"><bdi><a href="web_code-injection.html"  class="breadcrumbs" title="web:code-injection">code-injection</a></bdi></span></div>
+                <hr/>
+      </div>
+      
+      <p class="pageId text-right">
+        <span class="label label-default">web:code-injection</span>
+      </p>
+
+      <div id="dw__msgarea">
+              </div>
+
+      <main class="main row" role="main">
+
+        <!-- ********** ASIDE ********** -->
+<aside id="dokuwiki__aside" class="dw__sidebar col-sm-3 col-md-2 hidden-print">
+  <div class="content">
+    <div class="toogle hidden-lg hidden-md hidden-sm" data-toggle="collapse" data-target="#dokuwiki__aside .collapse">
+      <i class="glyphicon glyphicon-th-list"></i> 侧边栏    </div>
+    <div class="collapse in">
+            
+<h4 id="企业安全">企业安全</h4>
+<div class="level4">
+<ul>
+<li class="level1"><div class="li"><a href="enterprise_information.html" class="wikilink1" title="enterprise:information">信息收集</a></div>
+</li>
+<li class="level1"><div class="li"><a href="enterprise_server.html" class="wikilink1" title="enterprise:server">服务配置</a></div>
+</li>
+<li class="level1"><div class="li"><a href="enterprise_web.html" class="wikilink1" title="enterprise:web">Web应用</a></div>
+</li>
+<li class="level1"><div class="li"><a href="enterprise_tools.html" class="wikilink1" title="enterprise:tools">安全工具</a></div>
+</li>
+<li class="level1"><div class="li"><a href="enterprise_defence.html" class="wikilink1" title="enterprise:defence">安全防御</a></div>
+</li>
+<li class="level1"><div class="li"><a href="enterprise_pentest.html" class="wikilink1" title="enterprise:pentest">渗透技巧</a></div>
+</li>
+</ul>
+
+</div>
+
+<h4 id="android_安全">Android 安全</h4>
+<div class="level4">
+<ul>
+<li class="level1"><div class="li"><a href="android_client.html" class="wikilink1" title="android:client">客户端</a></div>
+</li>
+<li class="level1"><div class="li"><a href="android_system.html" class="wikilink1" title="android:system">系统</a></div>
+</li>
+<li class="level1"><div class="li"><a href="android_communicate.html" class="wikilink1" title="android:communicate">通信</a></div>
+</li>
+<li class="level1"><div class="li"><a href="android_server.html" class="wikilink1" title="android:server">服务端</a></div>
+</li>
+<li class="level1"><div class="li"><a href="android_tools.html" class="wikilink1" title="android:tools">常用工具</a></div>
+</li>
+</ul>
+
+</div>
+
+<h4 id="乌云">乌云</h4>
+<div class="level4">
+<ul>
+<li class="level1"><div class="li"><a href="wooyun_route.html" class="wikilink1" title="wooyun:route">乌云路由</a></div>
+</li>
+<li class="level1"><div class="li"><span class="curid"><a href="wooyun_woobuntu.html" class="wikilink1" title="wooyun:woobuntu">Woobuntu</a></span></div>
+</li>
+</ul>
+
+</div>
+
+<h4 id="apt">APT</h4>
+<div class="level4">
+<ul>
+<li class="level1"><div class="li"><a href="apt_organization.html" class="wikilink1" title="apt:organization">组织</a></div>
+</li>
+</ul>
+
+</div>
+
+<h4 id="find_us">Find Us</h4>
+<div class="level4">
+<ul>
+<li class="level1"><div class="li">Email: <a class="__cf_email__" href="cdn-cgi/l/email-protection.html" data-cfemail="196e707270596e7676606c7737766b7e">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">
+/* <![CDATA[ */!function(){try{var t="currentScript"in document?document.currentScript:function(){for(var t=document.getElementsByTagName("script"),e=t.length;e--;)if(t[e].getAttribute("data-cfhash"))return t[e]}();if(t&&t.previousSibling){var e,r,n,i,c=t.previousSibling,a=c.getAttribute("data-cfemail");if(a){for(e="",r=parseInt(a.substr(0,2),16),n=2;a.length-n;n+=2)i=parseInt(a.substr(n,2),16)^r,e+=String.fromCharCode(i);e=document.createTextNode(e),c.parentNode.replaceChild(e,c)}t.parentNode.removeChild(t);}}catch(u){}}()/* ]]> */</script>
+</div>
+</li>
+</ul>
+
+</div>
+          </div>
+  </div>
+</aside>
+
+        <!-- ********** CONTENT ********** -->
+        <article id="dokuwiki__content" class="col-sm-9 col-md-10" >
+
+          <div class="panel panel-default" > 
+            <div class="page group panel-body">
+
+                                          
+              <div class="pull-right hidden-print" data-spy="affix" data-offset-top="150" style="z-index:1024; top:10px; right:10px;">
+                <!-- TOC START -->
+<div id="dw__toc">
+<h3 class="toggle">目录</h3>
+<div>
+
+<ul class="toc">
+<li class="level1"><div class="li"><a href="#代码注入_code_injection">代码注入（CODE Injection）</a></div>
+<ul class="toc">
+<li class="clear">
+<ul class="toc">
+<li class="level3"><div class="li"><a href="#相关背景介绍">1、相关背景介绍</a></div></li>
+<li class="level3"><div class="li"><a href="#成因">2、成因</a></div></li>
+<li class="level3"><div class="li"><a href="#攻击方式及危害">3、攻击方式及危害</a></div></li>
+<li class="level3"><div class="li"><a href="#实际案例">4、实际案例</a></div></li>
+<li class="level3"><div class="li"><a href="#修复方案">5、修复方案</a></div></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<!-- TOC END -->
+              </div>
+
+              <!-- wikipage start -->
+              
+<h1 class="sectionedit1" id="代码注入_code_injection">代码注入（CODE Injection）</h1>
+<div class="level1">
+
+</div>
+
+<h3 class="sectionedit2" id="相关背景介绍">1、相关背景介绍</h3>
+<div class="level3">
+<hr />
+
+<p>
+当应用在调用一些能将字符串转化成代码的函数（如php中的eval）时，没有考虑用户是否能控制这个字符串，将造成代码注入漏洞。 
+狭义的代码注入通常指将可执行代码注入到当前页面中，如php的eval函数，可以将字符串代表的代码作为php代码执行，当用户能够控制这段字符串时，将产生代码注入漏洞（也称命令执行）。 
+广义上的代码注入，我觉得可以覆盖大半安全漏洞的分类。只要是用户可以控制的“数据”，被当做“代码”给注入到程序中，就是代码注入漏洞。如，SQL注入漏洞实际上是“数据”被当做SQL语句注入到正常SQL语句中了，XSS漏洞是数据被当做“javascript”被注入到HTML中了，文件包含漏洞是数据（某文件）被当做“脚本文件”被注入当正常脚本流程中了。 
+这个wiki主要介绍狭义上的代码注入漏洞。 
+</p>
+
+</div>
+
+<h3 class="sectionedit3" id="成因">2、成因</h3>
+<div class="level3">
+<hr />
+
+<p>
+几种常用语言，都有将字符串转化成代码去执行的相关函数，如： 
+</p>
+<pre class="code">- PHP：eval、assert
+- Javascript：eval
+- Vbscript: Execute、Eval
+- Python：exec
+- Java：Java中没有类似php中eval函数这种直接可以将字符串转化为代码执行的函数，但是有反射机制，并且有各种基于反射机制的表达式引擎，如：OGNL、SpEL、MVEL等，这些都能造成代码执行漏洞</pre>
+
+<p>
+应用有时候会考虑灵活性、简洁性，在代码中调用eval之类的函数去处理。如phpcms中很常用的string2array函数： 
+</p>
+<pre class="code php"><span class="kw2">function</span> string2array<span class="br0">&#40;</span><span class="re0">$data</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+<span class="kw1">if</span><span class="br0">&#40;</span><span class="re0">$data</span> <span class="sy0">==</span> <span class="st_h">''</span><span class="br0">&#41;</span> <span class="kw1">return</span> <a href="http://www.php.net/array"><span class="kw3">array</span></a><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="sy0">@</span><a href="http://www.php.net/eval"><span class="kw3">eval</span></a><span class="br0">&#40;</span><span class="st0">&quot;<span class="es1">\$</span>array = <span class="es4">$data</span>;&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="kw1">return</span> <span class="re0">$array</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+
+<p>
+为什么一个赋值的语句，却要用eval包裹起来，变成一个危险的“定时炸弹”？ 
+其实这也是这种漏洞很重要的成因，我们来到phpcms的数据库，看看这个settings究竟是什么内容： 
+</p>
+<pre class="code sql">array<span class="br0">&#40;</span>
+  <span class="st0">'upload_maxsize'</span> <span class="sy0">=&gt;</span> <span class="st0">'2048,
+  '</span>upload_allowext<span class="st0">' =&gt; '</span>jpg<span class="sy0">|</span>jpeg<span class="sy0">|</span>gif<span class="sy0">|</span>bmp<span class="sy0">|</span>png<span class="sy0">|</span>doc<span class="sy0">|</span>docx<span class="sy0">|</span>xls<span class="sy0">|</span>xlsx<span class="sy0">|</span>ppt<span class="sy0">|</span>pptx<span class="sy0">|</span>pdf<span class="sy0">|</span>txt<span class="sy0">|</span>rar<span class="sy0">|</span>zip<span class="sy0">|</span>swf<span class="st0">',
+  '</span>watermark_enable<span class="st0">' =&gt; '</span><span class="nu0">1</span><span class="st0">',
+  '</span>watermark_minwidth<span class="st0">' =&gt; '</span><span class="nu0">300</span><span class="st0">',
+  '</span>watermark_minheight<span class="st0">' =&gt; '</span><span class="nu0">300</span><span class="st0">',
+  '</span>watermark_img<span class="st0">' =&gt; '</span><span class="sy0">/</span>statics<span class="sy0">/</span>images<span class="sy0">/</span>water<span class="sy0">/</span>mark<span class="sy0">.</span>png<span class="st0">',
+  '</span>watermark_pct<span class="st0">' =&gt; '</span><span class="nu0">85</span><span class="st0">',
+  '</span>watermark_quality<span class="st0">' =&gt; '</span><span class="nu0">80</span><span class="st0">',
+  '</span>watermark_pos<span class="st0">' =&gt; '</span><span class="nu0">9</span><span class="st0">',
+)</span></pre>
+
+<p>
+如上，其实settings是一个字符串形式的“php数组”，我们必须要用eval函数才能将“字符串”变成一个真正的数组，所以这也是phpcms里多次调用string2array函数的主要原因。很多CMS为了设置的灵活性，都会选择用eval来处理内容。但处理的同时并没有检查用户是否可以控制被处理的“字符串”。 
+所以，很明显的，如果我们能够控制phpcms的数据库，那么getshell也是很简单的了。 
+</p>
+
+</div>
+
+<h3 class="sectionedit4" id="攻击方式及危害">3、攻击方式及危害</h3>
+<div class="level3">
+<hr />
+
+<p>
+<code> 以PHP为例讲解 JAVA等待补充，我感觉也很重要</code>
+</p>
+
+<p>
+PHP中能造成代码注入的主要函数： 
+* eval
+* preg_replace + /e模式
+* assert
+</p>
+
+<p>
+用的一般就是前两者，CMS中很少用到assert的，至于一些偏门函数就更少了，用的情况仅限于留后门。 
+常见用法也有如下一些：
+</p>
+<pre class="code php"><a href="http://www.php.net/eval"><span class="kw3">eval</span></a><span class="br0">&#40;</span><span class="st0">&quot;<span class="es1">\$</span>ret = <span class="es4">$data</span>;&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span> 
+<a href="http://www.php.net/eval"><span class="kw3">eval</span></a><span class="br0">&#40;</span><span class="st0">&quot;<span class="es1">\$</span>ret = deal('<span class="es4">$data</span>');&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span> 
+<a href="http://www.php.net/eval"><span class="kw3">eval</span></a><span class="br0">&#40;</span><span class="st0">&quot;<span class="es1">\$</span>ret = deal(&quot;</span><span class="re0">$data</span><span class="st0">&quot;);&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span> 
+<a href="http://www.php.net/preg_replace"><span class="kw3">preg_replace</span></a><span class="br0">&#40;</span><span class="st_h">'/&lt;data&gt;(.*)&lt;/data&gt;/e'</span><span class="sy0">,</span> <span class="st_h">'$ret = &quot;\\1&quot;;'</span><span class="br0">&#41;</span><span class="sy0">;</span> </pre>
+
+<p>
+第一个就是刚才之前说phpcms的，通常$data不会直接来自POST或GET变量（要不也太水了），但通过一些二次漏洞很可能能够造出代码执行（如SQL注入）。 
+第二个是将$data使用一个函数（deal）处理后再赋值给$ret。那么，传参的方式就很重要了。第二个用的是单引号传参，那么我们只能先闭合单引号，之后才能注入代码。如果应用全局做了addslashes或GPC=on的话，就不能够注入代码了。 
+第三个与第二个类似，但使用的是双引号传参。双引号在代码中有个很重要的特性，它能解析其中的函数，如我们传入${phpinfo()}，phpinfo将会被执行，而得到的返回值作为参数传入deal函数。这个时候，我们就不用考虑闭合引号的事了。 
+第四个是preg_replace函数的误用。这种用法出现的情况是最多的，也是因为preg_replace第二个参数中，包裹正则结果\\1的是双引号，通过第三个中的方式，也能执行任意代码。
+</p>
+
+<p>
+Python中，还有一个比较有意思的“代码注入”： 
+python调用Pickle或cPickle对输入进行反序列化的时候，可能引入代码：<a href="https://blog.nelhage.com/2011/03/exploiting-pickle/" class="urlextern" title="https://blog.nelhage.com/2011/03/exploiting-pickle/"  rel="nofollow">Exploiting Misuse of Python&#039;s &quot;Pickle&quot;</a>
+同样的情况，当PHP调用unserialsize进行反序列化时，将不会引入代码，但也可能造成各种安全问题，对此不在本章中讨论。
+</p>
+
+</div>
+
+<h3 class="sectionedit5" id="实际案例">4、实际案例</h3>
+<div class="level3">
+<hr />
+
+<p>
+关于PHPCMS我说的第一种，案例： 
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2015-0104157" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2015-0104157"  rel="nofollow">phpcms前台任意代码执行（有php版本限制）</a>
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-046565" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-046565"  rel="nofollow">phpcms v9 后台远程代码执行漏洞（第三弹）</a>
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2014-085518" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2014-085518"  rel="nofollow">phpcms后台命令执行可getshell</a>
+</p>
+
+<p>
+这几案例应该是copy了phpcms的string2array造成的： 
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-087518" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-087518"  rel="nofollow">DayuCMS 1.525 前台任意代码执行</a>
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-061643" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-061643"  rel="nofollow">FineCMS v1.x远程代码执行漏洞</a>
+</p>
+
+<p>
+这个也是String2Array类似函数造成的，但是经过了“入库”+“出库”+命令执行的二次操作： 
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-082805" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-082805"  rel="nofollow">PHPMyWind最新版代码执行漏洞</a>
+</p>
+
+<p>
+一个直接执行了eval($xxx)的案例： 
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-078327" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-078327"  rel="nofollow">DESTOON前台getshell</a>
+</p>
+
+<p>
+这几个就是我讲的第三种情况，eval的值在双引号内：eval(“\$title = \”$title\“;”); 
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-062435" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-062435"  rel="nofollow">Destoon B2B 2014-05-21最新版csrf getshell</a>
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-054693" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-054693"  rel="nofollow">cmstop 远程代码执行漏洞（大众版）</a>
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-053172" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-053172"  rel="nofollow">某生活查询工具代码执行#可批量Getshell</a>
+</p>
+
+<p>
+preg_replace造成的代码执行ThinkPHP： 
+</p>
+
+<p>
+<a href="https://butian.360.cn/vul/info/qid/QTVA-2013-08762" class="urlextern" title="https://butian.360.cn/vul/info/qid/QTVA-2013-08762"  rel="nofollow">ThinkPHP 任意代码执行漏洞</a>
+</p>
+
+<p>
+这个案例也是preg_replace造成，但第二个参数的输出结果\\1并没有在引号中，所以也可以直接执行任意代码： 
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-088871" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-088871"  rel="nofollow">方维购物分享最新版前台代码漏洞</a>
+</p>
+
+<p>
+这个案例直接覆盖了preg_replace第一个参数，使用e修饰，造成代码执行： 
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2014-080723" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2014-080723"  rel="nofollow">Discuz!某两个版本前台产品命令执行（无需登录）</a>
+</p>
+
+<p>
+这个案例比较有意思，在线编码类网站时下越来越流行，所以“代码执行”是一个正常功能，但如果没有做沙盒或沙盒没做好的话，就能拿下服务器权限： 
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-069669" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-069669"  rel="nofollow">某网站python在线练习系统设计缺陷导致getshell</a>
+</p>
+
+</div>
+
+<h3 class="sectionedit6" id="修复方案">5、修复方案</h3>
+<div class="level3">
+<hr />
+
+<p>
+1.能使用json保存数组、对象就使用json，不要将php对象保存成字符串，否则读取的时候需要使用eval。 
+2.对于必须使用eval的情况，一定要保证用户不能轻易接触eval的参数（或用正则严格判断输入的数据格式）。对于字符串，一定要使用单引号包裹可控代码，并再插入前进行addslashes： 
+</p>
+<pre class="code php"><span class="re0">$data</span> <span class="sy0">=</span> <a href="http://www.php.net/addslashes"><span class="kw3">addslashes</span></a><span class="br0">&#40;</span><span class="re0">$data</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<a href="http://www.php.net/eval"><span class="kw3">eval</span></a><span class="br0">&#40;</span><span class="st0">&quot;<span class="es1">\$</span>data = deal('<span class="es4">$data</span>');&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+
+<p>
+3.放弃使用
+</p>
+<pre class="code">preg_replace</pre>
+
+<p>
+的e修饰符，而换用
+</p>
+<pre class="code">preg_replace_callback</pre>
+
+<p>
+替代。 
+4.如果非要使用
+</p>
+<pre class="code">preg_replace</pre>
+
+<p>
+的e模式的话，请保证第二个参数中，对于正则匹配出的对象，用单引号包裹。
+</p>
+
+</div>
+
+              <!-- wikipage stop -->
+
+                            
+            </div>
+          </div>
+
+        </article>
+
+        
+      </main>
+
+      <footer id="dokuwiki__footer" class="small hidden-print">
+
+        <a href="javascript:void(0)" class="back-to-top hidden-print btn btn-default btn-sm" title="跳至内容>" id="back-to-top"><i class="glyphicon glyphicon-chevron-up"></i></a>
+
+                <div class="text-center">
+          <p id="dw__license">
+                      </p>
+                  </div>
+      </footer>
+
+      
+    </div><!-- /site -->
+
+    <div class="no"><img src="lib/exe/indexer87af.gif?id=web%3Acode-injection&amp;1449197458" width="2" height="1" alt="" /></div>
+    <div id="screen__mode" class="no">
+      <span class="visible-xs"></span>
+      <span class="visible-sm"></span>
+      <span class="visible-md"></span>
+      <span class="visible-lg"></span>
+    </div>
+  </div>
+  <!--[if ( lte IE 7 | IE 8 ) ]></div><![endif]-->
+</body>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "http://hm.baidu.com/hm.js?2e9369dace9479584f08203285c7cbce";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<!-- Mirrored from wiki.wooyun.org/web:code-injection by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 02:53:35 GMT -->
+</html>

@@ -1,0 +1,14 @@
+====== RFIDiot PCSC ======
+
+  * [[tools:bruteforce mifare|bruteforce mifare]]
+  * [[tools:calculate jcop mifare keys|calculate jcop mifare keys]]
+  * [[tools:chip & pin info|chip & pin info]]
+  * [[tools:continuous select tag|continuous select tag]]
+  * [[tools:epassport read/write/clone|epassport read/write/clone]]
+  * [[tools:identify hf tag type|identify hf tag type]]
+  * [[tools:jcop info|jcop info]]
+  * [[tools:jcop mifare read/write|jcop mifare read/write]]
+  * [[tools:jcop set atr historical bytes|jcop set atr historical bytes]]
+  * [[tools:read mifare|read mifare]]
+  * [[tools:read tag|read tag]]
+  * [[tools:select tag|select tag]]

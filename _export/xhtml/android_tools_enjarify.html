@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/android:tools:enjarify by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:25:24 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8" />
+  <title>android:tools:enjarify</title>
+<meta name="generator" content="DokuWiki"/>
+<meta name="robots" content="index,follow"/>
+<meta name="keywords" content="android,tools,enjarify"/>
+<link rel="search" type="application/opensearchdescription+xml" href="../../lib/exe/opensearch.php" title="WooYun WiKi"/>
+<link rel="start" href="../../index.html"/>
+<link rel="contents" href="../../android_tools_enjarifydecf.html?do=index" title="网站地图"/>
+<link rel="alternate" type="application/rss+xml" title="最近更改" href="../../feed.php"/>
+<link rel="alternate" type="application/rss+xml" title="当前命名空间" href="../../feed31a9.php?mode=list&amp;ns=android:tools"/>
+<link rel="alternate" type="text/html" title="纯HTML" href="android_tools_enjarify.html"/>
+<link rel="alternate" type="text/plain" title="Wiki Markup 语言" href="../raw/enjarify.txt"/>
+<link rel="canonical" href="../../android_tools_enjarify.html"/>
+<link rel="stylesheet" type="text/css" href="../../lib/exe/css70b4.css?t=bootstrap3&amp;tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"/>
+<script type="text/javascript">/*<![CDATA[*/var NS='android:tools';var JSINFO = {"id":"android:tools:enjarify","namespace":"android:tools","plugin_codeprettify":{"loader_base":"\/lib\/plugins\/codeprettify\/google-code-prettify"}};
+/*!]]>*/</script>
+<script type="text/javascript" charset="utf-8" src="../../lib/exe/js1e16.php?tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"></script>
+<script type="text/javascript" charset="utf-8" src="../../lib/plugins/codeprettify/google-code-prettify/run_prettifyeb11.js?lang=css"></script>
+</head>
+<body>
+<div class="dokuwiki export">
+<!-- TOC START -->
+<div id="dw__toc">
+<h3 class="toggle">目录</h3>
+<div>
+
+<ul class="toc">
+<li class="level1"><div class="li"><a href="#enjarify使用说明">Enjarify使用说明</a></div>
+<ul class="toc">
+<li class="clear">
+<ul class="toc">
+<li class="level3"><div class="li"><a href="#简介">1.简介</a></div></li>
+<li class="level3"><div class="li"><a href="#环境搭建">2.环境搭建</a></div></li>
+<li class="level3"><div class="li"><a href="#使用方法">3.使用方法</a></div></li>
+<li class="level3"><div class="li"><a href="#参数说明">4.参数说明</a></div></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<!-- TOC END -->
+
+<h1 class="sectionedit1" id="enjarify使用说明">Enjarify使用说明</h1>
+<div class="level1">
+
+<p>
+下载地址:<a href="https://github.com/google/enjarify" class="urlextern" title="https://github.com/google/enjarify"  rel="nofollow">https://github.com/google/enjarify</a>
+</p>
+
+</div>
+<!-- EDIT1 SECTION "Enjarify使用说明" [1-123] -->
+<h3 class="sectionedit2" id="简介">1.简介</h3>
+<div class="level3">
+<hr />
+
+<p>
+<a href="https://github.com/google/enjarify" class="urlextern" title="https://github.com/google/enjarify"  rel="nofollow">enjarify</a>是谷歌出品的一款反编译工具,它可以将dalvik字节码转化成 java 字节码,然后就可以使用 <a href="https://github.com/java-decompiler/jd-gui" class="urlextern" title="https://github.com/java-decompiler/jd-gui"  rel="nofollow">JD-GUI</a> 之类的 java 逆向工具来分析 app 了.
+</p>
+
+<p>
+优势:谷歌出品更新应该更给力,相对 dex2jar 这种流传广泛的工具对应的 anti 应该更少.
+</p>
+
+</div>
+<!-- EDIT2 SECTION "1.简介" [124-521] -->
+<h3 class="sectionedit3" id="环境搭建">2.环境搭建</h3>
+<div class="level3">
+<hr />
+
+<p>
+enjarify可以运行在任意装有 python3的平台上,python3下载地址:
+</p>
+
+<p>
+<a href="https://www.python.org/downloads/release/python-343/" class="urlextern" title="https://www.python.org/downloads/release/python-343/"  rel="nofollow">https://www.python.org/downloads/release/python-343/</a>
+</p>
+
+<p>
+下载完成后将 python3加入环境变量,各种系统的环境变量设置就不介绍了各位看官如有不会的自行百度下吧.
+</p>
+
+</div>
+<!-- EDIT3 SECTION "2.环境搭建" [522-825] -->
+<h3 class="sectionedit4" id="使用方法">3.使用方法</h3>
+<div class="level3">
+<hr />
+
+<p>
+<strong>直接使用</strong>
+</p>
+<pre class="code">python3 -O -m enjarify.main yourapp.apk</pre>
+
+<p>
+<strong>win使用批处理</strong>
+</p>
+<pre class="code">C:\Documents and Settings\Administrator&gt;enjarify.bat
+usage: enjarify [-h] [-o OUTPUT] [-f] [--fast] inputfile
+enjarify: error: the following arguments are required: inputfile
+
+//注意批处理里面的调用是 python3,默认的安装完后的 exe 是 python,改下两边任意一个的 name 就好了.
+
+C:\Documents and Settings\Administrator&gt;enjarify.bat &quot;C:\Documents and Settings\Administrator\My Documents\下载\Root-Explorer-3.3.4.apk&quot;
+1000 classes processed
+2000 classes processed
+3000 classes processed
+Output written to C:\Documents and Settings\Administrator\My Documents\下载\Root-Explorer-3.3.4-enjarify.jar
+3244 classes translated successfully, 0 classes had errors</pre>
+
+<p>
+<strong>linux/oxs 使用脚本</strong>
+</p>
+<pre class="code">ln -s &quot;$PWD/enjarify.sh&quot; ~/bin/enjarify
+enjarify yourapp.apk
+enjarify classes2.dex
+enjarify yourapp.apk -o yourapp.jar</pre>
+
+</div>
+<!-- EDIT4 SECTION "3.使用方法" [826-1790] -->
+<h3 class="sectionedit5" id="参数说明">4.参数说明</h3>
+<div class="level3">
+<hr />
+<pre class="code">usage: enjarify [-h] [-o OUTPUT] [-f] [--fast] inputfile</pre>
+<pre class="code">Translates Dalvik bytecode (.dex or .apk) to Java bytecode (.jar)</pre>
+<pre class="code">positional arguments:
+  inputfile</pre>
+<pre class="code">optional arguments:
+  -h, --help            show this help message and exit
+  -o OUTPUT, --output OUTPUT
+                        Output .jar file. Default is [input-
+                        filename]-enjarify.jar.
+  -f, --force           Force overwrite. If output file already exists, this
+                        option is required to overwrite.
+  --fast                Speed up translation at the expense of generated
+                        bytecode being less readable.</pre>
+
+</div>
+<!-- EDIT5 SECTION "4.参数说明" [1791-] --></div>
+</body>
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/android:tools:enjarify by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:25:24 GMT -->
+</html>

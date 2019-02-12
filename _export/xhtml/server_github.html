@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/server:github by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:25:25 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8" />
+  <title>server:github</title>
+<meta name="generator" content="DokuWiki"/>
+<meta name="robots" content="index,follow"/>
+<meta name="keywords" content="server,github"/>
+<link rel="search" type="application/opensearchdescription+xml" href="../../lib/exe/opensearch.php" title="WooYun WiKi"/>
+<link rel="start" href="../../index.html"/>
+<link rel="contents" href="../../server_githubdecf.html?do=index" title="网站地图"/>
+<link rel="alternate" type="application/rss+xml" title="最近更改" href="../../feed.php"/>
+<link rel="alternate" type="application/rss+xml" title="当前命名空间" href="../../feed0688.php?mode=list&amp;ns=server"/>
+<link rel="alternate" type="text/html" title="纯HTML" href="server_github.html"/>
+<link rel="alternate" type="text/plain" title="Wiki Markup 语言" href="../raw/github.txt"/>
+<link rel="canonical" href="../../server_github.html"/>
+<link rel="stylesheet" type="text/css" href="../../lib/exe/css70b4.css?t=bootstrap3&amp;tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"/>
+<script type="text/javascript">/*<![CDATA[*/var NS='server';var JSINFO = {"id":"server:github","namespace":"server","plugin_codeprettify":{"loader_base":"\/lib\/plugins\/codeprettify\/google-code-prettify"}};
+/*!]]>*/</script>
+<script type="text/javascript" charset="utf-8" src="../../lib/exe/js1e16.php?tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"></script>
+<script type="text/javascript" charset="utf-8" src="../../lib/plugins/codeprettify/google-code-prettify/run_prettifyeb11.js?lang=css"></script>
+</head>
+<body>
+<div class="dokuwiki export">
+<!-- TOC START -->
+<div id="dw__toc">
+<h3 class="toggle">目录</h3>
+<div>
+
+<ul class="toc">
+<li class="level1"><div class="li"><a href="#github导致文件泄露">Github导致文件泄露</a></div>
+<ul class="toc">
+<li class="clear">
+<ul class="toc">
+<li class="level3"><div class="li"><a href="#github简介">1、Github简介</a></div></li>
+<li class="level3"><div class="li"><a href="#漏洞成因及危害">2、漏洞成因及危害</a></div></li>
+<li class="level3"><div class="li"><a href="#漏洞检测及利用">3、漏洞检测及利用</a></div></li>
+<li class="level3"><div class="li"><a href="#实际案例">4、实际案例</a></div></li>
+<li class="level3"><div class="li"><a href="#漏洞修复">5、漏洞修复</a></div></li>
+<li class="level3"><div class="li"><a href="#相关资源">6、相关资源</a></div></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<!-- TOC END -->
+
+<h1 class="sectionedit1" id="github导致文件泄露">Github导致文件泄露</h1>
+<div class="level1">
+
+</div>
+<!-- EDIT1 SECTION "Github导致文件泄露" [1-41] -->
+<h3 class="sectionedit2" id="github简介">1、Github简介</h3>
+<div class="level3">
+<hr />
+
+<p>
+GitHub是一个共享虚拟主机服务，用于存放使用Git版本控制的软件代码和内容项目。它由GitHub公司（曾称Logical Awesome）的开发者Chris Wanstrath、PJ Hyett和Tom Preston-Werner使用Ruby on Rails编写而成。
+</p>
+
+<p>
+作为开源代码库以及版本控制系统，Github目前已拥有超过350万的开发者用户。随着越来越多的应用程序转移到了云上，Github已经成为了管理软件开发以及发现已有代码的首选方法。
+</p>
+
+</div>
+<!-- EDIT2 SECTION "1、Github简介" [42-561] -->
+<h3 class="sectionedit3" id="漏洞成因及危害">2、漏洞成因及危害</h3>
+<div class="level3">
+<hr />
+
+<p>
+Github是目前全球最热门的在线协作网站，大量的程序员都会在Github上分享自己的代码以及协力进行软件开发。
+但与此同时，部分的程序员出于各种原因而没有删除所分享代码中的重要敏感信息，而被黑客利用与攻击系统。
+</p>
+
+<p>
+在Github中被泄露的敏感信息主要包括以下几类
+</p>
+<ul>
+<li class="level1"><div class="li"> 邮箱信息</div>
+</li>
+<li class="level1"><div class="li"> SVN信息</div>
+</li>
+<li class="level1"><div class="li"> 内部账号及密码</div>
+</li>
+<li class="level1"><div class="li"> 数据库连接信息</div>
+</li>
+<li class="level1"><div class="li"> 服务器配置信息</div>
+</li>
+</ul>
+
+<p>
+这些敏感信息有的只是导致一些无法被外网连接的内网账户信息或者数据库连接信息泄露，但时也可能会导致公司重要的商业秘密或程序源代码被他人窃取，管理员账户被控制或者数据库泄露等，造成巨大的损失。
+</p>
+
+</div>
+<!-- EDIT3 SECTION "2、漏洞成因及危害" [562-1351] -->
+<h3 class="sectionedit4" id="漏洞检测及利用">3、漏洞检测及利用</h3>
+<div class="level3">
+<hr />
+
+<p>
+使用搜索引擎搜索语法便可快速从Github上找到需要的信息，以下是几个示例。
+</p>
+
+<p>
+Google hack:
+</p>
+<pre class="code">site:Github.com smtp 
+site:Github.com sa password
+site:Github.com root password
+site:Github.com User ID=&#039;sa&#039;;Password
+site:Github.com svn
+site:Github.com ftp</pre>
+
+<p>
+也可使用Github敏感信息收集工具<a href="https://github.com/lijiejie/GitHack" class="urlextern" title="https://github.com/lijiejie/GitHack"  rel="nofollow">GitHack</a>。
+</p>
+
+</div>
+<!-- EDIT4 SECTION "3、漏洞检测及利用" [1352-1778] -->
+<h3 class="sectionedit5" id="实际案例">4、实际案例</h3>
+<div class="level3">
+<hr />
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-0100238" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-0100238"  rel="nofollow">北京大学内部邮件账号泄漏</a>
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-0108535" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-0108535"  rel="nofollow">阿里巴巴某系统弱口令</a>
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-095466" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-095466"  rel="nofollow">泄露youku各种信息内含数据库论队友的重要性</a>
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-094921" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-094921"  rel="nofollow">高德软件多个信息泄露，影响公司安全</a>
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-091525" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-091525"  rel="nofollow">UC某业务导致敏感内部邮件信息泄露</a>
+</p>
+
+</div>
+<!-- EDIT5 SECTION "4、实际案例" [1779-2296] -->
+<h3 class="sectionedit6" id="漏洞修复">5、漏洞修复</h3>
+<div class="level3">
+<hr />
+
+<p>
+将源码上传至Github公开仓库前注意对敏感信息打码或者删除。
+</p>
+
+</div>
+<!-- EDIT6 SECTION "5、漏洞修复" [2297-2411] -->
+<h3 class="sectionedit7" id="相关资源">6、相关资源</h3>
+<div class="level3">
+<hr />
+
+<p>
+<a href="http://michenriksen.com/blog/gitrob-putting-the-open-source-in-osint/" class="urlextern" title="http://michenriksen.com/blog/gitrob-putting-the-open-source-in-osint/"  rel="nofollow">Gitrob: Putting the Open Source in OSINT</a>
+</p>
+
+</div>
+<!-- EDIT7 SECTION "6、相关资源" [2412-] --></div>
+</body>
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/server:github by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:25:25 GMT -->
+</html>

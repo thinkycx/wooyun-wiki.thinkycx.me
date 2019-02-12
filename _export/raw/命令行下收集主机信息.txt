@@ -1,0 +1,76 @@
+使用wmic识别安装到系统中的补丁情况
+<code>
+C:\> wmic qfe get description,installedOn
+</code>
+
+识别正在运行的服务
+<code>
+C:\>sc query type= service
+C:\>net start
+</code>
+
+识别开机启动的程序，包括路径
+<code>
+C:\>wmic startup list full
+</code>
+
+ping探测存活主机
+<code>
+D:\>for /L %I in (100,1,254) DO @ping -w 1 -n 1 10.18.180.%I | findstr "TTL=" >> pinglive.txt
+</code>
+
+查看系统中网卡的IP地址和MAC地址
+<code>
+D:\>wmic nicconfig get ipaddress,macaddress
+</code>
+
+查看当前系统是否有屏保保护，延迟是多少
+<code>
+D:\>wmic desktop get screensaversecure,screensavertimeout
+</code>
+
+查看系统中开放的共享
+<code>
+D:\>wmic share get name,path
+D:\>net share
+</code>
+
+查看系统中开启的日志
+<code>
+C:\>wmic nteventlog get path,filename,writeable
+</code>
+
+
+清除相关的日志（这里是全部清除）
+<code>
+wevtutil cl "windows powershell"
+wevtutil cl "security"
+wevtutil cl "system"
+</code>
+
+查看系统中安装的软件以及版本
+<code>
+C:\>wmic product get name,version
+</code>
+
+查看某个进程的详细信息 （路径，命令行参数等）
+<code>
+C:\>wmic process where name="chrome.exe" list full
+</code>
+
+终止一个进程
+<code>
+D:\>wmic process where name="xshell.exe" call terminate
+D:\>ntsd -c q -p 进程的PID
+</code>
+
+显示系统中的曾经连接过的无线密码
+<code>
+D:\>netsh wlan show profiles 
+D:\>netsh wlan show profiles name="profiles的名字" key=clear
+</code>
+
+查看当前系统是否是VMWARE
+<code>
+C:\>wmic bios list full | find /i "vmware"
+</code>

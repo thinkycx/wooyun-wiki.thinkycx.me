@@ -1,0 +1,49 @@
+====== fragroute使用说明 ======
+
+==== 1、工具简介 ====
+
+----
+2002年3月左右，http://www.monkey.org/~dugsong/发布了一个工具fragroute，在入侵检测领域引起了相当大的震动。有关fragroute的讨论成了3-4月http://online.securityfocus.com/和snort邮件列表的一个热点。
+fragroute能够截取、修改和重写向外发送的报文，实现大部分在了Secure Networks Insertion, Evasion, and Denial of Service: Eluding Network Intrusion Detection中叙述的IDS欺骗技术，包括IP、TCP层的数据包碎片以及数据包数据重叠等。
+
+==== 2、参数解释 ====
+
+----
+终端直接输入“fragroute -h”可以查看其相关参数用法：
+<code bash>
+light@kali:~# fragroute
+Usage: fragroute [-f file] dst
+Rules:
+       delay first|last|random <ms>
+       drop first|last|random <prob-%>
+       dup first|last|random <prob-%>
+       echo <string> ...
+       ip_chaff dup|opt|<ttl>
+       ip_frag <size> [old|new]
+       ip_opt lsrr|ssrr <ptr> <ip-addr> ...
+       ip_ttl <ttl>
+       ip_tos <tos>
+       order random|reverse
+       print
+       tcp_chaff cksum|null|paws|rexmit|seq|syn|<ttl>
+       tcp_opt mss|wscale <size>
+       tcp_seg <size> [old|new]
+</code>
+
+
+==== 3、使用方法 ====
+
+----
+Usage: fragroute [-f file] dst  
+fragroute -f fragroute.conf 目的ip地址   
+-f：必带的参数，指定配置文件的路径。
+fragroute的使用是根据fragroute.conf这个配 置文件来进行操作的，所有的命令参数值放在这个配置文件中，每次只需要修改配置文件即可。fragroute本身会自带一些配置文件，供大家使用。操作时也可以把常用的配置文件放在一个目录下以便管理和使用。  
+dst：必带的参数，为目的ip地址，注意直接写ip地址即可。指明发向该ip地址的报文才进行fragroute的操作。仅支持对一个ip地址进行fragroute的命令操作。  
+配置完以上两个参数后就可以使用了，但是第一次使用一般会碰到这样的问题： 
+
+[light@kali ~]# fragroute -f /usr/local/etc/fragroute.conf 192.168.96.1 fragroute: no route to 192.168.96.1: No such process  
+提示没有路由到目的ip，这个时候其实是没有学到arp的原因，你只需要先ping一下你想要访问的目的ip，然后再执行上面的命令就可以了。
+==== 4、相关资源 ====
+
+----
+[[http://www.monkey.org/~dugsong/fragroute/|fragroute官网]]

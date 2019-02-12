@@ -1,0 +1,119 @@
+#NFS安全配置
+##1、NFS简介
+NFS(Network File System)网络文件系统是FreeBSD支持的文件系统中的一种， 也被称为 NFS。 NFS允许一个系统在网络上与它人共享目录和文件。通过使用NFS，用户和程序可以象访问本地文件 一样访问远端系统上的文件。
+
+使用NFS有以下好处：
+
+	1、本地工作站使用更少的磁盘空间，因为通常的数据可以存放在一 台机器上而且可以通过网络访问到。
+	2、用户不必在每个网络上机器里头都有一个home目录。Home目录 可以被放在NFS服务器上并且在网络上处处可用。
+	3、诸如软驱，CDROM和Zip之类的存储设备可以在网络上面被别的机器使用。 这可以减少整个网络上的可移动介质设备的数量。
+
+NFS是不可以单独进行工作的，它必须跟portmap来协商生成的。Portmap用于提供RPC协议（远程过程调用）
+
+NFS相关进程：
+
+	rpc.nfsd：它是基本的NFS守护进程，主要功能是管理客户端是否能够登录服务器
+	rpc.mountd：它是RPC安装守护进程，主要功能是管理NFS的文件系统。当客户端顺利通过rpc.nfsd登录NFS服务后，在使用NFS服务所提供的文凭前，还必须通过文件使用权限的验证。它会读取NFS的配置文件/etc/exports来对比客户端权限。
+	portmap：portmap的主要功能是进行端口映射工作。当客户端尝试连接并使用RPC服务器提供的服务（如NFS服务）时，portmap会将所管理的与服务对应的端口提供给客户端，从而使客户可以通过该端口向服务器请求服务。
+
+
+服务器必须运行以下服务：
+
+	nfsd：NFS，为来自NFS客户端的 请求服务。
+	mountd：NFS挂载服务，处理nfsd递交过来的请求。
+	rpcbind：此服务允许 NFS 客户程序查询正在被 NFS 服务使用的端口。
+
+
+##2、NFS服务器架设
+搭建环境：CentOS release 6.6 (Final)
+安装软件包
+
+	yum install nfs-utils
+
+NFS相关文件
+
+	/etc/exports：NFS服务的主要配置文件
+	/usr/sbin/exportfs：NFS服务的管理命令
+	/usr/sbin/showmount：客户端的查看命令
+	/var/lib/nfs/etab：记录NFS分享出来的目录的完整权限设定值
+	/var/lib/nfs/xtab：记录曾经登录过的客户端信息
+
+启动服务
+
+	/etc/init.d/rpcbind start
+        /etc/init.d/nfs start
+
+配置输出的路径
+
+	vim /etc/exports
+
+查看挂在出来的东西
+
+	showmount -e ip
+
+将ip:/var/test输出的目录，挂在到本机的/mnt下面
+
+	mount-t nfs ip:/var/test /mnt
+
+/etc/exports中配置的简单说明：
+
+	<输出目录> [客户端1 选项（访问权限,用户映射,其他）] [客户端2 选项（访问权限,用户映射,其他）]
+
+网段表示方法：
+
+	不做限制，允许任何主机：*
+	限定单个IP：192.168.5.6
+	限定子网：192.168.5.0/24、192.168.5.0/255.255.255.0
+	指定主机：test.wooyun.org
+	限定一个域中的所有主机：*.wooyun.org
+
+配置参数：
+
+	ro：只读(默认配置)
+	rw：可写
+	root_squash：root用户的所有请求映射成如anonymous用户一样的权限（默认）
+	subtree_check：如果共享/usr/bin之类的子目录时，强制NFS检查父目录的权限（默认）
+	no_subtree_check：和上面相对，不检查父目录权限
+	all_squash：共享文件的UID和GID映射匿名用户anonymous，适合公用目录
+	no_all_squash：保留共享文件的UID和GID（默认）
+	sync：同步模式，内存中数据时时写入磁盘
+	async：不同步，把内存中数据定期写入磁盘中
+	secure：NFS通过1024以下的安全TCP/IP端口发送
+	insecure：NFS通过1024以上的端口发送
+	wdelay：如果多个用户要写入NFS目录，则归组写入（默认）
+	hide：在NFS共享目录中不共享其子目录
+	no_hide：共享NFS目录的子目录
+	no_root_squash：允许已root身份写入，如果不开启这个参数，NFS挂载端在以本机root身份写入东西的时候，生成的文件的文件的用户和属组均为nfsnobody
+	anonuid=xxx：指定NFS服务器/etc/passwd文件中匿名用户的UID
+	anongid=xxx：指定NFS服务器/etc/passwd文件中匿名用户的GID
+
+##3、错误配置以利用
+###3.1、限制NFS可挂载的IP/IP段
+任何人都可以对输出的目录进行挂载，造成信息泄露
+###3.2、未对NFS的权限存在问题，任何人均可写
+可挂载的情况下，如果发布的文件为web文件，可以直接写入webshell
+
+
+##4、实际案例
+
+
+##5、修复方案
+###5.1、在/etc/exports中限制可以挂在的IP或IP段
+###5.2、错误的开放了可写权限
+
+
+##6、漏洞扫描与发现
+nmap扫描TCP 2049端口，然后试用showmount -e ip进行权限查看
+
+	nmap -Pn -p2049 -sV --open ip
+	showmount -e ip
+
+##7、相关资源
+
+[[https://www.freebsd.org/doc/zh_CN.UTF-8/books/handbook/network-nfs.html|网络文件系统]]
+
+[[http://phantom.iteye.com/blog/66673|NFS配置与安装]]
+
+[[http://www.cnblogs.com/mchina/archive/2013/01/03/2840040.html|Linux NFS服务器的安装与配置]]
+
+[[http://www.92csz.com/study/linux/19.htm|NFS服务配置]]

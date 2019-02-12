@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/tools:urlcrazy by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:25:26 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8" />
+  <title>tools:urlcrazy</title>
+<meta name="generator" content="DokuWiki"/>
+<meta name="robots" content="index,follow"/>
+<meta name="keywords" content="tools,urlcrazy"/>
+<link rel="search" type="application/opensearchdescription+xml" href="../../lib/exe/opensearch.php" title="WooYun WiKi"/>
+<link rel="start" href="../../index.html"/>
+<link rel="contents" href="../../tools_urlcrazydecf.html?do=index" title="网站地图"/>
+<link rel="alternate" type="application/rss+xml" title="最近更改" href="../../feed.php"/>
+<link rel="alternate" type="application/rss+xml" title="当前命名空间" href="../../feed022e.php?mode=list&amp;ns=tools"/>
+<link rel="alternate" type="text/html" title="纯HTML" href="tools_urlcrazy.html"/>
+<link rel="alternate" type="text/plain" title="Wiki Markup 语言" href="../raw/urlcrazy.txt"/>
+<link rel="canonical" href="../../tools_urlcrazy.html"/>
+<link rel="stylesheet" type="text/css" href="../../lib/exe/css70b4.css?t=bootstrap3&amp;tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"/>
+<script type="text/javascript">/*<![CDATA[*/var NS='tools';var JSINFO = {"id":"tools:urlcrazy","namespace":"tools","plugin_codeprettify":{"loader_base":"\/lib\/plugins\/codeprettify\/google-code-prettify"}};
+/*!]]>*/</script>
+<script type="text/javascript" charset="utf-8" src="../../lib/exe/js1e16.php?tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"></script>
+<script type="text/javascript" charset="utf-8" src="../../lib/plugins/codeprettify/google-code-prettify/run_prettifyeb11.js?lang=css"></script>
+</head>
+<body>
+<div class="dokuwiki export">
+<!-- TOC START -->
+<div id="dw__toc">
+<h3 class="toggle">目录</h3>
+<div>
+
+<ul class="toc">
+<li class="level1"><div class="li"><a href="#urlcrazy使用说明">urlcrazy使用说明</a></div>
+<ul class="toc">
+<li class="clear">
+<ul class="toc">
+<li class="level3"><div class="li"><a href="#工具简介">1、工具简介</a></div></li>
+<li class="level3"><div class="li"><a href="#使用方法">2、使用方法</a></div></li>
+<li class="level3"><div class="li"><a href="#使用示范">3、使用示范</a></div></li>
+<li class="level3"><div class="li"><a href="#相关资源">4、相关资源</a></div></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<!-- TOC END -->
+
+<h1 class="sectionedit1" id="urlcrazy使用说明">urlcrazy使用说明</h1>
+<div class="level1">
+
+</div>
+<!-- EDIT1 SECTION "urlcrazy使用说明" [1-36] -->
+<h3 class="sectionedit2" id="工具简介">1、工具简介</h3>
+<div class="level3">
+<hr />
+
+<p>
+提供检查域名可能用于注册钓鱼网站的相关域名等功能。
+</p>
+
+</div>
+<!-- EDIT2 SECTION "1、工具简介" [37-146] -->
+<h3 class="sectionedit3" id="使用方法">2、使用方法</h3>
+<div class="level3">
+<hr />
+
+<p>
+终端直接输入“urlcrazy -h”可以查看其相关参数用法：
+</p>
+<pre class="code bash"><span class="co4">light@kali:~# </span>urlcrazy <span class="re5">-h</span>
+URLCrazy version <span class="nu0">0.5</span>
+by Andrew Horton <span class="br0">&#40;</span>urbanadventurer<span class="br0">&#41;</span>
+http:<span class="sy0">//</span>www.morningstarsecurity.com<span class="sy0">/</span>research<span class="sy0">/</span>urlcrazy
+&nbsp;
+Generate and <span class="kw3">test</span> domain typos and variations to detect and perform typo squatting, URL hijacking,
+phishing, and corporate espionage.
+&nbsp;
+Supports the following domain variations:
+Character omission, character repeat, adjacent character swap, adjacent character replacement, double 
+character replacement, adjacent character insertion, missing dot, <span class="kw2">strip</span> dashes, singular or pluralise,
+common misspellings, vowel swaps, homophones, bit flipping <span class="br0">&#40;</span>cosmic rays<span class="br0">&#41;</span>, homoglyphs, wrong top level 
+domain, and wrong second level domain.
+&nbsp;
+Usage: <span class="sy0">/</span>usr<span class="sy0">/</span>bin<span class="sy0">/</span>urlcrazy <span class="br0">&#91;</span>options<span class="br0">&#93;</span> domain
+&nbsp;
+Options
+ -k, <span class="re5">--keyboard</span>=LAYOUT	Options are: qwerty, azerty, qwertz, dvorak <span class="br0">&#40;</span>default: qwerty<span class="br0">&#41;</span>
+ -p, <span class="re5">--popularity</span>	Check domain popularity with Google
+ -r, <span class="re5">--no-resolve</span>	Do not resolve DNS
+ -i, <span class="re5">--show-invalid</span>	Show invalid domain names
+ -f, <span class="re5">--format</span>=TYPE	Human readable or CSV <span class="br0">&#40;</span>default: human readable<span class="br0">&#41;</span>
+ -o, <span class="re5">--output</span>=FILE	Output <span class="kw2">file</span>
+ -h, <span class="re5">--help</span>		This <span class="kw3">help</span>
+ -v, <span class="re5">--version</span>   	Print version information. This version is <span class="nu0">0.5</span></pre>
+
+</div>
+<!-- EDIT3 SECTION "2、使用方法" [147-1396] -->
+<h3 class="sectionedit4" id="使用示范">3、使用示范</h3>
+<div class="level3">
+<hr />
+
+<p>
+查询<a href="http://www.wooyun.org/" class="urlextern" title="http://www.wooyun.org"  rel="nofollow">乌云</a>的相关可能注册钓鱼域名信息：
+</p>
+<pre class="code bash"><span class="co4">light@kali:~# </span>urlcrazy wooyun.org
+URLCrazy Domain Report
+Domain    : wooyun.org
+Keyboard  : qwerty
+At        : <span class="nu0">2015</span>-06-08 01:<span class="nu0">40</span>:<span class="nu0">33</span> <span class="re5">-0400</span>
+&nbsp;
+<span class="co0"># Please wait. 88 hostnames to process</span>
+&nbsp;
+Typo Type                     Typo           DNS-A          CC-A                  DNS-MX                           Extn  
+<span class="re5">-------------------------------------------------------------------------------------------------------------------------</span>
+Character Omission            wooun.org                     ?                                                      org   
+Character Omission            wooyn.org                     ?                                                      org   
+Character Omission            wooyu.org                     ?                     eforward1.registrar-servers.com  org   
+Character Omission            woyun.org      61.153.19.102  CN,CHINA                                               org   
+Character Repeat              woooyun.org    63.223.64.165  US,UNITED STATES                                       org   
+Character Repeat              wooyunn.org                   ?                                                      org   
+Character Repeat              wooyuun.org                   ?                                                      org   
+Character Repeat              wooyyun.org                   ?                                                      org   
+Character Repeat              wwooyun.org                   ?                                                      org   
+Character Swap                owoyun.org                    ?                                                      org   
+Character Swap                woouyn.org                    ?                                                      org   
+Character Swap                wooynu.org                    ?                                                      org   
+Character Swap                woyoun.org                    ?                                                      org   
+Character Replacement         eooyun.org                    ?                                                      org   
+Character Replacement         qooyun.org                    ?                                                      org   
+Character Replacement         wioyun.org                    ?                                                      org   
+Character Replacement         woiyun.org                    ?                                                      org   
+Character Replacement         wootun.org                    ?                                                      org   
+Character Replacement         woouun.org                    ?                                                      org   
+Character Replacement         wooyin.org                    ?                                                      org   
+Character Replacement         wooyub.org                    ?                                                      org   
+Character Replacement         wooyum.org                    ?                                                      org   
+Character Replacement         wooyyn.org                    ?                                                      org   
+Character Replacement         wopyun.org                    ?                                                      org   
+Character Replacement         wpoyun.org                    ?                                                      org   
+Double Character Replacement  wiiyun.org                    ?                                                      org   
+Double Character Replacement  wppyun.org                    ?                                                      org   
+Character Insertion           weooyun.org                   ?                                                      org   
+Character Insertion           woioyun.org                   ?                                                      org   
+Character Insertion           wooiyun.org                   ?                                                      org   
+Character Insertion           woopyun.org                   ?                                                      org   
+Character Insertion           wooytun.org                   ?                                                      org   
+Character Insertion           wooyuin.org                   ?                                                      org   
+Character Insertion           wooyunb.org                   ?                                                      org   
+Character Insertion           wooyunm.org                   ?                                                      org   
+Character Insertion           wooyuyn.org                   ?                                                      org   
+Character Insertion           wopoyun.org                   ?                                                      org   
+Character Insertion           wqooyun.org                   ?                                                      org   
+Missing Dot                   wooyunorg.com                 ?                                                      com   
+Missing Dot                   wwwwooyun.org                 ?                                                      org   
+Singular or Pluralise         wooyuns.org                   ?                                                      org   
+Vowel Swap                    wooyan.org                    ?                                                      org   
+Vowel Swap                    wooyen.org                    ?                                                      org   
+Vowel Swap                    wooyon.org                    ?                                                      org   
+Bit Flipping                  7ooyun.org                    ?                                                      org   
+Bit Flipping                  gooyun.org                    ?                                                      org   
+Bit Flipping                  sooyun.org                    ?                                                      org   
+Bit Flipping                  uooyun.org                    ?                                                      org   
+Bit Flipping                  vooyun.org                    ?                                                      org   
+Bit Flipping                  wgoyun.org                    ?                                                      org   
+Bit Flipping                  wkoyun.org                    ?                                                      org   
+Bit Flipping                  wmoyun.org                    ?                                                      org   
+Bit Flipping                  wnoyun.org                    ?                                                      org   
+Bit Flipping                  wogyun.org                    ?                                                      org   
+Bit Flipping                  wokyun.org                    ?                                                      org   
+Bit Flipping                  womyun.org                    ?                                                      org   
+Bit Flipping                  wonyun.org                    ?                                                      org   
+Bit Flipping                  woo9un.org                    ?                                                      org   
+Bit Flipping                  wooiun.org                    ?                                                      org   
+Bit Flipping                  wooqun.org                    ?                                                      org   
+Bit Flipping                  wooxun.org                    ?                                                      org   
+Bit Flipping                  wooy5n.org                    ?                                                      org   
+Bit Flipping                  wooyqn.org                    ?                                                      org   
+Bit Flipping                  wooytn.org                    ?                                                      org   
+Bit Flipping                  wooyuf.org                    ?                                                      org   
+Bit Flipping                  wooyuj.org                    ?                                                      org   
+Bit Flipping                  wooyul.org                    ?                                                      org   
+Bit Flipping                  wooyuo.org                    ?                                                      org   
+Bit Flipping                  wooywn.org                    ?                                                      org   
+Homoglyphs                    vvooyun.org                   ?                                                      org   
+Homoglyphs                    w00yun.org                    ?                                                      org   
+Homoglyphs                    w0oyun.org                    ?                                                      org   
+Homoglyphs                    wo0yun.org                    ?                                                      org   
+Wrong TLD                     wooyun.ca                     ?                                                      ca    
+Wrong TLD                     wooyun.ch                     ?                                                      ch    
+Wrong TLD                     wooyun.com     61.36.239.14   KR,KOREA REPUBLIC OF  mail.wooyun.com                  com   
+Wrong TLD                     wooyun.de                     ?                                                      de    
+Wrong TLD                     wooyun.edu                    ?                                                      edu   
+Wrong TLD                     wooyun.es                     ?                                                      es    
+Wrong TLD                     wooyun.fr                     ?                                                      fr    
+Wrong TLD                     wooyun.it                     ?                                                      it    
+Wrong TLD                     wooyun.jp                     ?                                                      jp    
+Wrong TLD                     wooyun.net     61.36.239.4    KR,KOREA REPUBLIC OF                                   net   
+Wrong TLD                     wooyun.nl                     ?                                                      <span class="kw2">nl</span>    
+Wrong TLD                     wooyun.no                     ?                                                      no    
+Wrong TLD                     wooyun.ru                     ?                                                      ru    
+Wrong TLD                     wooyun.se                     ?                                                      se    
+Wrong TLD                     wooyun.us                     ?                                                      us</pre>
+
+</div>
+<!-- EDIT4 SECTION "3、使用示范" [1397-12690] -->
+<h3 class="sectionedit5" id="相关资源">4、相关资源</h3>
+<div class="level3">
+<hr />
+
+<p>
+<a href="http://www.morningstarsecurity.com/" class="urlextern" title="http://www.morningstarsecurity.com/"  rel="nofollow">工具详解</a>
+</p>
+
+</div>
+<!-- EDIT5 SECTION "4、相关资源" [12691-] --></div>
+</body>
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/tools:urlcrazy by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:25:26 GMT -->
+</html>

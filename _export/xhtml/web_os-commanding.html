@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/web:os-commanding by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:03:07 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8" />
+  <title>web:os-commanding</title>
+<meta name="generator" content="DokuWiki"/>
+<meta name="robots" content="index,follow"/>
+<meta name="keywords" content="web,os-commanding"/>
+<link rel="search" type="application/opensearchdescription+xml" href="../../lib/exe/opensearch.php" title="WooYun WiKi"/>
+<link rel="start" href="../../index.html"/>
+<link rel="contents" href="../../web_os-commandingdecf.html?do=index" title="网站地图"/>
+<link rel="alternate" type="application/rss+xml" title="最近更改" href="../../feed.php"/>
+<link rel="alternate" type="application/rss+xml" title="当前命名空间" href="../../feed4fbc.php?mode=list&amp;ns=web"/>
+<link rel="alternate" type="text/html" title="纯HTML" href="web_os-commanding.html"/>
+<link rel="alternate" type="text/plain" title="Wiki Markup 语言" href="../raw/os-commanding.txt"/>
+<link rel="canonical" href="../../web_os-commanding.html"/>
+<link rel="stylesheet" type="text/css" href="../../lib/exe/css70b4.css?t=bootstrap3&amp;tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"/>
+<script type="text/javascript">/*<![CDATA[*/var NS='web';var JSINFO = {"id":"web:os-commanding","namespace":"web","plugin_codeprettify":{"loader_base":"\/lib\/plugins\/codeprettify\/google-code-prettify"}};
+/*!]]>*/</script>
+<script type="text/javascript" charset="utf-8" src="../../lib/exe/js1e16.php?tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"></script>
+<script type="text/javascript" charset="utf-8" src="../../lib/plugins/codeprettify/google-code-prettify/run_prettifyeb11.js?lang=css"></script>
+</head>
+<body>
+<div class="dokuwiki export">
+<!-- TOC START -->
+<div id="dw__toc">
+<h3 class="toggle">目录</h3>
+<div>
+
+<ul class="toc">
+<li class="level1"><div class="li"><a href="#命令执行_os_commanding">命令执行（OS Commanding）</a></div>
+<ul class="toc">
+<li class="clear">
+<ul class="toc">
+<li class="level3"><div class="li"><a href="#相关背景介绍">1、相关背景介绍</a></div></li>
+<li class="level3"><div class="li"><a href="#成因">2、成因</a></div></li>
+<li class="level3"><div class="li"><a href="#利用方法及危害">3、利用方法及危害</a></div></li>
+<li class="level3"><div class="li"><a href="#案例">4、案例</a></div></li>
+<li class="level3"><div class="li"><a href="#修复方案">5、修复方案</a></div></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<!-- TOC END -->
+
+<h1 class="sectionedit1" id="命令执行_os_commanding">命令执行（OS Commanding）</h1>
+<div class="level1">
+
+</div>
+<!-- EDIT1 SECTION "命令执行（OS Commanding）" [1-47] -->
+<h3 class="sectionedit2" id="相关背景介绍">1、相关背景介绍</h3>
+<div class="level3">
+<hr />
+
+<p>
+当应用需要调用一些外部程序去处理内容的情况下，就会用到一些执行系统命令的函数。如PHP中的system、exec、shell_exec等，当用户可以控制命令执行函数中的参数时，将可以注入恶意系统命令到正常命令中，造成命令执行攻击。
+这里还是主要以PHP为主介绍命令执行漏洞，Java等应用的细节待补充。
+</p>
+
+</div>
+<!-- EDIT2 SECTION "1、相关背景介绍" [48-479] -->
+<h3 class="sectionedit3" id="成因">2、成因</h3>
+<div class="level3">
+<hr />
+
+<p>
+脚本语言（如PHP）优点是简洁、方便，但也伴随着一些问题，如速度慢、无法接触系统底层，如果我们开发的应用（特别是企业级的一些应用）需要一些除去web的特殊功能时，就需要调用一些外部程序。<br/>
+在PHP中可以调用外部程序的主要有以下函数：<br/>
+
+</p>
+<pre class="code php"><a href="http://www.php.net/system"><span class="kw3">system</span></a>
+<a href="http://www.php.net/exec"><span class="kw3">exec</span></a>
+<a href="http://www.php.net/shell_exec"><span class="kw3">shell_exec</span></a>
+<a href="http://www.php.net/passthru"><span class="kw3">passthru</span></a>
+<a href="http://www.php.net/popen"><span class="kw3">popen</span></a>
+proc_popen</pre>
+
+<p>
+一些偏门函数就不说了，以上函数主要是在wbeshell里用的多，实际上在正常应用中差别不太大，用的最多的还是前三个。<br/>
+应用在调用这些函数执行系统命令的时候，如果将用户的输入作为系统命令的参数拼接到命令行中，又没有过滤用户的输入的情况下，就会造成命令执行漏洞。<br/>
+常见的一些成因：<br/>
+1.一些商业应用需要执行命令，商业应用的一些核心代码可能封装在二进制文件中，再web应用中通过system函数来调用之：
+</p>
+<pre class="code php"><a href="http://www.php.net/system"><span class="kw3">system</span></a><span class="br0">&#40;</span><span class="st0">&quot;/bin/program --arg <span class="es4">$arg</span>&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span></pre>
+
+<p>
+2.系统的漏洞造成命令注入：<br/>
+不知各位看官是否还记得bash破壳漏洞，如果我们能够控制执行的bash的环境变量，就可以通过破壳漏洞来执行任意代码。<br/>
+<br/>
+3.调用一些常用组件<br/>
+很典型的就是Discuz中，可以选择使用ImageMagick这个常用的图片处理组件，对用户上传的图片进行处理（默认是GD库），而Discuz并没有很好控制用户的输入，造成命令执行，详见：<a href="http://drops.wooyun.org/papers/4611" class="urlextern" title="http://drops.wooyun.org/papers/4611"  rel="nofollow">DiscuzX系列命令执行分析公开（三连弹）</a>。<br/>
+<br/>
+另外JAVA中的命令执行漏洞（struts2/Elasticsearch Groovy等）很常见，亟待补充。
+</p>
+
+</div>
+<!-- EDIT3 SECTION "2、成因" [480-2187] -->
+<h3 class="sectionedit4" id="利用方法及危害">3、利用方法及危害</h3>
+<div class="level3">
+<hr />
+
+<p>
+常见可控位置情况有下面几种：
+</p>
+<pre class="code php"><a href="http://www.php.net/system"><span class="kw3">system</span></a><span class="br0">&#40;</span><span class="st0">&quot;<span class="es4">$arg</span>&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">//可控点直接是待执行的程序</span>
+<a href="http://www.php.net/system"><span class="kw3">system</span></a><span class="br0">&#40;</span><span class="st0">&quot;/bin/prog <span class="es4">$arg</span>&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">//可控点是传入程序的整个参数</span>
+<a href="http://www.php.net/system"><span class="kw3">system</span></a><span class="br0">&#40;</span><span class="st0">&quot;/bin/prog -p <span class="es4">$arg</span>&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">//可控点是传入程序的某个参数的值（无引号包裹）</span>
+<a href="http://www.php.net/system"><span class="kw3">system</span></a><span class="br0">&#40;</span><span class="st0">&quot;/bin/prog --p=<span class="es1">\&quot;</span><span class="es4">$arg</span><span class="es1">\&quot;</span>&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">//可控点是传入程序的某个参数的值（有双引号包裹）</span>
+<a href="http://www.php.net/system"><span class="kw3">system</span></a><span class="br0">&#40;</span><span class="st0">&quot;/bin/prog --p='<span class="es4">$arg</span>'&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">//可控点是传入程序的某个参数的值（有单引号包裹）</span></pre>
+
+<p>
+<strong>第一种情况</strong><br/>
+如果我们能直接控制$arg，那么就能执行执行任意命令了，没太多好说的。<br/>
+<strong>第二种情况</strong><br/>
+我们能够控制的点是程序的整个参数，我们可以直接用&amp;&amp;或|等等，利用与、或、管道命令来执行其他命令（可以涉及到很多linux命令行技巧）。<br/>
+还有一个偏门情况，当$arg被escapeshellcmd处理之后，我们不能越出这个外部程序的范围，我们可以看看这个程序自身是否有“执行外部命令”的参数或功能，比如linux下的sendmail命令自带读写文件功能，我们可以用来写webshell。<br/>
+<strong>第三种情况</strong><br/>
+我们控制的点是一个参数，我们也同样可以利用与、或、管道来执行其他命令，情境与二无异。<br/>
+<strong>第四种情况</strong><br/>
+这种情况压力大一点，有双引号包裹。如果引号没有被转义，我们可以先闭合引号，成为第三种情况后按照第三种情况来利用，如果引号被转义（addslashes），我们也不必着急。linux shell环境下双引号中间的变量也是可以被解析的。我们可以在双引号内利用反引号执行任意命令“ <code>id</code> ”<br/>
+<strong>第五种情况</strong><br/>
+这是最难受的一种情况了，因为单引号内只是一个字符串，我们要先闭合单引号才可以执行命令。如：system(“/bin/prog –p=&#039;aaa&#039; | id”)<br/>
+<br/>
+危害自然不言而喻，执行命令可以读写文件、反弹shell、获得系统权限、内网渗透等。<br/>
+
+</p>
+
+</div>
+<!-- EDIT4 SECTION "3、利用方法及危害" [2188-4218] -->
+<h3 class="sectionedit5" id="案例">4、案例</h3>
+<div class="level3">
+<hr />
+
+<p>
+srun3000有多处因为命令执行造成的getshell：<br/>
+<a href="http://www.wooyun.org/corps/深澜软件" class="urlextern" title="http://www.wooyun.org/corps/%E6%B7%B1%E6%BE%9C%E8%BD%AF%E4%BB%B6"  rel="nofollow">深澜软件</a>
+</p>
+
+<p>
+可控点是参数：<br/>
+<a href="http://wooyun.org/bugs/wooyun-2010-087818" class="urlextern" title="http://wooyun.org/bugs/wooyun-2010-087818"  rel="nofollow">宜搜某分站配置不当已被getshell</a>
+</p>
+
+<p>
+可控点是参数的值：<br/>
+<a href="http://wooyun.org/bugs/wooyun-2010-027324" class="urlextern" title="http://wooyun.org/bugs/wooyun-2010-027324"  rel="nofollow">[再浅谈内网安全]--网神某带ids,waf网关设备完控0day又一枚</a>
+</p>
+
+<p>
+一个python绕过沙盒执行系统命令：<br/>
+<a href="http://wooyun.org/bugs/wooyun-2010-020955" class="urlextern" title="http://wooyun.org/bugs/wooyun-2010-020955"  rel="nofollow">百度BAE系列2:系统命令执行,/etc/passwd及读写其它用户文件等</a>
+</p>
+
+</div>
+<!-- EDIT5 SECTION "4、案例" [4219-4825] -->
+<h3 class="sectionedit6" id="修复方案">5、修复方案</h3>
+<div class="level3">
+<hr />
+
+<p>
+1.能使用脚本解决的工作，不要调用其他程序处理。尽量少用执行命令的函数，并在disable_functions中禁用之。<br/>
+2.对于可控点是程序参数的情况，使用escapeshellcmd函数进行过滤。<br/>
+3.对于可控点是程序参数的值的情况，使用escapeshellarg函数进行过滤。<br/>
+4.参数的值尽量使用引号包裹，并在拼接前调用addslashes进行转义。<br/>
+
+</p>
+
+</div>
+<!-- EDIT6 SECTION "5、修复方案" [4826-] --></div>
+</body>
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/web:os-commanding by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:03:07 GMT -->
+</html>

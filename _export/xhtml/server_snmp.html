@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/server:snmp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:02:53 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8" />
+  <title>server:snmp</title>
+<meta name="generator" content="DokuWiki"/>
+<meta name="robots" content="index,follow"/>
+<meta name="keywords" content="server,snmp"/>
+<link rel="search" type="application/opensearchdescription+xml" href="../../lib/exe/opensearch.php" title="WooYun WiKi"/>
+<link rel="start" href="../../index.html"/>
+<link rel="contents" href="../../server_snmpdecf.html?do=index" title="网站地图"/>
+<link rel="alternate" type="application/rss+xml" title="最近更改" href="../../feed.php"/>
+<link rel="alternate" type="application/rss+xml" title="当前命名空间" href="../../feed0688.php?mode=list&amp;ns=server"/>
+<link rel="alternate" type="text/html" title="纯HTML" href="server_snmp.html"/>
+<link rel="alternate" type="text/plain" title="Wiki Markup 语言" href="../raw/snmp.txt"/>
+<link rel="canonical" href="../../server_snmp.html"/>
+<link rel="stylesheet" type="text/css" href="../../lib/exe/css70b4.css?t=bootstrap3&amp;tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"/>
+<script type="text/javascript">/*<![CDATA[*/var NS='server';var JSINFO = {"id":"server:snmp","namespace":"server","plugin_codeprettify":{"loader_base":"\/lib\/plugins\/codeprettify\/google-code-prettify"}};
+/*!]]>*/</script>
+<script type="text/javascript" charset="utf-8" src="../../lib/exe/js1e16.php?tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"></script>
+<script type="text/javascript" charset="utf-8" src="../../lib/plugins/codeprettify/google-code-prettify/run_prettifyeb11.js?lang=css"></script>
+</head>
+<body>
+<div class="dokuwiki export">
+<!-- TOC START -->
+<div id="dw__toc">
+<h3 class="toggle">目录</h3>
+<div>
+
+<ul class="toc">
+<li class="level1"><div class="li"><a href="#snmp安全配置">SNMP安全配置</a></div>
+<ul class="toc">
+<li class="clear">
+<ul class="toc">
+<li class="level3"><div class="li"><a href="#snmp简介">1、SNMP简介</a></div></li>
+<li class="level3"><div class="li"><a href="#snmp服务架设">2、SNMP服务架设</a></div></li>
+<li class="level3"><div class="li"><a href="#错误配置以及利用">3、错误配置以及利用</a></div></li>
+<li class="level3"><div class="li"><a href="#实际案例">4、实际案例</a></div></li>
+<li class="level3"><div class="li"><a href="#修复方案">5、修复方案</a></div></li>
+<li class="level3"><div class="li"><a href="#cve-2012-32681">5.2 CVE-2012-3268</a></div></li>
+<li class="level3"><div class="li"><a href="#漏洞扫描与发现">6、漏洞扫描与发现</a></div></li>
+<li class="level3"><div class="li"><a href="#相关资源">7、相关资源</a></div></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<!-- TOC END -->
+
+<h1 class="sectionedit1" id="snmp安全配置">SNMP安全配置</h1>
+<div class="level1">
+
+</div>
+<!-- EDIT1 SECTION "SNMP安全配置" [0-18] -->
+<h3 class="sectionedit2" id="snmp简介">1、SNMP简介</h3>
+<div class="level3">
+<hr />
+
+<p>
+简单网络管理协议（SNMP），由一组网络管理的标准组成，包含一个应用层协议（application layer protocol）、数据库模型（database schema）和一组资源对象。该协议能够支持网络管理系统，用以监测连接到网络上的设备是否有任何引起管理上关注的情况。该协议是互联网工程工作小组（IETF，Internet Engineering Task Force）定义的internet协议簇的一部分。SNMP的目标是管理互联网Internet上众多厂家生产的软硬件平台，因此SNMP受Internet标准网络管理框架的影响也很大。SNMP已经出到第三个版本的协议，其功能较以前已经大大地加强和改进了。
+</p>
+
+</div>
+<!-- EDIT2 SECTION "1、SNMP简介" [19-741] -->
+<h3 class="sectionedit3" id="snmp服务架设">2、SNMP服务架设</h3>
+<div class="level3">
+<hr />
+
+<p>
+测试环境:CentOS 6.5 
+</p>
+<pre class="code">yum install net-snmp -y 
+/etc/init.d/snmpd start
+[root@centos ~]# netstat -antpleu  |grep snmp
+tcp        0      0 127.0.0.1:199               0.0.0.0:*                   LISTEN      0          35513      3300/snmpd          
+udp        0      0 0.0.0.0:161                 0.0.0.0:*                               0          35511      3300/snmpd      </pre>
+
+<p>
+配置文件
+</p>
+<pre class="code">/etc/snmp/snmpd.conf</pre>
+
+</div>
+<!-- EDIT3 SECTION "2、SNMP服务架设" [742-1214] -->
+<h3 class="sectionedit4" id="错误配置以及利用">3、错误配置以及利用</h3>
+<div class="level3">
+<hr />
+
+</div>
+
+<h4 id="默认团体字符串">3.1 默认团体字符串</h4>
+<div class="level4">
+
+<p>
+通过默认的团体字符串，可以获得主机的信息
+</p>
+
+</div>
+
+<h4 id="基于团体字符串的snmp的ddos攻击">3.2 基于团体字符串的snmp的ddos攻击</h4>
+<div class="level4">
+
+<p>
+因为查询和返回的数据不对等，所以可以在知道团体字符串的情况下，使用的UDP协议，通过伪造来源IP，达到获取大流量，进行DDOS攻击
+</p>
+
+</div>
+
+<h4 id="cve-2012-3268获得设备的密码">3.3 CVE-2012-3268获得设备的密码</h4>
+<div class="level4">
+
+<p>
+知道团体字符串后，通过指定特定的oid，来获取设备的密码，从而达到控制设备的目的
+</p>
+
+<p>
+相关的攻击原理：
+</p>
+
+<p>
+<a href="http://drops.wooyun.org/tips/409" class="urlextern" title="http://drops.wooyun.org/tips/409"  rel="nofollow">snmp弱口令引起的信息泄漏</a>
+</p>
+
+</div>
+<!-- EDIT4 SECTION "3、错误配置以及利用" [1215-1832] -->
+<h3 class="sectionedit5" id="实际案例">4、实际案例</h3>
+<div class="level3">
+<hr />
+
+</div>
+
+<h4 id="弱口令">4.1 弱口令</h4>
+<div class="level4">
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-081037" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-081037"  rel="nofollow">华为某服务器SNMP弱口令</a>
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-092565" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-092565"  rel="nofollow">极客公园某配置不当致敏感信息泄露</a>
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-057685" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-057685"  rel="nofollow">西北民族大学DNS服务器SNMP服务存在默认弱口令</a>
+</p>
+
+</div>
+
+<h4 id="cve-2012-3268">4.2 CVE-2012-3268</h4>
+<div class="level4">
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2013-021877" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2013-021877"  rel="nofollow">中国移动H3C防火墙侧漏，利用snmp获取管理员密码，成功登录设备</a>
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-075706" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-075706"  rel="nofollow">中粮我买网某设备缺陷导致密码破解进入内网（可内网未漫游）</a>
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-032312" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-032312"  rel="nofollow">通过snmp获取中国移动华为防火墙交换机等设备的登录密码</a>
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2013-021964" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2013-021964"  rel="nofollow">中国移动集团华为三层交换SNMP漏洞，可获取管理帐号密码，已成功登录</a>
+</p>
+
+</div>
+<!-- EDIT5 SECTION "4、实际案例" [1833-2745] -->
+<h3 class="sectionedit6" id="修复方案">5、修复方案</h3>
+<div class="level3">
+<hr />
+
+</div>
+
+<h4 id="修改默认的团体字符串名">5.1 修改默认的团体字符串名</h4>
+<div class="level4">
+<pre class="code">	
+vim /etc/snmp/snmpd.conf
+#允许任何IP通过public来连接
+com2sec notConfigUser  default       public
+#只允许1.1.1.1来使用public连接
+com2sec notConfigUser  1.1.1.1       public</pre>
+
+</div>
+<!-- EDIT6 SECTION "5、修复方案" [2746-3020] -->
+<h3 class="sectionedit7" id="cve-2012-32681">5.2 CVE-2012-3268</h3>
+<div class="level3">
+
+<p>
+如果条件允许在厂商的协助下进行升级，否则设置复杂的团体字符串
+</p>
+
+</div>
+<!-- EDIT7 SECTION "5.2 CVE-2012-3268" [3021-3138] -->
+<h3 class="sectionedit8" id="漏洞扫描与发现">6、漏洞扫描与发现</h3>
+<div class="level3">
+<hr />
+
+</div>
+
+<h4 id="手工发现">6.1 手工发现</h4>
+<div class="level4">
+
+<p>
+-p为团体字符串
+</p>
+<pre class="code">snmpwalk -v 2c -p public ip</pre>
+
+</div>
+
+<h4 id="自动发现">6.2 自动发现</h4>
+<div class="level4">
+
+<p>
+通过nmap扫描
+</p>
+<pre class="code bash"><span class="kw2">nmap</span> <span class="re5">-Pn</span> <span class="re5">-sU</span> <span class="re5">-p161</span> <span class="re5">--script</span>=brute 1.1.1.0<span class="sy0">/</span><span class="nu0">24</span></pre>
+
+</div>
+<!-- EDIT8 SECTION "6、漏洞扫描与发现" [3139-3364] -->
+<h3 class="sectionedit9" id="相关资源">7、相关资源</h3>
+<div class="level3">
+<hr />
+
+<p>
+<a href="http://drops.wooyun.org/tips/409" class="urlextern" title="http://drops.wooyun.org/tips/409"  rel="nofollow">snmp弱口令引起的信息泄漏</a>
+</p>
+
+<p>
+<a href="http://drops.wooyun.org/tips/2106" class="urlextern" title="http://drops.wooyun.org/tips/2106"  rel="nofollow">基于snmp的反射攻击的理论及其实现</a>
+</p>
+
+<p>
+<a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-3268" class="urlextern" title="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-3268"  rel="nofollow">CVE-2012-3268</a>
+</p>
+
+<p>
+<a href="https://github.com/grutz/h3c-pt-tools" class="urlextern" title="https://github.com/grutz/h3c-pt-tools"  rel="nofollow">CVE-2012-3268利用工具</a>
+</p>
+
+</div>
+<!-- EDIT9 SECTION "7、相关资源" [3365-] --></div>
+</body>
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/server:snmp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:02:53 GMT -->
+</html>

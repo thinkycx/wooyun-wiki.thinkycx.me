@@ -1,0 +1,68 @@
+====== lbd使用说明 ======
+
+==== 1、工具简介 ====
+
+----
+一款负载均衡探测器，检查目标站点是否使用了负载均衡。
+
+==== 2、使用方法 ====
+
+----
+终端直接输入“lbd”可以查看其相关参数用法：
+<code bash>
+options:
+	-c shell commands	as `-e'; use /bin/sh to exec [dangerous!!]
+	-e filename		program to exec after connect [dangerous!!]
+	-b			allow broadcasts
+	-g gateway		source-routing hop point[s], up to 8
+	-G num			source-routing pointer: 4, 8, 12, ...
+	-h			this cruft
+	-i secs			delay interval for lines sent, ports scanned
+        -k                      set keepalive option on socket
+	-l			listen mode, for inbound connects
+	-n			numeric-only IP addresses, no DNS
+	-o file			hex dump of traffic
+	-p port			local port number
+	-r			randomize local and remote ports
+	-q secs			quit after EOF on stdin and delay of secs
+	-s addr			local source address
+	-T tos			set Type Of Service
+	-t			answer TELNET negotiation
+	-u			UDP mode
+	-v			verbose [use twice to be more verbose]
+	-w secs			timeout for connects and final net reads
+	-z			zero-I/O mode [used for scanning]
+
+</code>
+
+
+==== 3、使用示范 ====
+
+----
+查询[[http://wooyun.org|wooyun.org]]是否使用了负载均衡：
+<code bash>
+light@kali:~# lbd wooyun.org
+
+lbd - load balancing detector 0.1 - Checks if a given domain uses load-balancing.
+                                    Written by Stefan Behte (http://ge.mine.nu)
+                                    Proof-of-concept! Might give false positives.
+
+Checking for DNS-Loadbalancing: NOT FOUND
+Checking for HTTP-Loadbalancing [Server]: 
+ yunjiasu-nginx
+ NOT FOUND
+
+Checking for HTTP-Loadbalancing [Date]: 05:42:50, 05:42:50, 05:42:51, 05:42:51, 05:42:51, 05:42:51, 05:42:51, 05:42:51, 05:42:51, 05:42:51, 05:42:51, 05:42:51, 05:42:52, 05:42:52, 05:42:52, 05:42:52, 05:42:52, 05:42:52, 05:42:52, 05:42:52, 05:42:52, 05:42:52, 05:42:53, 05:42:53, 05:42:53, 05:42:53, 05:42:53, 05:42:53, 05:42:53, 05:42:53, 05:42:53, 05:42:53, 05:42:54, 05:42:54, 05:42:54, 05:42:55, 05:42:55, 05:42:56, 05:42:57, 05:42:58, 05:42:58, 05:42:59, 05:42:59, 05:42:59, 05:42:59, 05:42:59, 05:42:59, 05:42:59, 05:42:59, 05:43:00, NOT FOUND
+
+Checking for HTTP-Loadbalancing [Diff]: FOUND
+< CF-RAY: 20297812c9eb174c-SZX
+> CF-RAY: 20297813828e1740-SZX
+
+wooyun.org does Load-balancing. Found via Methods: HTTP[Diff]
+
+</code>
+
+==== 4、相关资源 ====
+
+----
+暂无

@@ -1,0 +1,65 @@
+====== dnstracer 使用说明 ======
+
+==== 1、工具简介 ====
+
+----
+dnstracker可以追踪dns的解析过程。
+
+==== 2、使用方法 ====
+
+----
+kali终端直接输入“dnstracer”可以查看其相关参数用法：
+<code bash>
+light@kali:~# dnstracer 
+DNSTRACER version 1.8.1 - (c) Edwin Groothuis - http://www.mavetju.org
+Usage: dnstracer [options] [host]
+	-c: disable local caching, default enabled
+	-C: enable negative caching, default disabled
+	-o: enable overview of received answers, default disabled
+	-q <querytype>: query-type to use for the DNS requests, default A
+	-r <retries>: amount of retries for DNS requests, default 3
+	-s <server>: use this server for the initial request, default localhost
+	             If . is specified, A.ROOT-SERVERS.NET will be used.
+	-t <maximum timeout>: Limit time to wait per try
+	-v: verbose
+	-S <ip address>: use this source address.
+	-4: don't query IPv6 servers
+
+</code>
+
+==== 3、使用示范 ====
+
+----
+查询[[http://1ight.co|1ight.co]]的DNS解析过程：
+
+<code bash>
+light@kali:~# dnstracer -o 1ight.co
+Tracing to 1ight.co[a] via 192.168.75.2, maximum of 3 retries
+192.168.75.2 (192.168.75.2) 
+ |\___ F1G1NS1.DNSPOD.NET [1ight.co] (180.153.9.189) Got authoritative answer 
+ |\___ F1G1NS1.DNSPOD.NET [1ight.co] (182.140.167.166) * Got authoritative answer 
+ |\___ F1G1NS1.DNSPOD.NET [1ight.co] (113.108.80.138) Got authoritative answer 
+ |\___ F1G1NS1.DNSPOD.NET [1ight.co] (111.30.132.180) * * * 
+ |\___ F1G1NS1.DNSPOD.NET [1ight.co] (125.39.208.193) Got authoritative answer 
+  \___ F1G1NS2.DNSPOD.NET [1ight.co] (112.90.82.194) Got authoritative answer 
+  \___ F1G1NS2.DNSPOD.NET [1ight.co] (101.226.30.224) Got authoritative answer 
+  \___ F1G1NS2.DNSPOD.NET [1ight.co] (182.140.167.188) * Got authoritative answer 
+  \___ F1G1NS2.DNSPOD.NET [1ight.co] (115.236.137.40) Got authoritative answer 
+  \___ F1G1NS2.DNSPOD.NET [1ight.co] (115.236.151.191) * Got authoritative answer 
+
+F1G1NS2.DNSPOD.NET (115.236.151.191)    1ight.co -> 112.74.102.78
+F1G1NS2.DNSPOD.NET (115.236.137.40)     1ight.co -> 112.74.102.78
+F1G1NS2.DNSPOD.NET (182.140.167.188)    1ight.co -> 112.74.102.78
+F1G1NS2.DNSPOD.NET (101.226.30.224)     1ight.co -> 112.74.102.78
+F1G1NS2.DNSPOD.NET (112.90.82.194)      1ight.co -> 112.74.102.78
+F1G1NS1.DNSPOD.NET (125.39.208.193)     1ight.co -> 112.74.102.78
+F1G1NS1.DNSPOD.NET (113.108.80.138)     1ight.co -> 112.74.102.78
+F1G1NS1.DNSPOD.NET (182.140.167.166)    1ight.co -> 112.74.102.78
+F1G1NS1.DNSPOD.NET (180.153.9.189)      1ight.co -> 112.74.102.78
+
+</code>
+
+==== 4、相关资源 ====
+
+----
+暂无

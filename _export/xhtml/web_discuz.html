@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/web:discuz by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:03:12 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8" />
+  <title>web:discuz</title>
+<meta name="generator" content="DokuWiki"/>
+<meta name="robots" content="index,follow"/>
+<meta name="keywords" content="web,discuz"/>
+<link rel="search" type="application/opensearchdescription+xml" href="../../lib/exe/opensearch.php" title="WooYun WiKi"/>
+<link rel="start" href="../../index.html"/>
+<link rel="contents" href="../../web_discuzdecf.html?do=index" title="网站地图"/>
+<link rel="alternate" type="application/rss+xml" title="最近更改" href="../../feed.php"/>
+<link rel="alternate" type="application/rss+xml" title="当前命名空间" href="../../feed4fbc.php?mode=list&amp;ns=web"/>
+<link rel="alternate" type="text/html" title="纯HTML" href="web_discuz.html"/>
+<link rel="alternate" type="text/plain" title="Wiki Markup 语言" href="../raw/discuz.txt"/>
+<link rel="canonical" href="../../web_discuz.html"/>
+<link rel="stylesheet" type="text/css" href="../../lib/exe/css70b4.css?t=bootstrap3&amp;tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"/>
+<script type="text/javascript">/*<![CDATA[*/var NS='web';var JSINFO = {"id":"web:discuz","namespace":"web","plugin_codeprettify":{"loader_base":"\/lib\/plugins\/codeprettify\/google-code-prettify"}};
+/*!]]>*/</script>
+<script type="text/javascript" charset="utf-8" src="../../lib/exe/js1e16.php?tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"></script>
+<script type="text/javascript" charset="utf-8" src="../../lib/plugins/codeprettify/google-code-prettify/run_prettifyeb11.js?lang=css"></script>
+</head>
+<body>
+<div class="dokuwiki export">
+<!-- TOC START -->
+<div id="dw__toc">
+<h3 class="toggle">目录</h3>
+<div>
+
+<ul class="toc">
+<li class="level1"><div class="li"><a href="#discuz">Discuz!</a></div>
+<ul class="toc">
+<li class="clear">
+<ul class="toc">
+<li class="level3"><div class="li"><a href="#discuz简介">1、Discuz简介!</a></div></li>
+<li class="level3"><div class="li"><a href="#重要漏洞及利用">2、重要漏洞及利用</a></div></li>
+<li class="level3"><div class="li"><a href="#修复方案">3、修复方案</a></div></li>
+<li class="level3"><div class="li"><a href="#实际案例">4、实际案例</a></div></li>
+<li class="level3"><div class="li"><a href="#参考资料">5、参考资料</a></div></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<!-- TOC END -->
+
+<h1 class="sectionedit1" id="discuz">Discuz!</h1>
+<div class="level1">
+
+</div>
+<!-- EDIT1 SECTION "Discuz!" [1-24] -->
+<h3 class="sectionedit2" id="discuz简介">1、Discuz简介!</h3>
+<div class="level3">
+<hr />
+
+<p>
+Discuz!是一个可免费下载的PHP网络论坛程序，简称DZ，由戴志康（Crossday）所创立。前身为Crossday Bulletin（CDB），最初改自XMB，而后改写成为现今的Discuz!社区论坛程序，由康盛创想所有（现已被腾讯收购）。现在Discuz!已成为中国大陆最多用户使用的论坛程序。
+</p>
+
+<p>
+从Discuz!6.1.0开始，Discuz!因强行捆绑UCenter而引来不少批评，后来Discuz!UCenter将内置于论坛程序中，关于UCenter的指责减少。
+</p>
+
+</div>
+<!-- EDIT2 SECTION "1、Discuz简介!" [25-559] -->
+<h3 class="sectionedit3" id="重要漏洞及利用">2、重要漏洞及利用</h3>
+<div class="level3">
+<hr />
+
+<p>
+Discuz!中的漏洞主要可以分为三类：
+</p>
+<ol>
+<li class="level1"><div class="li"> Discuz!本身的漏洞，如<a href="http://wooyun.org/bugs/wooyun-2013-045677" class="urlextern" title="http://wooyun.org/bugs/wooyun-2013-045677"  rel="nofollow">Discuz! 3.1 后台命令执行</a>。</div>
+</li>
+<li class="level1"><div class="li"> Discuz!中捆绑的UCenter的漏洞，如<a href="http://wooyun.org/bugs/wooyun-2014-048137" class="urlextern" title="http://wooyun.org/bugs/wooyun-2014-048137"  rel="nofollow">Discuz的利用UC_KEY进行getshell</a>。</div>
+</li>
+<li class="level1"><div class="li"> Discuz!中插件所带来的漏洞,如<a href="http://wooyun.org/bugs/wooyun-2013-045611" class="urlextern" title="http://wooyun.org/bugs/wooyun-2013-045611"  rel="nofollow">discuz!某自带工具可拿shell</a> 。</div>
+</li>
+</ol>
+
+<p>
+Discuz!历史上的漏洞很多，参见以下页面。
+</p>
+
+<p>
+<a href="http://wooyun.org/corps/Discuz!" class="urlextern" title="http://wooyun.org/corps/Discuz!"  rel="nofollow"> 厂商信息_Discuz!漏洞列表 | WooYun.org</a>
+</p>
+
+<p>
+<a href="http://drops.wooyun.org/papers/4611" class="urlextern" title="http://drops.wooyun.org/papers/4611"  rel="nofollow">DiscuzX系列命令执行分析公开（三连弹）</a>
+</p>
+
+<p>
+<a href="http://drops.wooyun.org/papers/929" class="urlextern" title="http://drops.wooyun.org/papers/929"  rel="nofollow">Discuz!X升级/转换程序GETSHELL漏洞分析</a>
+</p>
+
+<p>
+但是在最新版的Discuz!中已公开的漏洞均被修复了。
+</p>
+
+</div>
+<!-- EDIT3 SECTION "2、重要漏洞及利用" [560-1413] -->
+<h3 class="sectionedit4" id="修复方案">3、修复方案</h3>
+<div class="level3">
+<hr />
+
+<p>
+更新服务器上的Discuz!版本到最新版，最新版可在<a href="http://www.comsenz.com/downloads/install/discuzx" class="urlextern" title="http://www.comsenz.com/downloads/install/discuzx"  rel="nofollow">Discuz!官方下载地址</a>找到。
+</p>
+
+</div>
+<!-- EDIT4 SECTION "3、修复方案" [1414-1598] -->
+<h3 class="sectionedit5" id="实际案例">4、实际案例</h3>
+<div class="level3">
+<hr />
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-054271" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-054271"  rel="nofollow">一次成功的漫游腾讯内部网络过程 #1</a>
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-084642" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-084642"  rel="nofollow">酷我音乐某站补丁不及时</a>
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-084645" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-084645"  rel="nofollow">迅雷某站点补丁不及时</a>
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-046458" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-046458"  rel="nofollow">TOM某分站任意代码写入导致getshell</a>
+</p>
+
+</div>
+<!-- EDIT5 SECTION "4、实际案例" [1599-1993] -->
+<h3 class="sectionedit6" id="参考资料">5、参考资料</h3>
+<div class="level3">
+<hr />
+
+<p>
+<a href="http://wooyun.org/corps/Discuz!" class="urlextern" title="http://wooyun.org/corps/Discuz!"  rel="nofollow"> 厂商信息_Discuz!漏洞列表 | WooYun.org</a>
+</p>
+
+<p>
+<a href="http://drops.wooyun.org/papers/4611" class="urlextern" title="http://drops.wooyun.org/papers/4611"  rel="nofollow">DiscuzX系列命令执行分析公开（三连弹）</a>
+</p>
+
+<p>
+<a href="http://drops.wooyun.org/papers/929" class="urlextern" title="http://drops.wooyun.org/papers/929"  rel="nofollow">Discuz!X升级/转换程序GETSHELL漏洞分析</a>
+</p>
+
+</div>
+<!-- EDIT6 SECTION "5、参考资料" [1994-] --></div>
+</body>
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/web:discuz by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:03:12 GMT -->
+</html>

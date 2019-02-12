@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/client:broadcast by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:25:19 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8" />
+  <title>client:broadcast</title>
+<meta name="generator" content="DokuWiki"/>
+<meta name="robots" content="index,follow"/>
+<meta name="keywords" content="client,broadcast"/>
+<link rel="search" type="application/opensearchdescription+xml" href="../../lib/exe/opensearch.php" title="WooYun WiKi"/>
+<link rel="start" href="../../index.html"/>
+<link rel="contents" href="../../client_broadcastdecf.html?do=index" title="网站地图"/>
+<link rel="alternate" type="application/rss+xml" title="最近更改" href="../../feed.php"/>
+<link rel="alternate" type="application/rss+xml" title="当前命名空间" href="../../feed8226.php?mode=list&amp;ns=client"/>
+<link rel="alternate" type="text/html" title="纯HTML" href="client_broadcast.html"/>
+<link rel="alternate" type="text/plain" title="Wiki Markup 语言" href="../raw/broadcast.txt"/>
+<link rel="canonical" href="../../client_broadcast.html"/>
+<link rel="stylesheet" type="text/css" href="../../lib/exe/css70b4.css?t=bootstrap3&amp;tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"/>
+<script type="text/javascript">/*<![CDATA[*/var NS='client';var JSINFO = {"id":"client:broadcast","namespace":"client","plugin_codeprettify":{"loader_base":"\/lib\/plugins\/codeprettify\/google-code-prettify"}};
+/*!]]>*/</script>
+<script type="text/javascript" charset="utf-8" src="../../lib/exe/js1e16.php?tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"></script>
+<script type="text/javascript" charset="utf-8" src="../../lib/plugins/codeprettify/google-code-prettify/run_prettifyeb11.js?lang=css"></script>
+</head>
+<body>
+<div class="dokuwiki export">
+<!-- TOC START -->
+<div id="dw__toc">
+<h3 class="toggle">目录</h3>
+<div>
+
+<ul class="toc">
+<li class="level1"><div class="li"><a href="#broadcast_reciever">Broadcast Reciever</a></div>
+<ul class="toc">
+<li class="clear">
+<ul class="toc">
+<li class="level3"><div class="li"><a href="#科普">1、科普</a></div></li>
+<li class="level3"><div class="li"><a href="#知识要点">2、知识要点</a></div></li>
+<li class="level3"><div class="li"><a href="#分类">3、分类</a></div></li>
+<li class="level3"><div class="li"><a href="#测试方法">4、测试方法</a></div></li>
+<li class="level3"><div class="li"><a href="#案例">5、案例</a></div></li>
+<li class="level3"><div class="li"><a href="#参考">6、参考</a></div></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<!-- TOC END -->
+
+<h1 class="sectionedit1" id="broadcast_reciever">Broadcast Reciever</h1>
+<div class="level1">
+
+</div>
+<!-- EDIT1 SECTION "Broadcast Reciever" [1-35] -->
+<h3 class="sectionedit2" id="科普">1、科普</h3>
+<div class="level3">
+<hr />
+
+<p>
+Broadcast Recevier 广播接收器是一个专注于接收广播通知信息，并做出对应处理的组件。很多广播是源自于系统代码的──比如，通知时区改变、电池电量低、拍摄了一张照片或者用户改变了语言选项。应用程序也可以进行广播──比如说，通知其它应用程序一些数据下载完成并处于可用状态。 应用程序可以拥有任意数量的广播接收器以对所有它感兴趣的通知信息予以响应。所有的接收器均继承自BroadcastReceiver基类。 广播接收器没有用户界面。然而，它们可以启动一个activity来响应它们收到的信息，或者用NotificationManager来通知用户。通知可以用很多种方式来吸引用户的注意力──闪动背灯、震动、播放声音等等。一般来说是在状态栏上放一个持久的图标，用户可以打开它并获取消息。
+</p>
+
+
+
+</div>
+<!-- EDIT2 SECTION "1、科普" [36-1051] -->
+<h3 class="sectionedit3" id="知识要点">2、知识要点</h3>
+<div class="level3">
+<hr />
+
+<p>
+<strong>注册形式：动态or静态</strong>
+</p>
+
+<p>
+&lt;activity&gt;元素的name属性指定了实现了这个activity的 Activity的子类。icon和label属性指向了包含展示给用户的此activity的图标和标签的资源文件。其它组件也以类似的方法声明──&lt;service&gt; 元素用于声明服务， &lt;receiver&gt; 元素用于声明广播接收器，而 &lt;provider&gt; 元素用于声明内容提供器。 manifest文件中未进行声明的activity、服务以及内容提供器将不为系统所见，从而也就不会被运行。然而，广播接收器既可以在manifest文件中声明，也可以在代码中进行动态的创建，并以调用Context.registerReceiver()的方式注册至系统。
+</p>
+
+
+
+<p>
+（静态与动态注册广播接收器区别）
+</p>
+
+<p>
+<strong>回调方法</strong>
+</p>
+
+<p>
+广播接收器只有一个回调方法：
+</p>
+<pre class="code java">    #<span class="sy0">!</span>java
+    <span class="kw4">void</span> onReceive<span class="br0">&#40;</span><a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+context"><span class="kw3">Context</span></a> curContext, Intent broadcastMsg<span class="br0">&#41;</span></pre>
+
+<p>
+<br/>
+
+当广播消息抵达接收器时，Android调用它的onReceive() 方法并将包含消息的Intent对象传递给它。广播接收器仅在它执行这个方法时处于活跃状态。当onReceive()返回后，它即为失活状态。 拥有一个活跃状态的广播接收器的进程被保护起来而不会被杀死。但仅拥有失活状态组件的进程则会在其它进程需要它所占有的内存的时候随时被杀掉。 这种方式引出了一个问题：如果响应一个广播信息需要很长的一段时间，我们一般会将其纳入一个衍生的线程中去完成，而不是在主线程内完成它，从而保证用户交互过程的流畅。如果onReceive()衍生了一个线程并且返回，则包涵新线程在内的整个进程都被会判为失活状态（除非进程内的其它应用程序组件仍处于活跃状态），于是它就有可能被杀掉。这个问题的解决方法是令onReceive()启动一个新服务，并用其完成任务，于是系统就会知道进程中仍然在处理着工作。
+</p>
+
+<p>
+<strong>权限</strong>
+</p>
+
+<p>
+设置接收app
+</p>
+<pre class="code java">    #<span class="sy0">!</span>java
+    Intent  setPackage<span class="br0">&#40;</span><a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+string"><span class="kw3">String</span></a> packageName<span class="br0">&#41;</span>
+    <span class="br0">&#40;</span>Usually optional<span class="br0">&#41;</span> <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+set"><span class="kw3">Set</span></a> an explicit application <span class="kw1">package</span> <span class="co2">name</span> that limits the components <span class="kw1">this</span> Intent will resolve to.</pre>
+
+<p>
+设置接收权限
+</p>
+<pre class="code java">    #<span class="sy0">!</span>java
+    <span class="kw1">abstract</span> <span class="kw4">void</span>   sendBroadcast<span class="br0">&#40;</span>Intent intent, <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+string"><span class="kw3">String</span></a> receiverPermission<span class="br0">&#41;</span>
+    Broadcast the given intent to all interested BroadcastReceivers, allowing an optional required permission to be enforced.</pre>
+
+<p>
+protectionLevel
+</p>
+
+<p>
+normal:默认值。低风险权限，只要申请了就可以使用，安装时不需要用户确认。
+</p>
+
+<p>
+dangerous：像WRITE_SETTING和SEND_SMS等权限是有风险的，因为这些权限能够用来重新配置设备或者导致话费。使用此protectionLevel来标识用户可能关注的一些权限。Android将会在安装程序时，警示用户关于这些权限的需求，具体的行为可能依据Android版本或者所安装的移动设备而有所变化。
+</p>
+
+<p>
+signature：这些权限仅授予那些和本程序应用了相同密钥来签名的程序。
+</p>
+
+<p>
+signatureOrSystem:与signature类似，除了一点，系统中的程序也需要有资格来访问。这样允许定制Android系统应用也能获得权限，这种保护等级有助于集成系统编译过程。
+</p>
+
+<p>
+<strong>广播类型</strong>
+</p>
+
+<p>
+系统广播：像开机启动、接收到短信、电池电量低这类事件发生的时候系统都会发出特定的广播去通知应用，应用接收到广播后会以某种形式再转告用户。
+</p>
+
+<p>
+自定义广播：不同于系统广播事件，应用可以为自己的广播接收器自定义出一条广播事件。
+</p>
+
+<p>
+<strong>Ordered Broadcast</strong>
+</p>
+
+<p>
+OrderedBroadcast-有序广播，Broadcast-普通广播，他们的区别是有序广播发出后能够适配的广播接收者按照一定的权限顺序接收这个广播，并且前面的接收者可以对广播的内容进行修改，修改的结果被后面接收者接收，优先级高的接收者还可以结束这个广播，那么后面优先级低的接收者就接收不到这个广播了。而普通广播发出后，能够是适配的接收者没有一定顺序接收广播，也不能终止广播。
+</p>
+
+<p>
+<strong>sticky broadcast</strong>
+</p>
+
+<p>
+有这么一种broadcast，在发送并经过AMS(ActivityManagerService)分发给对应的receiver后，这个broadcast并不会被丢弃，而是保存在AMS中，当有新的需要动态注册的receiver请求AMS注册时，如果这个receiver能够接收这个broadcast，那么AMS会将在receiver注册成功之后，马上向receiver发送这个broadcast。这种broadcast我们称之为stickybroadcast。
+</p>
+
+<p>
+sendStickyBroadcast()字面意思是发送粘性的广播，使用这个api需要权限android.Manifest.permission.BROADCAST_STICKY,粘性广播的特点是Intent会一直保留到广播事件结束，而这种广播也没有所谓的10秒限制，10秒限制是指普通的广播如果onReceive方法执行时间太长，超过10秒的时候系统会将这个广播置为可以干掉的candidate，一旦系统资源不够的时候，就会干掉这个广播而让它不执行。
+</p>
+
+
+
+<p>
+(几种广播的特性)
+</p>
+
+<p>
+<strong>变动</strong>
+</p>
+
+<p>
+android3.1以及之后版本广播接收器不能在启动应用前注册。可以通过设置intent的flag为Intent.FLAG_INCLUDE_STOPPED_PACKAGES将广播发送给未启动应用的广播接收器。
+</p>
+
+<p>
+<strong>关键方法</strong>
+</p>
+<ul>
+<li class="level1"><div class="li">  sendBroadcast(intent)</div>
+</li>
+<li class="level1"><div class="li">  sendOrderedBroadcast(intent, null, mResultReceiver, null, 0, null, null)</div>
+</li>
+<li class="level1"><div class="li">  onReceive(Context context, Intent intent)</div>
+</li>
+<li class="level1"><div class="li">  getResultData()</div>
+</li>
+<li class="level1"><div class="li">  abortBroadcast()</div>
+</li>
+<li class="level1"><div class="li">  registerReceiver()</div>
+</li>
+<li class="level1"><div class="li">  unregisterReceiver()</div>
+</li>
+<li class="level1"><div class="li">  LocalBroadcastManager.getInstance(this).sendBroadcast(intent)</div>
+</li>
+<li class="level1"><div class="li">  sendStickyBroadcast(intent)</div>
+</li>
+</ul>
+
+</div>
+<!-- EDIT3 SECTION "2、知识要点" [1052-6744] -->
+<h3 class="sectionedit4" id="分类">3、分类</h3>
+<div class="level3">
+<hr />
+
+
+<ol>
+<li class="level1"><div class="li"> 私有广播接收器：只接收app自身发出的广播</div>
+</li>
+<li class="level0"><div class="li"> 公共广播接收器：能接收所有app发出的广播</div>
+</li>
+<li class="level0"><div class="li"> 内部广播接收器：只接收内部app发出的广播</div>
+</li>
+</ol>
+
+<p>
+<strong>安全建议</strong>
+</p>
+
+<p>
+intent-filter节点与exported属性设置组合建议
+</p>
+
+
+<ol>
+<li class="level1"><div class="li"> 私有广播接收器设置exported=&#039;false&#039;，并且不配置intent-filter。(私有广播接收器依然能接收到同UID的广播)
+<br/>
+        &lt;receiver android:name=“.PrivateReceiver” android:exported=“false” /&gt;
+<br/>
+</div>
+</li>
+<li class="level0"><div class="li"> 对接收来的广播进行验证
+</div>
+</li>
+<li class="level0"><div class="li"> 内部app之间的广播使用protectionLevel=&#039;signature&#039;验证其是否真是内部app
+</div>
+</li>
+<li class="level0"><div class="li"> 返回结果时需注意接收app是否会泄露信息
+</div>
+</li>
+<li class="level0"><div class="li"> 发送的广播包含敏感信息时需指定广播接收器，使用显示意图或者
+<br/>
+        setPackage(String packageName)
+<br/>
+</div>
+</li>
+<li class="level0"><div class="li"> sticky broadcast粘性广播中不应包含敏感信息
+</div>
+</li>
+<li class="level0"><div class="li"> Ordered Broadcast建议设置接收权限receiverPermission，避免恶意应用设置高优先级抢收此广播后并执行abortBroadcast()方法。</div>
+</li>
+</ol>
+
+</div>
+<!-- EDIT4 SECTION "3、分类" [6745-7835] -->
+<h3 class="sectionedit5" id="测试方法">4、测试方法</h3>
+<div class="level3">
+<hr />
+
+<p>
+1、查找动态广播接收器：反编译后检索registerReceiver(),
+</p>
+<pre class="code bash">dz<span class="sy0">&gt;</span> run app.broadcast.info <span class="re5">-a</span> android <span class="re5">-i</span></pre>
+
+<p>
+<br/>
+
+2、查找静态广播接收器：反编译后查看配置文件查找广播接收器组件&lt;receiver&gt;，注意exported属性
+</p>
+
+<p>
+3、查找发送广播内的信息检索sendBroadcast与sendOrderedBroadcast，注意setPackage方法于receiverPermission变量。
+</p>
+
+<p>
+发送测试广播
+</p>
+<pre class="code java">    #<span class="sy0">!</span>java
+    adb shell：
+    am broadcast <span class="sy0">-</span>a MyBroadcast <span class="sy0">-</span>n com.<span class="me1">isi</span>.<span class="me1">vul_broadcastreceiver</span><span class="sy0">/</span>.<span class="me1">MyBroadCastReceiver</span>
+    am broadcast <span class="sy0">-</span>a MyBroadcast <span class="sy0">-</span>n com.<span class="me1">isi</span>.<span class="me1">vul_broadcastreceiver</span><span class="sy0">/</span>.<span class="me1">MyBroadCastReceiver</span> –es number <span class="nu0">5556</span>.
+&nbsp;
+    <span class="me1">drozer</span>：
+    dz<span class="sy0">&gt;</span> run app.<span class="me1">broadcast</span>.<span class="me1">send</span> <span class="sy0">--</span>component com.<span class="kw1">package</span>.<span class="me1">name</span> <span class="sy0">--</span>action android.<span class="me1">intent</span>.<span class="me1">action</span>.<span class="me1">XXX</span>
+&nbsp;
+    code：
+    Intent i <span class="sy0">=</span> <span class="kw1">new</span> Intent<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    ComponentName componetName <span class="sy0">=</span> <span class="kw1">new</span> ComponentName<span class="br0">&#40;</span>packagename,  componet<span class="br0">&#41;</span><span class="sy0">;</span>         
+    i.<span class="me1">setComponent</span><span class="br0">&#40;</span>componetName<span class="br0">&#41;</span><span class="sy0">;</span>       
+    sendBroadcast<span class="br0">&#40;</span>i<span class="br0">&#41;</span><span class="sy0">;</span></pre>
+
+<p>
+接收指定广播
+</p>
+<pre class="code java">    #<span class="sy0">!</span>java
+    <span class="kw1">public</span> <span class="kw1">class</span> <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+receiver"><span class="kw3">Receiver</span></a> <span class="kw1">extends</span> BroadcastReceiver <span class="br0">&#123;</span>
+        <span class="kw1">private</span> <span class="kw1">final</span> <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+string"><span class="kw3">String</span></a> ACCOUNT_NAME <span class="sy0">=</span> <span class="st0">&quot;account_name&quot;</span><span class="sy0">;</span>
+        <span class="kw1">private</span> <span class="kw1">final</span> <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+string"><span class="kw3">String</span></a> ACCOUNT_PWD <span class="sy0">=</span> <span class="st0">&quot;account_password&quot;</span><span class="sy0">;</span>
+        <span class="kw1">private</span> <span class="kw1">final</span> <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+string"><span class="kw3">String</span></a> ACCOUNT_TYPE <span class="sy0">=</span> <span class="st0">&quot;account_type&quot;</span><span class="sy0">;</span>
+        <span class="kw1">private</span> <span class="kw4">void</span> doLog<span class="br0">&#40;</span><a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+context"><span class="kw3">Context</span></a> paramContext, Intent paramIntent<span class="br0">&#41;</span>
+        <span class="br0">&#123;</span>
+            <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+string"><span class="kw3">String</span></a> name<span class="sy0">;</span>
+            <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+string"><span class="kw3">String</span></a> password<span class="sy0">;</span>
+            <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+string"><span class="kw3">String</span></a> type<span class="sy0">;</span>
+            <span class="kw1">do</span>
+            <span class="br0">&#123;</span>
+                name <span class="sy0">=</span> paramIntent.<span class="me1">getExtras</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">getString</span><span class="br0">&#40;</span>ACCOUNT_NAME<span class="br0">&#41;</span><span class="sy0">;</span>
+                password <span class="sy0">=</span> paramIntent.<span class="me1">getExtras</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">getString</span><span class="br0">&#40;</span>ACCOUNT_PWD<span class="br0">&#41;</span><span class="sy0">;</span>
+                type <span class="sy0">=</span> paramIntent.<span class="me1">getExtras</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">getString</span><span class="br0">&#40;</span>ACCOUNT_TYPE<span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+            <span class="kw1">while</span> <span class="br0">&#40;</span><span class="br0">&#40;</span>TextUtils.<span class="me1">isEmpty</span><span class="br0">&#40;</span>name<span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="sy0">||</span> <span class="br0">&#40;</span>TextUtils.<span class="me1">isEmpty</span><span class="br0">&#40;</span>password<span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="sy0">||</span> <span class="br0">&#40;</span>TextUtils.<span class="me1">isEmpty</span><span class="br0">&#40;</span>type<span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="sy0">||</span> <span class="br0">&#40;</span><span class="br0">&#40;</span><span class="sy0">!</span>type.<span class="me1">equals</span><span class="br0">&#40;</span><span class="st0">&quot;email&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="sy0">&amp;&amp;</span> <span class="br0">&#40;</span><span class="sy0">!</span>type.<span class="me1">equals</span><span class="br0">&#40;</span><span class="st0">&quot;cellphone&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            Log.<span class="me1">i</span><span class="br0">&#40;</span><span class="st0">&quot;name&quot;</span>, name<span class="br0">&#41;</span><span class="sy0">;</span>
+            Log.<span class="me1">i</span><span class="br0">&#40;</span><span class="st0">&quot;password&quot;</span>, password<span class="br0">&#41;</span><span class="sy0">;</span>
+            Log.<span class="me1">i</span><span class="br0">&#40;</span><span class="st0">&quot;type&quot;</span>, type<span class="br0">&#41;</span><span class="sy0">;</span>
+         <span class="br0">&#125;</span>
+&nbsp;
+        <span class="kw1">public</span> <span class="kw4">void</span> onReceive<span class="br0">&#40;</span><a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+context"><span class="kw3">Context</span></a> paramContext, Intent paramIntent<span class="br0">&#41;</span>
+        <span class="br0">&#123;</span>
+          <span class="kw1">if</span> <span class="br0">&#40;</span>TextUtils.<span class="me1">equals</span><span class="br0">&#40;</span>paramIntent.<span class="me1">getAction</span><span class="br0">&#40;</span><span class="br0">&#41;</span>, <span class="st0">&quot;account&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+          doLog<span class="br0">&#40;</span>paramContext, paramIntent<span class="br0">&#41;</span><span class="sy0">;</span>
+         <span class="br0">&#125;</span>
+&nbsp;
+    <span class="br0">&#125;</span></pre>
+
+</div>
+<!-- EDIT5 SECTION "4、测试方法" [7836-10052] -->
+<h3 class="sectionedit6" id="案例">5、案例</h3>
+<div class="level3">
+<hr />
+
+<p>
+<strong>案例1：伪造消息代码执行</strong>
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-039801" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-039801"  rel="nofollow">百度云盘手机版钓鱼、信息泄露和代码执行高危漏洞三合一</a>
+</p>
+
+<p>
+<strong>案例2：拒绝服务</strong>
+</p>
+
+<p>
+尝试向广播接收器发送不完整的intent比如空action或者空extra。
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-0511" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-0511"  rel="nofollow">乐phone手机系统重启漏洞</a>
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2013-042755" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2013-042755"  rel="nofollow">QQ手机管家拒绝服务漏洞</a>
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-034181" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-034181"  rel="nofollow">手机百度4.5.1Android客户端DOS攻击</a>
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-053878" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-053878"  rel="nofollow">百度某手机应用拒绝服务漏洞</a>
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-047716" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-047716"  rel="nofollow">搜狗输入法安卓客户端本地拒绝服务漏洞</a>
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-039968" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-039968"  rel="nofollow">百度云盘客户端拒绝服务</a>
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2013-019422" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2013-019422"  rel="nofollow">su提权广播劫持导致拒绝服务攻击</a>（上面都是伪造，这个是劫持）
+</p>
+
+<p>
+<strong>案例3：敏感信息泄漏</strong>
+</p>
+
+<p>
+某应用利用广播传输用户账号密码
+</p>
+
+
+
+<p>
+隐式意图发送敏感信息
+</p>
+<pre class="code java">    #<span class="sy0">!</span>java
+    <span class="kw1">public</span> <span class="kw1">class</span> ServerService <span class="kw1">extends</span> Service <span class="br0">&#123;</span>
+      <span class="co1">// ...</span>
+      <span class="kw1">private</span> <span class="kw4">void</span> d<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="co1">// ...</span>
+        Intent v1 <span class="sy0">=</span> <span class="kw1">new</span> Intent<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        v1.<span class="me1">setAction</span><span class="br0">&#40;</span><span class="st0">&quot;com.sample.action.server_running&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        v1.<span class="me1">putExtra</span><span class="br0">&#40;</span><span class="st0">&quot;local_ip&quot;</span>, v0.<span class="me1">h</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        v1.<span class="me1">putExtra</span><span class="br0">&#40;</span><span class="st0">&quot;port&quot;</span>, v0.<span class="me1">i</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        v1.<span class="me1">putExtra</span><span class="br0">&#40;</span><span class="st0">&quot;code&quot;</span>, v0.<span class="me1">g</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        v1.<span class="me1">putExtra</span><span class="br0">&#40;</span><span class="st0">&quot;connected&quot;</span>, v0.<span class="me1">s</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        v1.<span class="me1">putExtra</span><span class="br0">&#40;</span><span class="st0">&quot;pwd_predefined&quot;</span>, v0.<span class="me1">r</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span><span class="sy0">!</span>TextUtils.<span class="me1">isEmpty</span><span class="br0">&#40;</span>v0.<span class="me1">t</span><span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+          v1.<span class="me1">putExtra</span><span class="br0">&#40;</span><span class="st0">&quot;connected_usr&quot;</span>, v0.<span class="me1">t</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+      <span class="br0">&#125;</span>
+      <span class="kw1">this</span>.<span class="me1">sendBroadcast</span><span class="br0">&#40;</span>v1<span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span></pre>
+
+<p>
+接收POC
+</p>
+<pre class="code java">    #<span class="sy0">!</span>java
+    <span class="kw1">public</span> <span class="kw1">class</span> BcReceiv <span class="kw1">extends</span> BroadcastReceiver <span class="br0">&#123;</span>
+      @Override
+      <span class="kw1">public</span> <span class="kw4">void</span> onReceive<span class="br0">&#40;</span><a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+context"><span class="kw3">Context</span></a> context, Intent intent<span class="br0">&#41;</span><span class="br0">&#123;</span>
+&nbsp;
+        <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+string"><span class="kw3">String</span></a> s <span class="sy0">=</span> <span class="kw2">null</span><span class="sy0">;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>intent.<span class="me1">getAction</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">equals</span><span class="br0">&#40;</span><span class="st0">&quot;com.sample.action.server_running&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+          <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+string"><span class="kw3">String</span></a> pwd <span class="sy0">=</span> intent.<span class="me1">getStringExtra</span><span class="br0">&#40;</span><span class="st0">&quot;connected&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+          s <span class="sy0">=</span> <span class="st0">&quot;Airdroid  =&gt; [&quot;</span> <span class="sy0">+</span> pwd <span class="sy0">+</span> <span class="st0">&quot;]/&quot;</span> <span class="sy0">+</span> intent.<span class="me1">getExtras</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        Toast.<span class="me1">makeText</span><span class="br0">&#40;</span>context, <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+string"><span class="kw3">String</span></a>.<span class="me1">format</span><span class="br0">&#40;</span><span class="st0">&quot;%s Received&quot;</span>, s<span class="br0">&#41;</span>,
+                       Toast.<span class="me1">LENGTH_SHORT</span><span class="br0">&#41;</span>.<span class="me1">show</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+      <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span></pre>
+
+<p>
+修复后代码，使用 LocalBroadcastManager.sendBroadcast() 发出的广播只能被app自身广播接收器接收。
+</p>
+<pre class="code java">    #<span class="sy0">!</span>java
+    Intent intent <span class="sy0">=</span> <span class="kw1">new</span> Intent<span class="br0">&#40;</span><span class="st0">&quot;my-sensitive-event&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    intent.<span class="me1">putExtra</span><span class="br0">&#40;</span><span class="st0">&quot;event&quot;</span>, <span class="st0">&quot;this is a test event&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    LocalBroadcastManager.<span class="me1">getInstance</span><span class="br0">&#40;</span><span class="kw1">this</span><span class="br0">&#41;</span>.<span class="me1">sendBroadcast</span><span class="br0">&#40;</span>intent<span class="br0">&#41;</span><span class="sy0">;</span></pre>
+
+<p>
+<strong>案例4：权限绕过</strong>
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-09175" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-09175"  rel="nofollow">小米MIUI漏洞可能导致硬件资源消耗</a>
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-019579" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-019579"  rel="nofollow">无须权限随意开启和关闭手机wifi功能</a>
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2014-068478" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2014-068478"  rel="nofollow">华为荣耀3X Android4.2提权打电话漏洞</a>
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2014-084520" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2014-084520"  rel="nofollow">酷派最安全手机s6拨打电话权限绕过</a>
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2014-084516" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2014-084516"  rel="nofollow">酷派最安全手机s6程序锁绕过</a>
+</p>
+
+<p>
+<a href="http://zone.wooyun.org/content/16841" class="urlextern" title="http://zone.wooyun.org/content/16841"  rel="nofollow">CVE-2014-8610 Android &lt; 5.0 短信重发漏洞</a>
+</p>
+
+</div>
+<!-- EDIT6 SECTION "5、案例" [10053-13252] -->
+<h3 class="sectionedit7" id="参考">6、参考</h3>
+<div class="level3">
+<hr />
+
+<p>
+<a href="http://www.jssec.org/dl/android/_securecoding/_en.pdf" class="urlextern" title="http://www.jssec.org/dl/android\_securecoding\_en.pdf"  rel="nofollow">Android Application Secure Design/Secure Coding Guidebook</a>
+</p>
+
+<p>
+<a href="https://www.securecoding.cert.org/confluence/display/android/DRD03-J.+Do+not+broadcast+sensitive+information+using+an+implicit+intent" class="urlextern" title="https://www.securecoding.cert.org/confluence/display/android/DRD03-J.+Do+not+broadcast+sensitive+information+using+an+implicit+intent"  rel="nofollow">DRD03-J. Do not broadcast sensitive information using an implicit intent</a>
+
+</p>
+
+</div>
+<!-- EDIT7 SECTION "6、参考" [13253-] --></div>
+</body>
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/client:broadcast by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:25:19 GMT -->
+</html>

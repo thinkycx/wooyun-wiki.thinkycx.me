@@ -1,0 +1,73 @@
+====== Enjarify使用说明 ======
+
+下载地址:[https://github.com/google/enjarify](https://github.com/google/enjarify)
+
+==== 1.简介 ====
+
+---
+
+[enjarify](https://github.com/google/enjarify)是谷歌出品的一款反编译工具,它可以将dalvik字节码转化成 java 字节码,然后就可以使用 [JD-GUI](https://github.com/java-decompiler/jd-gui) 之类的 java 逆向工具来分析 app 了.
+
+优势:谷歌出品更新应该更给力,相对 dex2jar 这种流传广泛的工具对应的 anti 应该更少.
+
+
+==== 2.环境搭建 ====
+
+---
+
+enjarify可以运行在任意装有 python3的平台上,python3下载地址:
+
+https://www.python.org/downloads/release/python-343/
+
+下载完成后将 python3加入环境变量,各种系统的环境变量设置就不介绍了各位看官如有不会的自行百度下吧.
+
+==== 3.使用方法 ====
+
+---
+
+**直接使用**
+
+	python3 -O -m enjarify.main yourapp.apk
+	
+**win使用批处理**
+
+	C:\Documents and Settings\Administrator>enjarify.bat
+	usage: enjarify [-h] [-o OUTPUT] [-f] [--fast] inputfile
+	enjarify: error: the following arguments are required: inputfile
+	
+	//注意批处理里面的调用是 python3,默认的安装完后的 exe 是 python,改下两边任意一个的 name 就好了.
+	
+	C:\Documents and Settings\Administrator>enjarify.bat "C:\Documents and Settings\Administrator\My Documents\下载\Root-Explorer-3.3.4.apk"
+	1000 classes processed
+	2000 classes processed
+	3000 classes processed
+	Output written to C:\Documents and Settings\Administrator\My Documents\下载\Root-Explorer-3.3.4-enjarify.jar
+	3244 classes translated successfully, 0 classes had errors
+	
+**linux/oxs 使用脚本**
+
+	ln -s "$PWD/enjarify.sh" ~/bin/enjarify
+	enjarify yourapp.apk
+	enjarify classes2.dex
+	enjarify yourapp.apk -o yourapp.jar
+
+==== 4.参数说明 ====
+
+---
+
+	usage: enjarify [-h] [-o OUTPUT] [-f] [--fast] inputfile
+
+	Translates Dalvik bytecode (.dex or .apk) to Java bytecode (.jar)
+
+	positional arguments:
+	  inputfile
+
+	optional arguments:
+	  -h, --help            show this help message and exit
+	  -o OUTPUT, --output OUTPUT
+	                        Output .jar file. Default is [input-
+	                        filename]-enjarify.jar.
+	  -f, --force           Force overwrite. If output file already exists, this
+	                        option is required to overwrite.
+	  --fast                Speed up translation at the expense of generated
+	                        bytecode being less readable.

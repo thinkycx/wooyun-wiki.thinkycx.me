@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/server:squid by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:03:05 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8" />
+  <title>server:squid</title>
+<meta name="generator" content="DokuWiki"/>
+<meta name="robots" content="index,follow"/>
+<meta name="keywords" content="server,squid"/>
+<link rel="search" type="application/opensearchdescription+xml" href="../../lib/exe/opensearch.php" title="WooYun WiKi"/>
+<link rel="start" href="../../index.html"/>
+<link rel="contents" href="../../server_squiddecf.html?do=index" title="网站地图"/>
+<link rel="alternate" type="application/rss+xml" title="最近更改" href="../../feed.php"/>
+<link rel="alternate" type="application/rss+xml" title="当前命名空间" href="../../feed0688.php?mode=list&amp;ns=server"/>
+<link rel="alternate" type="text/html" title="纯HTML" href="server_squid.html"/>
+<link rel="alternate" type="text/plain" title="Wiki Markup 语言" href="../raw/squid.txt"/>
+<link rel="canonical" href="../../server_squid.html"/>
+<link rel="stylesheet" type="text/css" href="../../lib/exe/css70b4.css?t=bootstrap3&amp;tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"/>
+<script type="text/javascript">/*<![CDATA[*/var NS='server';var JSINFO = {"id":"server:squid","namespace":"server","plugin_codeprettify":{"loader_base":"\/lib\/plugins\/codeprettify\/google-code-prettify"}};
+/*!]]>*/</script>
+<script type="text/javascript" charset="utf-8" src="../../lib/exe/js1e16.php?tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"></script>
+<script type="text/javascript" charset="utf-8" src="../../lib/plugins/codeprettify/google-code-prettify/run_prettifyeb11.js?lang=css"></script>
+</head>
+<body>
+<div class="dokuwiki export">
+<!-- TOC START -->
+<div id="dw__toc">
+<h3 class="toggle">目录</h3>
+<div>
+
+<ul class="toc">
+<li class="level1"><div class="li"><a href="#squid">squid</a></div>
+<ul class="toc">
+<li class="clear">
+<ul class="toc">
+<li class="level3"><div class="li"><a href="#squid简介">1、squid简介</a></div></li>
+<li class="level3"><div class="li"><a href="#squid服务器架设">2、squid服务器架设</a></div></li>
+<li class="level3"><div class="li"><a href="#错误配置及利用">3、错误配置及利用</a></div></li>
+<li class="level3"><div class="li"><a href="#实际案例">4、实际案例</a></div></li>
+<li class="level3"><div class="li"><a href="#修复方案">5、修复方案</a></div></li>
+<li class="level3"><div class="li"><a href="#漏洞扫描及发现">6、漏洞扫描及发现</a></div></li>
+<li class="level3"><div class="li"><a href="#相关资源">7、相关资源</a></div></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<!-- TOC END -->
+
+<h1 class="sectionedit1" id="squid">squid</h1>
+<div class="level1">
+
+</div>
+<!-- EDIT1 SECTION "squid" [1-20] -->
+<h3 class="sectionedit2" id="squid简介">1、squid简介</h3>
+<div class="level3">
+<hr />
+
+<p>
+Squid是一种用来缓冲Internet数据的软件。它是这样实现其功能的，接受来自人们需要下载的目标（object）的请求并适当地处理这些请求。也就是说，如果一个人想下载一web页面，他请求Squid为他取得这个页面。Squid随之连接到远程服务器（比如：<a href="http://squid.nlanr.net/" class="urlextern" title="http://squid.nlanr.net/"  rel="nofollow">http://squid.nlanr.net/</a>）并向这个页面发出请求。然后，Squid显式地聚集数据到客户端机器，而且同时复制一份。当下一次有人需要同一页面时，Squid可以简单地从磁盘中读到它，那样数据迅即就会传输到客户机上。当前的Squid可以处理HTTP，FTP，GOPHER，SSL和WAIS等协议。但它不能处理如POP，NNTP，RealAudio以及其它类型的东西。
+</p>
+
+</div>
+<!-- EDIT2 SECTION "1、squid简介" [21-793] -->
+<h3 class="sectionedit3" id="squid服务器架设">2、squid服务器架设</h3>
+<div class="level3">
+<hr />
+
+<p>
+测试环境Centos 6.2
+安装squid
+</p>
+<pre class="code bash"><span class="kw2">yum install</span> squid <span class="re5">-y</span>
+<span class="sy0">/</span>etc<span class="sy0">/</span>init.d<span class="sy0">/</span>squid start</pre>
+
+<p>
+相关配置文件
+</p>
+<pre class="code">配置文件目录
+/etc/squid
+主要配置文件
+/etc/squid/squid.conf
+监听端口
+TCP:3128</pre>
+
+<p>
+此时的squid就是一个没有任何保护的，可以被任何人使用。
+配置账户密码
+</p>
+<pre class="code">vim /etc/squid/squid.conf
+#在配置文件最上层添加以下内容
+#Add auth
+auth_param basic program /usr/lib64/squid/ncsa_auth /usr/etc/passwd
+acl password proxy_auth REQUIRED
+http_access allow password
+#生成密码文件
+htpasswd -c /usr/etc/passwd test
+#重启服务
+/etc/init.d/squid restart</pre>
+
+<p>
+此时使用浏览器使用该代理时需要输入用户名和密码
+</p>
+
+</div>
+<!-- EDIT3 SECTION "2、squid服务器架设" [794-1546] -->
+<h3 class="sectionedit4" id="错误配置及利用">3、错误配置及利用</h3>
+<div class="level3">
+<hr />
+
+</div>
+
+<h5 id="未配置权限直接使用进入内网">3、1 未配置权限直接使用进入内网</h5>
+<div class="level5">
+
+<p>
+作为一个squid代理服务器，未做任何验证，就可以使用，可以直接访问内网
+</p>
+
+</div>
+
+<h5 id="配置不当导致敏感信息泄露">3、2 配置不当导致敏感信息泄露</h5>
+<div class="level5">
+
+<p>
+访问
+</p>
+<pre class="code">http://ip/cgi-bin/cachemgr.cgi</pre>
+
+<p>
+或者
+</p>
+<pre class="code">squidclient -h ip -p port mgr:info</pre>
+
+<p>
+在没有做限制的时候，可以查看squid的一些基本信息
+</p>
+
+</div>
+<!-- EDIT4 SECTION "3、错误配置及利用" [1547-1951] -->
+<h3 class="sectionedit5" id="实际案例">4、实际案例</h3>
+<div class="level3">
+<hr />
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-0181" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-0181"  rel="nofollow">http://www.wooyun.org/bugs/wooyun-2010-0181</a>
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-021602" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-021602"  rel="nofollow">http://www.wooyun.org/bugs/wooyun-2010-021602</a>
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-025343" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-025343"  rel="nofollow">http://www.wooyun.org/bugs/wooyun-2010-025343</a>
+</p>
+
+</div>
+<!-- EDIT5 SECTION "4、实际案例" [1952-2125] -->
+<h3 class="sectionedit6" id="修复方案">5、修复方案</h3>
+<div class="level3">
+<hr />
+
+</div>
+
+<h5 id="配置密码">5.1 配置密码</h5>
+<div class="level5">
+
+</div>
+
+<h5 id="信息泄露">5.2 信息泄露</h5>
+<div class="level5">
+
+<p>
+对于cachemgr.cgi泄露的话，可以直接删除cgi或者做一个401认证。
+</p>
+
+</div>
+<!-- EDIT6 SECTION "5、修复方案" [2126-2287] -->
+<h3 class="sectionedit7" id="漏洞扫描及发现">6、漏洞扫描及发现</h3>
+<div class="level3">
+<hr />
+
+</div>
+<!-- EDIT7 SECTION "6、漏洞扫描及发现" [2288-2331] -->
+<h3 class="sectionedit8" id="相关资源">7、相关资源</h3>
+<div class="level3">
+<hr />
+
+<p>
+<a href="http://www.squid-cache.org/" class="urlextern" title="http://www.squid-cache.org/"  rel="nofollow">http://www.squid-cache.org/</a>
+</p>
+
+<p>
+<a href="http://home.arcor.de/pangj/squid/" class="urlextern" title="http://home.arcor.de/pangj/squid/"  rel="nofollow">http://home.arcor.de/pangj/squid/</a>
+</p>
+
+</div>
+<!-- EDIT8 SECTION "7、相关资源" [2332-] --></div>
+</body>
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/server:squid by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:03:05 GMT -->
+</html>

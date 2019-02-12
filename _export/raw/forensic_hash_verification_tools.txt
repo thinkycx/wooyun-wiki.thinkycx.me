@@ -1,0 +1,4 @@
+====== 取证哈希验证工具集 ======
+
+  * [[tools:md5deep|md5deep]]
+  * [[tools:rahash2|rahash2]]

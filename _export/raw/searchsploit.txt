@@ -1,0 +1,81 @@
+====== searchsploit使用说明 ======
+
+==== 1、工具简介 ====
+
+----
+
+这个项目是由Offensive Security发起的、基于[[http://www.exploit-db.com|exploit database]]官方漏洞数据库源的漏洞搜索工具，可以直接在终端搜索漏洞相关信息，如漏洞简介和漏洞验证/利用脚本。
+
+==== 2、使用方法 ====
+
+----
+
+
+在kali终端直接输入“searchsploit -h”可以查看其相关参数用法：
+<code bash>
+light@kali:~# searchsploit -h
+Usage  : searchsploit [OPTIONS] term1 [term2] ... [termN]
+Example: searchsploit oracle windows local
+
+=========
+ OPTIONS
+=========
+ -c         - Perform case-sensitive searches; by default,
+              searches will try to be greedy
+ -v         - By setting verbose output, description lines
+              are allowed to overflow their columns
+ -h, --help - Show help screen
+
+NOTES:
+ - Use any number of search terms you would like (minimum: 1)
+ - Search terms are not case sensitive, and order is irrelevant
+</code>
+
+参数解释：
+  * -c : 搜索是大小写敏感
+  * -v : 详细输出
+
+==== 3、使用示范 ====
+
+----
+
+
+比如我们要搜索windows上iis服务的远程漏洞，可以使用以下命令：
+<code bash>
+light@kali:~# searchsploit windows iis remote
+ Description                                    Path
+--------------------------------------------- ----------------------------------
+MS Windows IIS 5.0 - 5.1 - Remote Denial of  | /windows/dos/35.c
+MS Windows Media Services (nsiislog.dll) Rem | /windows/remote/56.c
+MS Windows IIS SSL Remote Denial of Service  | /windows/dos/176.c
+MS IIS 4.0/5.0 and PWS Extended Unicode Dire | /windows/remote/189.c
+MS IIS 4.0/5.0 and PWS Extended Unicode Dire | /windows/remote/190.c
+MS IIS 4.0/5.0 and PWS Extended Unicode Dire | /windows/remote/191.pl
+MS IIS 4.0/5.0 and PWS Extended Unicode Dire | /windows/remote/192.pl
+MS Windows IIS 5.0 SSL Remote buffer overflo | /windows/remote/275.c
+MS Windows IIS 5.0 (500-100.asp) Server Name | /windows/remote/1178.c
+MS Windows IIS SA WebAgent 5.2/5.3 Redirect  | /windows/remote/1260.pm
+Microsoft IIS 6.0 (/AUX/.aspx) Remote Denial | /windows/dos/3965.pl
+Microsoft IIS <= 5.1 Hit Highlighting Authen | /windows/remote/4016.sh
+Oracle WebLogic IIS connector JSESSIONID Rem | /windows/remote/8336.pl
+Microsoft IIS 6.0 WebDAV Remote Authenticati | /windows/remote/8704.txt
+Microsoft IIS 6.0 WebDAV Remote Authenticati | /windows/remote/8754.patch
+Microsoft IIS 6.0 WebDAV Remote Authenticati | /windows/remote/8765.php
+Microsoft IIS 6.0 WebDAV Remote Authenticati | /windows/remote/8806.pl
+Microsoft IIS 5.0/6.0 FTP Server Remote Stac | /windows/remote/9541.pl
+Microsoft IIS 5.0 FTP Server Remote Stack Ov | /windows/remote/9559.pl
+Microsoft IIS ASP Multiple Extensions Securi | /windows/remote/10791.py
+Microsoft Internet Information Services (IIS | /windows/remote/14179.txt
+Windows 7 IIS7.5 FTPSVC UNAUTH'D Remote DoS  | /windows/dos/15803.py
+Microsoft IIS ISAPI w3who.dll Query String O | /windows/remote/16354.rb
+Microsoft IIS ISAPI nsiislog.dll ISAPI POST  | /windows/remote/16355.rb
+....
+</code>
+
+==== 4、相关资源 ====
+
+----
+
+[[https://github.com/offensive-security/exploit-database|searchsploit git]]
+
+[[https://www.exploit-db.com/|exploit-db官网]]

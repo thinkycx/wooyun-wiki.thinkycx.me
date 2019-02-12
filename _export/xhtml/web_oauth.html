@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/web:oauth by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:03:08 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8" />
+  <title>web:oauth</title>
+<meta name="generator" content="DokuWiki"/>
+<meta name="robots" content="index,follow"/>
+<meta name="keywords" content="web,oauth"/>
+<link rel="search" type="application/opensearchdescription+xml" href="../../lib/exe/opensearch.php" title="WooYun WiKi"/>
+<link rel="start" href="../../index.html"/>
+<link rel="contents" href="../../web_oauthdecf.html?do=index" title="网站地图"/>
+<link rel="alternate" type="application/rss+xml" title="最近更改" href="../../feed.php"/>
+<link rel="alternate" type="application/rss+xml" title="当前命名空间" href="../../feed4fbc.php?mode=list&amp;ns=web"/>
+<link rel="alternate" type="text/html" title="纯HTML" href="web_oauth.html"/>
+<link rel="alternate" type="text/plain" title="Wiki Markup 语言" href="../raw/oauth.txt"/>
+<link rel="canonical" href="../../web_oauth.html"/>
+<link rel="stylesheet" type="text/css" href="../../lib/exe/css70b4.css?t=bootstrap3&amp;tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"/>
+<script type="text/javascript">/*<![CDATA[*/var NS='web';var JSINFO = {"id":"web:oauth","namespace":"web","plugin_codeprettify":{"loader_base":"\/lib\/plugins\/codeprettify\/google-code-prettify"}};
+/*!]]>*/</script>
+<script type="text/javascript" charset="utf-8" src="../../lib/exe/js1e16.php?tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"></script>
+<script type="text/javascript" charset="utf-8" src="../../lib/plugins/codeprettify/google-code-prettify/run_prettifyeb11.js?lang=css"></script>
+</head>
+<body>
+<div class="dokuwiki export">
+<!-- TOC START -->
+<div id="dw__toc">
+<h3 class="toggle">目录</h3>
+<div>
+
+<ul class="toc">
+<li class="level1"><div class="li"><a href="#url_redirection_url重定向">URL redirection/URL重定向</a></div>
+<ul class="toc">
+<li class="clear">
+<ul class="toc">
+<li class="level3"><div class="li"><a href="#相关背景介绍">1、相关背景介绍</a></div></li>
+<li class="level3"><div class="li"><a href="#成因">2、成因</a></div></li>
+<li class="level3"><div class="li"><a href="#攻击方式及危害">3、攻击方式及危害</a></div></li>
+<li class="level3"><div class="li"><a href="#实际案例">4、实际案例</a></div></li>
+<li class="level3"><div class="li"><a href="#修复方案">5、修复方案</a></div></li>
+<li class="level3"><div class="li"><a href="#漏洞扫描与发现">6、漏洞扫描与发现</a></div></li>
+<li class="level3"><div class="li"><a href="#相关其他安全问题">7、相关其他安全问题</a></div></li>
+<li class="level3"><div class="li"><a href="#相关资源">8、相关资源</a></div></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<!-- TOC END -->
+
+<h1 class="sectionedit1" id="url_redirection_url重定向">URL redirection/URL重定向</h1>
+<div class="level1">
+
+</div>
+<!-- EDIT1 SECTION "URL redirection/URL重定向" [1-47] -->
+<h3 class="sectionedit2" id="相关背景介绍">1、相关背景介绍</h3>
+<div class="level3">
+<hr />
+
+<p>
+OAuth（开放授权）是一个开放标准，允许用户让第三方应用访问该用户在某一网站上存储的私密的资源（如照片，视频，联系人列表），而无需将用户名和密码提供给第三方应用。
+</p>
+
+<p>
+OAuth允许用户提供一个令牌，而不是用户名和密码来访问他们存放在特定服务提供者的数据。每一个令牌授权一个特定的网站（例如，视频编辑网站)在特定的时段（例如，接下来的2小时内）内访问特定的资源（例如仅仅是某一相册中的视频）。这样，OAuth让用户可以授权第三方网站访问他们存储在另外服务提供者的某些特定信息，而非所有内容。
+</p>
+
+</div>
+<!-- EDIT2 SECTION "1、相关背景介绍" [48-785] -->
+<h3 class="sectionedit3" id="成因">2、成因</h3>
+<div class="level3">
+<hr />
+
+<p>
+就OAuth协议本身而言是相对比较严谨的，目前常见的OAuth相关漏洞多为开发者在部署、使用OAuth时的疏忽或不规范所致。
+</p>
+
+</div>
+<!-- EDIT3 SECTION "2、成因" [786-970] -->
+<h3 class="sectionedit4" id="攻击方式及危害">3、攻击方式及危害</h3>
+<div class="level3">
+<hr />
+
+<p>
+<strong>授权方</strong>：
+</p>
+
+<p>
+<strong>认证服务器redirect_uri未校验</strong>
+</p>
+
+<p>
+若认证服务器不对申请授权请求中的redirect_uri参数进行验证，攻击者则可以伪造一个redirect_uri为自己可控地址的请求，通过XSS或CSRF等手段让受害人访问，当获得授权后认证服务器将会带着授权码重定向到攻击者的地址，从而导致授权码泄露。
+</p>
+
+<p>
+<strong>利用浏览器的一些特性绕过认证服务器对redirect_uri的校验</strong>
+</p>
+
+<p>
+很多浏览器会将“<code>\</code>”转换成“<code>/</code>”，如攻击者将redirect_uri改为<code>www.b.com\.www.a.com</code>，认证服务器认为这个地址是<a href="http://www.a.com/" class="urlextern" title="http://www.a.com"  rel="nofollow">www.a.com</a>下的一个子域名，而浏览器经过转换后，实际跳转到的地址则是<code>www.b.com/.www.a.com</code>（即<a href="http://www.b.com/" class="urlextern" title="http://www.b.com"  rel="nofollow">www.b.com</a>下的一个地址），成功绕过了redirect_uri校验。相关漏洞如：<a href="http://www.wooyun.org/bugs/wooyun-2014-059403" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2014-059403"  rel="nofollow">WooYun-2014-59403</a>。
+</p>
+
+<p>
+safari浏览器会对url中的full width字符自动转化为常见的字符，攻击者通过将“<code>/</code>“等字符替换成full width字符后即可通过上述方法绕过redirect_uri校验。相关漏洞如：<a href="http://www.wooyun.org/bugs/wooyun-2014-059639" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2014-059639"  rel="nofollow">WooYun-2014-59639</a>。
+</p>
+
+<p>
+此外，还可以通过在URL中加入的“<code>@</code>”字符绕过redirect_uri校验。相关漏洞如：<a href="http://www.wooyun.org/bugs/wooyun-2014-059676" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2014-059676"  rel="nofollow">WooYun-2014-59676</a>。
+</p>
+
+<p>
+<strong>应用方</strong>：
+</p>
+
+<p>
+<strong>利用CSRF进行授权劫持</strong>
+</p>
+
+<p>
+因OAuth授权过程中的链接及参数都是已知的，所以攻击者可以预先构造相应链接诱导用户点击，点击后（已登录状态）的用户则在不知情的情况下对某一第三方应用进行了授权。
+</p>
+
+<p>
+<strong>利用URL跳转漏洞或引用外部图片等方式通过referer将code带到攻击者的域名</strong>
+</p>
+
+<p>
+如果应用方网站可以进行任意的URL跳转或引用的外部的图片等资源，攻击者则可利用跳转到自己网站或请求自己网站资源过程中的referer信息获取token。
+</p>
+
+</div>
+<!-- EDIT4 SECTION "3、攻击方式及危害" [971-2946] -->
+<h3 class="sectionedit5" id="实际案例">4、实际案例</h3>
+<div class="level3">
+<hr />
+
+<p>
+<strong>PiaCa：<a href="http://www.wooyun.org/bugs/wooyun-2012-05804" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2012-05804"  rel="nofollow">WooYun-2012-05804：人人网Oauth 2.0授权可导致用户access_token泄露</a></strong>
+</p>
+
+<p>
+由于简化模式（implicit grant type）的授权请求仅需client_id和redirect_uri，人人网并没有对redirect_uri进行严格检查，导致攻击者可以利用redirect_uri域下的xss漏洞得到用户token。
+</p>
+
+<p>
+<strong>p.z：<a href="http://www.wooyun.org/bugs/wooyun-2014-059403" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2014-059403"  rel="nofollow">WooYun-2014-59403：腾讯OAuth平台redirect_uri过滤不严可能导致用户信息遭窃取</a></strong>
+</p>
+
+<p>
+由于绝大多数浏览器会将\转化为/，所以攻击者成功利用full width字符绕过redirect_uri校验。
+</p>
+
+<p>
+<strong>p.z：<a href="http://www.wooyun.org/bugs/wooyun-2014-059639" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2014-059639"  rel="nofollow">WooYun-2014-59639：腾讯OAuth平台redirect_uri过滤不严可能导致用户信息遭窃取（三）</a></strong>
+</p>
+
+<p>
+由于safari会对url中的full width字符自动转化为常见的字符，所以攻击者成功利用full width字符绕过redirect_uri校验。
+</p>
+
+</div>
+<!-- EDIT5 SECTION "4、实际案例" [2947-3932] -->
+<h3 class="sectionedit6" id="修复方案">5、修复方案</h3>
+<div class="level3">
+<hr />
+
+<p>
+<strong>授权方</strong>：
+</p>
+
+<p>
+对于OAuth回调污染问题，应严格校验redirect_uri，在某些情况下可以考虑通过字符串比对的方式进行校验。
+</p>
+
+<p>
+<strong>应用方</strong>：
+</p>
+
+<p>
+可利用state参数进行防跨站攻击，验证302跳转回来带code参数的这个请求是否是攻击者伪造的，防止攻击者伪造请求。
+</p>
+
+<p>
+对于外链攻击，可在支持HTML5浏览器的环境下给所有外部链接加上<code>rel=noreferrer</code>属性；对于老版本IE的处理方案是利用一个HTTPS进行跳转达到抹去referer的效果。
+</p>
+
+</div>
+<!-- EDIT6 SECTION "5、修复方案" [3933-4504] -->
+<h3 class="sectionedit7" id="漏洞扫描与发现">6、漏洞扫描与发现</h3>
+<div class="level3">
+<hr />
+
+<p>
+<strong>授权方</strong>：
+</p>
+
+<p>
+排查对redirect_uri的域检测是否存在绕过。
+</p>
+
+<p>
+<strong>应用方</strong>：
+</p>
+
+<p>
+排查网站上是否存在URL跳转漏洞。
+</p>
+
+</div>
+<!-- EDIT7 SECTION "6、漏洞扫描与发现" [4505-4686] -->
+<h3 class="sectionedit8" id="相关其他安全问题">7、相关其他安全问题</h3>
+<div class="level3">
+<hr />
+
+<p>
+通过OAuth从资源服务器获取数据的时候，应该注意进行相应过滤，防止从资源服务器引入危险代码导致SQLi、XSS等攻击。
+</p>
+
+</div>
+<!-- EDIT8 SECTION "7、相关其他安全问题" [4687-4889] -->
+<h3 class="sectionedit9" id="相关资源">8、相关资源</h3>
+<div class="level3">
+<hr />
+
+<p>
+<a href="http://zhuanlan.zhihu.com/wooyun/19745587" class="urlextern" title="http://zhuanlan.zhihu.com/wooyun/19745587"  rel="nofollow">OAuth 漏洞预警</a>
+</p>
+
+<p>
+<a href="http://drops.wooyun.org/papers/598" class="urlextern" title="http://drops.wooyun.org/papers/598"  rel="nofollow">OAuth 2.0安全案例回顾</a>
+</p>
+
+<p>
+<a href="http://drops.wooyun.org/papers/1989" class="urlextern" title="http://drops.wooyun.org/papers/1989"  rel="nofollow">OAuth 安全指南</a>
+</p>
+
+<p>
+<a href="http://www.ruanyifeng.com/blog/2014/05/oauth_2_0.html" class="urlextern" title="http://www.ruanyifeng.com/blog/2014/05/oauth_2_0.html"  rel="nofollow">理解OAuth 2.0</a>
+</p>
+
+</div>
+<!-- EDIT9 SECTION "8、相关资源" [4890-] --></div>
+</body>
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/web:oauth by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:03:08 GMT -->
+</html>

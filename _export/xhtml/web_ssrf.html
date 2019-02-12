@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/web:ssrf by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:03:07 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8" />
+  <title>web:ssrf</title>
+<meta name="generator" content="DokuWiki"/>
+<meta name="robots" content="index,follow"/>
+<meta name="keywords" content="web,ssrf"/>
+<link rel="search" type="application/opensearchdescription+xml" href="../../lib/exe/opensearch.php" title="WooYun WiKi"/>
+<link rel="start" href="../../index.html"/>
+<link rel="contents" href="../../web_ssrfdecf.html?do=index" title="网站地图"/>
+<link rel="alternate" type="application/rss+xml" title="最近更改" href="../../feed.php"/>
+<link rel="alternate" type="application/rss+xml" title="当前命名空间" href="../../feed4fbc.php?mode=list&amp;ns=web"/>
+<link rel="alternate" type="text/html" title="纯HTML" href="web_ssrf.html"/>
+<link rel="alternate" type="text/plain" title="Wiki Markup 语言" href="../raw/ssrf.txt"/>
+<link rel="canonical" href="../../web_ssrf.html"/>
+<link rel="stylesheet" type="text/css" href="../../lib/exe/css70b4.css?t=bootstrap3&amp;tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"/>
+<script type="text/javascript">/*<![CDATA[*/var NS='web';var JSINFO = {"id":"web:ssrf","namespace":"web","plugin_codeprettify":{"loader_base":"\/lib\/plugins\/codeprettify\/google-code-prettify"}};
+/*!]]>*/</script>
+<script type="text/javascript" charset="utf-8" src="../../lib/exe/js1e16.php?tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"></script>
+<script type="text/javascript" charset="utf-8" src="../../lib/plugins/codeprettify/google-code-prettify/run_prettifyeb11.js?lang=css"></script>
+</head>
+<body>
+<div class="dokuwiki export">
+<!-- TOC START -->
+<div id="dw__toc">
+<h3 class="toggle">目录</h3>
+<div>
+
+<ul class="toc">
+<li class="level1"><div class="li"><a href="#ssrf_server_side_request_forgery">SSRF（Server Side Request Forgery）</a></div>
+<ul class="toc">
+<li class="clear">
+<ul class="toc">
+<li class="level3"><div class="li"><a href="#背景">1、背景</a></div></li>
+<li class="level3"><div class="li"><a href="#成因">2、成因</a></div></li>
+<li class="level3"><div class="li"><a href="#攻击类型">3、攻击类型</a></div></li>
+<li class="level3"><div class="li"><a href="#漏洞挖掘">4、漏洞挖掘</a></div></li>
+<li class="level3"><div class="li"><a href="#绕过方式">5、绕过方式</a></div></li>
+<li class="level3"><div class="li"><a href="#修复方案">6、修复方案</a></div></li>
+<li class="level3"><div class="li"><a href="#相关资源">7、相关资源</a></div></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<!-- TOC END -->
+
+<h1 class="sectionedit1" id="ssrf_server_side_request_forgery">SSRF（Server Side Request Forgery）</h1>
+<div class="level1">
+
+</div>
+<!-- EDIT1 SECTION "SSRF（Server Side Request Forgery）" [1-53] -->
+<h3 class="sectionedit2" id="背景">1、背景</h3>
+<div class="level3">
+<hr />
+
+<p>
+SSRF(Server-Side Request Forgery:服务器端请求伪造) 是一种由攻击者构造形成由服务端发起请求的一个安全漏洞。一般情况下，SSRF攻击的目标是从外网无法访问的内部系统。
+</p>
+
+</div>
+<!-- EDIT2 SECTION "1、背景" [54-303] -->
+<h3 class="sectionedit3" id="成因">2、成因</h3>
+<div class="level3">
+<hr />
+
+<p>
+SSRF 形成的原因大都是由于服务端提供了从其他服务器应用获取数据的功能且没有对目标地址做过滤与限制。比如从指定URL地址获取网页文本内容、加载指定地址的图片、下载等。
+</p>
+
+</div>
+<!-- EDIT3 SECTION "2、成因" [304-568] -->
+<h3 class="sectionedit4" id="攻击类型">3、攻击类型</h3>
+<div class="level3">
+<hr />
+
+<p>
+1.可以对外网、服务器所在内网、本地进行端口扫描，获取一些服务的banner信息。
+</p>
+
+<p>
+2.攻击运行在内网或本地的应用程序(比如溢出)。
+</p>
+
+<p>
+3.对内网web应用进行指纹识别，通过访问默认文件实现。
+</p>
+
+<p>
+4.攻击内外网的web应用，主要是使用get参数就可以实现的攻击(比如struts2，sqli等)。
+</p>
+
+<p>
+5.利用file协议读取本地文件等。
+</p>
+
+</div>
+<!-- EDIT4 SECTION "3、攻击类型" [569-1010] -->
+<h3 class="sectionedit5" id="漏洞挖掘">4、漏洞挖掘</h3>
+<div class="level3">
+<hr />
+
+</div>
+
+<h4 id="漏洞挖掘方法分为两种">漏洞挖掘方法分为两种：</h4>
+<div class="level4">
+
+<p>
+<strong>从WEB功能上寻找</strong>
+</p>
+
+<p>
+<strong>从URL关键字寻找</strong>
+</p>
+<hr />
+
+<p>
+常见WEB功能：
+</p>
+
+<p>
+1）分享：通过URL地址分享网页内容
+</p>
+
+<p>
+2）转码服务：通过URL地址把原地址的网页内容调优使其适合手机屏幕浏览
+</p>
+
+<p>
+3）在线翻译：通过URL地址翻译对应文本的内容。
+</p>
+
+<p>
+4）图片加载与下载：通过URL地址加载或下载图片。
+</p>
+
+<p>
+5）图片、文章收藏功能
+</p>
+<hr />
+
+<p>
+常见URL关键字：
+</p>
+
+<p>
+share、wap、url、link、src、source、target、u、3g、display、sourceURl、imageURL、domain
+</p>
+
+</div>
+<!-- EDIT5 SECTION "4、漏洞挖掘" [1011-1620] -->
+<h3 class="sectionedit6" id="绕过方式">5、绕过方式</h3>
+<div class="level3">
+<hr />
+
+<p>
+1）使用@
+</p>
+<pre class="code">http://<a class="__cf_email__" href="../../cdn-cgi/l/email-protection.html" data-cfemail="1958377a7674592829372829372829372829">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">
+/* <![CDATA[ */!function(){try{var t="currentScript"in document?document.currentScript:function(){for(var t=document.getElementsByTagName("script"),e=t.length;e--;)if(t[e].getAttribute("data-cfhash"))return t[e]}();if(t&&t.previousSibling){var e,r,n,i,c=t.previousSibling,a=c.getAttribute("data-cfemail");if(a){for(e="",r=parseInt(a.substr(0,2),16),n=2;a.length-n;n+=2)i=parseInt(a.substr(n,2),16)^r,e+=String.fromCharCode(i);e=document.createTextNode(e),c.parentNode.replaceChild(e,c)}t.parentNode.removeChild(t);}}catch(u){}}()/* ]]> */</script>
+http://A.com:<a class="__cf_email__" href="../../cdn-cgi/l/email-protection.html" data-cfemail="0f4d4f3e3f213e3f213e3f213e3f">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">
+/* <![CDATA[ */!function(){try{var t="currentScript"in document?document.currentScript:function(){for(var t=document.getElementsByTagName("script"),e=t.length;e--;)if(t[e].getAttribute("data-cfhash"))return t[e]}();if(t&&t.previousSibling){var e,r,n,i,c=t.previousSibling,a=c.getAttribute("data-cfemail");if(a){for(e="",r=parseInt(a.substr(0,2),16),n=2;a.length-n;n+=2)i=parseInt(a.substr(n,2),16)^r,e+=String.fromCharCode(i);e=document.createTextNode(e),c.parentNode.replaceChild(e,c)}t.parentNode.removeChild(t);}}catch(u){}}()/* ]]> */</script></pre>
+
+<p>
+2）ip地址转换成进制
+</p>
+<pre class="code">115.239.210.26 ＝ 16373751032</pre>
+
+<p>
+3）使用短地址来生成内网地址
+</p>
+<pre class="code">http://10.10.116.11 
+http://t.cn/RwbLKDx</pre>
+
+<p>
+4）端口绕过
+</p>
+<ul>
+<li class="level1"><div class="li"><a href="http://www.wooyun.org/bugs/wooyun-2014-061850" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2014-061850"  rel="nofollow">内网编织者百度内网手动编织! </a>
+<p>
+  <a href="http://tieba.baidu.com/f/commit/share/openShareApi?url=http://10.50.33.43:8080/" class="urlextern" title="http://tieba.baidu.com/f/commit/share/openShareApi?url=http://10.50.33.43:8080/"  rel="nofollow">http://tieba.baidu.com/f/commit/share/openShareApi?url=http://10.50.33.43:8080/</a>
+</p>
+</div>
+</li>
+</ul>
+
+<p>
+5）xip.io
+</p>
+<pre class="code">http://tp.chinaso.com/web?url=http://www.10.10.0.179.xip.io&amp;fr=client
+10.0.0.1.xip.io 10.0.0.1
+www.10.0.0.1.xip.io 10.0.0.1
+mysite.10.0.0.1.xip.io 10.0.0.1
+foo.bar.10.0.0.1.xip.io 10.0.0.1</pre>
+
+<p>
+6）通过js跳转
+</p>
+<ul>
+<li class="level1"><div class="li"><a href="http://www.wooyun.org/bugs/wooyun-2015-0102331" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2015-0102331"  rel="nofollow">百度某SSRF绕过限制可通内网(可shell) </a></div>
+</li>
+</ul>
+
+</div>
+<!-- EDIT6 SECTION "5、绕过方式" [1621-2419] -->
+<h3 class="sectionedit7" id="修复方案">6、修复方案</h3>
+<div class="level3">
+<hr />
+
+<p>
+1.过滤返回信息，验证远程服务器对请求的响应是比较容易的方法。如果web应用是去获取某一种类型的文件。那么在把返回结果展示给用户之前先验证返回的信息是否符合标准。
+</p>
+
+<p>
+2.统一错误信息，避免用户可以根据错误信息来判断远端服务器的端口状态。
+</p>
+
+<p>
+3.限制请求的端口为http常用的端口，比如，80、443、8080、8090。
+</p>
+
+<p>
+4.黑名单内网ip。避免应用被用来获取获取内网数据，攻击内网。
+</p>
+
+<p>
+5.禁用不需要的协议。仅仅允许http和https请求。
+</p>
+
+</div>
+<!-- EDIT7 SECTION "6、修复方案" [2420-3033] -->
+<h3 class="sectionedit8" id="相关资源">7、相关资源</h3>
+<div class="level3">
+<hr />
+
+<p>
+<a href="http://www.freebuf.com/articles/web/20407.html" class="urlextern" title="http://www.freebuf.com/articles/web/20407.html"  rel="nofollow">SSRF攻击实例解析</a>
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2015-099135" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2015-099135"  rel="nofollow">乌云多数已修复SSRF漏洞可被绕过</a>
+</p>
+
+<p>
+<a href="https://sobug.com/article/detail/11" class="urlextern" title="https://sobug.com/article/detail/11"  rel="nofollow">SSRF漏洞的挖掘经验</a>
+</p>
+
+</div>
+<!-- EDIT8 SECTION "7、相关资源" [3034-] --></div>
+</body>
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/web:ssrf by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:03:07 GMT -->
+</html>

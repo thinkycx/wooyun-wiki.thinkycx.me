@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/server:svn by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:25:25 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8" />
+  <title>server:svn</title>
+<meta name="generator" content="DokuWiki"/>
+<meta name="robots" content="index,follow"/>
+<meta name="keywords" content="server,svn"/>
+<link rel="search" type="application/opensearchdescription+xml" href="../../lib/exe/opensearch.php" title="WooYun WiKi"/>
+<link rel="start" href="../../index.html"/>
+<link rel="contents" href="../../server_svndecf.html?do=index" title="网站地图"/>
+<link rel="alternate" type="application/rss+xml" title="最近更改" href="../../feed.php"/>
+<link rel="alternate" type="application/rss+xml" title="当前命名空间" href="../../feed0688.php?mode=list&amp;ns=server"/>
+<link rel="alternate" type="text/html" title="纯HTML" href="server_svn.html"/>
+<link rel="alternate" type="text/plain" title="Wiki Markup 语言" href="../raw/svn.txt"/>
+<link rel="canonical" href="../../server_svn.html"/>
+<link rel="stylesheet" type="text/css" href="../../lib/exe/css70b4.css?t=bootstrap3&amp;tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"/>
+<script type="text/javascript">/*<![CDATA[*/var NS='server';var JSINFO = {"id":"server:svn","namespace":"server","plugin_codeprettify":{"loader_base":"\/lib\/plugins\/codeprettify\/google-code-prettify"}};
+/*!]]>*/</script>
+<script type="text/javascript" charset="utf-8" src="../../lib/exe/js1e16.php?tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"></script>
+<script type="text/javascript" charset="utf-8" src="../../lib/plugins/codeprettify/google-code-prettify/run_prettifyeb11.js?lang=css"></script>
+</head>
+<body>
+<div class="dokuwiki export">
+<!-- TOC START -->
+<div id="dw__toc">
+<h3 class="toggle">目录</h3>
+<div>
+
+<ul class="toc">
+<li class="level1"><div class="li"><a href="#svn安全配置">SVN安全配置</a></div>
+<ul class="toc">
+<li class="clear">
+<ul class="toc">
+<li class="level3"><div class="li"><a href="#svn简介">1、SVN简介</a></div></li>
+<li class="level3"><div class="li"><a href="#svn服务器架设">2、SVN服务器架设</a></div></li>
+<li class="level3"><div class="li"><a href="#错误配置及利用">3、错误配置及利用</a></div></li>
+<li class="level3"><div class="li"><a href="#实际案例">4、实际案例</a></div></li>
+<li class="level3"><div class="li"><a href="#修复方案">5、修复方案</a></div></li>
+<li class="level3"><div class="li"><a href="#相关资源">6、相关资源</a></div></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<!-- TOC END -->
+
+<h1 class="sectionedit1" id="svn安全配置">SVN安全配置</h1>
+<div class="level1">
+
+</div>
+<!-- EDIT1 SECTION "SVN安全配置" [1-32] -->
+<h3 class="sectionedit2" id="svn简介">1、SVN简介</h3>
+<div class="level3">
+<hr />
+
+<p>
+Subversion，简称SVN，是一个开放源代码的版本控制系统，相对于的RCS、CVS，采用了分支管理系统，它的设计目标就是取代CVS。互联网上越来越多的控制服务从CVS转移到Subversion。
+</p>
+
+<p>
+Subversion使用服务端—客户端的结构，当然服务端与客户端可以都运行在同一台服务器上。在服务端是存放着所有受控制数据的Subversion仓库，另一端是Subversion的客户端程序，管理着受控数据的一部分在本地的映射（称为“工作副本”）。在这两端之间，是通过各种仓库存取层（Repository Access，简称RA）的多条通道进行访问的。这些通道中，可以通过不同的网络协议，例如HTTP、SSH等，或本地文件的方式来对仓库进行操作。
+</p>
+
+</div>
+<!-- EDIT2 SECTION "1、SVN简介" [33-852] -->
+<h3 class="sectionedit3" id="svn服务器架设">2、SVN服务器架设</h3>
+<div class="level3">
+<hr />
+
+<p>
+安装SVN
+</p>
+<pre class="code bash"><span class="co4">#</span><span class="kw2">yum install</span> subversion</pre>
+
+<p>
+测试是否安装成功
+</p>
+<pre class="code bash"><span class="co4">#</span><span class="kw2">svnserve</span> <span class="re5">--version</span></pre>
+
+<p>
+如果显示了版本信息则表示安装成功
+</p>
+
+<p>
+创建仓库
+</p>
+<pre class="code bash"><span class="co4">#</span><span class="kw2">svnadmin</span> create <span class="sy0">/</span>home<span class="sy0">/</span>svn<span class="sy0">/</span>repo</pre>
+
+<p>
+给svn设置密码
+</p>
+
+<p>
+修改配置文件/home/svn/repo/conf/svnserve.conf 去掉
+</p>
+<pre class="code bash"><span class="co4">#</span><span class="br0">&#91;</span>general<span class="br0">&#93;</span></pre>
+
+<p>
+前面的#号
+</p>
+
+<p>
+匿名访问的权限，可以是read,write,none,默认为read
+</p>
+<pre class="code bash">anon-access = none</pre>
+
+<p>
+认证用户的权限，可以是read,write,none,默认为write
+</p>
+<pre class="code bash">auth-access = <span class="kw2">write</span></pre>
+
+<p>
+密码数据库的路径
+</p>
+<pre class="code bash"><span class="co4">#</span>password-db = <span class="kw2">passwd</span></pre>
+
+<p>
+去掉前面的#
+</p>
+
+<p>
+修改配置文件passwd
+</p>
+<pre class="code bash"><span class="co4">#</span><span class="kw2">vim</span> <span class="sy0">/</span>home<span class="sy0">/</span>svn<span class="sy0">/</span>repo<span class="sy0">/</span>conf<span class="sy0">/</span><span class="kw2">passwd</span></pre>
+
+<p>
+=前面是用户名，后面是密码：
+</p>
+<pre class="code bash"><span class="br0">&#91;</span><span class="kw2">users</span><span class="br0">&#93;</span>
+name = password</pre>
+
+<p>
+<strong>启动SVN服务器</strong>
+</p>
+
+<p>
+对于单个代码仓库
+</p>
+<pre class="code bash"><span class="co4">#</span><span class="kw2">svnserve</span> <span class="re5">-d</span> <span class="re5">-r</span> <span class="sy0">/</span>home<span class="sy0">/</span><span class="kw2">svn</span> <span class="re5">--listen-host</span> 192.168.1.100</pre>
+
+<p>
+svn默认端口是3690，在防火墙上开放这个端口。
+</p>
+<pre class="code bash"><span class="sy0">/</span>sbin<span class="sy0">/</span>iptables <span class="re5">-A</span> INPUT <span class="re5">-i</span> eth0 <span class="re5">-p</span> tcp <span class="re5">--dport</span> <span class="nu0">3690</span> <span class="re5">-j</span> ACCEPT
+<span class="sy0">/</span>sbin<span class="sy0">/</span>service iptables save</pre>
+
+<p>
+把/var/www/html/目录导入到svn的repo目录下
+</p>
+<pre class="code bash"><span class="kw2">svn import</span> <span class="sy0">/</span>var<span class="sy0">/</span>www<span class="sy0">/</span>html<span class="sy0">/</span>  file:<span class="sy0">///</span>home<span class="sy0">/</span>svn<span class="sy0">/</span>repo  <span class="re5">-m</span> <span class="st0">&quot;test&quot;</span></pre>
+
+</div>
+<!-- EDIT3 SECTION "2、SVN服务器架设" [853-2122] -->
+<h3 class="sectionedit4" id="错误配置及利用">3、错误配置及利用</h3>
+<div class="level3">
+<hr />
+
+<p>
+SVN导致的漏洞主要有两类：
+</p>
+<ol>
+<li class="level1"><div class="li"> SVN未设置密码并允许匿名访问。</div>
+</li>
+<li class="level1"><div class="li"> 发布代码时使用了SVN co并且未限制对服务器上的.svn文件夹的访问。</div>
+</li>
+</ol>
+
+<p>
+SVN未设置密码并允许匿名访问将导致重要的源代码、数据库连接信息和服务器配置信息等敏感信息泄露，进而可能将导致服务器沦陷。
+</p>
+
+<p>
+发布代码时使用了SVN co时服务器将导出一个带.svn文件夹的目录树，.svn文件夹中有包含了用于版本信息追踪的“entries”文件。如此时未限制对服务器上的.svn文件夹的访问便可被用于摸清站点结构。
+</p>
+
+<p>
+更严重的问题在于，SVN产生的.svn目录下还包含了以.svn-base结尾的源代码文件副本（低版本SVN具体路径为text-base目录，高版本SVN为pristine目录），如果服务器没有对此类后缀做解析，黑客则可以直接获得文件源代码。
+</p>
+
+<p>
+如果解析了该后缀，可能会有文件解析的漏洞，可能会有扩展解析漏洞，找地方上传xxx.php.gif也许就可以直接得到webshell了。
+</p>
+
+<p>
+附上个遍历.svn/entries展现网站目录结构的两个脚本：
+<a href="http://static.wooyun.org/20141017/2014101714374572884.zip" class="urlextern" title="http://static.wooyun.org/20141017/2014101714374572884.zip"  rel="nofollow">svn遍历脚本</a>
+</p>
+
+</div>
+<!-- EDIT4 SECTION "3、错误配置及利用" [2123-3380] -->
+<h3 class="sectionedit5" id="实际案例">4、实际案例</h3>
+<div class="level3">
+<hr />
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2013-020861" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2013-020861"  rel="nofollow">【盛大180天渗透纪实】第四章.SVN猎手 （某站SVN信息泄露+设计问题导致服务器沦陷）</a>
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2013-018998" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2013-018998"  rel="nofollow">爱拍svn泄露，有被脱裤危险，想起了csdn....</a>
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2013-026351" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2013-026351"  rel="nofollow">优酷某分站SVN信息及某sql文件泄漏</a>
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2012-012665" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2012-012665"  rel="nofollow">淘宝网某应用svn信息导致代码泄露</a>
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2012-012321" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2012-012321"  rel="nofollow">鲜果网怕是所有应用要沦陷了？</a>
+</p>
+
+</div>
+<!-- EDIT5 SECTION "4、实际案例" [3381-3971] -->
+<h3 class="sectionedit6" id="修复方案">5、修复方案</h3>
+<div class="level3">
+<hr />
+
+<p>
+设置SVN密码，并将匿名访问用户的权限设置为none。
+</p>
+
+<p>
+发布代码时使用svn export导出，而不要使用svn co检索，防止泄露目录结构。
+</p>
+
+<p>
+svn export使用示例
+</p>
+<pre class="code">svn  export  [-r 版本号]  http://路径 [本地目录全路径]　--username　用户名
+svn  export  [-r 版本号]  svn://路径 [本地目录全路径]　--username　用户名
+svn  export  本地检出的(即带有.svn文件夹的)目录全路径  要导出的本地目录全路径</pre>
+
+<p>
+如果已经线上的生产环境已经有了.svn目录不想删掉可以在服务器上设置禁制访问此目录：
+</p>
+
+<p>
+Apache，设置.htacess:
+</p>
+<pre class="code">&lt;Directory ~ &quot;\.svn&quot;&gt;
+Order allow,deny
+Deny from all
+&lt;/Directory&gt;</pre>
+
+<p>
+Nginx,设置配置文件:
+</p>
+<pre class="code">location ~ ^(.*)\/\.svn\/ {
+return 404;
+}</pre>
+
+</div>
+<!-- EDIT6 SECTION "5、修复方案" [3972-4810] -->
+<h3 class="sectionedit7" id="相关资源">6、相关资源</h3>
+<div class="level3">
+<hr />
+
+<p>
+<a href="http://subversion.tigris.org/" class="urlextern" title="http://subversion.tigris.org/"  rel="nofollow">Subversion官方网站</a>
+</p>
+
+<p>
+<a href="http://www.ibm.com/developerworks/cn/java/j-lo-apache-subversion/" class="urlextern" title="http://www.ibm.com/developerworks/cn/java/j-lo-apache-subversion/"  rel="nofollow">用Apache和Subversion搭建安全的版本控制环境</a>
+</p>
+
+<p>
+<a href="http://blog.csdn.net/kangquan2008/article/details/8070391" class="urlextern" title="http://blog.csdn.net/kangquan2008/article/details/8070391"  rel="nofollow">centos svn安装及配置与使用</a>
+</p>
+
+<p>
+<a href="http://www.cnblogs.com/aLittleBitCool/archive/2011/07/09/2101602.html" class="urlextern" title="http://www.cnblogs.com/aLittleBitCool/archive/2011/07/09/2101602.html"  rel="nofollow">linux下svn常用指令</a>
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2012-05539" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2012-05539"  rel="nofollow">WooYun: .svn目录未设权限限制的漏洞利用总结</a>
+</p>
+
+</div>
+<!-- EDIT7 SECTION "6、相关资源" [4811-] --></div>
+</body>
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/server:svn by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:25:25 GMT -->
+</html>

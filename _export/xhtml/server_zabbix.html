@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/server:zabbix by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:02:53 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8" />
+  <title>server:zabbix</title>
+<meta name="generator" content="DokuWiki"/>
+<meta name="robots" content="index,follow"/>
+<meta name="keywords" content="server,zabbix"/>
+<link rel="search" type="application/opensearchdescription+xml" href="../../lib/exe/opensearch.php" title="WooYun WiKi"/>
+<link rel="start" href="../../index.html"/>
+<link rel="contents" href="../../server_zabbixdecf.html?do=index" title="网站地图"/>
+<link rel="alternate" type="application/rss+xml" title="最近更改" href="../../feed.php"/>
+<link rel="alternate" type="application/rss+xml" title="当前命名空间" href="../../feed0688.php?mode=list&amp;ns=server"/>
+<link rel="alternate" type="text/html" title="纯HTML" href="server_zabbix.html"/>
+<link rel="alternate" type="text/plain" title="Wiki Markup 语言" href="../raw/zabbix.txt"/>
+<link rel="canonical" href="../../server_zabbix.html"/>
+<link rel="stylesheet" type="text/css" href="../../lib/exe/css70b4.css?t=bootstrap3&amp;tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"/>
+<script type="text/javascript">/*<![CDATA[*/var NS='server';var JSINFO = {"id":"server:zabbix","namespace":"server","plugin_codeprettify":{"loader_base":"\/lib\/plugins\/codeprettify\/google-code-prettify"}};
+/*!]]>*/</script>
+<script type="text/javascript" charset="utf-8" src="../../lib/exe/js1e16.php?tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"></script>
+<script type="text/javascript" charset="utf-8" src="../../lib/plugins/codeprettify/google-code-prettify/run_prettifyeb11.js?lang=css"></script>
+</head>
+<body>
+<div class="dokuwiki export">
+<!-- TOC START -->
+<div id="dw__toc">
+<h3 class="toggle">目录</h3>
+<div>
+
+<ul class="toc">
+<li class="level1"><div class="li"><a href="#zabbix安全配置">Zabbix安全配置</a></div>
+<ul class="toc">
+<li class="clear">
+<ul class="toc">
+<li class="level3"><div class="li"><a href="#zabbix简介">1、zabbix简介</a></div></li>
+<li class="level3"><div class="li"><a href="#zabbix服务架设">2、zabbix服务架设</a></div></li>
+<li class="level3"><div class="li"><a href="#错误配置以及利用">3、错误配置以及利用</a></div></li>
+<li class="level3"><div class="li"><a href="#zabbix前台注入">3.4 zabbix前台注入</a></div></li>
+<li class="level3"><div class="li"><a href="#实际案例">4、实际案例</a></div></li>
+<li class="level3"><div class="li"><a href="#修复方案">5、修复方案</a></div></li>
+<li class="level3"><div class="li"><a href="#发现问题">6、发现问题</a></div></li>
+<li class="level3"><div class="li"><a href="#相关资源">7、相关资源</a></div></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<!-- TOC END -->
+
+<h1 class="sectionedit1" id="zabbix安全配置">Zabbix安全配置</h1>
+<div class="level1">
+
+</div>
+<!-- EDIT1 SECTION "Zabbix安全配置" [1-35] -->
+<h3 class="sectionedit2" id="zabbix简介">1、zabbix简介</h3>
+<div class="level3">
+<hr />
+
+<p>
+zabbix是一个基于WEB界面的提供分布式系统监视以及网络监视功能的企业级的开源解决方案。
+</p>
+
+<p>
+zabbix能监视各种网络参数，保证服务器系统的安全运营；并提供灵活的通知机制以让系统管理员快速定位/解决存在的各种问题。
+</p>
+
+<p>
+zabbix由2部分构成，zabbix server与可选组件zabbix agent。
+</p>
+
+<p>
+zabbix server可以通过SNMP，zabbix agent，ping，端口监视等方法提供对远程服务器/网络状态的监视，数据收集等功能，它可以运行在Linux，Solaris，HP-UX，AIX，Free BSD，Open BSD，OS X等平台上。
+</p>
+
+</div>
+<!-- EDIT2 SECTION "1、zabbix简介" [36-672] -->
+<h3 class="sectionedit3" id="zabbix服务架设">2、zabbix服务架设</h3>
+<div class="level3">
+<hr />
+
+</div>
+
+<h4 id="zabbix-server安装">2.1 zabbix-server安装</h4>
+<div class="level4">
+
+<p>
+rpm安装的方式
+</p>
+<pre class="code bash">rpm <span class="re5">-ivh</span> http:<span class="sy0">//</span>repo.zabbix.com<span class="sy0">/</span>zabbix<span class="sy0">/</span><span class="nu0">2.4</span><span class="sy0">/</span>rhel<span class="sy0">/</span><span class="nu0">6</span><span class="sy0">/</span>x86_64<span class="sy0">/</span>zabbix-release-<span class="nu0">2.4</span>-<span class="nu0">1</span>.el6.noarch.rpm
+<span class="kw2">yum install</span> zabbix-server zabbix-web-mysql zabbix-zabbix-web zabbix-agent zabbix-get http mysql-server <span class="re5">-y</span></pre>
+
+<p>
+配置mysql数据库:
+</p>
+<pre class="code bash"><span class="kw2">vim</span> <span class="sy0">/</span>etc<span class="sy0">/</span>my.cnf
+<span class="co0">#默认字符集为utf-8</span>
+default-character-set = utf8
+<span class="co0">#innodb的每个表文件单独存储</span>
+innodb_file_per_table = <span class="nu0">1</span></pre>
+
+<p>
+创建相关的表
+</p>
+<pre class="code bash">mysql<span class="sy0">&gt;</span> create database zabbix character <span class="kw1">set</span> utf8;
+mysql<span class="sy0">&gt;</span> grant all privileges on zabbix.<span class="sy0">*</span> to zabbix<span class="sy0">@</span>localhost identified by <span class="st_h">'zabbix'</span>;</pre>
+
+<p>
+导入表结构
+</p>
+<pre class="code bash"><span class="kw3">cd</span> <span class="sy0">/</span>usr<span class="sy0">/</span>share<span class="sy0">/</span>doc<span class="sy0">/</span>zabbix-server-mysql-2.4.4<span class="sy0">/</span>create
+mysql <span class="re5">-uroot</span> <span class="re5">-Dzabbix</span> <span class="sy0">&lt;</span> schema.sql
+mysql <span class="re5">-uroot</span> <span class="re5">-Dzabbix</span> <span class="sy0">&lt;</span> images.sql
+mysql <span class="re5">-uroot</span> <span class="re5">-Dzabbix</span> <span class="sy0">&lt;</span> data.sql</pre>
+
+<p>
+配置zabbix-server
+</p>
+<pre class="code bash"><span class="kw2">vim</span> <span class="sy0">/</span>etc<span class="sy0">/</span>zabbix<span class="sy0">/</span>zabbix_server.conf
+<span class="re2">LogFile</span>=<span class="sy0">/</span>var<span class="sy0">/</span>log<span class="sy0">/</span>zabbix<span class="sy0">/</span>zabbix_server.log
+<span class="re2">LogFileSize</span>=<span class="nu0">0</span>
+<span class="re2">PidFile</span>=<span class="sy0">/</span>var<span class="sy0">/</span>run<span class="sy0">/</span>zabbix<span class="sy0">/</span>zabbix_server.pid
+<span class="re2">DBHost</span>=localhost
+<span class="re2">DBName</span>=zabbix
+<span class="re2">DBUser</span>=zabbix
+<span class="re2">DBPassword</span>=zabbix
+<span class="re2">DBSocket</span>=<span class="sy0">/</span>var<span class="sy0">/</span>lib<span class="sy0">/</span>mysql<span class="sy0">/</span>mysql.sock
+<span class="re2">DBPort</span>=<span class="nu0">3306</span>
+<span class="re2">StartPollers</span>=<span class="nu0">5</span>
+<span class="re2">SNMPTrapperFile</span>=<span class="sy0">/</span>var<span class="sy0">/</span>log<span class="sy0">/</span>snmptt<span class="sy0">/</span>snmptt.log
+<span class="re2">CacheSize</span>=256M
+<span class="re2">AlertScriptsPath</span>=<span class="sy0">/</span>etc<span class="sy0">/</span>zabbix<span class="sy0">/</span>script<span class="sy0">/</span>alertscripts
+<span class="re2">ExternalScripts</span>=<span class="sy0">/</span>etc<span class="sy0">/</span>zabbix<span class="sy0">/</span>script<span class="sy0">/</span>externalscripts
+<span class="sy0">/</span>etc<span class="sy0">/</span>init.d<span class="sy0">/</span>zabbix-server start
+<span class="sy0">/</span>etc<span class="sy0">/</span>init.d<span class="sy0">/</span>mysqld start
+<span class="sy0">/</span>etc<span class="sy0">/</span>init.d<span class="sy0">/</span>httpd start</pre>
+
+<p>
+浏览器<a href="http://ip/zabbix" class="urlextern" title="http://ip/zabbix"  rel="nofollow">http://ip/zabbix</a>　按照提示配置
+</p>
+
+</div>
+
+<h4 id="zabbix-agent安装">2.2 zabbix-agent安装</h4>
+<div class="level4">
+<pre class="code bash">rpm <span class="re5">-ivh</span> http:<span class="sy0">//</span>repo.zabbix.com<span class="sy0">/</span>zabbix<span class="sy0">/</span><span class="nu0">2.4</span><span class="sy0">/</span>rhel<span class="sy0">/</span><span class="nu0">6</span><span class="sy0">/</span>x86_64<span class="sy0">/</span>zabbix-release-<span class="nu0">2.4</span>-<span class="nu0">1</span>.el6.noarch.rpm
+<span class="kw2">yum install</span> zabbix zabbix-agent <span class="re5">-y</span></pre>
+
+<p>
+配置zabbix-agent
+</p>
+<pre class="code bash"><span class="kw2">vim</span> <span class="sy0">/</span>etc<span class="sy0">/</span>zabbix<span class="sy0">/</span>zabbix_agentd.conf
+<span class="re2">PidFile</span>=<span class="sy0">/</span>var<span class="sy0">/</span>run<span class="sy0">/</span>zabbix<span class="sy0">/</span>zabbix_agentd.pid
+<span class="re2">LogFile</span>=<span class="sy0">/</span>var<span class="sy0">/</span>log<span class="sy0">/</span>zabbix<span class="sy0">/</span>zabbix_agentd.log
+<span class="re2">LogFileSize</span>=<span class="nu0">0</span>
+<span class="re2">Server</span>=服务端IP
+<span class="re2">ServerActive</span>=服务端IP
+<span class="re2">Hostname</span>=主机名</pre>
+
+</div>
+<!-- EDIT3 SECTION "2、zabbix服务架设" [673-2522] -->
+<h3 class="sectionedit4" id="错误配置以及利用">3、错误配置以及利用</h3>
+<div class="level3">
+<hr />
+
+</div>
+
+<h4 id="默认密码或者弱口令">3.1 默认密码或者弱口令</h4>
+<div class="level4">
+
+<p>
+zabbix默认的口令为Admin:zabbix，或者存在弱口令，可以登录，登录后可以在后台自定义脚本，执行命令。
+</p>
+
+</div>
+
+<h4 id="开启guest账户">3.2 开启guest账户</h4>
+<div class="level4">
+
+<p>
+默认安装后是开启了guest账户的，如果没有禁止，可以通过guest账户登录，查看信息
+</p>
+
+</div>
+
+<h4 id="开启了guest同时版本号_208">3.3 开启了guest同时版本号&lt;= 2.0.8</h4>
+<div class="level4">
+
+<p>
+zabbix版本⇐2.0.8的时候，httpmon.php页面存在注入;开启了guest账户后可以直接访问，进行sql注入攻击。
+</p>
+
+<p>
+具体攻击方法参考:
+</p>
+
+<p>
+<a href="http://drops.wooyun.org/papers/680" class="urlextern" title="http://drops.wooyun.org/papers/680"  rel="nofollow">Zabbix SQL Injection/RCE – CVE-2013-5743</a>
+</p>
+
+</div>
+<!-- EDIT4 SECTION "3、错误配置以及利用" [2523-3177] -->
+<h3 class="sectionedit5" id="zabbix前台注入">3.4 zabbix前台注入</h3>
+<div class="level3">
+
+<p>
+漏洞具体利用方法:
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-072075" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-072075"  rel="nofollow">Zabbix的前台SQL注射漏洞0day一枚（官方测试受到影响）</a>
+</p>
+
+</div>
+<!-- EDIT5 SECTION "3.4 zabbix前台注入" [3178-3354] -->
+<h3 class="sectionedit6" id="实际案例">4、实际案例</h3>
+<div class="level3">
+<hr />
+
+</div>
+
+<h4 id="zabbix弱口令">4.1 zabbix弱口令</h4>
+<div class="level4">
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-069679" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-069679"  rel="nofollow">土豆某zabbix弱口令</a>
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-084596" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-084596"  rel="nofollow">中国科学院计算机网络信息中心zabbix弱口令，导致命令执行</a>
+</p>
+
+</div>
+
+<h4 id="zabbix的httpmonphp页面注入">4.2 zabbix的httpmon.php页面注入</h4>
+<div class="level4">
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-086349" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-086349"  rel="nofollow">京东某站shell直入jae内网物理机内核版本过低</a>
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-053420" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-053420"  rel="nofollow">乐视ZabbbixSQL注入导致命令执行</a>
+</p>
+
+</div>
+<!-- EDIT6 SECTION "4、实际案例" [3355-3872] -->
+<h3 class="sectionedit7" id="修复方案">5、修复方案</h3>
+<div class="level3">
+<hr />
+
+<p>
+zabbix最好不要放在外网
+</p>
+
+<p>
+修改默认账户密码，同时禁用guest用户
+</p>
+
+<p>
+对于重点的zabbix-server，最好能够做ACL访问限制
+</p>
+
+</div>
+<!-- EDIT7 SECTION "5、修复方案" [3873-4053] -->
+<h3 class="sectionedit8" id="发现问题">6、发现问题</h3>
+<div class="level3">
+<hr />
+
+<p>
+收集企业WEB应用，是否包含Zabbix。
+</p>
+
+</div>
+<!-- EDIT8 SECTION "6、发现问题" [4054-4134] -->
+<h3 class="sectionedit9" id="相关资源">7、相关资源</h3>
+<div class="level3">
+<hr />
+
+<p>
+<a href="http://drops.wooyun.org/papers/680" class="urlextern" title="http://drops.wooyun.org/papers/680"  rel="nofollow">Zabbix SQL Injection/RCE – CVE-2013-5743</a>
+</p>
+
+<p>
+<a href="http://drops.wooyun.org/tips/68" class="urlextern" title="http://drops.wooyun.org/tips/68"  rel="nofollow">当渗透遇到zabbix--小谈zabbix安全</a>
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-072075" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-072075"  rel="nofollow">Zabbix的前台SQL注射漏洞0day一枚（官方测试受到影响）</a>
+</p>
+
+</div>
+<!-- EDIT9 SECTION "7、相关资源" [4135-] --></div>
+</body>
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/server:zabbix by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:02:53 GMT -->
+</html>

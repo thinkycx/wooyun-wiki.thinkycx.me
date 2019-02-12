@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/web:file-upload by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:03:07 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8" />
+  <title>web:file-upload</title>
+<meta name="generator" content="DokuWiki"/>
+<meta name="robots" content="index,follow"/>
+<meta name="keywords" content="web,file-upload"/>
+<link rel="search" type="application/opensearchdescription+xml" href="../../lib/exe/opensearch.php" title="WooYun WiKi"/>
+<link rel="start" href="../../index.html"/>
+<link rel="contents" href="../../web_file-uploaddecf.html?do=index" title="网站地图"/>
+<link rel="alternate" type="application/rss+xml" title="最近更改" href="../../feed.php"/>
+<link rel="alternate" type="application/rss+xml" title="当前命名空间" href="../../feed4fbc.php?mode=list&amp;ns=web"/>
+<link rel="alternate" type="text/html" title="纯HTML" href="web_file-upload.html"/>
+<link rel="alternate" type="text/plain" title="Wiki Markup 语言" href="../raw/file-upload.txt"/>
+<link rel="canonical" href="../../web_file-upload.html"/>
+<link rel="stylesheet" type="text/css" href="../../lib/exe/css70b4.css?t=bootstrap3&amp;tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"/>
+<script type="text/javascript">/*<![CDATA[*/var NS='web';var JSINFO = {"id":"web:file-upload","namespace":"web","plugin_codeprettify":{"loader_base":"\/lib\/plugins\/codeprettify\/google-code-prettify"}};
+/*!]]>*/</script>
+<script type="text/javascript" charset="utf-8" src="../../lib/exe/js1e16.php?tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"></script>
+<script type="text/javascript" charset="utf-8" src="../../lib/plugins/codeprettify/google-code-prettify/run_prettifyeb11.js?lang=css"></script>
+</head>
+<body>
+<div class="dokuwiki export">
+<!-- TOC START -->
+<div id="dw__toc">
+<h3 class="toggle">目录</h3>
+<div>
+
+<ul class="toc">
+<li class="level1"><div class="li"><a href="#文件上传漏洞">文件上传漏洞</a></div>
+<ul class="toc">
+<li class="clear">
+<ul class="toc">
+<li class="level3"><div class="li"><a href="#背景介绍">1、背景介绍</a></div></li>
+<li class="level3"><div class="li"><a href="#漏洞成因">2、漏洞成因</a></div></li>
+<li class="level3"><div class="li"><a href="#漏洞的检测及利用">3、漏洞的检测及利用</a></div></li>
+<li class="level3"><div class="li"><a href="#漏洞修复">4、漏洞修复</a></div></li>
+<li class="level3"><div class="li"><a href="#实际案例">5、实际案例</a></div></li>
+<li class="level3"><div class="li"><a href="#相关资源">6、相关资源</a></div></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<!-- TOC END -->
+
+<h1 class="sectionedit1" id="文件上传漏洞">文件上传漏洞</h1>
+<div class="level1">
+
+</div>
+<!-- EDIT1 SECTION "文件上传漏洞" [1-34] -->
+<h3 class="sectionedit2" id="背景介绍">1、背景介绍</h3>
+<div class="level3">
+<hr />
+
+<p>
+在网站的运营过程中，不可避免地要对网站的某些页面或者内容进行更新，这时便需要使用到网站的文件上传的功能。如果不对被上传的文件进行限制或者限制被绕过，该功能便有可能会被利用于上传可执行文件、脚本到服务器上，进而进一步导致服务器沦陷。
+</p>
+
+</div>
+<!-- EDIT2 SECTION "1、背景介绍" [35-413] -->
+<h3 class="sectionedit3" id="漏洞成因">2、漏洞成因</h3>
+<div class="level3">
+<hr />
+
+<p>
+导致文件上传的漏洞的原因较多，主要包括以下几类：
+</p>
+<ol>
+<li class="level1"><div class="li"> 服务器配置不当</div>
+</li>
+<li class="level1"><div class="li"> 开源编辑器上传漏洞</div>
+</li>
+<li class="level1"><div class="li"> 本地文件上传限制被绕过</div>
+</li>
+<li class="level1"><div class="li"> 过滤不严或被绕过</div>
+</li>
+<li class="level1"><div class="li"> 文件解析漏洞导致文件执行</div>
+</li>
+<li class="level1"><div class="li"> 文件路径截断</div>
+</li>
+</ol>
+
+<p>
+<strong>服务器配置不当</strong>
+</p>
+
+<p>
+当服务器配置不当时，在不需要上传页面的情况下便可导致任意文件上传，参见<a href="../../server_httpput.html" class="wikilink1" title="server:httpput">HTTP请求方法（PUT）</a>。
+</p>
+
+<p>
+<strong>开源编辑器上传漏洞</strong>
+</p>
+
+<p>
+很多开源的编辑器历史上都有不同的上传漏洞，包括但不只限于CKEditor,CKEditor的文件上传漏洞参见<a href="../../web_fck-editor.html" class="wikilink1" title="web:fck-editor">CKEditor</a>。
+</p>
+
+<p>
+<strong>本地文件上传限制被绕过</strong>
+</p>
+
+<p>
+只在客户端浏览器上做了文件限制而没有在远程的服务器上做限制，只需要修改数据包就可以轻松绕过限制。
+</p>
+
+<p>
+<strong>过滤不严或被绕过</strong>
+</p>
+
+<p>
+有些网站上使用了黑名单过滤掉了一些关键的可执行文件脚本后缀等，但黑名单不全或者被绕过，导致可执行脚本文件被上传到服务器上，执行。
+</p>
+
+<p>
+如在服务器后端过滤掉了后缀为.php的文件，但并没有过滤掉.php3等其他可执行文件脚本后缀，攻击者就可以上传带有其他的可执行文件脚本本后缀的恶意文件到服务器上。
+</p>
+
+<p>
+常用的一些可执行的文件脚本的后缀
+</p>
+<pre class="code">php
+php2
+php3
+php5
+phtml
+asp
+aspx
+ascx
+ashx
+cer
+jsp
+jspx</pre>
+
+<p>
+在某些情况下由于管理员错误的服务器配置（将.html后缀的文件使用php进行解析等）会导致.html、.xml等静态页面后缀的文件也可被执行。
+</p>
+
+<p>
+在上传文件保存磁盘为NTFS格式时可通过::$DATA绕过黑名单限制，参见<a href="http://zone.wooyun.org/content/1064" class="urlextern" title="http://zone.wooyun.org/content/1064"  rel="nofollow">NTFS中的ADS的一些问题[欢迎一起讨论，求思路求方法]</a>。
+</p>
+
+<p>
+有时服务器只对第一个被上传的文件进行了检查，这时通过同时上传多个文件并将恶意文件掺杂进其中也可绕过服务器的过滤。
+</p>
+
+<p>
+<strong>文件解析漏洞导致文件执行</strong>
+</p>
+
+<p>
+当服务器上存在文件解析漏洞时，合法的文件名便可导致带有恶意代码的文件被执行，参见<a href="../../server_resolve.html" class="wikilink1" title="server:resolve">解析漏洞</a>。
+</p>
+
+<p>
+<strong>文件路径截断</strong>
+</p>
+
+<p>
+在上传的文件中使用一些特殊的符号，使得文件被上传到服务器中时路径被截断从而控制文件路径。
+</p>
+
+<p>
+常用的进行文件路径截断的字符如下
+</p>
+<pre class="code">\0
+?
+%00</pre>
+
+<p>
+在可以控制文件路径的情况下，使用超长的文件路径也有可能会导致文件路径截断。
+</p>
+
+</div>
+<!-- EDIT3 SECTION "2、漏洞成因" [414-2937] -->
+<h3 class="sectionedit4" id="漏洞的检测及利用">3、漏洞的检测及利用</h3>
+<div class="level3">
+<hr />
+
+</div>
+<!-- EDIT4 SECTION "3、漏洞的检测及利用" [2938-2982] -->
+<h3 class="sectionedit5" id="漏洞修复">4、漏洞修复</h3>
+<div class="level3">
+<hr />
+
+<p>
+<strong>服务器配置不当</strong>
+</p>
+
+<p>
+重新配置好服务器。
+</p>
+
+<p>
+服务器PUT方法配置不当可参见<a href="../../server_httpput.html" class="wikilink1" title="server:httpput">HTTP请求方法（PUT）</a>
+</p>
+
+<p>
+<strong>开源编辑器上传漏洞</strong>
+</p>
+
+<p>
+若新版编辑器已修复漏洞，请更新编辑器版本。
+</p>
+
+<p>
+<strong>本地文件上传限制被绕过</strong>
+</p>
+
+<p>
+在服务器后端对上传的文件进行过滤。
+</p>
+
+<p>
+<strong>过滤不严或被绕过</strong>
+</p>
+
+<p>
+建议使用白名单的方法对文件进行过滤。
+</p>
+
+<p>
+<strong>文件解析漏洞导致文件执行</strong>
+</p>
+
+<p>
+文件解析漏洞的修复可参考<span class="curid"><a href="../../web_file-upload.html" class="wikilink1" title="web:file-upload">文件上传</a></span>。
+</p>
+
+<p>
+<strong>文件路径截断</strong>
+</p>
+
+<p>
+使用随机数改写文件名和文件路径,不要使用用户定义的文件名和文件路径。
+</p>
+
+<p>
+除了以上的方法之外，还可将被上传的文件限制在某一路径下，并在文件上传目录禁止脚本解析。
+</p>
+
+</div>
+<!-- EDIT5 SECTION "4、漏洞修复" [2983-3807] -->
+<h3 class="sectionedit6" id="实际案例">5、实际案例</h3>
+<div class="level3">
+<hr />
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-0103185" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-0103185"  rel="nofollow">KXmail任意文件上传导致代码执行</a>
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-0102022" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-0102022"  rel="nofollow">KingCms最新版（k9）GetShell</a>
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-098102" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-098102"  rel="nofollow">中华人民共和国商务部某分站任意文件上传GETSHELL</a>
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-097048" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-097048"  rel="nofollow">海尔某站文件上传GetShell</a>
+</p>
+
+</div>
+<!-- EDIT6 SECTION "5、实际案例" [3808-4220] -->
+<h3 class="sectionedit7" id="相关资源">6、相关资源</h3>
+<div class="level3">
+<hr />
+
+<p>
+<a href="http://zone.wooyun.org/content/19529" class="urlextern" title="http://zone.wooyun.org/content/19529"  rel="nofollow">PHP任意文件上传漏洞（CVE-2015-2348）分析与利用</a>
+</p>
+
+<p>
+<a href="http://zone.wooyun.org/content/1064" class="urlextern" title="http://zone.wooyun.org/content/1064"  rel="nofollow">NTFS中的ADS的一些问题[欢迎一起讨论，求思路求方法]</a>
+</p>
+
+<p>
+<a href="https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2015-2348" class="urlextern" title="https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2015-2348"  rel="nofollow">CVE-2015-2348</a>
+</p>
+
+<p>
+<a href="https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2006-7243" class="urlextern" title="https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2006-7243"  rel="nofollow">CVE-2006-7243</a>
+</p>
+
+</div>
+<!-- EDIT7 SECTION "6、相关资源" [4221-] --></div>
+</body>
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/web:file-upload by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:03:07 GMT -->
+</html>

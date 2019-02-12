@@ -1,0 +1,29 @@
+====== 常用工具 ======
+
+==== 反编译 ====
+
+* [[android:tools:apktool|Apktool]]
+* [[android:tools:smali|Smali]]
+* [[android:tools:dex2jar|Dex2jar]]
+* [[android:tools:jd|JD-GUI]]
+* [[android:tools:jeb|Jeb]]
+* [[android:tools:enjarify|Enjarify]]
+* [[android:tools:Luyten|Luyten]]
+
+==== hook框架 ==== 
+
+* [[http://drops.wooyun.org/tips/7488|Xposed]]
+* [[http://drops.wooyun.org/tips/8084|Cydia]]
+* [[http://|ADBI]]
+* [[http://drops.wooyun.org/tools/5602|Frida]]
+
+==== 动态调试 ====
+
+* [[http://drops.wooyun.org/tips/2997|Drozer]]
+* andbug
+* Introspy
+* [[http://drops.wooyun.org/tips/7181|Smalidea]]
+
+==== 辅助测试 ====
+
+* [[android:tools:pidcat|pidcat]]

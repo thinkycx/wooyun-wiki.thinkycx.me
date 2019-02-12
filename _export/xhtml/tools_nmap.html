@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/tools:nmap by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:25:26 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8" />
+  <title>tools:nmap</title>
+<meta name="generator" content="DokuWiki"/>
+<meta name="robots" content="index,follow"/>
+<meta name="keywords" content="tools,nmap"/>
+<link rel="search" type="application/opensearchdescription+xml" href="../../lib/exe/opensearch.php" title="WooYun WiKi"/>
+<link rel="start" href="../../index.html"/>
+<link rel="contents" href="../../tools_nmapdecf.html?do=index" title="网站地图"/>
+<link rel="alternate" type="application/rss+xml" title="最近更改" href="../../feed.php"/>
+<link rel="alternate" type="application/rss+xml" title="当前命名空间" href="../../feed022e.php?mode=list&amp;ns=tools"/>
+<link rel="alternate" type="text/html" title="纯HTML" href="tools_nmap.html"/>
+<link rel="alternate" type="text/plain" title="Wiki Markup 语言" href="../raw/nmap.txt"/>
+<link rel="canonical" href="../../tools_nmap.html"/>
+<link rel="stylesheet" type="text/css" href="../../lib/exe/css70b4.css?t=bootstrap3&amp;tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"/>
+<script type="text/javascript">/*<![CDATA[*/var NS='tools';var JSINFO = {"id":"tools:nmap","namespace":"tools","plugin_codeprettify":{"loader_base":"\/lib\/plugins\/codeprettify\/google-code-prettify"}};
+/*!]]>*/</script>
+<script type="text/javascript" charset="utf-8" src="../../lib/exe/js1e16.php?tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"></script>
+<script type="text/javascript" charset="utf-8" src="../../lib/plugins/codeprettify/google-code-prettify/run_prettifyeb11.js?lang=css"></script>
+</head>
+<body>
+<div class="dokuwiki export">
+<!-- TOC START -->
+<div id="dw__toc">
+<h3 class="toggle">目录</h3>
+<div>
+
+<ul class="toc">
+<li class="level1"><div class="li"><a href="#nmap">NMAP</a></div>
+<ul class="toc">
+<li class="clear">
+<ul class="toc">
+<li class="level3"><div class="li"><a href="#nmap介绍">1、Nmap介绍</a></div></li>
+<li class="level3"><div class="li"><a href="#nmap功能介绍">2、Nmap功能介绍</a></div></li>
+<li class="level3"><div class="li"><a href="#简单示例">3、简单示例</a></div></li>
+<li class="level3"><div class="li"><a href="#nmap参数详解">4、Nmap参数详解</a></div></li>
+<li class="level3"><div class="li"><a href="#例子">5、例子</a></div></li>
+<li class="level3"><div class="li"><a href="#相关资源">6、相关资源</a></div></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<!-- TOC END -->
+
+<h1 class="sectionedit1" id="nmap">NMAP</h1>
+<div class="level1">
+
+</div>
+<!-- EDIT1 SECTION "NMAP" [1-20] -->
+<h3 class="sectionedit2" id="nmap介绍">1、Nmap介绍</h3>
+<div class="level3">
+
+<p>
+Nmap是一款网络扫描和主机检测的非常有用的工具。Nmap是不局限于仅仅收集信息和枚举，同时可以用来作为一个漏洞探测器或安全扫描器。它可以适用于winodws,linux,mac等操作系统
+</p>
+
+<p>
+Nmap是一款非常强大的实用工具,可用于：检测活在网络上的主机（主机发现）检测主机上开放的端口（端口发现或枚举）检测到相应的端口（服务发现）的软件和版本检测操作系统，硬件地址，以及软件版本检测脆弱性的漏洞（Nmap的脚本）Nmap是一个非常普遍的工具，它有命令行界面和图形用户界面。本文包括以下方面的内容:介绍Nmap扫描中的重要参数操作系统检测Nmap使用教程Nmap使用不同的技术来执行扫描，包括：TCP的connect扫描，TCP反向的ident扫描，FTP反弹扫描等。所有这些扫描的类型有自己的优点和缺点，我们接下来将讨论这些问题。 Nmap的使用取决于目标主机,因为有一个简单的（基本）扫描和预先扫描之间的差异。我们需要使用一些先进的技术来绕过防火墙和入侵检测/防御系统，以获得正确的结果。
+</p>
+
+</div>
+<!-- EDIT2 SECTION "1、Nmap介绍" [21-1225] -->
+<h3 class="sectionedit3" id="nmap功能介绍">2、Nmap功能介绍</h3>
+<div class="level3">
+<ul>
+<li class="level1"><div class="li">1.主机存活检测</div>
+</li>
+<li class="level1"><div class="li">2.端口探测</div>
+</li>
+<li class="level1"><div class="li">3.服务识别</div>
+</li>
+<li class="level1"><div class="li">4.操作系统识别</div>
+</li>
+<li class="level1"><div class="li">5.硬件地址检测</div>
+</li>
+<li class="level1"><div class="li">6.服务版本识别</div>
+</li>
+<li class="level1"><div class="li">7.漏洞扫描,使用nmap自带脚本</div>
+</li>
+</ul>
+
+</div>
+<!-- EDIT3 SECTION "2、Nmap功能介绍" [1226-1439] -->
+<h3 class="sectionedit4" id="简单示例">3、简单示例</h3>
+<div class="level3">
+
+<p>
+使用ping检测10.0.0.0/24这个网段
+</p>
+<pre class="code bash"><span class="kw2">nmap</span> <span class="re5">-sP</span> 10.0.0.0<span class="sy0">/</span><span class="nu0">24</span></pre>
+
+<p>
+使用SYN的方法对全端口进行扫描,在aggressive(4)的时间模板下,同时对开放的端口进行端口识别
+</p>
+<pre class="code bash"><span class="kw2">nmap</span> <span class="re5">-p1-65535</span> <span class="re5">-sV</span> <span class="re5">-sS</span> <span class="re5">-T4</span> target </pre>
+
+<p>
+PS: -T代表的是扫描的时候,一些控制选项(TCP的延迟时间,探测报文之间的间隔等)的集合,具体的man nmap一下就知道了
+</p>
+
+<p>
+使用SYN扫描,在aggressive(4)的时间模板下,探测操作系统的类型和版本,还有显示traceroute的结果,结果输出较为详细
+</p>
+<pre class="code bash"><span class="kw2">nmap</span> <span class="re5">-v</span> <span class="re5">-sS</span> <span class="re5">-A</span> <span class="re5">-T4</span> target </pre>
+
+<p>
+使用SYN扫描,在insane(5)的时间模板下,探测操作系统的类型和版本,还有显示traceroute的结果,结果输出较为详细
+</p>
+<pre class="code bash"><span class="kw2">nmap</span> <span class="re5">-v</span> <span class="re5">-sS</span> <span class="re5">-A</span> <span class="re5">-T5</span> target </pre>
+
+<p>
+使用SYN扫描,在insane(5)的时间模板下,探测操作系统的类型,还有显示traceroute的结果,操作系统的类型,结果输出较为详细
+</p>
+<pre class="code bash"><span class="kw2">nmap</span> <span class="re5">-v</span> <span class="re5">-sV</span> <span class="re5">-O</span> <span class="re5">-sS</span> <span class="re5">-T5</span> target </pre>
+
+<p>
+使用SYN的方法对全端口进行扫描,同时对开放的端口进行端口识别,在aggressive(4)的时间模板下,探测操作系统的类型还有显示traceroute的结果,结果输出较为详细
+</p>
+<pre class="code bash"><span class="kw2">nmap</span> <span class="re5">-v</span> <span class="re5">-p</span> <span class="nu0">1</span>-<span class="nu0">65535</span> <span class="re5">-sV</span> <span class="re5">-O</span> <span class="re5">-sS</span> <span class="re5">-T4</span> target </pre>
+
+<p>
+用SYN的方法对全端口进行扫描,同时对开放的端口进行端口识别,在insane(5)的时间模板下,探测操作系统的类型,还有显示traceroute的结果,结果输出较为详细
+</p>
+<pre class="code bash"><span class="kw2">nmap</span> <span class="re5">-v</span> <span class="re5">-p</span> <span class="nu0">1</span>-<span class="nu0">65535</span> <span class="re5">-sV</span> <span class="re5">-O</span> <span class="re5">-sS</span> <span class="re5">-T5</span> target</pre>
+
+<p>
+从文件中读取需要扫描的IP列表
+</p>
+<pre class="code bash"><span class="kw2">nmap</span> <span class="re5">-iL</span> ip-address.txt</pre>
+
+<p>
+Nmap输出格式
+</p>
+
+<p>
+扫描的结果输出到屏幕,同时会存储一份到grep-output.txt
+</p>
+<pre class="code bash"><span class="kw2">nmap</span> <span class="re5">-sV</span> <span class="re5">-p</span> <span class="nu0">139</span>,<span class="nu0">445</span> <span class="re5">-oG</span> grep-output.txt 10.0.1.0<span class="sy0">/</span><span class="nu0">24</span></pre>
+
+<p>
+扫描结果输出为html
+</p>
+<pre class="code bash"><span class="kw2">nmap</span> <span class="re5">-sS</span> <span class="re5">-sV</span> <span class="re5">-T5</span> 10.0.1.99 <span class="re5">--webxml</span> <span class="re5">-oX</span> - <span class="sy0">|</span> xsltproc <span class="re5">--output</span> file.html </pre>
+
+<p>
+Nmap扫描Netbios
+</p>
+
+<p>
+在子网中发现开放netbios的IP
+</p>
+<pre class="code bash"><span class="kw2">nmap</span> <span class="re5">-sV</span> <span class="re5">-v</span> -p139,<span class="nu0">445</span> 10.0.0.1<span class="sy0">/</span><span class="nu0">24</span></pre>
+
+<p>
+扫描指定netbios的名称
+</p>
+<pre class="code bash"><span class="kw2">nmap</span> <span class="re5">-sU</span> <span class="re5">--script</span> nbstat.nse <span class="re5">-p</span> <span class="nu0">137</span> target </pre>
+
+<p>
+扫描指定的目标,同时检测相关漏洞
+</p>
+<pre class="code bash"><span class="kw2">nmap</span> <span class="re5">--script-args</span>=<span class="re2">unsafe</span>=<span class="nu0">1</span> <span class="re5">--script</span> smb-check-vulns.nse <span class="re5">-p</span> <span class="nu0">445</span> target</pre>
+
+<p>
+将nmap的80端口的扫描结果,通过管道交给nikto进行扫描
+</p>
+<pre class="code bash">Nmap Nikto Scan <span class="kw2">nmap</span> <span class="re5">-p80</span> 10.0.1.0<span class="sy0">/</span><span class="nu0">24</span> <span class="re5">-oG</span> - <span class="sy0">|</span> nikto.pl <span class="re5">-h</span> -</pre>
+
+<p>
+将nmap的80,443端口的扫描结果,通过管道交给nikto进行扫描
+</p>
+<pre class="code bash"><span class="kw2">nmap</span> -p80,<span class="nu0">443</span> 10.0.1.0<span class="sy0">/</span><span class="nu0">24</span> <span class="re5">-oG</span> - <span class="sy0">|</span> nikto.pl <span class="re5">-h</span> -</pre>
+
+</div>
+<!-- EDIT4 SECTION "3、简单示例" [1440-4002] -->
+<h3 class="sectionedit5" id="nmap参数详解">4、Nmap参数详解</h3>
+<div class="level3">
+
+<p>
+Nmap支持主机名,ip,网段的表示方式
+</p>
+
+<p>
+例如:blah.highon.coffee, namp.org/24, 192.168.0.1;10.0.0-25.1-254
+</p>
+<ul>
+<li class="level1"><div class="li">-iL filename                    从文件中读取待检测的目标,文件中的表示方法支持机名,ip,网段</div>
+</li>
+<li class="level1"><div class="li">-iR hostnum                     随机选取,进行扫描.如果-iR指定为0,则是无休止的扫描</div>
+</li>
+<li class="level1"><div class="li">–exclude host1[, host2]        从扫描任务中需要排除的主机<br/>
+</div>
+</li>
+</ul>
+
+<p>
+主机发现
+</p>
+<ul>
+<li class="level1"><div class="li">-sL                     仅仅是显示,扫描的IP数目,不会进行任何扫描</div>
+</li>
+<li class="level1"><div class="li">-sn                     ping扫描,即主机发现</div>
+</li>
+<li class="level1"><div class="li">-Pn                     不检测主机存活</div>
+</li>
+<li class="level1"><div class="li">-PS/PA/PU/PY[portlist]  TCP SYN Ping/TCP ACK Ping/UDP Ping发现</div>
+</li>
+<li class="level1"><div class="li">-PE/PP/PM               使用ICMP echo, timestamp and netmask 请求包发现主机</div>
+</li>
+<li class="level1"><div class="li">-PO[prococol list]      使用IP协议包探测对方主机是否开启<br/>
+</div>
+</li>
+</ul>
+
+<p>
+扫描技巧
+</p>
+<ul>
+<li class="level1"><div class="li">-sS/sT/sA/sW/sM                 TCP SYN/TCP connect()/ACK/TCP窗口扫描/TCP Maimon扫描</div>
+</li>
+<li class="level1"><div class="li">-sU                             UDP扫描</div>
+</li>
+<li class="level1"><div class="li">-sN/sF/sX                       TCP Null，FIN，and Xmas扫描</div>
+</li>
+<li class="level1"><div class="li">–scanflags                     自定义TCP包中的flags</div>
+</li>
+<li class="level1"><div class="li">-sI zombie host[:probeport]     Idlescan</div>
+</li>
+<li class="level1"><div class="li">-sY/sZ                          SCTP INIT/COOKIE-ECHO 扫描</div>
+</li>
+<li class="level1"><div class="li">-sO                             使用IP protocol 扫描确定目标机支持的协议类型</div>
+</li>
+<li class="level1"><div class="li">-b “FTP relay host”             使用FTP bounce scan</div>
+</li>
+</ul>
+
+<p>
+指定端口和扫描顺序
+</p>
+<ul>
+<li class="level1"><div class="li">-p                      特定的端口 -p80,443 或者 -p1-65535</div>
+</li>
+<li class="level1"><div class="li">-p U:PORT               扫描udp的某个端口, -p U:53</div>
+</li>
+<li class="level1"><div class="li">-F                      快速扫描模式,比默认的扫描端口还少</div>
+</li>
+<li class="level1"><div class="li">-r                      不随机扫描端口,默认是随机扫描的</div>
+</li>
+<li class="level1"><div class="li">–top-ports “number”    扫描开放概率最高的number个端口,出现的概率需要参考nmap-services文件,ubuntu中该文件位于/usr/share/nmap.nmap默认扫前1000个</div>
+</li>
+<li class="level1"><div class="li">–port-ratio “ratio”    扫描指定频率以上的端口</div>
+</li>
+</ul>
+
+<p>
+服务版本识别
+</p>
+<ul>
+<li class="level1"><div class="li">-sV                             开放版本探测,可以直接使用-A同时打开操作系统探测和版本探测</div>
+</li>
+<li class="level1"><div class="li">–version-intensity level     设置版本扫描强度,强度水平说明了应该使用哪些探测报文。数值越高，服务越有可能被正确识别。默认是7</div>
+</li>
+<li class="level1"><div class="li">–version-light                 打开轻量级模式,为–version-intensity 2的别名</div>
+</li>
+<li class="level1"><div class="li">–version-all                   尝试所有探测,为–version-intensity 9的别名</div>
+</li>
+<li class="level1"><div class="li">–version-trace                 显示出详细的版本侦测过程信息</div>
+</li>
+</ul>
+
+<p>
+脚本扫描
+</p>
+<ul>
+<li class="level1"><div class="li">-sC                             根据端口识别的服务,调用默认脚本</div>
+</li>
+<li class="level1"><div class="li">–script=”Lua scripts”          调用的脚本名</div>
+</li>
+<li class="level1"><div class="li">–script-args=n1=v1,[n2=v2]     调用的脚本传递的参数</div>
+</li>
+<li class="level1"><div class="li">–script-args-file=filename     使用文本传递参数</div>
+</li>
+<li class="level1"><div class="li">–script-trace                  显示所有发送和接收到的数据</div>
+</li>
+<li class="level1"><div class="li">–script-updatedb               更新脚本的数据库</div>
+</li>
+<li class="level1"><div class="li">–script-help=”Lua script”      显示指定脚本的帮助</div>
+</li>
+</ul>
+
+<p>
+OS识别
+</p>
+<ul>
+<li class="level1"><div class="li">-O              启用操作系统检测,-A来同时启用操作系统检测和版本检测</div>
+</li>
+<li class="level1"><div class="li">–osscan-limit  针对指定的目标进行操作系统检测(至少需确知该主机分别有一个open和closed的端口)</div>
+</li>
+<li class="level1"><div class="li">–osscan-guess  推测操作系统检测结果,当Nmap无法确定所检测的操作系统时，会尽可能地提供最相近的匹配，Nmap默认进行这种匹配防火墙/IDS躲避和哄骗</div>
+</li>
+<li class="level1"><div class="li">-f; –mtu value                 指定使用分片、指定数据包的MTU.</div>
+</li>
+<li class="level1"><div class="li">-D decoy1,decoy2,ME             使用诱饵隐蔽扫描</div>
+</li>
+<li class="level1"><div class="li">-S IP-ADDRESS                   源地址欺骗</div>
+</li>
+<li class="level1"><div class="li">-e interface                    使用指定的接口</div>
+</li>
+</ul>
+
+<p>
+Nmap 输出
+</p>
+<ul>
+<li class="level1"><div class="li">-oN                     将标准输出直接写入指定的文件</div>
+</li>
+<li class="level1"><div class="li">-oX                     输出xml文件</div>
+</li>
+<li class="level1"><div class="li">-oS                     将所有的输出都改为大写</div>
+</li>
+<li class="level1"><div class="li">-oG                     输出便于通过bash或者perl处理的格式,非xml</div>
+</li>
+<li class="level1"><div class="li">-oA BASENAME            可将扫描结果以标准格式、XML格式和Grep格式一次性输出</div>
+</li>
+<li class="level1"><div class="li">-v                      提高输出信息的详细度</div>
+</li>
+<li class="level1"><div class="li">-d level                设置debug级别,最高是9</div>
+</li>
+<li class="level1"><div class="li">–reason                显示端口处于带确认状态的原因</div>
+</li>
+<li class="level1"><div class="li">–open                  只输出端口状态为open的端口</div>
+</li>
+<li class="level1"><div class="li">–packet-trace          显示所有发送或者接收到的数据包</div>
+</li>
+<li class="level1"><div class="li">–iflist                显示路由信息和接口,便于调试</div>
+</li>
+<li class="level1"><div class="li">–log-errors            把日志等级为errors/warings的日志输出</div>
+</li>
+<li class="level1"><div class="li">–append-output         追加到指定的文件</div>
+</li>
+<li class="level1"><div class="li">–resume FILENAME       恢复已停止的扫描</div>
+</li>
+<li class="level1"><div class="li">–stylesheet PATH/<abbr title="Uniform Resource Locator">URL</abbr>   设置XSL样式表，转换XML输出</div>
+</li>
+<li class="level1"><div class="li">–webxml                从namp.org得到XML的样式</div>
+</li>
+<li class="level1"><div class="li">–no-sytlesheet         忽略XML声明的XSL样式表</div>
+</li>
+</ul>
+
+<p>
+其他nmap选项
+</p>
+<ul>
+<li class="level1"><div class="li">-6                      开启IPv6</div>
+</li>
+<li class="level1"><div class="li">-A                      OS识别,版本探测,脚本扫描和traceroute</div>
+</li>
+<li class="level1"><div class="li">–datedir DIRNAME       说明用户Nmap数据文件位置</div>
+</li>
+<li class="level1"><div class="li">–send-eth / –send-ip  使用原以太网帧发送/在原IP层发送</div>
+</li>
+<li class="level1"><div class="li">–privileged            假定用户具有全部权限</div>
+</li>
+<li class="level1"><div class="li">–unprovoleged          假定用户不具有全部权限,创建原始套接字需要root权限</div>
+</li>
+<li class="level1"><div class="li">-V                      打印版本信息</div>
+</li>
+<li class="level1"><div class="li">-h                      输出帮助</div>
+</li>
+</ul>
+
+</div>
+<!-- EDIT5 SECTION "4、Nmap参数详解" [4003-9439] -->
+<h3 class="sectionedit6" id="例子">5、例子</h3>
+<div class="level3">
+
+<p>
+整个子网检测的Netbios
+</p>
+<pre class="code bash">Nmap <span class="re5">-sV</span> <span class="re5">-v</span> <span class="re5">-p</span> <span class="nu0">139</span>,<span class="nu0">445</span> 10.0.1.0<span class="sy0">/</span><span class="nu0">24</span>
+Starting Nmap <span class="nu0">6.47</span> <span class="br0">&#40;</span> http:<span class="sy0">//</span>nmap.org <span class="br0">&#41;</span> at <span class="nu0">2014</span>-<span class="nu0">12</span>-<span class="nu0">11</span> <span class="nu0">21</span>:<span class="nu0">26</span> GMT
+Nmap scan report <span class="kw1">for</span> nas.decepticons 10.0.1.12
+Host is up <span class="br0">&#40;</span>0.014s latency<span class="br0">&#41;</span>.
+&nbsp;
+PORT STATE SERVICE VERSION
+<span class="nu0">139</span><span class="sy0">/</span>tcp open netbios-ssn Samba smbd <span class="nu0">3</span>.X <span class="br0">&#40;</span>workgroup: MEGATRON<span class="br0">&#41;</span>
+<span class="nu0">445</span><span class="sy0">/</span>tcp open netbios-ssn Samba smbd <span class="nu0">3</span>.X <span class="br0">&#40;</span>workgroup: MEGATRON<span class="br0">&#41;</span>
+&nbsp;
+Service detection performed. Please report any incorrect results at http:<span class="sy0">//</span>nmap.org<span class="sy0">/</span>submit<span class="sy0">/</span> .
+&nbsp;
+Nmap done: <span class="nu0">256</span> IP addresses <span class="br0">&#40;</span><span class="nu0">1</span> hosts up<span class="br0">&#41;</span> scanned <span class="kw1">in</span> <span class="nu0">28.74</span> seconds</pre>
+
+<p>
+Nmap 查找Netbios名称
+</p>
+<pre class="code bash"><span class="kw2">nmap</span> <span class="re5">-sU</span> <span class="re5">--script</span> nbstat.nse <span class="re5">-p</span> <span class="nu0">137</span> 10.0.1.12
+Starting Nmap <span class="nu0">6.47</span> <span class="br0">&#40;</span> http:<span class="sy0">//</span>nmap.org <span class="br0">&#41;</span> at <span class="nu0">2014</span>-<span class="nu0">12</span>-<span class="nu0">11</span> <span class="nu0">21</span>:<span class="nu0">26</span> GMT
+Nmap scan report <span class="kw1">for</span> nas.decepticons 10.0.1.12
+Host is up <span class="br0">&#40;</span>0.014s latency<span class="br0">&#41;</span>.
+&nbsp;
+PORT STATE SERVICE VERSION
+<span class="nu0">137</span><span class="sy0">/</span>udp open netbios-ns
+&nbsp;
+Host script results:
+<span class="sy0">|</span>_nbstat: NetBIOS name: STARSCREAM, NetBIOS user: unknown, NetBIOS MAC: unknown <span class="br0">&#40;</span>unknown<span class="br0">&#41;</span> 
+Nmap done: <span class="nu0">256</span> IP addresses <span class="br0">&#40;</span><span class="nu0">1</span> hosts up<span class="br0">&#41;</span> scanned <span class="kw1">in</span> <span class="nu0">28.74</span> seconds</pre>
+
+<p>
+如果开启Netbios服务,检查是否存在漏洞
+</p>
+<pre class="code bash"><span class="kw2">nmap</span> <span class="re5">--script-args</span>=<span class="re2">unsafe</span>=<span class="nu0">1</span> <span class="re5">--script</span> smb-check-vulns.nse <span class="re5">-p</span> <span class="nu0">445</span> 10.0.0.1
+&nbsp;
+Nmap scan report <span class="kw1">for</span> ie6winxp.decepticons <span class="br0">&#40;</span>10.0.1.1<span class="br0">&#41;</span>
+Host is up <span class="br0">&#40;</span>0.00026s latency<span class="br0">&#41;</span>.
+PORT STATE SERVICE
+<span class="nu0">445</span><span class="sy0">/</span>tcp open microsoft-ds
+Host script results:
+<span class="sy0">|</span> smb-check-vulns:
+<span class="sy0">|</span> MS08-067: VULNERABLE
+<span class="sy0">|</span> Conficker: Likely CLEAN
+<span class="sy0">|</span> regsvc DoS: NOT VULNERABLE
+<span class="sy0">|</span> SMBv2 DoS <span class="br0">&#40;</span>CVE-<span class="nu0">2009</span>-<span class="nu0">3103</span><span class="br0">&#41;</span>: NOT VULNERABLE
+<span class="sy0">|</span>_ MS07-029: NO SERVICE <span class="br0">&#40;</span>the Dns Server RPC service is inactive<span class="br0">&#41;</span>
+Nmap done: <span class="nu0">1</span> IP address <span class="br0">&#40;</span><span class="nu0">1</span> host up<span class="br0">&#41;</span> scanned <span class="kw1">in</span> <span class="nu0">5.45</span> seconds</pre>
+
+<p>
+根据扫描结果,发现存在MS08-067漏洞
+</p>
+
+</div>
+<!-- EDIT6 SECTION "5、例子" [9440-11076] -->
+<h3 class="sectionedit7" id="相关资源">6、相关资源</h3>
+<div class="level3">
+
+<p>
+<a href="http://drops.wooyun.org/tips/4333" class="urlextern" title="http://drops.wooyun.org/tips/4333"  rel="nofollow">Nmap速查手册</a>
+</p>
+
+<p>
+<a href="http://drops.wooyun.org/tips/2188" class="urlextern" title="http://drops.wooyun.org/tips/2188"  rel="nofollow">nmap脚本使用总结</a>
+</p>
+
+<p>
+<a href="http://drops.wooyun.org/tips/2002" class="urlextern" title="http://drops.wooyun.org/tips/2002"  rel="nofollow">NMAP 基础教程</a>
+</p>
+
+<p>
+<a href="http://drops.wooyun.org/tools/515" class="urlextern" title="http://drops.wooyun.org/tools/515"  rel="nofollow">Zmap详细用户手册和DDOS的可行性</a>
+</p>
+
+</div>
+<!-- EDIT7 SECTION "6、相关资源" [11077-] --></div>
+</body>
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/tools:nmap by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:25:26 GMT -->
+</html>

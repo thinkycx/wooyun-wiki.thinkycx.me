@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/android:client by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:02:01 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8" />
+  <title>android:client</title>
+<meta name="generator" content="DokuWiki"/>
+<meta name="robots" content="index,follow"/>
+<meta name="keywords" content="android,client"/>
+<link rel="search" type="application/opensearchdescription+xml" href="../../lib/exe/opensearch.php" title="WooYun WiKi"/>
+<link rel="start" href="../../index.html"/>
+<link rel="contents" href="../../android_clientdecf.html?do=index" title="网站地图"/>
+<link rel="alternate" type="application/rss+xml" title="最近更改" href="../../feed.php"/>
+<link rel="alternate" type="application/rss+xml" title="当前命名空间" href="../../feede659.php?mode=list&amp;ns=android"/>
+<link rel="alternate" type="text/html" title="纯HTML" href="android_client.html"/>
+<link rel="alternate" type="text/plain" title="Wiki Markup 语言" href="../raw/client.txt"/>
+<link rel="canonical" href="../../android_client.html"/>
+<link rel="stylesheet" type="text/css" href="../../lib/exe/css70b4.css?t=bootstrap3&amp;tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"/>
+<script type="text/javascript">/*<![CDATA[*/var NS='android';var JSINFO = {"id":"android:client","namespace":"android","plugin_codeprettify":{"loader_base":"\/lib\/plugins\/codeprettify\/google-code-prettify"}};
+/*!]]>*/</script>
+<script type="text/javascript" charset="utf-8" src="../../lib/exe/js1e16.php?tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"></script>
+<script type="text/javascript" charset="utf-8" src="../../lib/plugins/codeprettify/google-code-prettify/run_prettifyeb11.js?lang=css"></script>
+</head>
+<body>
+<div class="dokuwiki export">
+<!-- TOC START -->
+<div id="dw__toc">
+<h3 class="toggle">目录</h3>
+<div>
+
+<ul class="toc">
+<li class="level1"><div class="li"><a href="#客户端">客户端</a></div>
+<ul class="toc">
+<li class="clear">
+<ul class="toc">
+<li class="level3"><div class="li"><a href="#组件安全">组件安全</a></div></li>
+<li class="level3"><div class="li"><a href="#敏感信息">敏感信息</a></div></li>
+<li class="level3"><div class="li"><a href="#应用加固">应用加固</a></div></li>
+<li class="level3"><div class="li"><a href="#安全配置">安全配置</a></div></li>
+<li class="level3"><div class="li"><a href="#安全策略">安全策略</a></div></li>
+<li class="level3"><div class="li"><a href="#其它">其它</a></div></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<!-- TOC END -->
+
+<h1 class="sectionedit1" id="客户端">客户端</h1>
+<div class="level1">
+
+</div>
+<!-- EDIT1 SECTION "客户端" [1-26] -->
+<h3 class="sectionedit2" id="组件安全">组件安全</h3>
+<div class="level3">
+<ul>
+<li class="level1"><div class="li"> <a href="../../client_activity.html" class="wikilink1" title="client:activity">Activity</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="../../client_service.html" class="wikilink1" title="client:service">Service</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="../../client_broadcast.html" class="wikilink1" title="client:broadcast">Broadcast Reciever</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="../../client_provider.html" class="wikilink1" title="client:provider">Content Provider</a></div>
+</li>
+<li class="level1"><div class="li"> WebView <a href="http://drops.wooyun.org/papers/548" class="urlextern" title="http://drops.wooyun.org/papers/548"  rel="nofollow">RCE</a> <a href="http://drops.wooyun.org/tools/3186" class="urlextern" title="http://drops.wooyun.org/tools/3186"  rel="nofollow">UXSS</a></div>
+</li>
+</ul>
+
+</div>
+<!-- EDIT2 SECTION "组件安全" [27-297] -->
+<h3 class="sectionedit3" id="敏感信息">敏感信息</h3>
+<div class="level3">
+<ul>
+<li class="level1"><div class="li"> <a href="http://drops.wooyun.org/tips/3812" class="urlextern" title="http://drops.wooyun.org/tips/3812"  rel="nofollow">logcat</a></div>
+</li>
+<li class="level1"><div class="li"> private key</div>
+</li>
+<li class="level1"><div class="li"> 其它文件</div>
+</li>
+<li class="level1"><div class="li"> 内部存储</div>
+</li>
+</ul>
+
+</div>
+<!-- EDIT3 SECTION "敏感信息" [298-419] -->
+<h3 class="sectionedit4" id="应用加固">应用加固</h3>
+<div class="level3">
+<ul>
+<li class="level1"><div class="li"> 代码混淆/花指令</div>
+</li>
+<li class="level1"><div class="li"> 反编译保护</div>
+</li>
+<li class="level1"><div class="li"> 注入<a href="http://drops.wooyun.org/papers/6045" class="urlextern" title="http://drops.wooyun.org/papers/6045"  rel="nofollow">Smali 注入</a></div>
+</li>
+<li class="level1"><div class="li"> 完整性验证，防篡改</div>
+</li>
+</ul>
+
+</div>
+<!-- EDIT4 SECTION "应用加固" [420-584] -->
+<h3 class="sectionedit5" id="安全配置">安全配置</h3>
+<div class="level3">
+<ul>
+<li class="level1"><div class="li"> AllowBackup</div>
+</li>
+<li class="level1"><div class="li"> debug</div>
+</li>
+<li class="level1"><div class="li"> 第三方SDK</div>
+</li>
+<li class="level1"><div class="li"> sdcard加载dex</div>
+</li>
+<li class="level1"><div class="li"> 编译api/兼容api</div>
+</li>
+<li class="level1"><div class="li"> so读写权限</div>
+</li>
+<li class="level1"><div class="li"> Permission and Protection Level</div>
+</li>
+<li class="level1"><div class="li"> socket接口</div>
+</li>
+</ul>
+
+</div>
+<!-- EDIT5 SECTION "安全配置" [585-766] -->
+<h3 class="sectionedit6" id="安全策略">安全策略</h3>
+<div class="level3">
+<ul>
+<li class="level1"><div class="li"> 键盘劫持</div>
+</li>
+<li class="level1"><div class="li"> 屏幕劫持</div>
+</li>
+<li class="level1"><div class="li"> 更新包传输/存储/验证</div>
+</li>
+</ul>
+
+</div>
+<!-- EDIT6 SECTION "安全策略" [767-856] -->
+<h3 class="sectionedit7" id="其它">其它</h3>
+<div class="level3">
+<ul>
+<li class="level1"><div class="li"> 弱本地加密</div>
+</li>
+</ul>
+
+</div>
+<!-- EDIT7 SECTION "其它" [857-] --></div>
+</body>
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/android:client by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:02:01 GMT -->
+</html>

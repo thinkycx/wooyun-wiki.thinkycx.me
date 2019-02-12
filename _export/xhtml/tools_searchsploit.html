@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/tools:searchsploit by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:31:19 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8" />
+  <title>tools:searchsploit</title>
+<meta name="generator" content="DokuWiki"/>
+<meta name="robots" content="index,follow"/>
+<meta name="keywords" content="tools,searchsploit"/>
+<link rel="search" type="application/opensearchdescription+xml" href="../../lib/exe/opensearch.php" title="WooYun WiKi"/>
+<link rel="start" href="../../index.html"/>
+<link rel="contents" href="../../tools_searchsploitdecf.html?do=index" title="网站地图"/>
+<link rel="alternate" type="application/rss+xml" title="最近更改" href="../../feed.php"/>
+<link rel="alternate" type="application/rss+xml" title="当前命名空间" href="../../feed022e.php?mode=list&amp;ns=tools"/>
+<link rel="alternate" type="text/html" title="纯HTML" href="tools_searchsploit.html"/>
+<link rel="alternate" type="text/plain" title="Wiki Markup 语言" href="../raw/searchsploit.txt"/>
+<link rel="canonical" href="../../tools_searchsploit.html"/>
+<link rel="stylesheet" type="text/css" href="../../lib/exe/css70b4.css?t=bootstrap3&amp;tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"/>
+<script type="text/javascript">/*<![CDATA[*/var NS='tools';var JSINFO = {"id":"tools:searchsploit","namespace":"tools","plugin_codeprettify":{"loader_base":"\/lib\/plugins\/codeprettify\/google-code-prettify"}};
+/*!]]>*/</script>
+<script type="text/javascript" charset="utf-8" src="../../lib/exe/js1e16.php?tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"></script>
+<script type="text/javascript" charset="utf-8" src="../../lib/plugins/codeprettify/google-code-prettify/run_prettifyeb11.js?lang=css"></script>
+</head>
+<body>
+<div class="dokuwiki export">
+<!-- TOC START -->
+<div id="dw__toc">
+<h3 class="toggle">目录</h3>
+<div>
+
+<ul class="toc">
+<li class="level1"><div class="li"><a href="#searchsploit使用说明">searchsploit使用说明</a></div>
+<ul class="toc">
+<li class="clear">
+<ul class="toc">
+<li class="level3"><div class="li"><a href="#工具简介">1、工具简介</a></div></li>
+<li class="level3"><div class="li"><a href="#使用方法">2、使用方法</a></div></li>
+<li class="level3"><div class="li"><a href="#使用示范">3、使用示范</a></div></li>
+<li class="level3"><div class="li"><a href="#相关资源">4、相关资源</a></div></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<!-- TOC END -->
+
+<h1 class="sectionedit1" id="searchsploit使用说明">searchsploit使用说明</h1>
+<div class="level1">
+
+</div>
+<!-- EDIT1 SECTION "searchsploit使用说明" [1-40] -->
+<h3 class="sectionedit2" id="工具简介">1、工具简介</h3>
+<div class="level3">
+<hr />
+
+<p>
+这个项目是由Offensive Security发起的、基于<a href="http://www.exploit-db.com/" class="urlextern" title="http://www.exploit-db.com"  rel="nofollow">exploit database</a>官方漏洞数据库源的漏洞搜索工具，可以直接在终端搜索漏洞相关信息，如漏洞简介和漏洞验证/利用脚本。
+</p>
+
+</div>
+<!-- EDIT2 SECTION "1、工具简介" [41-318] -->
+<h3 class="sectionedit3" id="使用方法">2、使用方法</h3>
+<div class="level3">
+<hr />
+
+<p>
+在kali终端直接输入“searchsploit -h”可以查看其相关参数用法：
+</p>
+<pre class="code bash"><span class="co4">light@kali:~# </span>searchsploit <span class="re5">-h</span>
+Usage  : searchsploit <span class="br0">&#91;</span>OPTIONS<span class="br0">&#93;</span> term1 <span class="br0">&#91;</span>term2<span class="br0">&#93;</span> ... <span class="br0">&#91;</span>termN<span class="br0">&#93;</span>
+Example: searchsploit oracle windows <span class="kw3">local</span>
+&nbsp;
+=========
+ OPTIONS
+=========
+ <span class="re5">-c</span>         - Perform case-sensitive searches; by default,
+              searches will try to be greedy
+ <span class="re5">-v</span>         - By setting verbose output, description lines
+              are allowed to overflow their columns
+ -h, <span class="re5">--help</span> - Show <span class="kw3">help</span> <span class="kw2">screen</span>
+&nbsp;
+NOTES:
+ - Use any number of search terms you would like <span class="br0">&#40;</span>minimum: <span class="nu0">1</span><span class="br0">&#41;</span>
+ - Search terms are not <span class="kw1">case</span> sensitive, and order is irrelevant</pre>
+
+<p>
+参数解释：
+</p>
+<ul>
+<li class="level1"><div class="li"> -c : 搜索是大小写敏感</div>
+</li>
+<li class="level1"><div class="li"> -v : 详细输出</div>
+</li>
+</ul>
+
+</div>
+<!-- EDIT3 SECTION "2、使用方法" [319-1071] -->
+<h3 class="sectionedit4" id="使用示范">3、使用示范</h3>
+<div class="level3">
+<hr />
+
+<p>
+比如我们要搜索windows上iis服务的远程漏洞，可以使用以下命令：
+</p>
+<pre class="code bash"><span class="co4">light@kali:~# </span>searchsploit windows iis remote
+ Description                                    Path
+<span class="re5">---------------------------------------------</span> <span class="re5">----------------------------------</span>
+MS Windows IIS <span class="nu0">5.0</span> - <span class="nu0">5.1</span> - Remote Denial of  <span class="sy0">|</span> <span class="sy0">/</span>windows<span class="sy0">/</span>dos<span class="sy0">/</span><span class="nu0">35</span>.c
+MS Windows Media Services <span class="br0">&#40;</span>nsiislog.dll<span class="br0">&#41;</span> Rem <span class="sy0">|</span> <span class="sy0">/</span>windows<span class="sy0">/</span>remote<span class="sy0">/</span><span class="nu0">56</span>.c
+MS Windows IIS SSL Remote Denial of Service  <span class="sy0">|</span> <span class="sy0">/</span>windows<span class="sy0">/</span>dos<span class="sy0">/</span><span class="nu0">176</span>.c
+MS IIS <span class="nu0">4.0</span><span class="sy0">/</span><span class="nu0">5.0</span> and PWS Extended Unicode Dire <span class="sy0">|</span> <span class="sy0">/</span>windows<span class="sy0">/</span>remote<span class="sy0">/</span><span class="nu0">189</span>.c
+MS IIS <span class="nu0">4.0</span><span class="sy0">/</span><span class="nu0">5.0</span> and PWS Extended Unicode Dire <span class="sy0">|</span> <span class="sy0">/</span>windows<span class="sy0">/</span>remote<span class="sy0">/</span><span class="nu0">190</span>.c
+MS IIS <span class="nu0">4.0</span><span class="sy0">/</span><span class="nu0">5.0</span> and PWS Extended Unicode Dire <span class="sy0">|</span> <span class="sy0">/</span>windows<span class="sy0">/</span>remote<span class="sy0">/</span><span class="nu0">191</span>.pl
+MS IIS <span class="nu0">4.0</span><span class="sy0">/</span><span class="nu0">5.0</span> and PWS Extended Unicode Dire <span class="sy0">|</span> <span class="sy0">/</span>windows<span class="sy0">/</span>remote<span class="sy0">/</span><span class="nu0">192</span>.pl
+MS Windows IIS <span class="nu0">5.0</span> SSL Remote buffer overflo <span class="sy0">|</span> <span class="sy0">/</span>windows<span class="sy0">/</span>remote<span class="sy0">/</span><span class="nu0">275</span>.c
+MS Windows IIS <span class="nu0">5.0</span> <span class="br0">&#40;</span><span class="nu0">500</span>-<span class="nu0">100</span>.asp<span class="br0">&#41;</span> Server Name <span class="sy0">|</span> <span class="sy0">/</span>windows<span class="sy0">/</span>remote<span class="sy0">/</span><span class="nu0">1178</span>.c
+MS Windows IIS SA WebAgent <span class="nu0">5.2</span><span class="sy0">/</span><span class="nu0">5.3</span> Redirect  <span class="sy0">|</span> <span class="sy0">/</span>windows<span class="sy0">/</span>remote<span class="sy0">/</span><span class="nu0">1260</span>.pm
+Microsoft IIS <span class="nu0">6.0</span> <span class="br0">&#40;</span><span class="sy0">/</span>AUX<span class="sy0">/</span>.aspx<span class="br0">&#41;</span> Remote Denial <span class="sy0">|</span> <span class="sy0">/</span>windows<span class="sy0">/</span>dos<span class="sy0">/</span><span class="nu0">3965</span>.pl
+Microsoft IIS <span class="sy0">&lt;</span>= <span class="nu0">5.1</span> Hit Highlighting Authen <span class="sy0">|</span> <span class="sy0">/</span>windows<span class="sy0">/</span>remote<span class="sy0">/</span><span class="nu0">4016</span>.sh
+Oracle WebLogic IIS connector JSESSIONID Rem <span class="sy0">|</span> <span class="sy0">/</span>windows<span class="sy0">/</span>remote<span class="sy0">/</span><span class="nu0">8336</span>.pl
+Microsoft IIS <span class="nu0">6.0</span> WebDAV Remote Authenticati <span class="sy0">|</span> <span class="sy0">/</span>windows<span class="sy0">/</span>remote<span class="sy0">/</span><span class="nu0">8704</span>.txt
+Microsoft IIS <span class="nu0">6.0</span> WebDAV Remote Authenticati <span class="sy0">|</span> <span class="sy0">/</span>windows<span class="sy0">/</span>remote<span class="sy0">/</span><span class="nu0">8754</span>.patch
+Microsoft IIS <span class="nu0">6.0</span> WebDAV Remote Authenticati <span class="sy0">|</span> <span class="sy0">/</span>windows<span class="sy0">/</span>remote<span class="sy0">/</span><span class="nu0">8765</span>.php
+Microsoft IIS <span class="nu0">6.0</span> WebDAV Remote Authenticati <span class="sy0">|</span> <span class="sy0">/</span>windows<span class="sy0">/</span>remote<span class="sy0">/</span><span class="nu0">8806</span>.pl
+Microsoft IIS <span class="nu0">5.0</span><span class="sy0">/</span><span class="nu0">6.0</span> FTP Server Remote Stac <span class="sy0">|</span> <span class="sy0">/</span>windows<span class="sy0">/</span>remote<span class="sy0">/</span><span class="nu0">9541</span>.pl
+Microsoft IIS <span class="nu0">5.0</span> FTP Server Remote Stack Ov <span class="sy0">|</span> <span class="sy0">/</span>windows<span class="sy0">/</span>remote<span class="sy0">/</span><span class="nu0">9559</span>.pl
+Microsoft IIS ASP Multiple Extensions Securi <span class="sy0">|</span> <span class="sy0">/</span>windows<span class="sy0">/</span>remote<span class="sy0">/</span><span class="nu0">10791</span>.py
+Microsoft Internet Information Services <span class="br0">&#40;</span>IIS <span class="sy0">|</span> <span class="sy0">/</span>windows<span class="sy0">/</span>remote<span class="sy0">/</span><span class="nu0">14179</span>.txt
+Windows <span class="nu0">7</span> IIS7.5 FTPSVC UNAUTH<span class="st_h">'D Remote DoS  | /windows/dos/15803.py
+Microsoft IIS ISAPI w3who.dll Query String O | /windows/remote/16354.rb
+Microsoft IIS ISAPI nsiislog.dll ISAPI POST  | /windows/remote/16355.rb
+....</span></pre>
+
+</div>
+<!-- EDIT4 SECTION "3、使用示范" [1072-3084] -->
+<h3 class="sectionedit5" id="相关资源">4、相关资源</h3>
+<div class="level3">
+<hr />
+
+<p>
+<a href="https://github.com/offensive-security/exploit-database" class="urlextern" title="https://github.com/offensive-security/exploit-database"  rel="nofollow">searchsploit git</a>
+</p>
+
+<p>
+<a href="https://www.exploit-db.com/" class="urlextern" title="https://www.exploit-db.com/"  rel="nofollow">exploit-db官网</a>
+</p>
+
+</div>
+<!-- EDIT5 SECTION "4、相关资源" [3085-] --></div>
+</body>
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/tools:searchsploit by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:31:19 GMT -->
+</html>

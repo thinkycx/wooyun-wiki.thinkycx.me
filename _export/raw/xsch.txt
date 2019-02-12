@@ -1,0 +1,81 @@
+====== 1.相关背景介绍======
+
+XSCH (Cross Site Content Hijacking）可翻译为跨站内容劫持，它和XSS有异曲同工之妙。它可以劫持获取用户敏感数据、劫持用户发起任意请求，是XSS和CSRF的一种变体，它和XSS比略显鸡肋，比CSRF更强大。不过，对于用户，我觉得这三者的危害是相同的，他们都可以危及到用户的数据或敏感信息。
+ 
+
+
+
+
+====== 2.成因======
+
+由于网站开发者在使用flash、Silverlight等进行开发的过程中的疏忽，没有对跨域策略文件（[[http://stackoverflow.com/tags/crossdomain.xml/info|crossdomain.xml]]）进行正确的配置导致问题产生。  
+例如：
+  * <cross-domain-policy><allow-access-from domain="*"/></cross-domain-policy>
+
+因为跨域策略文件配置为*，也就指任意域的flash都可以与它交互，导致可以发起请求、获取数据。
+
+
+
+
+ ====== 3.攻击方式及危害 ======
+
+flash在配置＊的情况下，可利用此[[https://github.com/nccgroup/CrossSiteContentHijacking|POC]]进行验证是否存在XSCH
+
+
+**深入：**
+在很多情况下，一些比较敏感的域都严格配置了自己的信任域
+例如：
+  * <cross-domain-policy>
+  * <allow-access-from domain="＊.test.com"/>
+  * <allow-access-from domain="＊.test.com.cn"/>
+  * <allow-access-from domain="＊.test.cn"/>
+  * </cross-domain-policy>
+这样似乎看上去很安全，只有信任域的flash文件才能向它发送请求，但是我们可以上传一个flash文件到其中任意一个域下，当然直接上传flash似乎比较难，但是我们可以上传一个后缀是jpg但内容却是flash的文件，因为浏览器解析flash文件的时候和后缀并没有关系，而是和它的执行方式有关系，我们只要以falsh的形式引用它即可执行。
+当我们可以利用flash进行跨域通讯的时候，用户的数据就不再安全，聪明的攻击者可以构造任意请求然后埋好陷阱等待者受害者。
+
+
+
+======  4.实际案例 ======
+**0x_Jin:wooyun-2010-088845：** [[http://wooyun.org/bugs/wooyun-2010-088845|http://wooyun.org/bugs/wooyun-2010-088845]]
+
+sohu某站上传过滤不严导致可劫持他人账号进行敏感操作
+
+**Jeary:wooyun-2010-0116384：**[[http://wooyun.org/bugs/wooyun-2010-0116384|http://wooyun.org/bugs/wooyun-2010-0116384]]
+
+搜狐焦点旗下搜狐家居可劫持任意账号（flash劫持案例） 
+
+**Jeary:wooyun-2010-0116229：**[[http://www.wooyun.org/bugs/wooyun-2010-0116229|http://www.wooyun.org/bugs/wooyun-2010-0116229]]
+
+搜狐视频劫持任意帐号（需交互）
+ 
+
+
+====== 5. 修复方案======
+1.严格配置信任域，尽量缩小域范围，如只配置一个域，i.test.com
+
+2.如果需要通讯的域太多，严格验证上传的文件内容
+
+3.请求验证token
+
+
+
+
+
+
+====== 6.相关资源 ======
+[[http://www.freebuf.com/articles/web/35353.html|http://www.freebuf.com/articles/web/35353.html]]
+
+[[http://www.freebuf.com/articles/web/37432.html|http://www.freebuf.com/articles/web/37432.html]]
+
+[[https://github.com/gursev/flash-xdomain-xploit|https://github.com/gursev/flash-xdomain-xploit]]
+
+[[https://github.com/nccgroup/CrossSiteContentHijacking|https://github.com/nccgroup/CrossSiteContentHijacking]]
+
+[[http://blog.knownsec.com/2014/06/flashupload_csrf_attacking/|http://blog.knownsec.com/2014/06/flashupload_csrf_attacking/]]
+
+[[http://jeary.org/?post=54|http://jeary.org/?post=54]]
+
+
+
+
+ --- //[[root@jeary.org|jeary]] 2015/07/30 11:22//

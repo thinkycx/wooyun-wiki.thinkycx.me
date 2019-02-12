@@ -1,0 +1,6 @@
+====== SMB分析 ======
+
+  * [[tools:acccheck|acccheck]]
+  * [[tools:nbtscan|nbtscan]]
+  * [[tools:nmap|nmap]]
+  * [[tools:zenmap|zenmap]]

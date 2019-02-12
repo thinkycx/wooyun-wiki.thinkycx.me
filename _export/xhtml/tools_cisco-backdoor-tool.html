@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/tools:cisco-backdoor-tool by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:26:51 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8" />
+  <title>tools:cisco-backdoor-tool</title>
+<meta name="generator" content="DokuWiki"/>
+<meta name="robots" content="index,follow"/>
+<meta name="keywords" content="tools,cisco-backdoor-tool"/>
+<link rel="search" type="application/opensearchdescription+xml" href="../../lib/exe/opensearch.php" title="WooYun WiKi"/>
+<link rel="start" href="../../index.html"/>
+<link rel="contents" href="../../tools_cisco-backdoor-tooldecf.html?do=index" title="网站地图"/>
+<link rel="alternate" type="application/rss+xml" title="最近更改" href="../../feed.php"/>
+<link rel="alternate" type="application/rss+xml" title="当前命名空间" href="../../feed022e.php?mode=list&amp;ns=tools"/>
+<link rel="alternate" type="text/html" title="纯HTML" href="tools_cisco-backdoor-tool.html"/>
+<link rel="alternate" type="text/plain" title="Wiki Markup 语言" href="../raw/cisco-backdoor-tool.txt"/>
+<link rel="canonical" href="../../tools_cisco-backdoor-tool.html"/>
+<link rel="stylesheet" type="text/css" href="../../lib/exe/css70b4.css?t=bootstrap3&amp;tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"/>
+<script type="text/javascript">/*<![CDATA[*/var NS='tools';var JSINFO = {"id":"tools:cisco-backdoor-tool","namespace":"tools","plugin_codeprettify":{"loader_base":"\/lib\/plugins\/codeprettify\/google-code-prettify"}};
+/*!]]>*/</script>
+<script type="text/javascript" charset="utf-8" src="../../lib/exe/js1e16.php?tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"></script>
+<script type="text/javascript" charset="utf-8" src="../../lib/plugins/codeprettify/google-code-prettify/run_prettifyeb11.js?lang=css"></script>
+</head>
+<body>
+<div class="dokuwiki export">
+<!-- TOC START -->
+<div id="dw__toc">
+<h3 class="toggle">目录</h3>
+<div>
+
+<ul class="toc">
+<li class="level1"><div class="li"><a href="#cve-2014-3393说明">CVE-2014-3393说明</a></div>
+<ul class="toc">
+<li class="clear">
+<ul class="toc">
+<li class="level3"><div class="li"><a href="#工具_漏洞简介">1、工具&amp;漏洞简介</a></div></li>
+<li class="level3"><div class="li"><a href="#使用方法">2、使用方法</a></div></li>
+<li class="level3"><div class="li"><a href="#相关资源">3、相关资源</a></div></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<!-- TOC END -->
+
+<h1 class="sectionedit1" id="cve-2014-3393说明">CVE-2014-3393说明</h1>
+<div class="level1">
+
+</div>
+<!-- EDIT1 SECTION "CVE-2014-3393说明" [1-35] -->
+<h3 class="sectionedit2" id="工具_漏洞简介">1、工具&amp;漏洞简介</h3>
+<div class="level3">
+<hr />
+
+<p>
+Cisco Adaptive Security Appliance (ASA) Software在Clientless SSL VPN入口自定义框架在实现上存在安全漏洞，未经身份验证的远程攻击者可利用此漏洞修改Clientless SSL VPN入口内容，导致窃取凭证、跨站脚本及其他攻击。此漏洞源于没有正确实现Clientless SSL VPN入口自定义框架内的身份验证检查。
+</p>
+
+<p>
+此工具可以用于在思科VPN的登录入口插入代码用于记录账号密码等。
+</p>
+
+</div>
+<!-- EDIT2 SECTION "1、工具&漏洞简介" [36-535] -->
+<h3 class="sectionedit3" id="使用方法">2、使用方法</h3>
+<div class="level3">
+<hr />
+
+<p>
+1.下载Burp的对应请求包<a href="../../_media/cisco_asa_backdoor.rar_%3b" class="media mediafile mf_rar" title="tools:cisco_asa_backdoor.rar (5 KB)">cisco_asa_backdoor.rar</a>
+</p>
+
+<p>
+2.解压后，在Burp=⇒restore 导入请求包
+</p>
+
+<p>
+3.导入后会出现4个repeater请求。
+</p>
+
+<p>
+4.修改各个请求包的target和包内Host，起一个请求包的“auth-page%2Ftitle-panel%2Ftext=”为缺陷位置可插入恶意代码。
+</p>
+
+<p>
+5.发送第一个请求，如返回302，则说明存在漏洞并可被利用。
+</p>
+
+<p>
+6.依次请求完最后三个数据包，查看页面是否被插入代码。
+</p>
+
+</div>
+<!-- EDIT3 SECTION "2、使用方法" [536-1033] -->
+<h3 class="sectionedit4" id="相关资源">3、相关资源</h3>
+<div class="level3">
+<hr />
+
+<p>
+<a href="http://drops.wooyun.org/papers/3451" class="urlextern" title="http://drops.wooyun.org/papers/3451"  rel="nofollow">drops.wooyun.org</a>
+</p>
+
+</div>
+<!-- EDIT4 SECTION "3、相关资源" [1034-] --></div>
+</body>
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/tools:cisco-backdoor-tool by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:26:51 GMT -->
+</html>

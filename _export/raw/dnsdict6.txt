@@ -1,0 +1,74 @@
+====== dnsdict6使用说明 ======
+
+==== 1、工具简介 ====
+
+----
+由gnucitizen.org开发，一款可以使用内置或指定字典的基于dnsmap的DNS枚举工具。
+
+==== 2、使用方法 ====
+
+----
+
+终端直接输入“dnsdict6 -h”可以查看其相关参数用法：
+<code bash>
+light@kali:~# dnsdict6 -h
+dnsdict6 v2.5 (c) 2013 by van Hauser / THC <vh@thc.org> www.thc.org
+
+Syntax: dnsdict6 [-d4] [-s|-m|-l|-x|-u] [-t THREADS] [-D] domain [dictionary-file]
+
+Enumerates a domain for DNS entries, it uses a dictionary file if supplied
+or a built-in list otherwise. This tool is based on dnsmap by gnucitizen.org.
+
+Options:
+ -4      do also dump IPv4 addresses
+ -t NO   specify the number of threads to use (default: 8, max: 32).
+ -D      dump the selected built-in wordlist, no scanning.
+ -d      display IPv6 information on NS and MX DNS domain information.
+ -S      perform SRV service name guessing
+ -[smlxu] choose the dictionary size by -s(mall=100), -m(edium=1419) (DEFAULT)
+           -l(arge=2601), -x(treme=5886) or -u(ber=16724)
+
+</code>
+语法：dnsdict6 [-d46] [-s|-m|-l|-x] [-t THREADS] [-D] domain [dictionary-file]
+
+参数解释：
+  * -4：显示ipv4
+  * -t：指定要使用的线程，默认线程为8，最大32
+  * -D：只显示字典不扫描
+  * -d：显示在DNS服务器上的NS、MX记录的ipv6信息
+  * －[smlx] 选择字典大小［内置的] -s 小型是50条 －m 中等是796条[默认] -l 大型1416条 －x 最大3211条
+==== 3、使用示范 ====
+
+----
+查询[[http://1ight.co|1ight.co]]的DNS信息：
+<code bash>
+light@kali:~# dnsdict6 -d46 -t 16 -d -m 1ight.co
+Starting DNS enumeration work on 1ight.co. ...
+Gathering NS and MX information...
+NS of 1ight.co. is f1g1ns1.dnspod.net. => 113.108.80.138
+NS of 1ight.co. is f1g1ns1.dnspod.net. => 111.30.132.180
+NS of 1ight.co. is f1g1ns1.dnspod.net. => 125.39.208.193
+NS of 1ight.co. is f1g1ns1.dnspod.net. => 180.153.9.189
+NS of 1ight.co. is f1g1ns1.dnspod.net. => 182.140.167.166
+NS of 1ight.co. is f1g1ns2.dnspod.net. => 115.236.137.40
+NS of 1ight.co. is f1g1ns2.dnspod.net. => 115.236.151.191
+NS of 1ight.co. is f1g1ns2.dnspod.net. => 112.90.82.194
+NS of 1ight.co. is f1g1ns2.dnspod.net. => 101.226.30.224
+NS of 1ight.co. is f1g1ns2.dnspod.net. => 182.140.167.188
+MX of 1ight.co. is mxbiz1.qq.com. => 183.60.15.245
+MX of 1ight.co. is mxbiz1.qq.com. => 183.57.48.34
+MX of 1ight.co. is mxbiz2.qq.com. => 183.60.15.245
+MX of 1ight.co. is mxbiz2.qq.com. => 183.57.48.34
+
+Starting enumerating 1ight.co. - creating 16 threads for 1419 words...
+Estimated time to completion: 1 to 1 minutes
+www.1ight.co. => 112.74.102.78
+
+Found 1 domain name and 1 unique ipv4 address for 1ight.co.
+</code>
+
+==== 4、相关资源 ====
+
+----
+
+[[http://www.gnucitizen.org/|gnucitizen.org]]

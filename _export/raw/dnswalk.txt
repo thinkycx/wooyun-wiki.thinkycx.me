@@ -1,0 +1,45 @@
+====== Dnswalk使用说明 ======
+
+==== 1、工具简介 ====
+
+----
+有时候可能需要了解当前域名所对应的所有二级域名，DNSWALK就是利用DNS区域传输技术来获取DNS对应域名A记录的小工具。
+
+==== 2、使用方法 ====
+
+----
+kali终端直接输入“dnswalk --help”可以查看其相关参数用法：
+<code bash>
+light@kali:~# dnswalk --help
+
+Usage: dnswalk [-OPTIONS [-MORE_OPTIONS]] [--] [PROGRAM_ARG1 ...]
+
+The following single-character options are accepted:
+	With arguments: -D
+	Boolean (without arguments): -r -f -i -a -d -m -F -l
+
+Options may be merged together.  -- stops processing of options.
+Space is not required between options and their arguments.
+
+</code>
+
+注意：域名后面有一个点
+
+ 
+==== 3、使用示范 ====
+
+----
+查询[[http://1ight.co|1ight.co]]的域名A记录信息：
+<code bash>
+light@kali:~# dnswalk 1ight.co.
+Checking 1ight.co.
+Getting zone transfer of 1ight.co. from f1g1ns1.dnspod.net...failed
+FAIL: Zone transfer of 1ight.co. from f1g1ns1.dnspod.net failed: connection failed
+Getting zone transfer of 1ight.co. from f1g1ns2.dnspod.net...
+....
+</code>
+
+==== 4、相关资源 ====
+
+----
+暂无

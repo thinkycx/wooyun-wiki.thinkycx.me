@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/defence:technical by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:25:19 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8" />
+  <title>defence:technical</title>
+<meta name="generator" content="DokuWiki"/>
+<meta name="robots" content="index,follow"/>
+<meta name="keywords" content="defence,technical"/>
+<link rel="search" type="application/opensearchdescription+xml" href="../../lib/exe/opensearch.php" title="WooYun WiKi"/>
+<link rel="start" href="../../index.html"/>
+<link rel="contents" href="../../defence_technicaldecf.html?do=index" title="网站地图"/>
+<link rel="alternate" type="application/rss+xml" title="最近更改" href="../../feed.php"/>
+<link rel="alternate" type="application/rss+xml" title="当前命名空间" href="../../feed6ee0.php?mode=list&amp;ns=defence"/>
+<link rel="alternate" type="text/html" title="纯HTML" href="defence_technical.html"/>
+<link rel="alternate" type="text/plain" title="Wiki Markup 语言" href="../raw/technical.txt"/>
+<link rel="canonical" href="../../defence_technical.html"/>
+<link rel="stylesheet" type="text/css" href="../../lib/exe/css70b4.css?t=bootstrap3&amp;tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"/>
+<script type="text/javascript">/*<![CDATA[*/var NS='defence';var JSINFO = {"id":"defence:technical","namespace":"defence","plugin_codeprettify":{"loader_base":"\/lib\/plugins\/codeprettify\/google-code-prettify"}};
+/*!]]>*/</script>
+<script type="text/javascript" charset="utf-8" src="../../lib/exe/js1e16.php?tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"></script>
+<script type="text/javascript" charset="utf-8" src="../../lib/plugins/codeprettify/google-code-prettify/run_prettifyeb11.js?lang=css"></script>
+</head>
+<body>
+<div class="dokuwiki export">
+<!-- TOC START -->
+<div id="dw__toc">
+<h3 class="toggle">目录</h3>
+<div>
+
+<ul class="toc">
+<li class="level1"><div class="li"><a href="#技术控制">技术控制</a></div>
+<ul class="toc">
+<li class="clear">
+<ul class="toc">
+<li class="level3"><div class="li"><a href="#生产环境">1、生产环境</a></div></li>
+<li class="level3"><div class="li"><a href="#办公环境">2、办公环境</a></div></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<!-- TOC END -->
+
+<h1 class="sectionedit1" id="技术控制">技术控制</h1>
+<div class="level1">
+
+</div>
+<!-- EDIT1 SECTION "技术控制" [1-28] -->
+<h3 class="sectionedit2" id="生产环境">1、生产环境</h3>
+<div class="level3">
+<hr />
+
+</div>
+
+<h4 id="安全开发">1.1 安全开发</h4>
+<div class="level4">
+
+<p>
+应用程序和计算机系统开发的首要目的往往是满足功能需求，而非安全。为了满足这两方面的需求，在设计和开发时必须同时考虑安全性和功能性。安全应该交织在产品的核心之中，并在各个层面提供保护。相对于在产品与其他应用程序集成时再开发可能影响总体功能和留下安全漏洞的前端或者包装程序，在设计之初就考虑进安全因素的方法要好得多。
+</p>
+
+<p>
+软件开发生命周期（software development life cycle，SDLC）是通过可重复和可预测的流程来帮助确保满足功能、成本、质量、交付周期的需求。
+</p>
+
+<p>
+安全计划应该尽量在生命周期的各个阶段予以实施，一般分为以下三个阶段：
+</p>
+<ul>
+<li class="level1"><div class="li">前期：制定基线，参考编程语言（php、java等）的安全编写规范（如owasp安全编码指南等）、参考app安全设计标准</div>
+</li>
+<li class="level1"><div class="li">中期：工具+人工的白盒代码审计</div>
+</li>
+<li class="level1"><div class="li">后期：系统正式上线前进行软件功能测试和黑盒渗透测试</div>
+</li>
+</ul>
+
+</div>
+
+<h4 id="安全运维">1.2 安全运维</h4>
+<div class="level4">
+
+<p>
+安全运维是为保障网络、计算机系统、应用程序和环境以安全和受保护的方式运转。
+</p>
+
+<p>
+不管是自建IDC还是部署到公有云平台，我们都应该关注以下几个方面的安全控制：
+</p>
+<ul>
+<li class="level1"><div class="li"> 安全域划分（vlan隔离等）</div>
+</li>
+<li class="level1"><div class="li"> 安全检测（定期的漏洞扫描、渗透测试等）</div>
+</li>
+<li class="level1"><div class="li"> 安全加固（系统、中间件、数据库等安全加固）</div>
+</li>
+<li class="level1"><div class="li"> 补丁管理（windows补丁等集中自动化管理）</div>
+</li>
+<li class="level1"><div class="li"> 入侵检测（部署软、硬件IDS、IPS，如<a href="http://drops.wooyun.org/tips/636" class="urlextern" title="http://drops.wooyun.org/tips/636"  rel="nofollow">OSSEC</a>、硬件IDS等）</div>
+</li>
+<li class="level1"><div class="li"> 访问控制（IAM策略、部署堡垒机等）</div>
+</li>
+<li class="level1"><div class="li"> 服务监控（网络、系统异常时系统自动短信通知管理员等机制）</div>
+</li>
+<li class="level1"><div class="li"> 日志集中管理（部署SOC等设备）</div>
+</li>
+<li class="level1"><div class="li"> 抗DDOS（使用CDN缓解DDOS、预算范围内加大带宽等措施）</div>
+</li>
+</ul>
+
+<p>
+如果公有云平台提供部分安全控制措施，可以结合其提供的安全能力与自身需求相结合。
+</p>
+
+</div>
+<!-- EDIT2 SECTION "1、生产环境" [29-2099] -->
+<h3 class="sectionedit3" id="办公环境">2、办公环境</h3>
+<div class="level3">
+<hr />
+
+<p>
+办公环境的安全一般主要关注边界安全、终端安全、移动设备安全及OA服务域的安全。
+</p>
+
+</div>
+
+<h4 id="边界安全">2.1 边界安全</h4>
+<div class="level4">
+
+<p>
+边界防护一般可以采取以下几种控制措施：
+</p>
+<ul>
+<li class="level1"><div class="li"> 防火墙（传统防护墙、WAF等）</div>
+</li>
+<li class="level1"><div class="li"> VPN</div>
+</li>
+<li class="level1"><div class="li"> 入侵检测（IDS、IPS、蜜罐等）</div>
+</li>
+<li class="level1"><div class="li"> 上网行为审计</div>
+</li>
+</ul>
+
+</div>
+
+<h4 id="终端安全">2.2 终端安全</h4>
+<div class="level4">
+
+<p>
+终端防护一般可以采取以下几种控制措施：
+</p>
+<ul>
+<li class="level1"><div class="li"> AD策略</div>
+</li>
+<li class="level1"><div class="li"> 终端管理（杀毒软件、安全软件部署）</div>
+</li>
+<li class="level1"><div class="li"> 网络准入控制（NAC）</div>
+</li>
+</ul>
+
+</div>
+
+<h4 id="移动设备安全">2.3 移动设备安全</h4>
+<div class="level4">
+
+<p>
+移动设备安全防护一般可以采取以下两种控制措施：
+</p>
+<ul>
+<li class="level1"><div class="li"> BYOD管理（制定BYOD使用规范）</div>
+</li>
+<li class="level1"><div class="li"> WIFI防护（禁止私设wifi热点、划分vlan、radius认证服务等）</div>
+</li>
+</ul>
+
+</div>
+
+<h4 id="oa服务域安全">2.4 OA服务域安全</h4>
+<div class="level4">
+
+<p>
+OA服务域安全防护一般可以采取以下几种控制措施：
+</p>
+<ul>
+<li class="level1"><div class="li"> 邮件使用管理规范（定期删除无用邮件、定期修改邮箱密码等）</div>
+</li>
+<li class="level1"><div class="li"> 内部系统使用规范（禁止开启对外映射、内部敏感信息禁止外传等）</div>
+</li>
+</ul>
+
+</div>
+<!-- EDIT3 SECTION "2、办公环境" [2100-] --></div>
+</body>
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/defence:technical by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:25:19 GMT -->
+</html>

@@ -1,0 +1,51 @@
+===== 服务配置 =====
+
+----
+
+==== 1、敏感系统或服务数据可被访问 ====
+
+----
+
+  * [[server:ftp|FTP安全配置]]
+  * [[server:mysql|MySQL安全配置]]
+  * [[server:mssql|MSSQL安全配置]]
+  * [[server:memcached|Memcached安全配置]]
+  * [[server:mongodb|MongoDB安全配置]]
+  * [[server:redis|Redis安全配置]]
+  * [[server:nagios|Nagios安全配置]]
+  * [[server:rsync|rsync安全配置]]
+  * [[server:snmp|Snmp安全配置]]
+  * [[server:zabbix|Zabbix安全配置]]
+  * [[server:cacti|Cacti安全配置]]
+  * [[server:nfs|NFS安全配置]]
+  * [[server:hadoop|Hadoop安全配置]]
+  * [[server:ElasticSearch|ElasticSearch安全配置]]
+
+
+==== 2、配置产生漏洞 ====
+
+----
+
+=== 2.1 HTTP Server ===
+
+  * [[server:file-disclosure|文件泄露]]
+  * [[server:HTTPPUT|HTTP请求方法（PUT）]]
+  * [[server:resolve|解析漏洞]]
+  * [[server:directory-list|目录遍历]]
+  * [[server:padding-oracle-attack|padding oracle attack]]
+  * [[server:j2ee|j2ee架构配置]]
+  * [[server:Host|host绑定的不安全因素]]
+
+=== 2.2 其他服务 ===
+
+  * [[server:zone-transfer|DNS 域传送漏洞]]
+  * [[server:squid|squid]]
+
+
+==== 3、未修复公开漏洞 ====
+
+----
+
+  * [[server:openssl|心脏滴血（openssl）]]
+  * [[server:bash|bash漏洞（shellshock）]]
+  * [[server:php|PHP-CGI、RCE]]

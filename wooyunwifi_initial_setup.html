@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh"
+  lang="zh" dir="ltr" class="no-js">
+
+<!-- Mirrored from wiki.wooyun.org/wooyunwifi:initial_setup by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:02:40 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>wooyunwifi:initial_setup [WooYun WiKi]</title>
+  <script>(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)</script>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="shortcut icon" href="lib/tpl/bootstrap3/images/favicon.ico" />
+<link rel="apple-touch-icon" href="lib/tpl/bootstrap3/images/apple-touch-icon.png" />
+      <link type="text/css" rel="stylesheet" href="lib/tpl/bootstrap3/assets/bootstrap/css/bootstrap.min.css" />
+    <script type="text/javascript">/*<![CDATA[*/
+    var TPL_CONFIG = {"tableFullWidth":1};
+  /*!]]>*/</script>
+  <meta name="generator" content="DokuWiki"/>
+<meta name="robots" content="noindex,nofollow"/>
+<meta name="keywords" content="wooyunwifi,initial_setup"/>
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.wooyun.org/lib/exe/opensearch.php" title="WooYun WiKi"/>
+<link rel="start" href="http://wiki.wooyun.org/"/>
+<link rel="contents" href="http://wiki.wooyun.org/wooyunwifi:initial_setup?do=index" title="网站地图"/>
+<link rel="alternate" type="application/rss+xml" title="最近更改" href="http://wiki.wooyun.org/feed.php"/>
+<link rel="alternate" type="application/rss+xml" title="当前命名空间" href="http://wiki.wooyun.org/feed.php?mode=list&amp;ns=wooyunwifi"/>
+<link rel="alternate" type="text/html" title="纯HTML" href="http://wiki.wooyun.org/_export/xhtml/wooyunwifi:initial_setup"/>
+<link rel="alternate" type="text/plain" title="Wiki Markup 语言" href="http://wiki.wooyun.org/_export/raw/wooyunwifi:initial_setup"/>
+<link rel="stylesheet" type="text/css" href="http://wiki.wooyun.org/lib/exe/css.php?t=bootstrap3&amp;tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"/>
+<script type="text/javascript">/*<![CDATA[*/var NS='wooyunwifi';var JSINFO = {"id":"wooyunwifi:initial_setup","namespace":"wooyunwifi","plugin_codeprettify":{"loader_base":"\/lib\/plugins\/codeprettify\/google-code-prettify"}};
+/*!]]>*/</script>
+<script type="text/javascript" charset="utf-8" src="http://wiki.wooyun.org/lib/exe/js.php?tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"></script>
+<script type="text/javascript" charset="utf-8" src="http://wiki.wooyun.org/lib/plugins/codeprettify/google-code-prettify/run_prettify.js?lang=css"></script>
+  <script type="text/javascript" src="http://wiki.wooyun.org/lib/tpl/bootstrap3/assets/bootstrap/js/bootstrap.min.js"></script>
+  <style type="text/css">
+    body { padding-top: 20px; }
+  </style>
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script type="text/javascript" src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+  <script type="text/javascript" src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body class="default page-on-panel">
+  <!--[if lte IE 7 ]><div id="IE7"><![endif]--><!--[if IE 8 ]><div id="IE8"><![endif]-->
+
+  <div id="dokuwiki__site" class="container">
+    <div id="dokuwiki__top" class="site dokuwiki mode_show tpl_bootstrap3    hasSidebar">
+
+      
+      <!-- header -->
+      <div id="dokuwiki__header">
+        <nav class="navbar  navbar-default" role="navigation">
+
+  <div class="container-fluid">
+
+    <div class="navbar-header">
+
+      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      <a href="http://wiki.wooyun.org/WooYun WiKi"  accesskey="h" title="[H]" class="navbar-brand"><img src="http://wiki.wooyun.org/lib/tpl/bootstrap3/images/logo.png" alt="WooYun WiKi" class="pull-left" id="dw__logo" width="20" height="20" /> <span id="dw__title" >WooYun WiKi</span></a>
+    </div>
+
+    <div class="collapse navbar-collapse">
+
+      <ul class="nav navbar-nav" id="dw__navbar">
+        <li class="active">
+  <a href="http://wiki.wooyun.org/WooYun WiKi" ><i class="glyphicon glyphicon-home"></i> Home</a></li>
+      </ul>
+
+      <div class="navbar-right">
+
+        <form action="http://wiki.wooyun.org/WooYun WiKi" accept-charset="utf-8" class="search" id="dw__search" method="get" role="search"><div class="no"><input type="hidden" name="do" value="search" /><input type="text" id="qsearch__in" accesskey="f" name="id" class="edit" title="[F]" /><input type="submit" value="搜索" class="button" title="搜索" /><div id="qsearch__out" class="ajax_qsearch JSpopup"></div></div></form>
+        <ul class="nav navbar-nav" id="dw__tools">
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="工具"><i class="glyphicon glyphicon-wrench"></i> <span class="hidden-lg hidden-md hidden-sm">工具</span> <span class="caret"></span></a>
+    <ul class="dropdown-menu tools" role="menu">
+
+      <!-- dokuwiki__usertools -->
+      <li class="dropdown-header"><i class="glyphicon glyphicon-user"></i> 用户工具</li>
+      
+      <li class="divider"></li>
+
+      <!-- dokuwiki__sitetools -->
+      <li class="dropdown-header"><i class="glyphicon glyphicon-cog"></i> 站点工具</li>
+      <li><a href="http://wiki.wooyun.org/wooyunwifi:initial_setup?do=recent"  class="action recent" accesskey="r" rel="nofollow" title="最近更改 [R]"><i class="glyphicon glyphicon-list-alt"></i> 最近更改</a></li><li><a href="http://wiki.wooyun.org/wooyunwifi:initial_setup?do=media&amp;ns=wooyunwifi"  class="action media" rel="nofollow" title="媒体管理器"><i class="glyphicon glyphicon-picture"></i> 媒体管理器</a></li><li><a href="http://wiki.wooyun.org/wooyunwifi:initial_setup?do=index"  class="action index" accesskey="x" rel="nofollow" title="网站地图 [X]"><i class="glyphicon glyphicon-list"></i> 网站地图</a></li>
+      <li class="divider"></li>
+
+      <!-- dokuwiki__pagetools -->
+      <li class="dropdown-header"><i class="glyphicon glyphicon-file"></i> 页面工具</li>
+      <li><a href="http://wiki.wooyun.org/wooyunwifi:initial_setup?do=edit&amp;rev=1438329358"  class="action source" accesskey="v" rel="nofollow" title="显示源文件 [V]"><i class="glyphicon glyphicon-edit"></i> 显示源文件</a></li><li><a href="http://wiki.wooyun.org/wooyunwifi:initial_setup?do=revisions"  class="action revs" accesskey="o" rel="nofollow" title="修订记录 [O]"><i class="glyphicon glyphicon-time"></i> 修订记录</a></li><li><a href="http://wiki.wooyun.org/wooyunwifi:initial_setup?do=backlink"  class="action backlink" rel="nofollow" title="反向链接"><i class="glyphicon glyphicon-link"></i> 反向链接</a></li><li><a href="#dokuwiki__top"  class="action top" accesskey="t" rel="nofollow" title="回到顶部 [T]"><i class="glyphicon glyphicon-chevron-up"></i> 回到顶部</a></li>
+    </ul>
+  </li>
+</ul>
+
+        <ul class="nav navbar-nav">
+          <li>
+                      </li>
+                    <li><a href="http://wiki.wooyun.org/wooyunwifi:initial_setup?do=login&amp;sectok=a3845e1693337b10c6abaa01a16b0594"  class="action login" rel="nofollow" title="登录"><i class="glyphicon glyphicon-log-in"></i> 登录</a></li>        </ul>
+
+      </div>
+
+    </div>
+  </div>
+</nav>
+      </div>
+      <!-- /header -->
+
+      
+            <div id="dw__breadcrumbs">
+        <hr/>
+                        <div class="breadcrumb hidden-print"><span class="bchead">您的足迹:</span> <span class="bcsep">•</span> <bdi><a href="http://wiki.wooyun.org/pentest:各种语言一句话反弹shell"  class="breadcrumbs" title="pentest:各种语言一句话反弹shell">各种语言一句话反弹shell</a></bdi> <span class="bcsep">•</span> <bdi><a href="http://wiki.wooyun.org/pentest:ssh相关操作"  class="breadcrumbs" title="pentest:ssh相关操作">ssh相关操作</a></bdi> <span class="bcsep">•</span> <bdi><a href="http://wiki.wooyun.org/pentest:filepath"  class="breadcrumbs" title="pentest:filepath">filepath</a></bdi> <span class="bcsep">•</span> <bdi><a href="http://wiki.wooyun.org/client:activity"  class="breadcrumbs" title="client:activity">activity</a></bdi> <span class="bcsep">•</span> <bdi><a href="http://wiki.wooyun.org/client:service"  class="breadcrumbs" title="client:service">service</a></bdi> <span class="bcsep">•</span> <bdi><a href="http://wiki.wooyun.org/client:broadcast"  class="breadcrumbs" title="client:broadcast">broadcast</a></bdi> <span class="bcsep">•</span> <bdi><a href="http://wiki.wooyun.org/client:provider"  class="breadcrumbs" title="client:provider">provider</a></bdi> <span class="bcsep">•</span> <bdi><a href="http://wiki.wooyun.org/android:tools:enjarify"  class="breadcrumbs" title="android:tools:enjarify">enjarify</a></bdi> <span class="bcsep">•</span> <bdi><a href="http://wiki.wooyun.org/android:tools:pidcat"  class="breadcrumbs" title="android:tools:pidcat">pidcat</a></bdi> <span class="bcsep">•</span> <span class="curid"><bdi><a href="http://wiki.wooyun.org/wooyunwifi:initial_setup"  class="breadcrumbs" title="wooyunwifi:initial_setup">initial_setup</a></bdi></span></div>
+                <hr/>
+      </div>
+      
+      <p class="pageId text-right">
+        <span class="label label-default">wooyunwifi:initial_setup</span>
+      </p>
+
+      <div id="dw__msgarea">
+              </div>
+
+      <main class="main row" role="main">
+
+        <!-- ********** ASIDE ********** -->
+<aside id="dokuwiki__aside" class="dw__sidebar col-sm-3 col-md-2 hidden-print">
+  <div class="content">
+    <div class="toogle hidden-lg hidden-md hidden-sm" data-toggle="collapse" data-target="#dokuwiki__aside .collapse">
+      <i class="glyphicon glyphicon-th-list"></i> 侧边栏    </div>
+    <div class="collapse in">
+            
+<h4 id="企业安全">企业安全</h4>
+<div class="level4">
+<ul>
+<li class="level1"><div class="li"><a href="http://wiki.wooyun.org/enterprise:information" class="wikilink1" title="enterprise:information">信息收集</a></div>
+</li>
+<li class="level1"><div class="li"><a href="http://wiki.wooyun.org/enterprise:server" class="wikilink1" title="enterprise:server">服务配置</a></div>
+</li>
+<li class="level1"><div class="li"><a href="http://wiki.wooyun.org/enterprise:web" class="wikilink1" title="enterprise:web">Web应用</a></div>
+</li>
+<li class="level1"><div class="li"><a href="http://wiki.wooyun.org/enterprise:tools" class="wikilink1" title="enterprise:tools">安全工具</a></div>
+</li>
+<li class="level1"><div class="li"><a href="http://wiki.wooyun.org/enterprise:defence" class="wikilink1" title="enterprise:defence">安全防御</a></div>
+</li>
+<li class="level1"><div class="li"><a href="http://wiki.wooyun.org/enterprise:pentest" class="wikilink1" title="enterprise:pentest">渗透技巧</a></div>
+</li>
+</ul>
+
+</div>
+
+<h4 id="android_安全">Android 安全</h4>
+<div class="level4">
+<ul>
+<li class="level1"><div class="li"><a href="http://wiki.wooyun.org/android:client" class="wikilink1" title="android:client">客户端</a></div>
+</li>
+<li class="level1"><div class="li"><a href="http://wiki.wooyun.org/android:system" class="wikilink1" title="android:system">系统</a></div>
+</li>
+<li class="level1"><div class="li"><a href="http://wiki.wooyun.org/android:communicate" class="wikilink1" title="android:communicate">通信</a></div>
+</li>
+<li class="level1"><div class="li"><a href="http://wiki.wooyun.org/android:server" class="wikilink1" title="android:server">服务端</a></div>
+</li>
+<li class="level1"><div class="li"><a href="http://wiki.wooyun.org/android:tools" class="wikilink1" title="android:tools">常用工具</a></div>
+</li>
+</ul>
+
+</div>
+
+<h4 id="乌云">乌云</h4>
+<div class="level4">
+<ul>
+<li class="level1"><div class="li"><a href="http://wiki.wooyun.org/wooyun:route" class="wikilink1" title="wooyun:route">乌云路由</a></div>
+</li>
+<li class="level1"><div class="li"><span class="curid"><a href="http://wiki.wooyun.org/wooyun:woobuntu" class="wikilink1" title="wooyun:woobuntu">Woobuntu</a></span></div>
+</li>
+</ul>
+
+</div>
+
+<h4 id="apt">APT</h4>
+<div class="level4">
+<ul>
+<li class="level1"><div class="li"><a href="http://wiki.wooyun.org/apt:organization" class="wikilink1" title="apt:organization">组织</a></div>
+</li>
+</ul>
+
+</div>
+
+<h4 id="find_us">Find Us</h4>
+<div class="level4">
+<ul>
+<li class="level1"><div class="li">Email: <a class="__cf_email__" href="http://wiki.wooyun.org/cdn-cgi/l/email-protection" data-cfemail="2057494b4960574f4f59554e0e4f5247">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">
+/* <![CDATA[ */!function(){try{var t="currentScript"in document?document.currentScript:function(){for(var t=document.getElementsByTagName("script"),e=t.length;e--;)if(t[e].getAttribute("data-cfhash"))return t[e]}();if(t&&t.previousSibling){var e,r,n,i,c=t.previousSibling,a=c.getAttribute("data-cfemail");if(a){for(e="",r=parseInt(a.substr(0,2),16),n=2;a.length-n;n+=2)i=parseInt(a.substr(n,2),16)^r,e+=String.fromCharCode(i);e=document.createTextNode(e),c.parentNode.replaceChild(e,c)}t.parentNode.removeChild(t);}}catch(u){}}()/* ]]> */</script>
+</div>
+</li>
+</ul>
+
+</div>
+          </div>
+  </div>
+</aside>
+
+        <!-- ********** CONTENT ********** -->
+        <article id="dokuwiki__content" class="col-sm-9 col-md-10" >
+
+          <div class="panel panel-default" > 
+            <div class="page group panel-body">
+
+                                          
+              <div class="pull-right hidden-print" data-spy="affix" data-offset-top="150" style="z-index:1024; top:10px; right:10px;">
+                <!-- TOC START -->
+<div id="dw__toc">
+<h3 class="toggle">目录</h3>
+<div>
+
+<ul class="toc">
+<li class="level1"><div class="li"><a href="#wooyunwifi_初始化配置">WooyunWifi 初始化配置</a></div>
+<ul class="toc">
+<li class="level2"><div class="li"><a href="#u盘初始化配置">U盘初始化配置</a></div></li>
+<li class="level2"><div class="li"><a href="#浏览路由器web界面">浏览路由器WEB界面</a></div></li>
+<li class="level2"><div class="li"><a href="#openwrt_luci_初始化配置">Openwrt Luci 初始化配置</a></div></li>
+<li class="level2"><div class="li"><a href="#openwrt_luci_网络配置">Openwrt Luci 网络配置</a></div></li>
+<li class="level2"><div class="li"><a href="#openwrt_luci_无线网络配置">Openwrt Luci 无线网络配置</a></div></li>
+<li class="level2"><div class="li"><a href="#openwrt_luci_dns配置">Openwrt Luci DNS配置</a></div></li>
+<li class="level2"><div class="li"><a href="#openwrt_luci_其他配置">Openwrt Luci 其他配置</a></div></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<!-- TOC END -->
+              </div>
+
+              <!-- wikipage start -->
+              
+<p>
+﻿
+</p>
+
+<h1 class="sectionedit1" id="wooyunwifi_初始化配置">WooyunWifi 初始化配置</h1>
+<div class="level1">
+
+<p>
+为了开始使用您的WooyunWifi路由器，您需要对WooyunWifi进行初始化配置，这些配置主要位于Openwrt Luci管理界面中，如果您对Openwrt路由器非常熟悉，您可以跳过这一章节。
+</p>
+
+<p>
+本章节仅介绍能使WooyunWifi正常运行的最简配置，更多高级配置请参考Openwrt官方网站
+</p>
+
+</div>
+
+<h2 class="sectionedit2" id="u盘初始化配置">U盘初始化配置</h2>
+<div class="level2">
+<hr />
+
+<p>
+请将您的U盘格式化为Fat32格式（分配单元大小选择16kb）。
+</p>
+
+<p>
+在Windows下，该操作的流程为：双击“我的电脑”→右键点击您的U盘图标→选择“格式化”→在“文件系统（F）”下拉列表中选中Fat32→在“分配单元大小”下拉列表中选中16kb→最终点击“开始”按钮进行格式化，完成后即可使用该U盘与WooyunWifi路由器进行连接。
+</p>
+
+<p>
+*您可以将破解无线网络密码用的字典放入U盘，改名为dict.list，放在根目录下，之后在破解无线网络密码时，将自动使用该字典进行破解。
+</p>
+
+<p>
+*您可以将WooyunWifi抓取到的日志保存至U盘，详细设置请参见“WooyunWifi高级设置”章节。
+</p>
+
+</div>
+
+<h2 class="sectionedit3" id="浏览路由器web界面">浏览路由器WEB界面</h2>
+<div class="level2">
+<hr />
+
+<p>
+WooyunWifi的WEB界面默认位于<a href="http://192.168.1.1/" class="urlextern" title="http://192.168.1.1"  rel="nofollow">http://192.168.1.1</a>
+</p>
+
+<p>
+界面中有两个选项：“Openwrt Luci”以及“WooyunWifi”，其中的“Openwrt Luci”为Openwrt原生的管理界面，用于管理作为一个正常无线路由器的相关功能，而“WooyunWifi”则是我们WooyunWifi路由器安全测试功能所在的WEB控制页面。
+</p>
+
+</div>
+
+<h2 class="sectionedit4" id="openwrt_luci_初始化配置">Openwrt Luci 初始化配置</h2>
+<div class="level2">
+<hr />
+
+<p>
+请在WEB页面中点击“Openwrt Luci”链接进入Openwrt Luci管理界面。
+</p>
+
+<p>
+您在初次浏览该页面时，页面将会提示如下内容：
+</p>
+<pre class="code">No password set!
+There is no password set on this router. Please configure a root password to protect the web interface and enable SSH.
+Go to password configuration...</pre>
+
+<p>
+请先输入默认用户名/密码登陆管理界面，默认用户名为root，默认密码为admin。
+</p>
+
+<p>
+之后点击位于页面上方的“Go to password configuration”进入密码设置界面，在输入完新的密码后即可点击右下角的Save &amp; Apply 按钮保存设置，如果您不熟悉其他设置项的含义，您可以保持默认设置。
+</p>
+
+<p>
+如果您阅读英文有困难，可以点击标题栏中的System → System 选项卡 ，之后在页面中间选择Language and Style标签，Language下拉选单中可以选择界面语言，chinese为中文，然后点击Save &amp; Apply应用设置。
+</p>
+
+<p>
+下文以中文语言介绍其他设置，如果您更偏好使用英文，请阅读本页面的英文版本。
+</p>
+
+</div>
+
+<h2 class="sectionedit5" id="openwrt_luci_网络配置">Openwrt Luci 网络配置</h2>
+<div class="level2">
+<hr />
+
+<p>
+如果您使用一根网线来提供网络，请将该网线插入路由器的WAN接口。然后点击标题栏中的 网络→接口 选项卡，您将在“接口总览”中看到绿色标记的LAN接口和红色标记的WAN接口。
+</p>
+
+<p>
+点击WAN接口所对应的“修改”按钮，您可以在基本设置中选择WAN口的连接协议，如果您的网络接入无需提供用户名和密码，默认的DHCP协议应该足以使您接入网络。如果您的网络接入需要提供用户名和密码，请在下拉列表中选中“PPPoE”选项，并点击“切换协议”按钮。之后填入您的拨号用户名和密码即可，其他选项如果您不熟悉可以留空，点击 保存&amp;应用 按钮以使设置生效。
+</p>
+
+<p>
+之后回到 网络→接口 页面，我们进行LAN接口的配置（非必须*）
+</p>
+
+<p>
+*如果您的路由器IP和上游路由器IP冲突，可能导致您的DNS服务无法正常使用，症状为无法访问网页
+</p>
+
+<p>
+点击LAN接口所对应的“修改”按钮，您可以看到LAN口默认为静态地址192.168.1.1，即路由器自身IP，如果您的路由器IP与上游路由器IP冲突，您可能需要修改该IP以保持兼容。示例：您可以改为192.168.16.1，然后点击保存&amp;应用，之后WEB页面断开连接，等待5秒后使用新的WEB管理界面地址重新登陆：<a href="http://192.168.16.1/" class="urlextern" title="http://192.168.16.1"  rel="nofollow">http://192.168.16.1</a>
+</p>
+
+<p>
+如果您无法为路由器提供有线网络接入，您也可以使用无线网络为路由器提供网络接入。
+</p>
+
+</div>
+
+<h2 class="sectionedit6" id="openwrt_luci_无线网络配置">Openwrt Luci 无线网络配置</h2>
+<div class="level2">
+<hr />
+
+<p>
+如果您能提供无线网络接入，可以让WooyunWifi路由器使用您的无线接入点来接入网络。
+</p>
+
+<p>
+*如果您已经通过有线方式配置了网络接入，您可以直接跳到点击“添加”按钮步骤。
+</p>
+
+<p>
+点击标题栏中的 网络→无线 选项卡 ，进入无线配置界面
+</p>
+
+<p>
+点击“搜索”按钮，以查找周围可用的无线接入点
+</p>
+
+<p>
+选择您的SSID名称对应的“加入网络”按钮
+</p>
+
+<p>
+填写您的无线密钥，点击“提交”按钮
+</p>
+
+<p>
+点击 保存&amp;应用 按钮以使设置生效
+</p>
+
+<p>
+*警告：使用该方式接入网络将强制路由器使用固定信道，请勿在该模式开启下尝试无线破解系列功能
+</p>
+
+<p>
+之后返回 网络→无线 选项卡界面，点击“添加”按钮，之后在 接口配置→基本设置→网络 列表中勾选Lan（该选项使无线接入者可以访问互联网），如果您打算使用KARMA功能，SSID名称保持默认即可，如果您打算手动伪造AP，您可以在这里设置为您想要的名称。如果您打算使用KARMA功能，请勿设置加密。
+</p>
+
+<p>
+之后点击 保存&amp;应用 按钮以使设置生效
+</p>
+
+</div>
+
+<h2 class="sectionedit7" id="openwrt_luci_dns配置">Openwrt Luci DNS配置</h2>
+<div class="level2">
+<hr />
+
+<p>
+*如果您正确配置路由器之后却无法访问网页，您可能需要手动配置DNS，如果您已经可以正常访问网页，本步骤可以忽略
+</p>
+
+<p>
+点击标题栏中的 网络→DHCP/<abbr title="Domain Name System">DNS</abbr> 选项卡，进入DHCP/DNS配置界面，在 服务器设置→基本设置→DNS转发 中填写您想指定的DNS服务器地址，例如：8.8.8.8，点击 保存&amp;应用 按钮以使设置生效。
+</p>
+
+</div>
+
+<h2 class="sectionedit8" id="openwrt_luci_其他配置">Openwrt Luci 其他配置</h2>
+<div class="level2">
+<hr />
+
+<p>
+Openwrt是一个功能强大的无线路由器操作系统，自身就有很多优秀的软件包
+</p>
+
+<p>
+请参阅Openwrt官方网站的使用说明
+</p>
+
+<p>
+<a href="http://wiki.openwrt.org/" class="urlextern" title="http://wiki.openwrt.org"  rel="nofollow">http://wiki.openwrt.org</a>
+</p>
+
+<p>
+<a href="http://downloads.openwrt.org/kamikaze/docs/openwrt.html" class="urlextern" title="http://downloads.openwrt.org/kamikaze/docs/openwrt.html"  rel="nofollow">http://downloads.openwrt.org/kamikaze/docs/openwrt.html</a>
+</p>
+
+</div>
+
+              <!-- wikipage stop -->
+
+                            
+            </div>
+          </div>
+
+        </article>
+
+        
+      </main>
+
+      <footer id="dokuwiki__footer" class="small hidden-print">
+
+        <a href="javascript:void(0)" class="back-to-top hidden-print btn btn-default btn-sm" title="跳至内容>" id="back-to-top"><i class="glyphicon glyphicon-chevron-up"></i></a>
+
+                <div class="text-center">
+          <p id="dw__license">
+                      </p>
+                  </div>
+      </footer>
+
+      
+    </div><!-- /site -->
+
+    <div class="no"><img src="http://wiki.wooyun.org/lib/exe/indexer.php?id=wooyunwifi%3Ainitial_setup&amp;1449197520" width="2" height="1" alt="" /></div>
+    <div id="screen__mode" class="no">
+      <span class="visible-xs"></span>
+      <span class="visible-sm"></span>
+      <span class="visible-md"></span>
+      <span class="visible-lg"></span>
+    </div>
+  </div>
+  <!--[if ( lte IE 7 | IE 8 ) ]></div><![endif]-->
+</body>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "http://hm.baidu.com/hm.js?2e9369dace9479584f08203285c7cbce";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<!-- Mirrored from wiki.wooyun.org/wooyunwifi:initial_setup by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:02:40 GMT -->
+</html>

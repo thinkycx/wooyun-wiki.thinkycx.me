@@ -1,0 +1,109 @@
+#SNMP安全配置
+
+###1、SNMP简介
+
+----
+
+简单网络管理协议（SNMP），由一组网络管理的标准组成，包含一个应用层协议（application layer protocol）、数据库模型（database schema）和一组资源对象。该协议能够支持网络管理系统，用以监测连接到网络上的设备是否有任何引起管理上关注的情况。该协议是互联网工程工作小组（IETF，Internet Engineering Task Force）定义的internet协议簇的一部分。SNMP的目标是管理互联网Internet上众多厂家生产的软硬件平台，因此SNMP受Internet标准网络管理框架的影响也很大。SNMP已经出到第三个版本的协议，其功能较以前已经大大地加强和改进了。
+
+
+###2、SNMP服务架设
+
+----
+
+测试环境:CentOS 6.5 
+<code>
+yum install net-snmp -y 
+/etc/init.d/snmpd start
+[root@centos ~]# netstat -antpleu  |grep snmp
+tcp        0      0 127.0.0.1:199               0.0.0.0:*                   LISTEN      0          35513      3300/snmpd          
+udp        0      0 0.0.0.0:161                 0.0.0.0:*                               0          35511      3300/snmpd      
+</code>
+配置文件
+
+<code>/etc/snmp/snmpd.conf</code>
+
+###3、错误配置以及利用
+
+----
+
+####3.1 默认团体字符串
+通过默认的团体字符串，可以获得主机的信息
+
+####3.2 基于团体字符串的snmp的ddos攻击
+因为查询和返回的数据不对等，所以可以在知道团体字符串的情况下，使用的UDP协议，通过伪造来源IP，达到获取大流量，进行DDOS攻击
+
+####3.3 CVE-2012-3268获得设备的密码
+知道团体字符串后，通过指定特定的oid，来获取设备的密码，从而达到控制设备的目的
+
+相关的攻击原理：
+
+[[http://drops.wooyun.org/tips/409|snmp弱口令引起的信息泄漏]]
+
+###4、实际案例
+
+----
+
+####4.1 弱口令
+
+[[http://www.wooyun.org/bugs/wooyun-2010-081037|华为某服务器SNMP弱口令]]
+
+[[http://www.wooyun.org/bugs/wooyun-2010-092565|极客公园某配置不当致敏感信息泄露]]
+
+[[http://www.wooyun.org/bugs/wooyun-2010-057685|西北民族大学DNS服务器SNMP服务存在默认弱口令]]
+
+####4.2 CVE-2012-3268
+
+[[http://www.wooyun.org/bugs/wooyun-2013-021877|中国移动H3C防火墙侧漏，利用snmp获取管理员密码，成功登录设备]]
+
+[[http://www.wooyun.org/bugs/wooyun-2010-075706|中粮我买网某设备缺陷导致密码破解进入内网（可内网未漫游）]]
+
+[[http://www.wooyun.org/bugs/wooyun-2010-032312|通过snmp获取中国移动华为防火墙交换机等设备的登录密码]]
+
+[[http://www.wooyun.org/bugs/wooyun-2013-021964|中国移动集团华为三层交换SNMP漏洞，可获取管理帐号密码，已成功登录]]
+
+
+###5、修复方案
+
+----
+
+####5.1 修改默认的团体字符串名
+<code>	
+vim /etc/snmp/snmpd.conf
+#允许任何IP通过public来连接
+com2sec notConfigUser  default       public
+#只允许1.1.1.1来使用public连接
+com2sec notConfigUser  1.1.1.1       public
+</code>
+====5.2 CVE-2012-3268====
+
+如果条件允许在厂商的协助下进行升级，否则设置复杂的团体字符串
+
+###6、漏洞扫描与发现
+
+----
+
+####6.1 手工发现
+-p为团体字符串
+
+<code>snmpwalk -v 2c -p public ip</code>
+
+####6.2 自动发现
+通过nmap扫描
+
+<code bash>nmap -Pn -sU -p161 --script=brute 1.1.1.0/24</code>
+
+
+
+###7、相关资源
+
+----
+
+[[http://drops.wooyun.org/tips/409|snmp弱口令引起的信息泄漏]]
+
+[[http://drops.wooyun.org/tips/2106|基于snmp的反射攻击的理论及其实现]]
+
+[[http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-3268|CVE-2012-3268]]
+
+[[https://github.com/grutz/h3c-pt-tools|CVE-2012-3268利用工具]]
+

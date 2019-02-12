@@ -1,0 +1,53 @@
+====== Discuz! ======
+
+
+==== 1、Discuz简介! ====
+
+----
+Discuz!是一个可免费下载的PHP网络论坛程序，简称DZ，由戴志康（Crossday）所创立。前身为Crossday Bulletin（CDB），最初改自XMB，而后改写成为现今的Discuz!社区论坛程序，由康盛创想所有（现已被腾讯收购）。现在Discuz!已成为中国大陆最多用户使用的论坛程序。
+
+从Discuz!6.1.0开始，Discuz!因强行捆绑UCenter而引来不少批评，后来Discuz!UCenter将内置于论坛程序中，关于UCenter的指责减少。
+
+==== 2、重要漏洞及利用 ====
+
+----
+Discuz!中的漏洞主要可以分为三类：
+  - Discuz!本身的漏洞，如[[http://wooyun.org/bugs/wooyun-2013-045677|Discuz! 3.1 后台命令执行]]。
+  - Discuz!中捆绑的UCenter的漏洞，如[[http://wooyun.org/bugs/wooyun-2014-048137|Discuz的利用UC_KEY进行getshell]]。
+  - Discuz!中插件所带来的漏洞,如[[http://wooyun.org/bugs/wooyun-2013-045611|discuz!某自带工具可拿shell]] 。
+
+
+Discuz!历史上的漏洞很多，参见以下页面。
+
+[[http://wooyun.org/corps/Discuz!| 厂商信息_Discuz!漏洞列表 | WooYun.org]] 
+
+[[http://drops.wooyun.org/papers/4611|DiscuzX系列命令执行分析公开（三连弹）]]
+
+[[http://drops.wooyun.org/papers/929|Discuz!X升级/转换程序GETSHELL漏洞分析]]
+
+但是在最新版的Discuz!中已公开的漏洞均被修复了。
+
+
+
+==== 3、修复方案 ====
+
+----
+更新服务器上的Discuz!版本到最新版，最新版可在[[http://www.comsenz.com/downloads/install/discuzx|Discuz!官方下载地址]]找到。
+==== 4、实际案例 ====
+
+----
+[[http://www.wooyun.org/bugs/wooyun-2010-054271|一次成功的漫游腾讯内部网络过程 #1]]
+
+[[http://www.wooyun.org/bugs/wooyun-2010-084642|酷我音乐某站补丁不及时]]
+
+[[http://www.wooyun.org/bugs/wooyun-2010-084645|迅雷某站点补丁不及时]]
+
+[[http://www.wooyun.org/bugs/wooyun-2010-046458|TOM某分站任意代码写入导致getshell]]
+==== 5、参考资料 ====
+
+----
+[[http://wooyun.org/corps/Discuz!| 厂商信息_Discuz!漏洞列表 | WooYun.org]] 
+
+[[http://drops.wooyun.org/papers/4611|DiscuzX系列命令执行分析公开（三连弹）]]
+
+[[http://drops.wooyun.org/papers/929|Discuz!X升级/转换程序GETSHELL漏洞分析]]

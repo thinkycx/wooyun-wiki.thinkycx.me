@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/android:system by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:02:21 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8" />
+  <title>android:system</title>
+<meta name="generator" content="DokuWiki"/>
+<meta name="robots" content="index,follow"/>
+<meta name="keywords" content="android,system"/>
+<link rel="search" type="application/opensearchdescription+xml" href="../../lib/exe/opensearch.php" title="WooYun WiKi"/>
+<link rel="start" href="../../index.html"/>
+<link rel="contents" href="../../android_systemdecf.html?do=index" title="网站地图"/>
+<link rel="alternate" type="application/rss+xml" title="最近更改" href="../../feed.php"/>
+<link rel="alternate" type="application/rss+xml" title="当前命名空间" href="../../feede659.php?mode=list&amp;ns=android"/>
+<link rel="alternate" type="text/html" title="纯HTML" href="android_system.html"/>
+<link rel="alternate" type="text/plain" title="Wiki Markup 语言" href="../raw/system.txt"/>
+<link rel="canonical" href="../../android_system.html"/>
+<link rel="stylesheet" type="text/css" href="../../lib/exe/css70b4.css?t=bootstrap3&amp;tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"/>
+<script type="text/javascript">/*<![CDATA[*/var NS='android';var JSINFO = {"id":"android:system","namespace":"android","plugin_codeprettify":{"loader_base":"\/lib\/plugins\/codeprettify\/google-code-prettify"}};
+/*!]]>*/</script>
+<script type="text/javascript" charset="utf-8" src="../../lib/exe/js1e16.php?tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"></script>
+<script type="text/javascript" charset="utf-8" src="../../lib/plugins/codeprettify/google-code-prettify/run_prettifyeb11.js?lang=css"></script>
+</head>
+<body>
+<div class="dokuwiki export">
+<!-- TOC START -->
+<div id="dw__toc">
+<h3 class="toggle">目录</h3>
+<div>
+
+<ul class="toc">
+<li class="level1"><div class="li"><a href="#系统">系统</a></div>
+<ul class="toc">
+<li class="clear">
+<ul class="toc">
+<li class="level3"><div class="li"><a href="#permission绕过">permission绕过</a></div></li>
+<li class="level3"><div class="li"><a href="#root权限提升">root权限提升</a></div></li>
+<li class="level3"><div class="li"><a href="#签名">签名</a></div></li>
+<li class="level3"><div class="li"><a href="#dos">DOS</a></div></li>
+<li class="level3"><div class="li"><a href="#配置">配置</a></div></li>
+<li class="level3"><div class="li"><a href="#零权限访问">零权限访问</a></div></li>
+<li class="level3"><div class="li"><a href="#other">other</a></div></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<!-- TOC END -->
+
+<h1 class="sectionedit1" id="系统">系统</h1>
+<div class="level1">
+
+</div>
+<!-- EDIT1 SECTION "系统" [0-10] -->
+<h3 class="sectionedit2" id="permission绕过">permission绕过</h3>
+<div class="level3">
+<ul>
+<li class="level1"><div class="li"> frgment注入</div>
+</li>
+<li class="level1"><div class="li"> 短信伪造</div>
+</li>
+<li class="level1"><div class="li"> 短信重发（CVE-2014-8610）</div>
+</li>
+<li class="level1"><div class="li"> CVE-2014-8597 Android &lt;5.0 SQL injection vulnerability in WAPPushManager</div>
+</li>
+<li class="level1"><div class="li"> 绕过ADB认证</div>
+</li>
+<li class="level1"><div class="li"> 电话拨打权限绕过漏洞</div>
+</li>
+<li class="level1"><div class="li"> BroadAnyWhere</div>
+</li>
+<li class="level1"><div class="li"> LanuchAnyWhere</div>
+</li>
+</ul>
+
+</div>
+<!-- EDIT2 SECTION "permission绕过" [11-277] -->
+<h3 class="sectionedit3" id="root权限提升">root权限提升</h3>
+<div class="level3">
+<ul>
+<li class="level1"><div class="li"> CVE-2014-7911</div>
+</li>
+<li class="level1"><div class="li"> TowellRoot(CVE-2014-3153)</div>
+</li>
+</ul>
+
+</div>
+<!-- EDIT3 SECTION "root权限提升" [278-352] -->
+<h3 class="sectionedit4" id="签名">签名</h3>
+<div class="level3">
+<ul>
+<li class="level1"><div class="li"> master key</div>
+</li>
+<li class="level1"><div class="li"> fake ID</div>
+</li>
+</ul>
+
+</div>
+<!-- EDIT4 SECTION "签名" [353-396] -->
+<h3 class="sectionedit5" id="dos">DOS</h3>
+<div class="level3">
+<ul>
+<li class="level1"><div class="li"> 图标拒绝服务</div>
+</li>
+<li class="level1"><div class="li"> mainfest拒绝服务</div>
+</li>
+<li class="level1"><div class="li"> fragment拒绝服务</div>
+</li>
+<li class="level1"><div class="li"> 浏览器拒绝服务</div>
+</li>
+<li class="level1"><div class="li"> Denial of App-PackageManager</div>
+</li>
+<li class="level1"><div class="li"> wifidos</div>
+</li>
+</ul>
+
+</div>
+<!-- EDIT5 SECTION "DOS" [397-554] -->
+<h3 class="sectionedit6" id="配置">配置</h3>
+<div class="level3">
+<ul>
+<li class="level1"><div class="li"> 文件权限</div>
+</li>
+<li class="level1"><div class="li"> symbolic link</div>
+</li>
+</ul>
+
+</div>
+<!-- EDIT6 SECTION "配置" [555-606] -->
+<h3 class="sectionedit7" id="零权限访问">零权限访问</h3>
+<div class="level3">
+<ul>
+<li class="level1"><div class="li"> <a href="http://drops.wooyun.org/papers/2736" class="urlextern" title="http://drops.wooyun.org/papers/2736"  rel="nofollow">Voice Attack</a></div>
+</li>
+<li class="level1"><div class="li"> <a href="http://drops.wooyun.org/papers/2893" class="urlextern" title="http://drops.wooyun.org/papers/2893"  rel="nofollow">Scheme Attack</a></div>
+</li>
+<li class="level1"><div class="li"> SD read</div>
+</li>
+<li class="level1"><div class="li"> 剪贴板</div>
+</li>
+<li class="level1"><div class="li"> next-intent attack</div>
+</li>
+</ul>
+
+</div>
+<!-- EDIT7 SECTION "零权限访问" [607-796] -->
+<h3 class="sectionedit8" id="other">other</h3>
+<div class="level3">
+<ul>
+<li class="level1"><div class="li"> 伪随机数生成（PRNG）</div>
+</li>
+<li class="level1"><div class="li"> 浏览器地址栏欺骗</div>
+</li>
+<li class="level1"><div class="li"> 邮件伪造/xss</div>
+</li>
+<li class="level1"><div class="li"> 蓝牙wifi权限缺失</div>
+</li>
+<li class="level1"><div class="li"> 邮件钓鱼（CVE-2014-4925）</div>
+</li>
+<li class="level1"><div class="li"> Cross-Device Scripting Attacks</div>
+</li>
+</ul>
+
+</div>
+<!-- EDIT8 SECTION "other" [797-] --></div>
+</body>
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/android:system by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:02:21 GMT -->
+</html>

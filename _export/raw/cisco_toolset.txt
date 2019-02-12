@@ -1,0 +1,7 @@
+====== Cisco工具集 ======
+
+  * [[tools:cisco-backdoor-tool|cisco-backdoor-tool]]
+  * [[tools:cisco-global-exploiter|cisco-global-exploiter]]
+  * [[tools:cisco-ocs|cisco-ocs]]
+  * [[tools:cisco-torch|cisco-torch]]
+  * [[tools:yersinia|yersinia]]

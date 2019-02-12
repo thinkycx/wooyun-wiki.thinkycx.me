@@ -1,0 +1,29 @@
+====== CVE-2014-3393说明 ======
+
+==== 1、工具&漏洞简介 ====
+
+----
+Cisco Adaptive Security Appliance (ASA) Software在Clientless SSL VPN入口自定义框架在实现上存在安全漏洞，未经身份验证的远程攻击者可利用此漏洞修改Clientless SSL VPN入口内容，导致窃取凭证、跨站脚本及其他攻击。此漏洞源于没有正确实现Clientless SSL VPN入口自定义框架内的身份验证检查。
+
+此工具可以用于在思科VPN的登录入口插入代码用于记录账号密码等。
+
+==== 2、使用方法 ====
+
+----
+1.下载Burp的对应请求包{{:tools:cisco_asa_backdoor.rar|}}
+
+2.解压后，在Burp==>restore 导入请求包
+
+3.导入后会出现4个repeater请求。
+
+4.修改各个请求包的target和包内Host，起一个请求包的“auth-page%2Ftitle-panel%2Ftext=”为缺陷位置可插入恶意代码。
+
+5.发送第一个请求，如返回302，则说明存在漏洞并可被利用。（如下图）
+{{:tools:1.png?100|}}
+
+6.依次请求完最后三个数据包，查看页面是否被插入代码。
+==== 3、相关资源 ====
+
+----
+
+[[http://drops.wooyun.org/papers/3451|drops.wooyun.org]]

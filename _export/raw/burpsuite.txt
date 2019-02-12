@@ -1,0 +1,51 @@
+====== Burpsuite使用说明 ======
+
+
+==== 1、工具简介 ====
+
+----
+
+BurpSuite是用于测试web 应用程序的集成平台。它包含了许多工具，并为这些工具设计了许多接口，以促进加快攻击应用程序的过程。所有的工具都共享一个能处理并显示HTTP 消息、持久性、认证、代理、日志，警报的一个强大的可扩展的框架。
+
+
+==== 2、burpsuite功能选项 ====
+
+----
+
+
+  * Proxy：是一个拦截HTTP/S的代理服务器，作为一个在浏览器和目标应用程序之间的中间人，允许你拦截，查看，修改在两个方向上的原始数据流。
+  * Spider：是一个应用智能感应的网络爬虫，它能完整的枚举应用程序的内容和功能。
+  * Scanner[仅限专业版]：是一个高级的工具，执行后，它能自动地发现web 应用程序的安全漏洞。
+  * Intruder：是一个定制的高度可配置的工具，对web应用程序进行自动化攻击，如：枚举标识符，收集有用的数据，以及使用fuzzing 技术探测常规漏洞。
+  * Repeater：一个靠手动操作来补发单独的HTTP请求，并分析应用程序响应的工具。
+  * Sequencer：是一个用来分析那些不可预知的应用程序会话令牌和重要数据项的随机性的工具。
+  * Decoder：是一个进行手动执行或对应用程序数据者智能解码编码的工具。
+  * Comparer：是一个实用的工具，通常是通过一些相关的请求和响应得到两项数据的一个可视化的“差异”。
+
+
+==== 3、配置浏览器burpsuit代理 ====
+
+----
+
+运行后，Burp Proxy 开启默认的8080 端口作为本地代理接口。通过置一个web浏览器使用其代理服务器,所有的网站流量可以被拦截，查看和修改。默认情况下，对非媒体资源的请求将被拦截并显示(可以通过Burp Proxy 选项里的options 选项修改默认值)。对所有通过BurpProxy网站流量使用预设的方案进行分析，然后纳入到目标站点地图中，来勾勒出一张包含访问的应用程序的内容和功能的画面。
+拦截HTTPS数据包需要浏览器访问http://burp，下载并安装证书才能使用。IE浏览器安装证书时，需要以管理员权限运行一次。
+
+==== 4、相关资源 ====
+
+----
+
+[[http://drops.wooyun.org/tools/1548|Burp Suite使用介绍（一）]]
+
+[[http://drops.wooyun.org/tools/1629|Burp Suite使用介绍（二）]]
+ 
+[[http://drops.wooyun.org/tools/2247|Burp Suite使用介绍（三）]]
+ 
+[[http://drops.wooyun.org/tools/2504|Burp Suite使用介绍（四）]]
+ 
+[[http://drops.wooyun.org/tips/2460|用Burpsuite 来处理csrf token]]
+ 
+[[http://drops.wooyun.org/tips/2689|JAVA逆向&反混淆-追查Burpsuite的破解原理]]
+ 
+[[http://drops.wooyun.org/papers/3962|BurpSuite 扩展开发[1]-API与HelloWold]]
+ 
+[[http://drops.wooyun.org/tools/5751|burpsuite扩展开发之Python]] 

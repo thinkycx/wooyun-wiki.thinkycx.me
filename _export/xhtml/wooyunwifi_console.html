@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/wooyunwifi:console by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:25:25 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8" />
+  <title>wooyunwifi:console</title>
+<meta name="generator" content="DokuWiki"/>
+<meta name="robots" content="index,follow"/>
+<meta name="keywords" content="wooyunwifi,console"/>
+<link rel="search" type="application/opensearchdescription+xml" href="../../lib/exe/opensearch.php" title="WooYun WiKi"/>
+<link rel="start" href="../../index.html"/>
+<link rel="contents" href="../../wooyunwifi_consoledecf.html?do=index" title="网站地图"/>
+<link rel="alternate" type="application/rss+xml" title="最近更改" href="../../feed.php"/>
+<link rel="alternate" type="application/rss+xml" title="当前命名空间" href="../../feedec26.php?mode=list&amp;ns=wooyunwifi"/>
+<link rel="alternate" type="text/html" title="纯HTML" href="wooyunwifi_console.html"/>
+<link rel="alternate" type="text/plain" title="Wiki Markup 语言" href="../raw/console.txt"/>
+<link rel="canonical" href="../../wooyunwifi_console.html"/>
+<link rel="stylesheet" type="text/css" href="../../lib/exe/css70b4.css?t=bootstrap3&amp;tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"/>
+<script type="text/javascript">/*<![CDATA[*/var NS='wooyunwifi';var JSINFO = {"id":"wooyunwifi:console","namespace":"wooyunwifi","plugin_codeprettify":{"loader_base":"\/lib\/plugins\/codeprettify\/google-code-prettify"}};
+/*!]]>*/</script>
+<script type="text/javascript" charset="utf-8" src="../../lib/exe/js1e16.php?tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"></script>
+<script type="text/javascript" charset="utf-8" src="../../lib/plugins/codeprettify/google-code-prettify/run_prettifyeb11.js?lang=css"></script>
+</head>
+<body>
+<div class="dokuwiki export">
+<!-- TOC START -->
+<div id="dw__toc">
+<h3 class="toggle">目录</h3>
+<div>
+
+<ul class="toc">
+<li class="level1"><div class="li"><a href="#wooyunwifi_命令行功能">WooyunWifi 命令行功能</a></div>
+<ul class="toc">
+<li class="level2"><div class="li"><a href="#配置路由器ssh服务">配置路由器SSH服务</a></div></li>
+<li class="level2"><div class="li"><a href="#ssh登录wooyunwifi">SSH登录WooyunWifi</a></div></li>
+<li class="level2"><div class="li"><a href="#命令行功能使用示例">命令行功能使用示例</a></div></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<!-- TOC END -->
+
+<h1 class="sectionedit1" id="wooyunwifi_命令行功能">WooyunWifi 命令行功能</h1>
+<div class="level1">
+
+<p>
+WooyunWifi为一些常用的安全测试功能提供了WEB控制界面，但是一些工具&amp;功能由于各种原因仍然只能在命令行界面下运行，本章节介绍WooyunWifi命令行功能的使用方法。
+</p>
+
+</div>
+<!-- EDIT1 SECTION "WooyunWifi 命令行功能" [0-249] -->
+<h2 class="sectionedit2" id="配置路由器ssh服务">配置路由器SSH服务</h2>
+<div class="level2">
+<hr />
+
+<p>
+*如果您按照之前的《WooyunWifi 初始化配置》正确配置了全部选项，您已经开启了路由器的SSH服务
+</p>
+
+<p>
+路由器的SSH服务在Openwrt Luci中，点击标题栏中的 系统→管理权 选项卡，在 SSH访问→DropBear设置 中依次选择 接口→“未指定”，端口 → 22，勾选“密码验证”和“root权限登录”，然后点击 保存&amp;应用 以使设置生效。
+</p>
+
+</div>
+<!-- EDIT2 SECTION "配置路由器SSH服务" [250-698] -->
+<h2 class="sectionedit3" id="ssh登录wooyunwifi">SSH登录WooyunWifi</h2>
+<div class="level2">
+<hr />
+
+<p>
+在*nix系统下，您可以通过ssh登入WooyunWifi命令行界面
+</p>
+
+<p>
+示例：<code>ssh 192.168.1.1 -l root</code>
+</p>
+
+<p>
+在Windows系统下，您可以通过putty等工具登入WooyunWifi命令行界面
+</p>
+
+<p>
+<a href="https://www.baidu.com/s?wd=putty" class="urlextern" title="https://www.baidu.com/s?wd=putty"  rel="nofollow">https://www.baidu.com/s?wd=putty</a>
+</p>
+
+<p>
+运行界面如图：
+</p>
+
+<p>
+<img src="../../_media/putty27f8.png_%3b?w=600&amp;tok=41dc46" class="media" alt="" width="600" />
+</p>
+
+<p>
+IP address 填写路由器的IP（*如果没有修改过，默认是192.168.1.1）
+端口设置为22 ， 连接类型选择SSH
+</p>
+
+<p>
+Login as 填写 root
+密码与Openwrt Luci设置的密码相同
+</p>
+
+<p>
+第一次登录时可能会提示RSA指纹未知，输入yes/点击“是”即可
+</p>
+
+<p>
+登陆成功后您将看到命令提示符：
+root@OpenWrt:~#
+</p>
+
+</div>
+<!-- EDIT3 SECTION "SSH登录WooyunWifi" [699-1393] -->
+<h2 class="sectionedit4" id="命令行功能使用示例">命令行功能使用示例</h2>
+<div class="level2">
+<hr />
+
+<p>
+无线破解集成工具：
+</p>
+<pre class="code">wifite.py</pre>
+
+<p>
+穿墙系列工具：
+</p>
+<pre class="code">ptunnel --help
+
+iodine --help
+
+htc  --help</pre>
+
+<p>
+usb系列工具：
+</p>
+<pre class="code">usbipd --help</pre>
+
+<p>
+网络数据包截获：
+</p>
+<pre class="code">tcpdump --help
+
+ngrep --help</pre>
+
+<p>
+用SSH隧道实现的VPN：
+</p>
+<pre class="code">/usr/local/sshuttle/sshuttle --help</pre>
+
+<p>
+手动破解WIFI：
+</p>
+<pre class="code">aircrack-ng --help
+以及aircrack相关那一整套工具都在里面
+
+reaver --help
+
+pixiewps --help</pre>
+
+<p>
+或者你也可以自己写一些python脚本：
+</p>
+<pre class="code">python</pre>
+
+<p>
+*工具未全部列出
+</p>
+
+<p>
+*没有你中意的工具？去Openwrt Luci管理界面中安装其他的软件包吧！
+</p>
+
+</div>
+<!-- EDIT4 SECTION "命令行功能使用示例" [1394-] --></div>
+</body>
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/wooyunwifi:console by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:25:25 GMT -->
+</html>

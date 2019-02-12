@@ -1,0 +1,48 @@
+====== wafw00f使用说明 ======
+
+==== 1、工具简介 ====
+
+----
+用python编写的一个WAF指纹探测和识别小工具。
+
+Wafw00f用来判断WAF设备的函数如下：
+
+<code bash>
+   AdminFolder = '/Admin_Files/'
+    xssstring = '<script>alert(1)</script>'
+    dirtravstring = '../../../../etc/passwd'
+    cleanhtmlstring = '<invalid>hello'
+    isaservermatch = 'Forbidden ( The server denied the specified Uniform Resource Locator (URL). Contact the server administrator.  )'
+</code>
+
+==== 2、使用方法 ====
+
+----
+使用“python wafw00f.py -h”可以查看工具的使用方法，运行示例：
+<code bash>
+python wafw00f.py http://www.victim.org/
+</code>
+
+基于Cookie的检测
+Wafw00f的探测大部分是基于Cookie的检测。
+
+F5asm的检测规则如下：
+<code bash>
+def isf5asm(self):
+        # credit goes to W3AF
+        return self.matchcookie('^TS[a-zA-Z0-9]{3,6}=')</code>
+        
+基于响应头的检测
+Profense在响应头会包含'server','profense'的信息。
+<code bash>
+    def isprofense(self):
+        """
+        Checks for server headers containing "profense"
+        """
+        return self.matchheader(('server','profense'))</code>
+        
+
+==== 3、相关资源 ====
+
+----
+[[http://code.google.com/p/waffit/source/browse/trunk/wafw00f.py|wafw00f git]]

@@ -1,0 +1,10 @@
+#文件泄露
+
+企业WEB文件泄露的原因可能有很多，在此总结几个方面供大家参考：
+
+- [[server:Github|github导致文件泄露]]
+- [[server:Git|git导致文件泄露]]
+- [[server:svn|svn导致文件泄露]]
+- [[server:DS_Store|DS_Store导致文件泄露]]
+- [[server:sitebackup|网站备份压缩文件]]
+- [[server:web.xml|WEB-INF/web.xml泄露]]

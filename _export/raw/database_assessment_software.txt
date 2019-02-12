@@ -1,0 +1,18 @@
+====== 数据库评估软件 ======
+
+  * [[tools:bbqsql|bbqsql]]
+  * [[tools:dbpwaudit|dbpwaudit]]
+  * [[tools:hexorbase|hexorbase]]
+  * [[tools:jsql|jsql]]
+  * [[tools:mdb-export|mdb-export]]
+  * [[tools:mdb-hexdump|mdb-hexdump]]
+  * [[tools:mdb-parsecsv|mdb-parsecsv]]
+  * [[tools:mdb-sql|mdb-sql]]
+  * [[tools:mdb-tables|mdb-tables]]
+  * [[tools:oscanner|oscanner]]
+  * [[tools:sidguesser|sidguesser]]
+  * [[tools:sqldict|sqldict]]
+  * [[tools:sqlmap|sqlmap]]
+  * [[tools:sqlninja|sqlninja]]
+  * [[tools:sqlsus|sqlsus]]
+  * [[tools:tnscmd10g|tnscmd10g]]

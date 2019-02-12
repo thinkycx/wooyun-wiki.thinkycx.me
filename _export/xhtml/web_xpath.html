@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/web:xpath by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:03:08 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8" />
+  <title>web:xpath</title>
+<meta name="generator" content="DokuWiki"/>
+<meta name="robots" content="index,follow"/>
+<meta name="keywords" content="web,xpath"/>
+<link rel="search" type="application/opensearchdescription+xml" href="../../lib/exe/opensearch.php" title="WooYun WiKi"/>
+<link rel="start" href="../../index.html"/>
+<link rel="contents" href="../../web_xpathdecf.html?do=index" title="网站地图"/>
+<link rel="alternate" type="application/rss+xml" title="最近更改" href="../../feed.php"/>
+<link rel="alternate" type="application/rss+xml" title="当前命名空间" href="../../feed4fbc.php?mode=list&amp;ns=web"/>
+<link rel="alternate" type="text/html" title="纯HTML" href="web_xpath.html"/>
+<link rel="alternate" type="text/plain" title="Wiki Markup 语言" href="../raw/xpath.txt"/>
+<link rel="canonical" href="../../web_xpath.html"/>
+<link rel="stylesheet" type="text/css" href="../../lib/exe/css70b4.css?t=bootstrap3&amp;tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"/>
+<script type="text/javascript">/*<![CDATA[*/var NS='web';var JSINFO = {"id":"web:xpath","namespace":"web","plugin_codeprettify":{"loader_base":"\/lib\/plugins\/codeprettify\/google-code-prettify"}};
+/*!]]>*/</script>
+<script type="text/javascript" charset="utf-8" src="../../lib/exe/js1e16.php?tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"></script>
+<script type="text/javascript" charset="utf-8" src="../../lib/plugins/codeprettify/google-code-prettify/run_prettifyeb11.js?lang=css"></script>
+</head>
+<body>
+<div class="dokuwiki export">
+
+<p>
+ 在很多WEB应用中常常会用XML格式来储存数据（国外占多数），而XPATH就是一个XML文档中解析和提取数据的查询语言（类似于SQL语言）。如果我们能控制一个XAPTH输入点，那么我们可以像注入SQL一样的去注入XPATH，当然你不能用SQL语句以及UNION联合查询。 
+假设有一个XML文档为 
+<strong>1.&lt;users&gt;<br/>
+2. &lt;user&gt;<br/>
+3.  &lt;name&gt;11&lt;/name&gt;<br/>
+4.  &lt;username&gt;Murkfox&lt;/username&gt;<br/>
+5.  &lt;password&gt;password123!&lt;/password&gt;<br/>
+6.  &lt;admin&gt;1&lt;/admin&gt;<br/>
+7. &lt;/user&gt;<br/>
+8. &lt;user&gt;<br/>
+9.  &lt;name&gt;Chris Stevens&lt;/name&gt;<br/>
+10.  &lt;username&gt;ctothes&lt;/username&gt;<br/>
+11.  &lt;password&gt;reddit12&lt;/password&gt; 
+12.  &lt;admin&gt;0&lt;/admin&gt;<br/>
+13. &lt;/user&gt;<br/>
+14.&lt;/users&gt;  一个非常简单的web表单使用用户名“Murkfox”和密码“password123!”输入到表单中，后台执行的查询语法如下  * ： /<em>[1]/user[username=”Murkfox”and password=”password123!”]</em>* 
+返回的用户节点 
+1.&lt;user&gt;<br/>
+2.  &lt;name&gt;11&lt;/name&gt;<br/>
+3.  &lt;username&gt;Murkfox&lt;/username&gt;<br/>
+4.  &lt;password&gt;password123!&lt;/password&gt;<br/>
+5.  &lt;admin&gt;1&lt;/admin&gt;<br/>
+6. &lt;/user&gt;<br/>
+7.假如服务端没有进行输入检查，那么一个XPATH注入就诞生了，它的核心问题和本质同其他注入一样，都是因为用户所能控制的输入被拼接或伪装成了程序的执行命令，而被服务端执行。 
+假设它的认证过程是这样的 
+/*[1]/user[username=”Murkfox”and password=”password123!”] 
+攻击者也可以提交以下内容 
+username: Murkfox“or “1” =“1password: anything 
+表达式为 
+Username=’Murkfox’ or 1=1 or ‘a’=’b’ 
+那么就可以表示为 
+（a or b）or （c and d） 
+由于逻辑操作符and的优先级高于or 所以，如果a或者b为真表达式不管c and d返回什么都是真的，攻击者就可以登录。这就是用XAPTH注入绕过验证机制。x 
+
+</p>
+</div>
+</body>
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/web:xpath by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:03:08 GMT -->
+</html>

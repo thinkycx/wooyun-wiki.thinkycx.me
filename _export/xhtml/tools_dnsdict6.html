@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/tools:dnsdict6 by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:25:25 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8" />
+  <title>tools:dnsdict6</title>
+<meta name="generator" content="DokuWiki"/>
+<meta name="robots" content="index,follow"/>
+<meta name="keywords" content="tools,dnsdict6"/>
+<link rel="search" type="application/opensearchdescription+xml" href="../../lib/exe/opensearch.php" title="WooYun WiKi"/>
+<link rel="start" href="../../index.html"/>
+<link rel="contents" href="../../tools_dnsdict6decf.html?do=index" title="网站地图"/>
+<link rel="alternate" type="application/rss+xml" title="最近更改" href="../../feed.php"/>
+<link rel="alternate" type="application/rss+xml" title="当前命名空间" href="../../feed022e.php?mode=list&amp;ns=tools"/>
+<link rel="alternate" type="text/html" title="纯HTML" href="tools_dnsdict6.html"/>
+<link rel="alternate" type="text/plain" title="Wiki Markup 语言" href="../raw/dnsdict6.txt"/>
+<link rel="canonical" href="../../tools_dnsdict6.html"/>
+<link rel="stylesheet" type="text/css" href="../../lib/exe/css70b4.css?t=bootstrap3&amp;tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"/>
+<script type="text/javascript">/*<![CDATA[*/var NS='tools';var JSINFO = {"id":"tools:dnsdict6","namespace":"tools","plugin_codeprettify":{"loader_base":"\/lib\/plugins\/codeprettify\/google-code-prettify"}};
+/*!]]>*/</script>
+<script type="text/javascript" charset="utf-8" src="../../lib/exe/js1e16.php?tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"></script>
+<script type="text/javascript" charset="utf-8" src="../../lib/plugins/codeprettify/google-code-prettify/run_prettifyeb11.js?lang=css"></script>
+</head>
+<body>
+<div class="dokuwiki export">
+<!-- TOC START -->
+<div id="dw__toc">
+<h3 class="toggle">目录</h3>
+<div>
+
+<ul class="toc">
+<li class="level1"><div class="li"><a href="#dnsdict6使用说明">dnsdict6使用说明</a></div>
+<ul class="toc">
+<li class="clear">
+<ul class="toc">
+<li class="level3"><div class="li"><a href="#工具简介">1、工具简介</a></div></li>
+<li class="level3"><div class="li"><a href="#使用方法">2、使用方法</a></div></li>
+<li class="level3"><div class="li"><a href="#使用示范">3、使用示范</a></div></li>
+<li class="level3"><div class="li"><a href="#相关资源">4、相关资源</a></div></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<!-- TOC END -->
+
+<h1 class="sectionedit1" id="dnsdict6使用说明">dnsdict6使用说明</h1>
+<div class="level1">
+
+</div>
+<!-- EDIT1 SECTION "dnsdict6使用说明" [1-36] -->
+<h3 class="sectionedit2" id="工具简介">1、工具简介</h3>
+<div class="level3">
+<hr />
+
+<p>
+由gnucitizen.org开发，一款可以使用内置或指定字典的基于dnsmap的DNS枚举工具。
+</p>
+
+</div>
+<!-- EDIT2 SECTION "1、工具简介" [37-172] -->
+<h3 class="sectionedit3" id="使用方法">2、使用方法</h3>
+<div class="level3">
+<hr />
+
+<p>
+终端直接输入“dnsdict6 -h”可以查看其相关参数用法：
+</p>
+<pre class="code bash"><span class="co4">light@kali:~# </span>dnsdict6 <span class="re5">-h</span>
+dnsdict6 v2.5 <span class="br0">&#40;</span>c<span class="br0">&#41;</span> <span class="nu0">2013</span> by van Hauser <span class="sy0">/</span> THC <span class="sy0">&lt;</span>vh<span class="sy0">@</span>thc.org<span class="sy0">&gt;</span> www.thc.org
+&nbsp;
+Syntax: dnsdict6 <span class="br0">&#91;</span>-d4<span class="br0">&#93;</span> <span class="br0">&#91;</span>-s<span class="sy0">|</span>-m<span class="sy0">|</span>-l<span class="sy0">|</span>-x<span class="sy0">|</span>-u<span class="br0">&#93;</span> <span class="br0">&#91;</span>-t THREADS<span class="br0">&#93;</span> <span class="br0">&#91;</span>-D<span class="br0">&#93;</span> domain <span class="br0">&#91;</span>dictionary-file<span class="br0">&#93;</span>
+&nbsp;
+Enumerates a domain <span class="kw1">for</span> DNS entries, it uses a dictionary <span class="kw2">file</span> <span class="kw1">if</span> supplied
+or a built-in list otherwise. This tool is based on dnsmap by gnucitizen.org.
+&nbsp;
+Options:
+ <span class="re5">-4</span>      <span class="kw1">do</span> also dump IPv4 addresses
+ <span class="re5">-t</span> NO   specify the number of threads to use <span class="br0">&#40;</span>default: <span class="nu0">8</span>, max: <span class="nu0">32</span><span class="br0">&#41;</span>.
+ <span class="re5">-D</span>      dump the selected built-in wordlist, no scanning.
+ <span class="re5">-d</span>      display IPv6 information on NS and MX DNS domain information.
+ <span class="re5">-S</span>      perform SRV service name guessing
+ -<span class="br0">&#91;</span>smlxu<span class="br0">&#93;</span> choose the dictionary <span class="kw2">size</span> by -s<span class="br0">&#40;</span><span class="re2">mall</span>=<span class="nu0">100</span><span class="br0">&#41;</span>, -m<span class="br0">&#40;</span><span class="re2">edium</span>=<span class="nu0">1419</span><span class="br0">&#41;</span> <span class="br0">&#40;</span>DEFAULT<span class="br0">&#41;</span>
+           -l<span class="br0">&#40;</span><span class="re2">arge</span>=<span class="nu0">2601</span><span class="br0">&#41;</span>, -x<span class="br0">&#40;</span><span class="re2">treme</span>=<span class="nu0">5886</span><span class="br0">&#41;</span> or -u<span class="br0">&#40;</span><span class="re2">ber</span>=<span class="nu0">16724</span><span class="br0">&#41;</span></pre>
+
+<p>
+语法：dnsdict6 [-d46] [-s|-m|-l|-x] [-t THREADS] [-D] domain [dictionary-file]
+</p>
+
+<p>
+参数解释：
+</p>
+<ul>
+<li class="level1"><div class="li"> -4：显示ipv4</div>
+</li>
+<li class="level1"><div class="li"> -t：指定要使用的线程，默认线程为8，最大32</div>
+</li>
+<li class="level1"><div class="li"> -D：只显示字典不扫描</div>
+</li>
+<li class="level1"><div class="li"> -d：显示在DNS服务器上的NS、MX记录的ipv6信息</div>
+</li>
+<li class="level1"><div class="li"> －[smlx] 选择字典大小［内置的] -s 小型是50条 －m 中等是796条[默认] -l 大型1416条 －x 最大3211条</div>
+</li>
+</ul>
+
+</div>
+<!-- EDIT3 SECTION "2、使用方法" [173-1466] -->
+<h3 class="sectionedit4" id="使用示范">3、使用示范</h3>
+<div class="level3">
+<hr />
+
+<p>
+查询<a href="http://1ight.co/" class="urlextern" title="http://1ight.co"  rel="nofollow">1ight.co</a>的DNS信息：
+</p>
+<pre class="code bash"><span class="co4">light@kali:~# </span>dnsdict6 <span class="re5">-d46</span> <span class="re5">-t</span> <span class="nu0">16</span> <span class="re5">-d</span> <span class="re5">-m</span> 1ight.co
+Starting DNS enumeration work on 1ight.co. ...
+Gathering NS and MX information...
+NS of 1ight.co. is f1g1ns1.dnspod.net. =<span class="sy0">&gt;</span> 113.108.80.138
+NS of 1ight.co. is f1g1ns1.dnspod.net. =<span class="sy0">&gt;</span> 111.30.132.180
+NS of 1ight.co. is f1g1ns1.dnspod.net. =<span class="sy0">&gt;</span> 125.39.208.193
+NS of 1ight.co. is f1g1ns1.dnspod.net. =<span class="sy0">&gt;</span> 180.153.9.189
+NS of 1ight.co. is f1g1ns1.dnspod.net. =<span class="sy0">&gt;</span> 182.140.167.166
+NS of 1ight.co. is f1g1ns2.dnspod.net. =<span class="sy0">&gt;</span> 115.236.137.40
+NS of 1ight.co. is f1g1ns2.dnspod.net. =<span class="sy0">&gt;</span> 115.236.151.191
+NS of 1ight.co. is f1g1ns2.dnspod.net. =<span class="sy0">&gt;</span> 112.90.82.194
+NS of 1ight.co. is f1g1ns2.dnspod.net. =<span class="sy0">&gt;</span> 101.226.30.224
+NS of 1ight.co. is f1g1ns2.dnspod.net. =<span class="sy0">&gt;</span> 182.140.167.188
+MX of 1ight.co. is mxbiz1.qq.com. =<span class="sy0">&gt;</span> 183.60.15.245
+MX of 1ight.co. is mxbiz1.qq.com. =<span class="sy0">&gt;</span> 183.57.48.34
+MX of 1ight.co. is mxbiz2.qq.com. =<span class="sy0">&gt;</span> 183.60.15.245
+MX of 1ight.co. is mxbiz2.qq.com. =<span class="sy0">&gt;</span> 183.57.48.34
+&nbsp;
+Starting enumerating 1ight.co. - creating <span class="nu0">16</span> threads <span class="kw1">for</span> <span class="nu0">1419</span> words...
+Estimated <span class="kw1">time</span> to completion: <span class="nu0">1</span> to <span class="nu0">1</span> minutes
+www.1ight.co. =<span class="sy0">&gt;</span> 112.74.102.78
+&nbsp;
+Found <span class="nu0">1</span> domain name and <span class="nu0">1</span> unique ipv4 address <span class="kw1">for</span> 1ight.co.</pre>
+
+</div>
+<!-- EDIT4 SECTION "3、使用示范" [1467-2683] -->
+<h3 class="sectionedit5" id="相关资源">4、相关资源</h3>
+<div class="level3">
+<hr />
+
+<p>
+<a href="http://www.gnucitizen.org/" class="urlextern" title="http://www.gnucitizen.org/"  rel="nofollow">gnucitizen.org</a>
+</p>
+
+</div>
+<!-- EDIT5 SECTION "4、相关资源" [2684-] --></div>
+</body>
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/tools:dnsdict6 by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:25:25 GMT -->
+</html>

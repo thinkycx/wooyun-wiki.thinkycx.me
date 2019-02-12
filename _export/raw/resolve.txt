@@ -1,0 +1,94 @@
+====== 解析漏洞 ======
+
+==== 1、漏洞简介 ====
+
+----
+解析漏洞是指web服务器因对http请求处理不当导致将非可执行的脚本，文件等当做可执行的脚本，文件等执行。该漏洞一般配合服务器的文件上传功能使用，以获取服务器的权限。
+
+==== 2、漏洞成因、检测及利用 ====
+
+----
+使用了低版本的，存在漏洞的web服务器。解析漏洞有以下几种：
+
+**IIS 5.x/6.0解析漏洞**
+
+目录解析:在网站下建立文件夹的名称中带有.asp、.asa等可执行脚本文件后缀为后缀的文件夹，其目录内的任何扩展名的文件都被IIS当作可执行文件来解析并执行。
+<code>http://www.xxx.com/xx.asp/xx.jpg</code>
+文件解析:在IIS6.0下，分号后面的不被解析，也就是说6.0下，分号后面的不被解析，也就是说xx.asp;.jpg将被当做xx.asp解析并执行。
+<code>http://www.xxx.com/xx.asp;.jpg</code>
+
+IIS6.0 默认的可执行文件有asp、asa、cer、cdx四种。
+
+**IIS 7.0/IIS 7.5/ Nginx <0.8.3畸形解析漏洞**
+
+在默认Fast-CGI开启状况下，访问以下网址，服务器将把xx.jpg文件当做php解析并执行。
+<code>http://www.xxx.com/xx.jpg/.php</code>
+
+**Nginx <8.03 空字节代码执行漏洞**
+
+影响范围：Nginx0.5.,0.6., 0.7 <= 0.7.65, 0.8 <= 0.8.37
+
+访问以下网址，服务器将把xx.jpg文件当做php解析并执行。
+<code>http://www.xxx.com/xx.jpg%00.php</code>
+
+**Apache解析漏洞**
+
+Apache对文件解析是从右到左开始判断解析,如果文件的后缀为不可识别,就再往左判断，解析。
+如xx.php.owf.rar，由于Apache无法解析rar和owf后缀，但能够解析php后缀，因此Apache会将xx.php.owf.rar当做php格式的文件进行解析并执行。
+
+访问以下网址，服务器将把xx.php.owf.rar文件当做php解析并执行。
+<code>http://www.xxx.com/xx.php.owf.rar</code>
+
+**CVE-2013-4547 Nginx解析漏洞**
+
+访问以下网址，服务器将把xx.jpg文件当做php解析并执行。
+<code>http://www.xxx.com/xx.jpg（非编码空格）\0.php</code>
+
+**使用.htaccess将任意文件作为可执行脚本解析**
+
+如果在Apache中.htaccess可被执行.且可被上传.那可以尝试在.htaccess中写入: 
+<code><FilesMatch ".(jpg)$"> SetHandler application/x-httpd-php </FilesMatch></code>
+这将把目录下的所有后缀为jpg的文件当做可执行的php脚本进行解析并执行。
+
+==== 3、实际案例 ====
+
+----
+**IIS 5.x/6.0解析漏洞**
+
+[[http://www.wooyun.org/bugs/wooyun-2010-092071|中国电信山东分公司某平台getshell可渗透内网]]
+
+[[http://www.wooyun.org/bugs/wooyun-2010-094428|武汉大学某站fck上传与IIS6解析漏洞]]
+
+**IIS 7.0/IIS 7.5/ Nginx <8.03畸形解析漏洞**
+
+[[http://www.wooyun.org/bugs/wooyun-2013-032250|用友软件某分站SQL注入漏洞+nginx解析漏洞]]
+
+[[http://www.wooyun.org/bugs/wooyun-2013-021064|新浪网分站多处安全漏洞（nginx解析+SQL注射等）小礼包]]
+
+[[http://www.wooyun.org/bugs/wooyun-2013-019253|kingsoft.com某x级域名nginx解析漏洞+爆路径]]
+
+**Nginx <8.03 空字节代码执行漏洞**
+
+[[http://wooyun.org/bugs/wooyun-2010-033033|56网某分站补丁不及时已webshell（20多万会员数据）]]
+
+[[http://wooyun.org/bugs/wooyun-2010-09578|金山毒霸后台及nginx截断打包]]
+
+[[http://wooyun.org/bugs/wooyun-2010-03541|phpdisk网盘上传解析漏洞]]
+
+**Apache解析漏洞**
+
+[[http://www.wooyun.org/bugs/wooyun-2010-095579|uc某站getshell可入内网]]
+
+[[http://www.wooyun.org/bugs/wooyun-2010-018433|安卓开发平台存在上传漏洞和Apache解析漏洞,成功获取webshell]]
+
+**CVE-2013-4547 Nginx解析漏洞**
+
+**使用.htaccess将任意文件作为可执行脚本解析**
+==== 4、漏洞修复 ====
+
+----
+升级web服务器版本或安装相应的官方补丁。
+==== 5、相关资源 ====
+
+----
+[[http://drops.wooyun.org/tips/2006|CVE-2013-4547 Nginx解析漏洞深入利用及分析]]

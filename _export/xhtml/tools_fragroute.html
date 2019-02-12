@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/tools:fragroute by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:25:26 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8" />
+  <title>tools:fragroute</title>
+<meta name="generator" content="DokuWiki"/>
+<meta name="robots" content="index,follow"/>
+<meta name="keywords" content="tools,fragroute"/>
+<link rel="search" type="application/opensearchdescription+xml" href="../../lib/exe/opensearch.php" title="WooYun WiKi"/>
+<link rel="start" href="../../index.html"/>
+<link rel="contents" href="../../tools_fragroutedecf.html?do=index" title="网站地图"/>
+<link rel="alternate" type="application/rss+xml" title="最近更改" href="../../feed.php"/>
+<link rel="alternate" type="application/rss+xml" title="当前命名空间" href="../../feed022e.php?mode=list&amp;ns=tools"/>
+<link rel="alternate" type="text/html" title="纯HTML" href="tools_fragroute.html"/>
+<link rel="alternate" type="text/plain" title="Wiki Markup 语言" href="../raw/fragroute.txt"/>
+<link rel="canonical" href="../../tools_fragroute.html"/>
+<link rel="stylesheet" type="text/css" href="../../lib/exe/css70b4.css?t=bootstrap3&amp;tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"/>
+<script type="text/javascript">/*<![CDATA[*/var NS='tools';var JSINFO = {"id":"tools:fragroute","namespace":"tools","plugin_codeprettify":{"loader_base":"\/lib\/plugins\/codeprettify\/google-code-prettify"}};
+/*!]]>*/</script>
+<script type="text/javascript" charset="utf-8" src="../../lib/exe/js1e16.php?tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"></script>
+<script type="text/javascript" charset="utf-8" src="../../lib/plugins/codeprettify/google-code-prettify/run_prettifyeb11.js?lang=css"></script>
+</head>
+<body>
+<div class="dokuwiki export">
+<!-- TOC START -->
+<div id="dw__toc">
+<h3 class="toggle">目录</h3>
+<div>
+
+<ul class="toc">
+<li class="level1"><div class="li"><a href="#fragroute使用说明">fragroute使用说明</a></div>
+<ul class="toc">
+<li class="clear">
+<ul class="toc">
+<li class="level3"><div class="li"><a href="#工具简介">1、工具简介</a></div></li>
+<li class="level3"><div class="li"><a href="#参数解释">2、参数解释</a></div></li>
+<li class="level3"><div class="li"><a href="#使用方法">3、使用方法</a></div></li>
+<li class="level3"><div class="li"><a href="#相关资源">4、相关资源</a></div></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<!-- TOC END -->
+
+<h1 class="sectionedit1" id="fragroute使用说明">fragroute使用说明</h1>
+<div class="level1">
+
+</div>
+<!-- EDIT1 SECTION "fragroute使用说明" [1-37] -->
+<h3 class="sectionedit2" id="工具简介">1、工具简介</h3>
+<div class="level3">
+<hr />
+
+<p>
+2002年3月左右，<a href="http://www.monkey.org/~dugsong/" class="urlextern" title="http://www.monkey.org/~dugsong/"  rel="nofollow">http://www.monkey.org/~dugsong/</a>发布了一个工具fragroute，在入侵检测领域引起了相当大的震动。有关fragroute的讨论成了3-4月<a href="http://online.securityfocus.com/" class="urlextern" title="http://online.securityfocus.com/"  rel="nofollow">http://online.securityfocus.com/</a>和snort邮件列表的一个热点。
+fragroute能够截取、修改和重写向外发送的报文，实现大部分在了Secure Networks Insertion, Evasion, and Denial of Service: Eluding Network Intrusion Detection中叙述的IDS欺骗技术，包括IP、TCP层的数据包碎片以及数据包数据重叠等。
+</p>
+
+</div>
+<!-- EDIT2 SECTION "1、工具简介" [38-590] -->
+<h3 class="sectionedit3" id="参数解释">2、参数解释</h3>
+<div class="level3">
+<hr />
+
+<p>
+终端直接输入“fragroute -h”可以查看其相关参数用法：
+</p>
+<pre class="code bash"><span class="co4">light@kali:~# </span>fragroute
+Usage: fragroute <span class="br0">&#91;</span>-f <span class="kw2">file</span><span class="br0">&#93;</span> dst
+Rules:
+       delay first<span class="sy0">|</span><span class="kw2">last</span><span class="sy0">|</span>random <span class="sy0">&lt;</span>ms<span class="sy0">&gt;</span>
+       drop first<span class="sy0">|</span><span class="kw2">last</span><span class="sy0">|</span>random <span class="sy0">&lt;</span>prob-<span class="sy0">%&gt;</span>
+       dup first<span class="sy0">|</span><span class="kw2">last</span><span class="sy0">|</span>random <span class="sy0">&lt;</span>prob-<span class="sy0">%&gt;</span>
+       <span class="kw3">echo</span> <span class="sy0">&lt;</span>string<span class="sy0">&gt;</span> ...
+       ip_chaff dup<span class="sy0">|</span>opt<span class="sy0">|&lt;</span>ttl<span class="sy0">&gt;</span>
+       ip_frag <span class="sy0">&lt;</span><span class="kw2">size</span><span class="sy0">&gt;</span> <span class="br0">&#91;</span>old<span class="sy0">|</span>new<span class="br0">&#93;</span>
+       ip_opt lsrr<span class="sy0">|</span>ssrr <span class="sy0">&lt;</span>ptr<span class="sy0">&gt;</span> <span class="sy0">&lt;</span>ip-addr<span class="sy0">&gt;</span> ...
+       ip_ttl <span class="sy0">&lt;</span>ttl<span class="sy0">&gt;</span>
+       ip_tos <span class="sy0">&lt;</span>tos<span class="sy0">&gt;</span>
+       order random<span class="sy0">|</span>reverse
+       print
+       tcp_chaff cksum<span class="sy0">|</span>null<span class="sy0">|</span>paws<span class="sy0">|</span>rexmit<span class="sy0">|</span><span class="kw2">seq</span><span class="sy0">|</span>syn<span class="sy0">|&lt;</span>ttl<span class="sy0">&gt;</span>
+       tcp_opt mss<span class="sy0">|</span>wscale <span class="sy0">&lt;</span><span class="kw2">size</span><span class="sy0">&gt;</span>
+       tcp_seg <span class="sy0">&lt;</span><span class="kw2">size</span><span class="sy0">&gt;</span> <span class="br0">&#91;</span>old<span class="sy0">|</span>new<span class="br0">&#93;</span></pre>
+
+</div>
+<!-- EDIT3 SECTION "2、参数解释" [591-1224] -->
+<h3 class="sectionedit4" id="使用方法">3、使用方法</h3>
+<div class="level3">
+<hr />
+
+<p>
+Usage: fragroute [-f file] dst<br/>
+fragroute -f fragroute.conf 目的ip地址<br/>
+-f：必带的参数，指定配置文件的路径。
+fragroute的使用是根据fragroute.conf这个配 置文件来进行操作的，所有的命令参数值放在这个配置文件中，每次只需要修改配置文件即可。fragroute本身会自带一些配置文件，供大家使用。操作时也可以把常用的配置文件放在一个目录下以便管理和使用。<br/>
+dst：必带的参数，为目的ip地址，注意直接写ip地址即可。指明发向该ip地址的报文才进行fragroute的操作。仅支持对一个ip地址进行fragroute的命令操作。<br/>
+配置完以上两个参数后就可以使用了，但是第一次使用一般会碰到这样的问题： 
+</p>
+
+<p>
+[light@kali ~]# fragroute -f /usr/local/etc/fragroute.conf 192.168.96.1 fragroute: no route to 192.168.96.1: No such process<br/>
+提示没有路由到目的ip，这个时候其实是没有学到arp的原因，你只需要先ping一下你想要访问的目的ip，然后再执行上面的命令就可以了。
+</p>
+
+</div>
+<!-- EDIT4 SECTION "3、使用方法" [1225-2335] -->
+<h3 class="sectionedit5" id="相关资源">4、相关资源</h3>
+<div class="level3">
+<hr />
+
+<p>
+<a href="http://www.monkey.org/~dugsong/fragroute/" class="urlextern" title="http://www.monkey.org/~dugsong/fragroute/"  rel="nofollow">fragroute官网</a>
+</p>
+
+</div>
+<!-- EDIT5 SECTION "4、相关资源" [2336-] --></div>
+</body>
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/tools:fragroute by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:25:26 GMT -->
+</html>

@@ -1,0 +1,7 @@
+====== 通信 ======
+
+[[http://drops.wooyun.org/tips/3296|通信证书校验]]
+
+[[http://drops.wooyun.org/tips/6049|敏感数据加密]] 
+
+[[http://drops.wooyun.org/tips/6049|重要数据摘要/签名]] 

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/server:web.xml by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:25:25 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8" />
+  <title>server:web.xml</title>
+<meta name="generator" content="DokuWiki"/>
+<meta name="robots" content="index,follow"/>
+<meta name="keywords" content="server,web.xml"/>
+<link rel="search" type="application/opensearchdescription+xml" href="../../lib/exe/opensearch.php" title="WooYun WiKi"/>
+<link rel="start" href="../../index.html"/>
+<link rel="contents" href="../../server_webdecf.html?do=index" title="网站地图"/>
+<link rel="alternate" type="application/rss+xml" title="最近更改" href="../../feed.php"/>
+<link rel="alternate" type="application/rss+xml" title="当前命名空间" href="../../feed0688.php?mode=list&amp;ns=server"/>
+<link rel="alternate" type="text/html" title="纯HTML" href="server_web.html"/>
+<link rel="alternate" type="text/plain" title="Wiki Markup 语言" href="../raw/web.xml.txt"/>
+<link rel="canonical" href="../../server_web.html"/>
+<link rel="stylesheet" type="text/css" href="../../lib/exe/css70b4.css?t=bootstrap3&amp;tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"/>
+<script type="text/javascript">/*<![CDATA[*/var NS='server';var JSINFO = {"id":"server:web.xml","namespace":"server","plugin_codeprettify":{"loader_base":"\/lib\/plugins\/codeprettify\/google-code-prettify"}};
+/*!]]>*/</script>
+<script type="text/javascript" charset="utf-8" src="../../lib/exe/js1e16.php?tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"></script>
+<script type="text/javascript" charset="utf-8" src="../../lib/plugins/codeprettify/google-code-prettify/run_prettifyeb11.js?lang=css"></script>
+</head>
+<body>
+<div class="dokuwiki export">
+<!-- TOC START -->
+<div id="dw__toc">
+<h3 class="toggle">目录</h3>
+<div>
+
+<ul class="toc">
+<li class="level1"><div class="li"><a href="#web-inf_webxml泄露">WEB-INF/web.xml泄露</a></div>
+<ul class="toc">
+<li class="level2"><div class="li"><a href="#webxml简介">1、web.xml简介</a></div></li>
+<li class="level2"><div class="li"><a href="#漏洞成因">2、漏洞成因</a></div></li>
+<li class="level2"><div class="li"><a href="#漏洞检测以及利用方法">3、漏洞检测以及利用方法</a></div></li>
+<li class="level2"><div class="li"><a href="#实际案例">4、实际案例</a></div></li>
+<li class="level2"><div class="li"><a href="#修复漏洞">5、修复漏洞</a></div></li>
+<li class="level2"><div class="li"><a href="#相关资源">6、相关资源</a></div></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<!-- TOC END -->
+
+<h1 class="sectionedit1" id="web-inf_webxml泄露">WEB-INF/web.xml泄露</h1>
+<div class="level1">
+
+</div>
+<!-- EDIT1 SECTION "WEB-INF/web.xml泄露" [0-22] -->
+<h2 class="sectionedit2" id="webxml简介">1、web.xml简介</h2>
+<div class="level2">
+
+<p>
+WEB-INF是Java的WEB应用的安全目录。如果想在页面中直接访问其中的文件，必须通过web.xml文件对要访问的文件进行相应映射才能访问。
+</p>
+
+<p>
+WEB-INF主要包含一下文件或目录：
+</p>
+<pre class="code">/WEB-INF/web.xml：Web应用程序配置文件，描述了 servlet 和其他的应用组件配置及命名规则。
+/WEB-INF/classes/：含了站点所有用的 class 文件，包括 servlet class 和非servlet class，他们不能包含在 .jar文件中
+/WEB-INF/lib/：存放web应用需要的各种JAR文件，放置仅在这个应用中要求使用的jar文件,如数据库驱动jar文件
+/WEB-INF/src/：源码目录，按照包名结构放置各个java文件。
+/WEB-INF/database.properties：数据库配置文件</pre>
+
+</div>
+<!-- EDIT2 SECTION "1、web.xml简介" [23-791] -->
+<h2 class="sectionedit3" id="漏洞成因">2、漏洞成因</h2>
+<div class="level2">
+
+<p>
+通常一些web应用我们会使用多个web服务器搭配使用，解决其中的一个web服务器的性能缺陷以及做均衡负载的优点和完成一些分层结构的安全策略等。在使用这种架构的时候，由于对静态资源的目录或文件的映射配置不当，可能会引发一些的安全问题，导致web.xml等文件能够被读取。
+</p>
+
+</div>
+<!-- EDIT3 SECTION "2、漏洞成因" [792-1183] -->
+<h2 class="sectionedit4" id="漏洞检测以及利用方法">3、漏洞检测以及利用方法</h2>
+<div class="level2">
+
+<p>
+通过找到web.xml文件，推断class文件的路径，最后直接class文件，在通过反编译class文件，得到网站源码。
+</p>
+
+</div>
+<!-- EDIT4 SECTION "3、漏洞检测以及利用方法" [1184-1359] -->
+<h2 class="sectionedit5" id="实际案例">4、实际案例</h2>
+<div class="level2">
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-094544" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-094544"  rel="nofollow">欧朋浏览器多站配置不当泄漏敏感信息</a>
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2012-07329" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2012-07329"  rel="nofollow">去哪儿任意文件读取（基本可重构该系统原工程）</a>
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-091995" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-091995"  rel="nofollow">tcl某站一种类型配置不当可getshell入内网</a>
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-061490" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-061490"  rel="nofollow">从一个小缺陷看某金融支付机构存在的安全隐患</a>
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2012-011730" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2012-011730"  rel="nofollow">百度某应用beidou（北斗）架构遍历</a>
+</p>
+
+</div>
+<!-- EDIT5 SECTION "4、实际案例" [1360-1916] -->
+<h2 class="sectionedit6" id="修复漏洞">5、修复漏洞</h2>
+<div class="level2">
+
+<p>
+通过Nginx配置禁止访问一些铭感目录
+</p>
+<pre class="code">location ~ ^/WEB-INF/* { deny all; }</pre>
+
+</div>
+<!-- EDIT6 SECTION "5、修复漏洞" [1917-2023] -->
+<h2 class="sectionedit7" id="相关资源">6、相关资源</h2>
+<div class="level2">
+
+<p>
+<a href="http://drops.wooyun.org/papers/60" class="urlextern" title="http://drops.wooyun.org/papers/60"  rel="nofollow">web服务器分层架构的资源文件映射安全以及在J2EE应用中的利用与危害</a>
+</p>
+
+<p>
+<a href="http://baike.baidu.com/view/1745468.htm" class="urlextern" title="http://baike.baidu.com/view/1745468.htm"  rel="nofollow">WEB-INF简介</a>
+</p>
+
+<p>
+<a href="http://drops.wooyun.org/tips/163" class="urlextern" title="http://drops.wooyun.org/tips/163"  rel="nofollow">攻击JavaWeb应用[1]-JavaEE 基础</a>
+</p>
+
+</div>
+<!-- EDIT7 SECTION "6、相关资源" [2024-] --></div>
+</body>
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/server:web.xml by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:25:25 GMT -->
+</html>

@@ -1,0 +1,138 @@
+====== 代码注入（CODE Injection） ======
+
+==== 1、相关背景介绍 ====
+
+----
+当应用在调用一些能将字符串转化成代码的函数（如php中的eval）时，没有考虑用户是否能控制这个字符串，将造成代码注入漏洞。 
+狭义的代码注入通常指将可执行代码注入到当前页面中，如php的eval函数，可以将字符串代表的代码作为php代码执行，当用户能够控制这段字符串时，将产生代码注入漏洞（也称命令执行）。 
+广义上的代码注入，我觉得可以覆盖大半安全漏洞的分类。只要是用户可以控制的“数据”，被当做“代码”给注入到程序中，就是代码注入漏洞。如，SQL注入漏洞实际上是“数据”被当做SQL语句注入到正常SQL语句中了，XSS漏洞是数据被当做“javascript”被注入到HTML中了，文件包含漏洞是数据（某文件）被当做“脚本文件”被注入当正常脚本流程中了。 
+这个wiki主要介绍狭义上的代码注入漏洞。 
+
+==== 2、成因 ====
+
+----
+几种常用语言，都有将字符串转化成代码去执行的相关函数，如： 
+<code>
+- PHP：eval、assert
+- Javascript：eval
+- Vbscript: Execute、Eval
+- Python：exec
+- Java：Java中没有类似php中eval函数这种直接可以将字符串转化为代码执行的函数，但是有反射机制，并且有各种基于反射机制的表达式引擎，如：OGNL、SpEL、MVEL等，这些都能造成代码执行漏洞
+</code>
+应用有时候会考虑灵活性、简洁性，在代码中调用eval之类的函数去处理。如phpcms中很常用的string2array函数： 
+<code php>
+function string2array($data) {
+if($data == '') return array();
+@eval("\$array = $data;");
+return $array;
+}
+</code>
+为什么一个赋值的语句，却要用eval包裹起来，变成一个危险的“定时炸弹”？ 
+其实这也是这种漏洞很重要的成因，我们来到phpcms的数据库，看看这个settings究竟是什么内容： 
+<code sql>
+array(
+  'upload_maxsize' => '2048,
+  'upload_allowext' => 'jpg|jpeg|gif|bmp|png|doc|docx|xls|xlsx|ppt|pptx|pdf|txt|rar|zip|swf',
+  'watermark_enable' => '1',
+  'watermark_minwidth' => '300',
+  'watermark_minheight' => '300',
+  'watermark_img' => '/statics/images/water/mark.png',
+  'watermark_pct' => '85',
+  'watermark_quality' => '80',
+  'watermark_pos' => '9',
+)
+</code>
+如上，其实settings是一个字符串形式的“php数组”，我们必须要用eval函数才能将“字符串”变成一个真正的数组，所以这也是phpcms里多次调用string2array函数的主要原因。很多CMS为了设置的灵活性，都会选择用eval来处理内容。但处理的同时并没有检查用户是否可以控制被处理的“字符串”。 
+所以，很明显的，如果我们能够控制phpcms的数据库，那么getshell也是很简单的了。 
+
+==== 3、攻击方式及危害 ====
+
+----
+``` 以PHP为例讲解 JAVA等待补充，我感觉也很重要``` 
+
+PHP中能造成代码注入的主要函数： 
+* eval
+* preg_replace + /e模式
+* assert
+
+用的一般就是前两者，CMS中很少用到assert的，至于一些偏门函数就更少了，用的情况仅限于留后门。 
+常见用法也有如下一些：
+
+<code php>
+eval("\$ret = $data;"); 
+eval("\$ret = deal('$data');"); 
+eval("\$ret = deal("$data");"); 
+preg_replace('/<data>(.*)</data>/e', '$ret = "\\1";'); 
+</code>
+
+第一个就是刚才之前说phpcms的，通常$data不会直接来自POST或GET变量（要不也太水了），但通过一些二次漏洞很可能能够造出代码执行（如SQL注入）。 
+第二个是将$data使用一个函数（deal）处理后再赋值给$ret。那么，传参的方式就很重要了。第二个用的是单引号传参，那么我们只能先闭合单引号，之后才能注入代码。如果应用全局做了addslashes或GPC=on的话，就不能够注入代码了。 
+第三个与第二个类似，但使用的是双引号传参。双引号在代码中有个很重要的特性，它能解析其中的函数，如我们传入${phpinfo()}，phpinfo将会被执行，而得到的返回值作为参数传入deal函数。这个时候，我们就不用考虑闭合引号的事了。 
+第四个是preg\_replace函数的误用。这种用法出现的情况是最多的，也是因为preg\_replace第二个参数中，包裹正则结果\\1的是双引号，通过第三个中的方式，也能执行任意代码。
+
+
+Python中，还有一个比较有意思的“代码注入”： 
+python调用Pickle或cPickle对输入进行反序列化的时候，可能引入代码：[[https://blog.nelhage.com/2011/03/exploiting-pickle/|Exploiting Misuse of Python's "Pickle"]]
+同样的情况，当PHP调用unserialsize进行反序列化时，将不会引入代码，但也可能造成各种安全问题，对此不在本章中讨论。
+
+==== 4、实际案例 ====
+
+----
+关于PHPCMS我说的第一种，案例： 
+
+[[http://www.wooyun.org/bugs/wooyun-2015-0104157|phpcms前台任意代码执行（有php版本限制）]] 
+
+[[http://www.wooyun.org/bugs/wooyun-2010-046565|phpcms v9 后台远程代码执行漏洞（第三弹）]]
+
+[[http://www.wooyun.org/bugs/wooyun-2014-085518|phpcms后台命令执行可getshell]]
+
+这几案例应该是copy了phpcms的string2array造成的： 
+
+[[http://www.wooyun.org/bugs/wooyun-2010-087518|DayuCMS 1.525 前台任意代码执行]] 
+
+[[http://www.wooyun.org/bugs/wooyun-2010-061643|FineCMS v1.x远程代码执行漏洞]]
+
+这个也是String2Array类似函数造成的，但是经过了“入库”+“出库”+命令执行的二次操作： 
+
+[[http://www.wooyun.org/bugs/wooyun-2010-082805|PHPMyWind最新版代码执行漏洞]]
+
+一个直接执行了eval($xxx)的案例： 
+
+[[http://www.wooyun.org/bugs/wooyun-2010-078327|DESTOON前台getshell]]
+
+这几个就是我讲的第三种情况，eval的值在双引号内：eval("\$title = \"$title\";"); 
+
+[[http://www.wooyun.org/bugs/wooyun-2010-062435|Destoon B2B 2014-05-21最新版csrf getshell]] 
+
+[[http://www.wooyun.org/bugs/wooyun-2010-054693|cmstop 远程代码执行漏洞（大众版）]]
+
+[[http://www.wooyun.org/bugs/wooyun-2010-053172|某生活查询工具代码执行#可批量Getshell]] 
+
+preg\_replace造成的代码执行ThinkPHP： 
+
+[[https://butian.360.cn/vul/info/qid/QTVA-2013-08762|ThinkPHP 任意代码执行漏洞]] 
+
+这个案例也是preg\_replace造成，但第二个参数的输出结果\\1并没有在引号中，所以也可以直接执行任意代码： 
+
+[[http://www.wooyun.org/bugs/wooyun-2010-088871|方维购物分享最新版前台代码漏洞]]
+
+这个案例直接覆盖了preg\_replace第一个参数，使用e修饰，造成代码执行： 
+
+[[http://www.wooyun.org/bugs/wooyun-2014-080723|Discuz!某两个版本前台产品命令执行（无需登录）]]
+
+这个案例比较有意思，在线编码类网站时下越来越流行，所以“代码执行”是一个正常功能，但如果没有做沙盒或沙盒没做好的话，就能拿下服务器权限： 
+
+[[http://www.wooyun.org/bugs/wooyun-2010-069669|某网站python在线练习系统设计缺陷导致getshell]]
+
+
+==== 5、修复方案 ====
+
+----
+1.能使用json保存数组、对象就使用json，不要将php对象保存成字符串，否则读取的时候需要使用eval。 
+2.对于必须使用eval的情况，一定要保证用户不能轻易接触eval的参数（或用正则严格判断输入的数据格式）。对于字符串，一定要使用单引号包裹可控代码，并再插入前进行addslashes： 
+<code php>
+$data = addslashes($data);
+eval("\$data = deal('$data');");
+</code>
+3.放弃使用<code>preg_replace</code>的e修饰符，而换用<code>preg_replace_callback</code>替代。 
+4.如果非要使用<code>preg_replace</code>的e模式的话，请保证第二个参数中，对于正则匹配出的对象，用单引号包裹。

@@ -1,0 +1,67 @@
+====== Apache Tomcat弱口令 ======
+
+==== 1、Apache Tomcat简介 ====
+
+----
+Tomcat是由Apache软件基金会下属的Jakarta项目开发的一个Servlet容器，按照Sun Microsystems提供的技术规范，实现了对Servlet和JavaServer Page（JSP）的支持，并提供了作为Web服务器的一些特有功能，如Tomcat管理和控制平台、安全域管理和Tomcat阀等。由于Tomcat本身也内含了一个HTTP服务器，它也可以被视作一个单独的Web服务器。
+==== 2、漏洞成因 ====
+
+----
+配置Tomcat的时候使用了常用的用户名和弱口令，导致Tomcat可被攻击者登陆，并利用manager中的war部署功能上传恶意脚本最终导致服务器沦陷。
+==== 3、漏洞检测及利用 ====
+
+----
+Tomcat的默认端口是8080端口，可使用nmap扫描服务器的8080端口寻找开放了tomcat的服务器：
+<code>
+nmap -n --open -p 8080 X.X.X.X/24
+</code>
+找到了Tomcat服务器后就可以访问manager目录并尝试使用弱口令或者Tomcat默认的用户名和密码进行登陆。默认用户名为admin，默认密码为admin。
+manager/html目录中可以上传部署war文件，将恶意的war上传并部署后访问war文件名所在的目录，如：http://xxx:8080/shell (假设上传的是shell.war)即可。
+
+特殊情况下，若Tomcat服务器关闭了8080端口，也可使用8009端口。参见：[[http://drops.wooyun.org/tips/737|Tomcat的8009端口AJP的利用]]。
+
+
+==== 4、漏洞修复 ====
+
+----
+**修改用户名和密码**
+
+修改tomcat-user.xml中的用户名和密码。将类似于如下的行进行修改。修改时要关闭Tomcat。
+<code><user username="admin" password="admin" roles="manager"/></code>
+
+**使用http.conf限制访问**
+
+使用http.conf限制对manager目录的访问：
+<code>
+<Location "/manager">
+AllowOverride None
+deny from all
+allow from 127.0.0.1
+</Location>
+</code>
+
+**使用iptables限制访问**
+
+使用iptables限制访问IP,只允许IP为X.X.X.X的主机访问8080端口：
+<code bash>
+iptables -F
+iptables -P INPUT DROP
+iptables -A INPUT -p tcp -s X.X.X.X --dport 8080 -j ACCEPT
+iptables -A INPUT -p udp -s X.X.X.X --dport 8080 -j ACCEPT
+</code>
+
+8080端口关闭后，8009端口同样可能导致服务器被入侵，参见：[[http://drops.wooyun.org/tips/737|Tomcat的8009端口AJP的利用]]。
+若发现Tomcat8009端口开放了也需要将其关闭。
+
+==== 5、实际案例 ====
+
+----
+[[http://www.wooyun.org/bugs/wooyun-2014-076027|中国电信销售管理系统tomcat弱口令(可shell)]]
+
+[[http://wooyun.org/bugs/wooyun-2010-075788|中国联通某分站存在Tomcat弱口令]]
+
+[[http://wooyun.org/bugs/wooyun-2010-037273|中国联通某分站存在Tomcat弱口令]]
+==== 6、参考资料 ====
+
+----
+[[http://drops.wooyun.org/tips/737|Tomcat的8009端口AJP的利用]]

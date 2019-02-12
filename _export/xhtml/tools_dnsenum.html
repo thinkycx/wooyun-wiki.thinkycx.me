@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/tools:dnsenum by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:25:25 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8" />
+  <title>tools:dnsenum</title>
+<meta name="generator" content="DokuWiki"/>
+<meta name="robots" content="index,follow"/>
+<meta name="keywords" content="tools,dnsenum"/>
+<link rel="search" type="application/opensearchdescription+xml" href="../../lib/exe/opensearch.php" title="WooYun WiKi"/>
+<link rel="start" href="../../index.html"/>
+<link rel="contents" href="../../tools_dnsenumdecf.html?do=index" title="网站地图"/>
+<link rel="alternate" type="application/rss+xml" title="最近更改" href="../../feed.php"/>
+<link rel="alternate" type="application/rss+xml" title="当前命名空间" href="../../feed022e.php?mode=list&amp;ns=tools"/>
+<link rel="alternate" type="text/html" title="纯HTML" href="tools_dnsenum.html"/>
+<link rel="alternate" type="text/plain" title="Wiki Markup 语言" href="../raw/dnsenum.txt"/>
+<link rel="canonical" href="../../tools_dnsenum.html"/>
+<link rel="stylesheet" type="text/css" href="../../lib/exe/css70b4.css?t=bootstrap3&amp;tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"/>
+<script type="text/javascript">/*<![CDATA[*/var NS='tools';var JSINFO = {"id":"tools:dnsenum","namespace":"tools","plugin_codeprettify":{"loader_base":"\/lib\/plugins\/codeprettify\/google-code-prettify"}};
+/*!]]>*/</script>
+<script type="text/javascript" charset="utf-8" src="../../lib/exe/js1e16.php?tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"></script>
+<script type="text/javascript" charset="utf-8" src="../../lib/plugins/codeprettify/google-code-prettify/run_prettifyeb11.js?lang=css"></script>
+</head>
+<body>
+<div class="dokuwiki export">
+<!-- TOC START -->
+<div id="dw__toc">
+<h3 class="toggle">目录</h3>
+<div>
+
+<ul class="toc">
+<li class="level1"><div class="li"><a href="#dnsenum使用说明">dnsenum使用说明</a></div>
+<ul class="toc">
+<li class="clear">
+<ul class="toc">
+<li class="level3"><div class="li"><a href="#工具简介">1、工具简介</a></div></li>
+<li class="level3"><div class="li"><a href="#使用方法">2、使用方法</a></div></li>
+<li class="level3"><div class="li"><a href="#使用示范">3、使用示范</a></div></li>
+<li class="level3"><div class="li"><a href="#相关资源">4、相关资源</a></div></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<!-- TOC END -->
+
+<h1 class="sectionedit1" id="dnsenum使用说明">dnsenum使用说明</h1>
+<div class="level1">
+
+</div>
+<!-- EDIT1 SECTION "dnsenum使用说明" [1-35] -->
+<h3 class="sectionedit2" id="工具简介">1、工具简介</h3>
+<div class="level3">
+<hr />
+
+<p>
+Dnsenum是一款非常强大的perl语言编写的多线程域名信息收集工具，它是由参与backtrack 开发项目的程序员所设计，设计者名叫Fillp (barbsie) Waeythens 。
+dnsenum的目的是尽可能收集一个域的信息，它能够通过谷歌或者字典文件猜测可能存在的域名，以及对一个网段进行反向查询。它可以查询网站的主机地址信息、域名服务器、mx record（函件交换记录），在域名服务器上执行axfr请求，通过谷歌脚本得到扩展域名信息（google hacking），提取自域名并查询，计算C类地址并执行whois查询，执行反向查询，把地址段写入文件。
+</p>
+
+</div>
+<!-- EDIT2 SECTION "1、工具简介" [36-746] -->
+<h3 class="sectionedit3" id="使用方法">2、使用方法</h3>
+<div class="level3">
+<hr />
+
+<p>
+终端直接输入“dnsenum -h”可以查看其相关参数用法：
+</p>
+<pre class="code bash"><span class="co4">light@kali:~# </span>dnsenum <span class="re5">-h</span>
+dnsenum.pl VERSION:1.2.3
+Usage: dnsenum.pl <span class="br0">&#91;</span>Options<span class="br0">&#93;</span> <span class="sy0">&lt;</span>domain<span class="sy0">&gt;</span> 
+<span class="br0">&#91;</span>Options<span class="br0">&#93;</span>:
+Note: the brute force <span class="re5">-f</span> switch is obligatory.
+GENERAL OPTIONS:
+  <span class="re5">--dnsserver</span> 	<span class="sy0">&lt;</span>server<span class="sy0">&gt;</span>
+			Use this DNS server <span class="kw1">for</span> A, NS and MX queries.
+  <span class="re5">--enum</span>		Shortcut option equivalent to <span class="re5">--threads</span> <span class="nu0">5</span> <span class="re5">-s</span> <span class="nu0">15</span> -w.
+  -h, <span class="re5">--help</span>		Print this <span class="kw3">help</span> message.
+  <span class="re5">--noreverse</span>		Skip the reverse lookup operations.
+  <span class="re5">--nocolor</span>		Disable ANSIColor output.
+  <span class="re5">--private</span>		Show and save private ips at the end of the <span class="kw2">file</span> domain_ips.txt.
+  <span class="re5">--subfile</span> <span class="sy0">&lt;</span><span class="kw2">file</span><span class="sy0">&gt;</span>	Write all valid subdomains to this file.
+  -t, <span class="re5">--timeout</span> <span class="sy0">&lt;</span>value<span class="sy0">&gt;</span>	The tcp and udp timeout values <span class="kw1">in</span> seconds <span class="br0">&#40;</span>default: 10s<span class="br0">&#41;</span>.
+  <span class="re5">--threads</span> <span class="sy0">&lt;</span>value<span class="sy0">&gt;</span>	The number of threads that will perform different queries.
+  -v, <span class="re5">--verbose</span>		Be verbose: show all the progress and all the error messages.
+GOOGLE SCRAPING OPTIONS:
+  -p, <span class="re5">--pages</span> <span class="sy0">&lt;</span>value<span class="sy0">&gt;</span>	The number of google search pages to process when scraping names, 
+			the default is <span class="nu0">5</span> pages, the <span class="re5">-s</span> switch must be specified.
+  -s, <span class="re5">--scrap</span> <span class="sy0">&lt;</span>value<span class="sy0">&gt;</span>	The maximum number of subdomains that will be scraped from Google <span class="br0">&#40;</span>default <span class="nu0">15</span><span class="br0">&#41;</span>.
+BRUTE FORCE OPTIONS:
+  -f, <span class="re5">--file</span> <span class="sy0">&lt;</span><span class="kw2">file</span><span class="sy0">&gt;</span>	Read subdomains from this <span class="kw2">file</span> to perform brute force.
+  -u, <span class="re5">--update</span>	<span class="sy0">&lt;</span>a<span class="sy0">|</span>g<span class="sy0">|</span>r<span class="sy0">|</span>z<span class="sy0">&gt;</span>
+			Update the <span class="kw2">file</span> specified with the <span class="re5">-f</span> switch with valid subdomains.
+	a <span class="br0">&#40;</span>all<span class="br0">&#41;</span>		Update using all results.
+	g		Update using only google scraping results.
+	r		Update using only reverse lookup results.
+	z		Update using only zonetransfer results.
+  -r, <span class="re5">--recursion</span>	Recursion on subdomains, brute force all discovred subdomains that have an NS record.
+WHOIS NETRANGE OPTIONS:
+  -d, <span class="re5">--delay</span> <span class="sy0">&lt;</span>value<span class="sy0">&gt;</span>	The maximum value of seconds to <span class="kw3">wait</span> between <span class="kw2">whois</span> queries, the value is defined randomly, default: 3s.
+  -w, <span class="re5">--whois</span>		Perform the <span class="kw2">whois</span> queries on c class network ranges.
+			 <span class="sy0">**</span>Warning<span class="sy0">**</span>: this can generate very large netranges and it will take lot of <span class="kw1">time</span> to performe reverse lookups.
+REVERSE LOOKUP OPTIONS:
+  -e, <span class="re5">--exclude</span>	<span class="sy0">&lt;</span>regexp<span class="sy0">&gt;</span>
+			Exclude PTR records that match the regexp expression from reverse lookup results, useful on invalid hostnames.
+OUTPUT OPTIONS:
+  <span class="re5">-o</span> <span class="re5">--output</span> <span class="sy0">&lt;</span><span class="kw2">file</span><span class="sy0">&gt;</span>	Output <span class="kw1">in</span> XML format. Can be imported <span class="kw1">in</span> MagicTree <span class="br0">&#40;</span>www.gremwell.com<span class="br0">&#41;</span></pre>
+
+<p>
+参数解释：
+</p>
+<ul>
+<li class="level1"><div class="li"> -f dns.txt ：指定字典文件，可以换成 dns-big.txt 也可以自定义字典</div>
+</li>
+<li class="level1"><div class="li"> -dnsserver 8.8.8.8 ：指定dns服务器，一般可以直接使用目标dns服务器，（PS：8.8.8.8 是一个IP地址，是Google提供的免费dns服务器的IP地址，另一个是：8.8.4.4）</div>
+</li>
+<li class="level1"><div class="li"> -o output.txt ：结果在 output.txt文档里</div>
+</li>
+</ul>
+
+</div>
+<!-- EDIT3 SECTION "2、使用方法" [747-3384] -->
+<h3 class="sectionedit4" id="使用示范">3、使用示范</h3>
+<div class="level3">
+<hr />
+
+<p>
+查询<a href="http://1ight.co/" class="urlextern" title="http://1ight.co"  rel="nofollow">1ight.co</a>的DNS信息：
+</p>
+<pre class="code bash"><span class="co4">light@kali:~# </span>dnsenum 1ight.co
+dnsenum.pl VERSION:1.2.3
+&nbsp;
+<span class="re5">-----</span>   1ight.co   <span class="re5">-----</span>
+&nbsp;
+&nbsp;
+Host<span class="st_h">'s addresses:
+__________________
+&nbsp;
+1ight.co.                                5        IN    A        112.74.102.78
+&nbsp;
+&nbsp;
+Name Servers:
+______________
+&nbsp;
+f1g1ns1.dnspod.net.                      5        IN    A        111.30.132.180
+f1g1ns1.dnspod.net.                      5        IN    A        125.39.208.193
+f1g1ns1.dnspod.net.                      5        IN    A        180.153.9.189
+f1g1ns1.dnspod.net.                      5        IN    A        182.140.167.166
+f1g1ns1.dnspod.net.                      5        IN    A        113.108.80.138
+f1g1ns2.dnspod.net.                      5        IN    A        182.140.167.188
+f1g1ns2.dnspod.net.                      5        IN    A        115.236.137.40
+f1g1ns2.dnspod.net.                      5        IN    A        115.236.151.191
+f1g1ns2.dnspod.net.                      5        IN    A        112.90.82.194
+f1g1ns2.dnspod.net.                      5        IN    A        101.226.30.224
+&nbsp;
+&nbsp;
+Mail (MX) Servers:
+___________________
+&nbsp;
+mxbiz2.qq.com.                           5        IN    A        183.60.15.245
+mxbiz2.qq.com.                           5        IN    A        183.57.48.34
+mxbiz1.qq.com.                           5        IN    A        183.57.48.34
+mxbiz1.qq.com.                           5        IN    A        183.60.15.245
+&nbsp;
+&nbsp;
+Trying Zone Transfers and getting Bind Versions:
+_________________________________________________
+&nbsp;
+&nbsp;
+Trying Zone Transfer for 1ight.co on f1g1ns1.dnspod.net ... 
+AXFR record query failed: connection failed
+&nbsp;
+Trying Zone Transfer for 1ight.co on f1g1ns2.dnspod.net ... 
+AXFR record query failed: connection failed
+&nbsp;
+brute force file not specified, bay.</span></pre>
+
+</div>
+<!-- EDIT4 SECTION "3、使用示范" [3385-5230] -->
+<h3 class="sectionedit5" id="相关资源">4、相关资源</h3>
+<div class="level3">
+<hr />
+
+<p>
+<a href="https://github.com/fwaeytens/dnsenum" class="urlextern" title="https://github.com/fwaeytens/dnsenum"  rel="nofollow">dnsenum git</a>
+</p>
+
+</div>
+<!-- EDIT5 SECTION "4、相关资源" [5231-] --></div>
+</body>
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/tools:dnsenum by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:25:25 GMT -->
+</html>

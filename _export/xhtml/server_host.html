@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/server:host by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:03:05 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8" />
+  <title>server:host</title>
+<meta name="generator" content="DokuWiki"/>
+<meta name="robots" content="index,follow"/>
+<meta name="keywords" content="server,host"/>
+<link rel="search" type="application/opensearchdescription+xml" href="../../lib/exe/opensearch.php" title="WooYun WiKi"/>
+<link rel="start" href="../../index.html"/>
+<link rel="contents" href="../../server_hostdecf.html?do=index" title="网站地图"/>
+<link rel="alternate" type="application/rss+xml" title="最近更改" href="../../feed.php"/>
+<link rel="alternate" type="application/rss+xml" title="当前命名空间" href="../../feed0688.php?mode=list&amp;ns=server"/>
+<link rel="alternate" type="text/html" title="纯HTML" href="server_host.html"/>
+<link rel="alternate" type="text/plain" title="Wiki Markup 语言" href="../raw/host.txt"/>
+<link rel="canonical" href="../../server_host.html"/>
+<link rel="stylesheet" type="text/css" href="../../lib/exe/css70b4.css?t=bootstrap3&amp;tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"/>
+<script type="text/javascript">/*<![CDATA[*/var NS='server';var JSINFO = {"id":"server:host","namespace":"server","plugin_codeprettify":{"loader_base":"\/lib\/plugins\/codeprettify\/google-code-prettify"}};
+/*!]]>*/</script>
+<script type="text/javascript" charset="utf-8" src="../../lib/exe/js1e16.php?tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"></script>
+<script type="text/javascript" charset="utf-8" src="../../lib/plugins/codeprettify/google-code-prettify/run_prettifyeb11.js?lang=css"></script>
+</head>
+<body>
+<div class="dokuwiki export">
+<!-- TOC START -->
+<div id="dw__toc">
+<h3 class="toggle">目录</h3>
+<div>
+
+<ul class="toc">
+<li class="level1"><div class="li"><a href="#关于服务器的host绑定的不安全因素">关于服务器的host绑定的不安全因素</a></div>
+<ul class="toc">
+<li class="clear">
+<ul class="toc">
+<li class="level3"><div class="li"><a href="#host主机头">1、host主机头</a></div></li>
+<li class="level3"><div class="li"><a href="#漏洞成因及危害">2、漏洞成因及危害</a></div></li>
+<li class="level3"><div class="li"><a href="#漏洞的利用">3、漏洞的利用</a></div></li>
+<li class="level3"><div class="li"><a href="#漏洞案例">4、漏洞案例</a></div></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<!-- TOC END -->
+
+<h1 class="sectionedit1" id="关于服务器的host绑定的不安全因素">关于服务器的host绑定的不安全因素</h1>
+<div class="level1">
+
+</div>
+<!-- EDIT1 SECTION "关于服务器的host绑定的不安全因素" [1-63] -->
+<h3 class="sectionedit2" id="host主机头">1、host主机头</h3>
+<div class="level3">
+<hr />
+
+<p>
+host主机头绑定是很多网站常用的一种一机多站的实现方法,相对于使用不同端口来实现一机多站要安全许多,因为端口可以通过暴力手段找到,而host绑定就要难破解很多,因为需要IP和主机名的对应.
+</p>
+
+</div>
+<!-- EDIT2 SECTION "1、host主机头" [64-354] -->
+<h3 class="sectionedit3" id="漏洞成因及危害">2、漏洞成因及危害</h3>
+<div class="level3">
+<hr />
+
+<p>
+很多网站为了方便管理和节省服务器成本,将内网管理站点和外网站点放置在同一服务器下,使用一机多站来进行隔离.
+</p>
+
+<p>
+很多情况下一台服务器安装两块网卡,分别接入外网和内网,方便公网访问公开站点,内网访问管理站点.并绑定host.
+</p>
+
+<p>
+例如:
+</p>
+<pre class="code">xxx.com为公开站点,并且指向IP为公网网卡.
+admin.xxx.com为管理站点,并且指向内网网卡.</pre>
+
+<p>
+看上去好像管理站点admin.xxx.com必须在内网才能访问但是却忽略了host绑定的问题.
+</p>
+
+<p>
+但是当我们将外网IP地址强制绑定到admin.xxx.com的时候web服务器又没有做来源检查,那么我们就可以通过外网访问到本来应该只有内网才能访问的管理站点了.
+</p>
+
+<p>
+并且由于是内网站点很多情况下管理员为了方便都是弱密码,或者直接未授权访问等
+</p>
+
+</div>
+<!-- EDIT3 SECTION "2、漏洞成因及危害" [355-1255] -->
+<h3 class="sectionedit4" id="漏洞的利用">3、漏洞的利用</h3>
+<div class="level3">
+<hr />
+
+<p>
+利用的话可以直接使用域名的一个暴力猜解
+</p>
+
+<p>
+将外网IP和内网IP的域名全部记录下来
+</p>
+
+<p>
+例如
+</p>
+<pre class="code">xxx.com          ip     1.1.1.1
+admin.xxx.com    ip     10.0.0.1</pre>
+
+<p>
+再使用工具将内网域名绑定到外网站点的IP上
+</p>
+
+<p>
+写入hosts文件
+</p>
+<pre class="code">1.1.1.1 admin.xxx.com </pre>
+
+<p>
+即可访问到内网站点了
+</p>
+
+</div>
+<!-- EDIT4 SECTION "3、漏洞的利用" [1256-1640] -->
+<h3 class="sectionedit5" id="漏洞案例">4、漏洞案例</h3>
+<div class="level3">
+<hr />
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2014-081180" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2014-081180"  rel="nofollow">途牛另类方式导致内网部分敏感系统泄露</a>
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-093577" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-093577"  rel="nofollow">盛大某游戏GM工具注入进入后台</a>
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-088352" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-088352"  rel="nofollow">傲游内网不完整漫游(大量内外网源码可被泄漏)</a>
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-0134151" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-0134151"  rel="nofollow">一下科技运维不当导致内部敏感信息泄漏</a>
+</p>
+
+</div>
+<!-- EDIT5 SECTION "4、漏洞案例" [1641-] --></div>
+</body>
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/server:host by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:03:05 GMT -->
+</html>

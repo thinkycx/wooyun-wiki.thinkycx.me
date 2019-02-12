@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/wooyunwifi:basic by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:25:25 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8" />
+  <title>wooyunwifi:basic</title>
+<meta name="generator" content="DokuWiki"/>
+<meta name="robots" content="index,follow"/>
+<meta name="keywords" content="wooyunwifi,basic"/>
+<link rel="search" type="application/opensearchdescription+xml" href="../../lib/exe/opensearch.php" title="WooYun WiKi"/>
+<link rel="start" href="../../index.html"/>
+<link rel="contents" href="../../wooyunwifi_basicdecf.html?do=index" title="网站地图"/>
+<link rel="alternate" type="application/rss+xml" title="最近更改" href="../../feed.php"/>
+<link rel="alternate" type="application/rss+xml" title="当前命名空间" href="../../feedec26.php?mode=list&amp;ns=wooyunwifi"/>
+<link rel="alternate" type="text/html" title="纯HTML" href="wooyunwifi_basic.html"/>
+<link rel="alternate" type="text/plain" title="Wiki Markup 语言" href="../raw/basic.txt"/>
+<link rel="canonical" href="../../wooyunwifi_basic.html"/>
+<link rel="stylesheet" type="text/css" href="../../lib/exe/css70b4.css?t=bootstrap3&amp;tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"/>
+<script type="text/javascript">/*<![CDATA[*/var NS='wooyunwifi';var JSINFO = {"id":"wooyunwifi:basic","namespace":"wooyunwifi","plugin_codeprettify":{"loader_base":"\/lib\/plugins\/codeprettify\/google-code-prettify"}};
+/*!]]>*/</script>
+<script type="text/javascript" charset="utf-8" src="../../lib/exe/js1e16.php?tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"></script>
+<script type="text/javascript" charset="utf-8" src="../../lib/plugins/codeprettify/google-code-prettify/run_prettifyeb11.js?lang=css"></script>
+</head>
+<body>
+<div class="dokuwiki export">
+<!-- TOC START -->
+<div id="dw__toc">
+<h3 class="toggle">目录</h3>
+<div>
+
+<ul class="toc">
+<li class="level1"><div class="li"><a href="#wooyunwifi基础功能介绍">WooyunWifi基础功能介绍</a></div>
+<ul class="toc">
+<li class="level2"><div class="li"><a href="#登陆页面">登陆页面</a></div></li>
+<li class="level2"><div class="li"><a href="#主界面">主界面</a></div></li>
+<li class="level2"><div class="li"><a href="#开启基本功能">开启基本功能</a></div></li>
+<li class="level2"><div class="li"><a href="#关闭基本功能">关闭基本功能</a></div></li>
+<li class="level2"><div class="li"><a href="#修改wooyunwifi登录密码">修改WooyunWifi登录密码</a></div></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<!-- TOC END -->
+
+<h1 class="sectionedit1" id="wooyunwifi基础功能介绍">WooyunWifi基础功能介绍</h1>
+<div class="level1">
+
+<p>
+本章节介绍WooyunWifi基础功能的使用方式。
+</p>
+
+</div>
+<!-- EDIT1 SECTION "WooyunWifi基础功能介绍" [0-90] -->
+<h2 class="sectionedit2" id="登陆页面">登陆页面</h2>
+<div class="level2">
+<hr />
+
+<p>
+请在WEB页面中点击“WooyunWifi”链接进入WooyunWifi控制界面。
+</p>
+
+<p>
+在登录页面，用户名默认为root，密码与Openwrt Luci管理密码相同，也与ssh密码相同，您如果之前已经修改过Openwrt Luci的默认密码，则您可以使用修改后的密码登陆（*若您没有修改默认密码，无法通过默认密码登陆）
+</p>
+
+</div>
+<!-- EDIT2 SECTION "登陆页面" [91-478] -->
+<h2 class="sectionedit3" id="主界面">主界面</h2>
+<div class="level2">
+<hr />
+
+<p>
+<img src="../../_media/000013ad3.png_%3b?w=600&amp;tok=4c6886" class="media" alt="" width="600" />
+</p>
+
+<p>
+主界面中共分4个区域：
+</p>
+
+<p>
+A：设备数量显示图表，分类为Andoid、IPhone、Other，按照比例显示，鼠标移上去可以看到不同颜色对应含义
+</p>
+
+<p>
+B：功能开关区，三大功能为HTTP（网页相关功能）、Mail（邮件相关功能）、KARMA（无线相关功能），点击开关可以开启对应的功能（*由于功能启动速度较慢，偶尔会出现开关弹回关闭状态的情况，请耐心等待，功能启动完毕后将自动弹回打开状态），请缓速温柔点击开关，不要拼命连续点击。
+</p>
+
+<p>
+C：高级功能设置区，如果您技术能力有限，请不要乱动里面的设置，保持默认即可
+</p>
+
+<p>
+D：数据嗅探展示区，Term对应为控制台形式展现所有的HTTP → POST数据，GET为列表形式展示过滤后的HTTP → GET数据，POST为列表形式展示过滤后的HTTP → POST数据，Mail为列表形式展示抓取到的邮箱用户名密码。
+</p>
+
+</div>
+<!-- EDIT3 SECTION "主界面" [479-1482] -->
+<h2 class="sectionedit4" id="开启基本功能">开启基本功能</h2>
+<div class="level2">
+<hr />
+
+<p>
+默认点击HTTP开关的客户端会被加入白名单，不会被自己路由器抓取嗅探。
+</p>
+
+<p>
+点击HTTP开关，启动HTTP抓取功能，请在点击后耐心等待约1分钟，期间可能会有开关自动跳到关闭状态的情况，此为启动速度慢引发的正常现象，请耐心等待。
+</p>
+
+<p>
+点击Mail开关，启动Mail抓取功能，请在点击后耐心等待约15秒，期间可能会有开关自动跳到关闭状态的情况，此为启动速度慢引发的正常现象，请耐心等待。
+</p>
+
+<p>
+*点击KARMA开关之前，请按照《WooyunWifi 初始化配置》所述建立一个免费热点以供连接
+点击KARMA开关，启动KARMA无线劫持功能，点击该开关将导致无线热点重启，您如果正在通过无线网络连入路由器进行配置，您的无线连接将会断开，请重新连接。KARMA功能不会随着设备的重启而关闭，请在必要时刻手动关闭该功能。
+</p>
+
+</div>
+<!-- EDIT4 SECTION "开启基本功能" [1483-2445] -->
+<h2 class="sectionedit5" id="关闭基本功能">关闭基本功能</h2>
+<div class="level2">
+<hr />
+
+<p>
+在各开关为开启状态时可以通过点击各开关来关闭该项功能。
+</p>
+
+<p>
+HTTP、Mail嗅探功能将随着设备的重启而关闭，KARMA功能不随设备的重启而关闭（*需手动关闭）。
+</p>
+
+<p>
+请确保使用同一个客户端设备开启或者关闭基本功能。
+</p>
+
+<p>
+当存储器满时，嗅探功能将自动关闭，您可以通过重新点击开关来清除历史数据并重新启动功能。
+</p>
+
+</div>
+<!-- EDIT5 SECTION "关闭基本功能" [2446-2892] -->
+<h2 class="sectionedit6" id="修改wooyunwifi登录密码">修改WooyunWifi登录密码</h2>
+<div class="level2">
+<hr />
+
+<p>
+WooyunWifi的登录密码始终与Openwrt Luci密码以及SSH密码保持一致，请在Openwrt Luci中点击标题栏中的 系统 → 管理权 选项卡进行设置
+</p>
+
+</div>
+<!-- EDIT6 SECTION "修改WooyunWifi登录密码" [2893-] --></div>
+</body>
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/wooyunwifi:basic by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:25:25 GMT -->
+</html>

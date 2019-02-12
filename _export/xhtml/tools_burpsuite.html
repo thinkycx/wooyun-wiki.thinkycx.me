@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/tools:burpsuite by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:27:40 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8" />
+  <title>tools:burpsuite</title>
+<meta name="generator" content="DokuWiki"/>
+<meta name="robots" content="index,follow"/>
+<meta name="keywords" content="tools,burpsuite"/>
+<link rel="search" type="application/opensearchdescription+xml" href="../../lib/exe/opensearch.php" title="WooYun WiKi"/>
+<link rel="start" href="../../index.html"/>
+<link rel="contents" href="../../tools_burpsuitedecf.html?do=index" title="网站地图"/>
+<link rel="alternate" type="application/rss+xml" title="最近更改" href="../../feed.php"/>
+<link rel="alternate" type="application/rss+xml" title="当前命名空间" href="../../feed022e.php?mode=list&amp;ns=tools"/>
+<link rel="alternate" type="text/html" title="纯HTML" href="tools_burpsuite.html"/>
+<link rel="alternate" type="text/plain" title="Wiki Markup 语言" href="../raw/burpsuite.txt"/>
+<link rel="canonical" href="../../tools_burpsuite.html"/>
+<link rel="stylesheet" type="text/css" href="../../lib/exe/css70b4.css?t=bootstrap3&amp;tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"/>
+<script type="text/javascript">/*<![CDATA[*/var NS='tools';var JSINFO = {"id":"tools:burpsuite","namespace":"tools","plugin_codeprettify":{"loader_base":"\/lib\/plugins\/codeprettify\/google-code-prettify"}};
+/*!]]>*/</script>
+<script type="text/javascript" charset="utf-8" src="../../lib/exe/js1e16.php?tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"></script>
+<script type="text/javascript" charset="utf-8" src="../../lib/plugins/codeprettify/google-code-prettify/run_prettifyeb11.js?lang=css"></script>
+</head>
+<body>
+<div class="dokuwiki export">
+<!-- TOC START -->
+<div id="dw__toc">
+<h3 class="toggle">目录</h3>
+<div>
+
+<ul class="toc">
+<li class="level1"><div class="li"><a href="#burpsuite使用说明">Burpsuite使用说明</a></div>
+<ul class="toc">
+<li class="clear">
+<ul class="toc">
+<li class="level3"><div class="li"><a href="#工具简介">1、工具简介</a></div></li>
+<li class="level3"><div class="li"><a href="#burpsuite功能选项">2、burpsuite功能选项</a></div></li>
+<li class="level3"><div class="li"><a href="#配置浏览器burpsuit代理">3、配置浏览器burpsuit代理</a></div></li>
+<li class="level3"><div class="li"><a href="#相关资源">4、相关资源</a></div></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<!-- TOC END -->
+
+<h1 class="sectionedit1" id="burpsuite使用说明">Burpsuite使用说明</h1>
+<div class="level1">
+
+</div>
+<!-- EDIT1 SECTION "Burpsuite使用说明" [1-38] -->
+<h3 class="sectionedit2" id="工具简介">1、工具简介</h3>
+<div class="level3">
+<hr />
+
+<p>
+BurpSuite是用于测试web 应用程序的集成平台。它包含了许多工具，并为这些工具设计了许多接口，以促进加快攻击应用程序的过程。所有的工具都共享一个能处理并显示HTTP 消息、持久性、认证、代理、日志，警报的一个强大的可扩展的框架。
+</p>
+
+</div>
+<!-- EDIT2 SECTION "1、工具简介" [39-393] -->
+<h3 class="sectionedit3" id="burpsuite功能选项">2、burpsuite功能选项</h3>
+<div class="level3">
+<hr />
+<ul>
+<li class="level1"><div class="li">Proxy：是一个拦截HTTP/S的代理服务器，作为一个在浏览器和目标应用程序之间的中间人，允许你拦截，查看，修改在两个方向上的原始数据流。</div>
+</li>
+<li class="level1"><div class="li">Spider：是一个应用智能感应的网络爬虫，它能完整的枚举应用程序的内容和功能。</div>
+</li>
+<li class="level1"><div class="li">Scanner[仅限专业版]：是一个高级的工具，执行后，它能自动地发现web 应用程序的安全漏洞。</div>
+</li>
+<li class="level1"><div class="li">Intruder：是一个定制的高度可配置的工具，对web应用程序进行自动化攻击，如：枚举标识符，收集有用的数据，以及使用fuzzing 技术探测常规漏洞。</div>
+</li>
+<li class="level1"><div class="li">Repeater：一个靠手动操作来补发单独的HTTP请求，并分析应用程序响应的工具。</div>
+</li>
+<li class="level1"><div class="li">Sequencer：是一个用来分析那些不可预知的应用程序会话令牌和重要数据项的随机性的工具。</div>
+</li>
+<li class="level1"><div class="li">Decoder：是一个进行手动执行或对应用程序数据者智能解码编码的工具。</div>
+</li>
+<li class="level1"><div class="li">Comparer：是一个实用的工具，通常是通过一些相关的请求和响应得到两项数据的一个可视化的“差异”。</div>
+</li>
+</ul>
+
+</div>
+<!-- EDIT3 SECTION "2、burpsuite功能选项" [394-1542] -->
+<h3 class="sectionedit4" id="配置浏览器burpsuit代理">3、配置浏览器burpsuit代理</h3>
+<div class="level3">
+<hr />
+
+<p>
+运行后，Burp Proxy 开启默认的8080 端口作为本地代理接口。通过置一个web浏览器使用其代理服务器,所有的网站流量可以被拦截，查看和修改。默认情况下，对非媒体资源的请求将被拦截并显示(可以通过Burp Proxy 选项里的options 选项修改默认值)。对所有通过BurpProxy网站流量使用预设的方案进行分析，然后纳入到目标站点地图中，来勾勒出一张包含访问的应用程序的内容和功能的画面。
+拦截HTTPS数据包需要浏览器访问<a href="http://burp/" class="urlextern" title="http://burp"  rel="nofollow">http://burp</a>，下载并安装证书才能使用。IE浏览器安装证书时，需要以管理员权限运行一次。
+</p>
+
+</div>
+<!-- EDIT4 SECTION "3、配置浏览器burpsuit代理" [1543-2261] -->
+<h3 class="sectionedit5" id="相关资源">4、相关资源</h3>
+<div class="level3">
+<hr />
+
+<p>
+<a href="http://drops.wooyun.org/tools/1548" class="urlextern" title="http://drops.wooyun.org/tools/1548"  rel="nofollow">Burp Suite使用介绍（一）</a>
+</p>
+
+<p>
+<a href="http://drops.wooyun.org/tools/1629" class="urlextern" title="http://drops.wooyun.org/tools/1629"  rel="nofollow">Burp Suite使用介绍（二）</a>
+</p>
+
+<p>
+<a href="http://drops.wooyun.org/tools/2247" class="urlextern" title="http://drops.wooyun.org/tools/2247"  rel="nofollow">Burp Suite使用介绍（三）</a>
+</p>
+
+<p>
+<a href="http://drops.wooyun.org/tools/2504" class="urlextern" title="http://drops.wooyun.org/tools/2504"  rel="nofollow">Burp Suite使用介绍（四）</a>
+</p>
+
+<p>
+<a href="http://drops.wooyun.org/tips/2460" class="urlextern" title="http://drops.wooyun.org/tips/2460"  rel="nofollow">用Burpsuite 来处理csrf token</a>
+</p>
+
+<p>
+<a href="http://drops.wooyun.org/tips/2689" class="urlextern" title="http://drops.wooyun.org/tips/2689"  rel="nofollow">JAVA逆向&amp;反混淆-追查Burpsuite的破解原理</a>
+</p>
+
+<p>
+<a href="http://drops.wooyun.org/papers/3962" class="urlextern" title="http://drops.wooyun.org/papers/3962"  rel="nofollow">BurpSuite 扩展开发[1]-API与HelloWold</a>
+</p>
+
+<p>
+<a href="http://drops.wooyun.org/tools/5751" class="urlextern" title="http://drops.wooyun.org/tools/5751"  rel="nofollow">burpsuite扩展开发之Python</a>
+</p>
+
+</div>
+<!-- EDIT5 SECTION "4、相关资源" [2262-] --></div>
+</body>
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/tools:burpsuite by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:27:40 GMT -->
+</html>

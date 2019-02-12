@@ -1,0 +1,6 @@
+====== RFIDiot FROSCH ======
+
+  * [[tools:read write clone unique (em4x02)|read write clone unique (em4x02)]]
+  * [[tools:reset hitag2 tag|reset hitag2 tag]]
+  * [[tools:set fdx-b id|set fdx-b id]]
+  * [[tools:test frosch reader|test frosch reader]]

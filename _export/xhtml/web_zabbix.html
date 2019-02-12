@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/web:zabbix by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:03:12 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8" />
+  <title>web:zabbix</title>
+<meta name="generator" content="DokuWiki"/>
+<meta name="robots" content="index,follow"/>
+<meta name="keywords" content="web,zabbix"/>
+<link rel="search" type="application/opensearchdescription+xml" href="../../lib/exe/opensearch.php" title="WooYun WiKi"/>
+<link rel="start" href="../../index.html"/>
+<link rel="contents" href="../../web_zabbixdecf.html?do=index" title="网站地图"/>
+<link rel="alternate" type="application/rss+xml" title="最近更改" href="../../feed.php"/>
+<link rel="alternate" type="application/rss+xml" title="当前命名空间" href="../../feed4fbc.php?mode=list&amp;ns=web"/>
+<link rel="alternate" type="text/html" title="纯HTML" href="web_zabbix.html"/>
+<link rel="alternate" type="text/plain" title="Wiki Markup 语言" href="../raw/zabbix-2.txt"/>
+<link rel="canonical" href="../../web_zabbix.html"/>
+<link rel="stylesheet" type="text/css" href="../../lib/exe/css70b4.css?t=bootstrap3&amp;tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"/>
+<script type="text/javascript">/*<![CDATA[*/var NS='web';var JSINFO = {"id":"web:zabbix","namespace":"web","plugin_codeprettify":{"loader_base":"\/lib\/plugins\/codeprettify\/google-code-prettify"}};
+/*!]]>*/</script>
+<script type="text/javascript" charset="utf-8" src="../../lib/exe/js1e16.php?tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"></script>
+<script type="text/javascript" charset="utf-8" src="../../lib/plugins/codeprettify/google-code-prettify/run_prettifyeb11.js?lang=css"></script>
+</head>
+<body>
+<div class="dokuwiki export">
+<!-- TOC START -->
+<div id="dw__toc">
+<h3 class="toggle">目录</h3>
+<div>
+
+<ul class="toc">
+<li class="level1"><div class="li"><a href="#zabbix">Zabbix</a></div>
+<ul class="toc">
+<li class="clear">
+<ul class="toc">
+<li class="level3"><div class="li"><a href="#zabbix简介">1、Zabbix简介</a></div></li>
+<li class="level3"><div class="li"><a href="#重要漏洞及利用">2、重要漏洞及利用</a></div></li>
+<li class="level3"><div class="li"><a href="#修复方案">3、修复方案</a></div></li>
+<li class="level3"><div class="li"><a href="#实际案例">4、实际案例</a></div></li>
+<li class="level3"><div class="li"><a href="#参考资料">5、参考资料</a></div></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<!-- TOC END -->
+
+<h1 class="sectionedit1" id="zabbix">Zabbix</h1>
+<div class="level1">
+
+</div>
+<!-- EDIT1 SECTION "Zabbix" [1-23] -->
+<h3 class="sectionedit2" id="zabbix简介">1、Zabbix简介</h3>
+<div class="level3">
+<hr />
+
+<p>
+zabbix是一个基于WEB界面的提供分布式系统监视以及网络监视功能的企业级的开源解决方案。 
+</p>
+
+<p>
+zabbix能监视各种网络参数，保证服务器系统的安全运营；并提供灵活的通知机制以让系统管理员快速定位/解决存在的各种问题。 
+</p>
+
+<p>
+zabbix由2部分构成，zabbix server与可选组件zabbix agent。 
+</p>
+
+<p>
+zabbix server可以通过SNMP，zabbix agent，ping，端口监视等方法提供对远程服务器/网络状态的监视，数据收集等功能，它可以运行在Linux，Solaris，HP-UX，AIX，Free BSD，Open BSD，OS X等平台上。
+</p>
+
+</div>
+<!-- EDIT2 SECTION "1、Zabbix简介" [24-663] -->
+<h3 class="sectionedit3" id="重要漏洞及利用">2、重要漏洞及利用</h3>
+<div class="level3">
+<hr />
+
+<p>
+Zabbix中的漏洞主要有：
+</p>
+
+<p>
+SQL注入：
+</p>
+<ul>
+<li class="level1"><div class="li"><a href="https://www.exploit-db.com/exploits/28972/" class="urlextern" title="https://www.exploit-db.com/exploits/28972/"  rel="nofollow">Zabbix 2.0.8 - SQL Injection and Remote Code Execution</a></div>
+</li>
+<li class="level1"><div class="li"><a href="https://www.exploit-db.com/exploits/18155/" class="urlextern" title="https://www.exploit-db.com/exploits/18155/"  rel="nofollow">Zabbix &lt;= 1.8.4 - (popup.php) SQL Injection</a></div>
+</li>
+<li class="level1"><div class="li"><a href="https://www.exploit-db.com/exploits/12435/" class="urlextern" title="https://www.exploit-db.com/exploits/12435/"  rel="nofollow">Zabbix &lt;= 1.8.1 - SQL Injection</a></div>
+</li>
+</ul>
+
+<p>
+命令执行:
+</p>
+<ul>
+<li class="level1"><div class="li"><a href="https://www.exploit-db.com/exploits/29321/" class="urlextern" title="https://www.exploit-db.com/exploits/29321/"  rel="nofollow">Zabbix Authenticated Remote Command Execution</a></div>
+</li>
+<li class="level1"><div class="li"><a href="https://www.exploit-db.com/exploits/28972/" class="urlextern" title="https://www.exploit-db.com/exploits/28972/"  rel="nofollow">Zabbix 2.0.8 - SQL Injection and Remote Code Execution</a></div>
+</li>
+<li class="level1"><div class="li"><a href="https://www.exploit-db.com/exploits/20796/" class="urlextern" title="https://www.exploit-db.com/exploits/20796/"  rel="nofollow">Zabbix Server Arbitrary Command Execution</a></div>
+</li>
+<li class="level1"><div class="li">等</div>
+</li>
+</ul>
+
+<p>
+未修改默认管理账号密码(admin/zabbix)或使用弱口令
+</p>
+
+</div>
+<!-- EDIT3 SECTION "2、重要漏洞及利用" [664-1422] -->
+<h3 class="sectionedit4" id="修复方案">3、修复方案</h3>
+<div class="level3">
+<hr />
+
+<p>
+更新服务器上的Zabbix版本到最新版，最新版可在<a href="http://www.zabbix.com/download.php" class="urlextern" title="http://www.zabbix.com/download.php"  rel="nofollow">官方下载地址</a>找到。
+</p>
+
+</div>
+<!-- EDIT4 SECTION "3、修复方案" [1423-1585] -->
+<h3 class="sectionedit5" id="实际案例">4、实际案例</h3>
+<div class="level3">
+<hr />
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-072075" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-072075"  rel="nofollow">Zabbix的前台SQL注射漏洞0day一枚（官方测试受到影响）</a>
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-084596" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-084596"  rel="nofollow">中国科学院计算机网络信息中心zabbix弱口令，导致命令执行</a>
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-093016" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-093016"  rel="nofollow">ShopEx某zabbix节点弱口令，导致命令执行(可入内网)</a>
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-040304" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-040304"  rel="nofollow">盛大广告ZabbixSQL注入导致命令执行</a>
+</p>
+
+</div>
+<!-- EDIT5 SECTION "4、实际案例" [1586-2083] -->
+<h3 class="sectionedit6" id="参考资料">5、参考资料</h3>
+<div class="level3">
+<hr />
+
+<p>
+<a href="http://drops.wooyun.org/papers/680" class="urlextern" title="http://drops.wooyun.org/papers/680"  rel="nofollow">Zabbix SQL Injection/RCE – CVE-2013-5743</a>
+</p>
+
+<p>
+<a href="http://drops.wooyun.org/tips/68" class="urlextern" title="http://drops.wooyun.org/tips/68"  rel="nofollow">当渗透遇到zabbix--小谈zabbix安全</a>
+</p>
+
+<p>
+<a href="../../server_zabbix.html" class="urlextern" title="http://wiki.wooyun.org/server:zabbix"  rel="nofollow">Zabbix安全配置</a>
+</p>
+
+<p>
+<a href="https://www.exploit-db.com/search/?action=search&amp;description=zabbix&amp;e_author=" class="urlextern" title="https://www.exploit-db.com/search/?action=search&amp;description=zabbix&amp;e_author="  rel="nofollow">exploit-db zabbix历史漏洞</a>
+</p>
+
+</div>
+<!-- EDIT6 SECTION "5、参考资料" [2084-] --></div>
+</body>
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/web:zabbix by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:03:12 GMT -->
+</html>

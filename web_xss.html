@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh"
+  lang="zh" dir="ltr" class="no-js">
+
+<!-- Mirrored from wiki.wooyun.org/web:xss by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 02:53:30 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>web:xss [WooYun WiKi]</title>
+  <script>(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)</script>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="shortcut icon" href="lib/tpl/bootstrap3/images/favicon.ico" />
+<link rel="apple-touch-icon" href="lib/tpl/bootstrap3/images/apple-touch-icon.png" />
+      <link type="text/css" rel="stylesheet" href="lib/tpl/bootstrap3/assets/bootstrap/css/bootstrap.min.css" />
+    <script type="text/javascript">/*<![CDATA[*/
+    var TPL_CONFIG = {"tableFullWidth":1};
+  /*!]]>*/</script>
+  <meta name="generator" content="DokuWiki"/>
+<meta name="robots" content="noindex,nofollow"/>
+<meta name="keywords" content="web,xss"/>
+<link rel="search" type="application/opensearchdescription+xml" href="http://wiki.wooyun.org/lib/exe/opensearch.php" title="WooYun WiKi"/>
+<link rel="start" href="http://wiki.wooyun.org/"/>
+<link rel="contents" href="http://wiki.wooyun.org/web:xss?do=index" title="网站地图"/>
+<link rel="alternate" type="application/rss+xml" title="最近更改" href="http://wiki.wooyun.org/feed.php"/>
+<link rel="alternate" type="application/rss+xml" title="当前命名空间" href="http://wiki.wooyun.org/feed.php?mode=list&amp;ns=web"/>
+<link rel="alternate" type="text/html" title="纯HTML" href="http://wiki.wooyun.org/_export/xhtml/web:xss"/>
+<link rel="alternate" type="text/plain" title="Wiki Markup 语言" href="http://wiki.wooyun.org/_export/raw/web:xss"/>
+<link rel="stylesheet" type="text/css" href="http://wiki.wooyun.org/lib/exe/css.php?t=bootstrap3&amp;tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"/>
+<script type="text/javascript">/*<![CDATA[*/var NS='web';var JSINFO = {"id":"web:xss","namespace":"web","plugin_codeprettify":{"loader_base":"\/lib\/plugins\/codeprettify\/google-code-prettify"}};
+/*!]]>*/</script>
+<script type="text/javascript" charset="utf-8" src="http://wiki.wooyun.org/lib/exe/js.php?tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"></script>
+<script type="text/javascript" charset="utf-8" src="http://wiki.wooyun.org/lib/plugins/codeprettify/google-code-prettify/run_prettify.js?lang=css"></script>
+  <script type="text/javascript" src="http://wiki.wooyun.org/lib/tpl/bootstrap3/assets/bootstrap/js/bootstrap.min.js"></script>
+  <style type="text/css">
+    body { padding-top: 20px; }
+  </style>
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script type="text/javascript" src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+  <script type="text/javascript" src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body class="default page-on-panel">
+  <!--[if lte IE 7 ]><div id="IE7"><![endif]--><!--[if IE 8 ]><div id="IE8"><![endif]-->
+
+  <div id="dokuwiki__site" class="container">
+    <div id="dokuwiki__top" class="site dokuwiki mode_show tpl_bootstrap3    hasSidebar">
+
+      
+      <!-- header -->
+      <div id="dokuwiki__header">
+        <nav class="navbar  navbar-default" role="navigation">
+
+  <div class="container-fluid">
+
+    <div class="navbar-header">
+
+      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      <a href="http://wiki.wooyun.org/WooYun WiKi"  accesskey="h" title="[H]" class="navbar-brand"><img src="http://wiki.wooyun.org/lib/tpl/bootstrap3/images/logo.png" alt="WooYun WiKi" class="pull-left" id="dw__logo" width="20" height="20" /> <span id="dw__title" >WooYun WiKi</span></a>
+    </div>
+
+    <div class="collapse navbar-collapse">
+
+      <ul class="nav navbar-nav" id="dw__navbar">
+        <li class="active">
+  <a href="http://wiki.wooyun.org/WooYun WiKi" ><i class="glyphicon glyphicon-home"></i> Home</a></li>
+      </ul>
+
+      <div class="navbar-right">
+
+        <form action="http://wiki.wooyun.org/WooYun WiKi" accept-charset="utf-8" class="search" id="dw__search" method="get" role="search"><div class="no"><input type="hidden" name="do" value="search" /><input type="text" id="qsearch__in" accesskey="f" name="id" class="edit" title="[F]" /><input type="submit" value="搜索" class="button" title="搜索" /><div id="qsearch__out" class="ajax_qsearch JSpopup"></div></div></form>
+        <ul class="nav navbar-nav" id="dw__tools">
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="工具"><i class="glyphicon glyphicon-wrench"></i> <span class="hidden-lg hidden-md hidden-sm">工具</span> <span class="caret"></span></a>
+    <ul class="dropdown-menu tools" role="menu">
+
+      <!-- dokuwiki__usertools -->
+      <li class="dropdown-header"><i class="glyphicon glyphicon-user"></i> 用户工具</li>
+      
+      <li class="divider"></li>
+
+      <!-- dokuwiki__sitetools -->
+      <li class="dropdown-header"><i class="glyphicon glyphicon-cog"></i> 站点工具</li>
+      <li><a href="http://wiki.wooyun.org/web:xss?do=recent"  class="action recent" accesskey="r" rel="nofollow" title="最近更改 [R]"><i class="glyphicon glyphicon-list-alt"></i> 最近更改</a></li><li><a href="http://wiki.wooyun.org/web:xss?do=media&amp;ns=web"  class="action media" rel="nofollow" title="媒体管理器"><i class="glyphicon glyphicon-picture"></i> 媒体管理器</a></li><li><a href="http://wiki.wooyun.org/web:xss?do=index"  class="action index" accesskey="x" rel="nofollow" title="网站地图 [X]"><i class="glyphicon glyphicon-list"></i> 网站地图</a></li>
+      <li class="divider"></li>
+
+      <!-- dokuwiki__pagetools -->
+      <li class="dropdown-header"><i class="glyphicon glyphicon-file"></i> 页面工具</li>
+      <li><a href="http://wiki.wooyun.org/web:xss?do=edit&amp;rev=1434869855"  class="action source" accesskey="v" rel="nofollow" title="显示源文件 [V]"><i class="glyphicon glyphicon-edit"></i> 显示源文件</a></li><li><a href="http://wiki.wooyun.org/web:xss?do=revisions"  class="action revs" accesskey="o" rel="nofollow" title="修订记录 [O]"><i class="glyphicon glyphicon-time"></i> 修订记录</a></li><li><a href="http://wiki.wooyun.org/web:xss?do=backlink"  class="action backlink" rel="nofollow" title="反向链接"><i class="glyphicon glyphicon-link"></i> 反向链接</a></li><li><a href="#dokuwiki__top"  class="action top" accesskey="t" rel="nofollow" title="回到顶部 [T]"><i class="glyphicon glyphicon-chevron-up"></i> 回到顶部</a></li>
+    </ul>
+  </li>
+</ul>
+
+        <ul class="nav navbar-nav">
+          <li>
+                      </li>
+                    <li><a href="http://wiki.wooyun.org/web:xss?do=login&amp;sectok=a3845e1693337b10c6abaa01a16b0594"  class="action login" rel="nofollow" title="登录"><i class="glyphicon glyphicon-log-in"></i> 登录</a></li>        </ul>
+
+      </div>
+
+    </div>
+  </div>
+</nav>
+      </div>
+      <!-- /header -->
+
+      
+            <div id="dw__breadcrumbs">
+        <hr/>
+                        <div class="breadcrumb hidden-print"><span class="bchead">您的足迹:</span> <span class="bcsep">•</span> <bdi><a href="http://wiki.wooyun.org/server:httpput"  class="breadcrumbs" title="server:httpput">httpput</a></bdi> <span class="bcsep">•</span> <bdi><a href="http://wiki.wooyun.org/server:resolve"  class="breadcrumbs" title="server:resolve">resolve</a></bdi> <span class="bcsep">•</span> <bdi><a href="http://wiki.wooyun.org/server:directory-list"  class="breadcrumbs" title="server:directory-list">directory-list</a></bdi> <span class="bcsep">•</span> <bdi><a href="http://wiki.wooyun.org/server:padding-oracle-attack"  class="breadcrumbs" title="server:padding-oracle-attack">padding-oracle-attack</a></bdi> <span class="bcsep">•</span> <bdi><a href="http://wiki.wooyun.org/server:host"  class="breadcrumbs" title="server:host">host</a></bdi> <span class="bcsep">•</span> <bdi><a href="http://wiki.wooyun.org/server:zone-transfer"  class="breadcrumbs" title="server:zone-transfer">zone-transfer</a></bdi> <span class="bcsep">•</span> <bdi><a href="http://wiki.wooyun.org/server:squid"  class="breadcrumbs" title="server:squid">squid</a></bdi> <span class="bcsep">•</span> <bdi><a href="http://wiki.wooyun.org/server:openssl"  class="breadcrumbs" title="server:openssl">openssl</a></bdi> <span class="bcsep">•</span> <bdi><a href="http://wiki.wooyun.org/server:bash"  class="breadcrumbs" title="server:bash">bash</a></bdi> <span class="bcsep">•</span> <span class="curid"><bdi><a href="http://wiki.wooyun.org/web:xss"  class="breadcrumbs" title="web:xss">xss</a></bdi></span></div>
+                <hr/>
+      </div>
+      
+      <p class="pageId text-right">
+        <span class="label label-default">web:xss</span>
+      </p>
+
+      <div id="dw__msgarea">
+              </div>
+
+      <main class="main row" role="main">
+
+        <!-- ********** ASIDE ********** -->
+<aside id="dokuwiki__aside" class="dw__sidebar col-sm-3 col-md-2 hidden-print">
+  <div class="content">
+    <div class="toogle hidden-lg hidden-md hidden-sm" data-toggle="collapse" data-target="#dokuwiki__aside .collapse">
+      <i class="glyphicon glyphicon-th-list"></i> 侧边栏    </div>
+    <div class="collapse in">
+            
+<h4 id="企业安全">企业安全</h4>
+<div class="level4">
+<ul>
+<li class="level1"><div class="li"><a href="http://wiki.wooyun.org/enterprise:information" class="wikilink1" title="enterprise:information">信息收集</a></div>
+</li>
+<li class="level1"><div class="li"><a href="http://wiki.wooyun.org/enterprise:server" class="wikilink1" title="enterprise:server">服务配置</a></div>
+</li>
+<li class="level1"><div class="li"><a href="http://wiki.wooyun.org/enterprise:web" class="wikilink1" title="enterprise:web">Web应用</a></div>
+</li>
+<li class="level1"><div class="li"><a href="http://wiki.wooyun.org/enterprise:tools" class="wikilink1" title="enterprise:tools">安全工具</a></div>
+</li>
+<li class="level1"><div class="li"><a href="http://wiki.wooyun.org/enterprise:defence" class="wikilink1" title="enterprise:defence">安全防御</a></div>
+</li>
+<li class="level1"><div class="li"><a href="http://wiki.wooyun.org/enterprise:pentest" class="wikilink1" title="enterprise:pentest">渗透技巧</a></div>
+</li>
+</ul>
+
+</div>
+
+<h4 id="android_安全">Android 安全</h4>
+<div class="level4">
+<ul>
+<li class="level1"><div class="li"><a href="http://wiki.wooyun.org/android:client" class="wikilink1" title="android:client">客户端</a></div>
+</li>
+<li class="level1"><div class="li"><a href="http://wiki.wooyun.org/android:system" class="wikilink1" title="android:system">系统</a></div>
+</li>
+<li class="level1"><div class="li"><a href="http://wiki.wooyun.org/android:communicate" class="wikilink1" title="android:communicate">通信</a></div>
+</li>
+<li class="level1"><div class="li"><a href="http://wiki.wooyun.org/android:server" class="wikilink1" title="android:server">服务端</a></div>
+</li>
+<li class="level1"><div class="li"><a href="http://wiki.wooyun.org/android:tools" class="wikilink1" title="android:tools">常用工具</a></div>
+</li>
+</ul>
+
+</div>
+
+<h4 id="乌云">乌云</h4>
+<div class="level4">
+<ul>
+<li class="level1"><div class="li"><a href="http://wiki.wooyun.org/wooyun:route" class="wikilink1" title="wooyun:route">乌云路由</a></div>
+</li>
+<li class="level1"><div class="li"><span class="curid"><a href="http://wiki.wooyun.org/wooyun:woobuntu" class="wikilink1" title="wooyun:woobuntu">Woobuntu</a></span></div>
+</li>
+</ul>
+
+</div>
+
+<h4 id="apt">APT</h4>
+<div class="level4">
+<ul>
+<li class="level1"><div class="li"><a href="http://wiki.wooyun.org/apt:organization" class="wikilink1" title="apt:organization">组织</a></div>
+</li>
+</ul>
+
+</div>
+
+<h4 id="find_us">Find Us</h4>
+<div class="level4">
+<ul>
+<li class="level1"><div class="li">Email: <a class="__cf_email__" href="http://wiki.wooyun.org/cdn-cgi/l/email-protection" data-cfemail="02756b696b42756d6d7b776c2c6d7065">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">
+/* <![CDATA[ */!function(){try{var t="currentScript"in document?document.currentScript:function(){for(var t=document.getElementsByTagName("script"),e=t.length;e--;)if(t[e].getAttribute("data-cfhash"))return t[e]}();if(t&&t.previousSibling){var e,r,n,i,c=t.previousSibling,a=c.getAttribute("data-cfemail");if(a){for(e="",r=parseInt(a.substr(0,2),16),n=2;a.length-n;n+=2)i=parseInt(a.substr(n,2),16)^r,e+=String.fromCharCode(i);e=document.createTextNode(e),c.parentNode.replaceChild(e,c)}t.parentNode.removeChild(t);}}catch(u){}}()/* ]]> */</script>
+</div>
+</li>
+</ul>
+
+</div>
+          </div>
+  </div>
+</aside>
+
+        <!-- ********** CONTENT ********** -->
+        <article id="dokuwiki__content" class="col-sm-9 col-md-10" >
+
+          <div class="panel panel-default" > 
+            <div class="page group panel-body">
+
+                                          
+              <div class="pull-right hidden-print" data-spy="affix" data-offset-top="150" style="z-index:1024; top:10px; right:10px;">
+                <!-- TOC START -->
+<div id="dw__toc">
+<h3 class="toggle">目录</h3>
+<div>
+
+<ul class="toc">
+<li class="level1"><div class="li"><a href="#xss_cross_site_scripting">XSS(cross site scripting)</a></div>
+<ul class="toc">
+<li class="clear">
+<ul class="toc">
+<li class="level3"><div class="li"><a href="#相关背景介绍">1、相关背景介绍</a></div></li>
+<li class="level3"><div class="li"><a href="#成因">2、成因</a></div></li>
+<li class="level3"><div class="li"><a href="#攻击方式及危害">3、攻击方式及危害</a></div></li>
+<li class="level3"><div class="li"><a href="#实际案例">4、实际案例</a></div></li>
+<li class="level3"><div class="li"><a href="#修复方案">5、修复方案</a></div></li>
+<li class="level3"><div class="li"><a href="#漏洞扫描与发现">6、漏洞扫描与发现</a></div></li>
+<li class="level3"><div class="li"><a href="#相关其他安全问题">7、相关其他安全问题</a></div></li>
+<li class="level3"><div class="li"><a href="#相关资源">8、相关资源</a></div></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<!-- TOC END -->
+              </div>
+
+              <!-- wikipage start -->
+              
+<p>
+﻿
+</p>
+
+<h1 class="sectionedit1" id="xss_cross_site_scripting">XSS(cross site scripting)</h1>
+<div class="level1">
+
+</div>
+
+<h3 class="sectionedit2" id="相关背景介绍">1、相关背景介绍</h3>
+<div class="level3">
+<hr />
+
+<p>
+跨站脚本攻击(Cross Site Scripting)，为不和层叠样式表(Cascading Style Sheets, <abbr title="Cascading Style Sheets">CSS</abbr>)的缩写混淆，故将跨站脚本攻击缩写为XSS。恶意攻击者往Web页面里插入恶意html代码，当用户浏览该页之时，嵌入其中Web里面的html代码会被执行，从而达到恶意攻击用户的特殊目的。
+</p>
+
+</div>
+
+<h3 class="sectionedit3" id="成因">2、成因</h3>
+<div class="level3">
+<hr />
+
+<p>
+造成XSS漏洞的原因就是，攻击者的输入没有经过严格的控制，最终显示给来访的用户，攻击者通过巧妙的方法注入恶意指令代码到网页，使用户加载并执行攻击者恶意制造的网页程序。这些恶意网页程序通常是JavaScript，但实际上也可以包括Java， VBScript， ActiveX， Flash 或者甚至是普通的HTML。攻击成功后，攻击者可能得到更高的权限（如执行一些操作）、个人网页内容、会话和cookie等各种内容。
+</p>
+
+</div>
+
+<h3 class="sectionedit4" id="攻击方式及危害">3、攻击方式及危害</h3>
+<div class="level3">
+<hr />
+
+<p>
+XSS攻击方式通常分为三大类：
+</p>
+
+<p>
+反射型XSS
+存储型XSS
+DOM型XSS
+</p>
+
+<p>
+但实际上还存在flash XSS以及一个比较新的概念mXSS，下面分别来介绍一下：
+</p>
+
+<p>
+反射型XSS，非持久化，需要欺骗用户自己去点击链接才能触发XSS代码（服务器中没有这样的页面和内容）。
+</p>
+
+<p>
+存储型XSS，持久化，代码是存储在服务器中的，如在个人信息或发表文章等地方，加入代码，如果没有过滤或过滤不严，那么这些代码将储存到服务器中，用户访问该页面的时候触发代码执行。
+</p>
+
+<p>
+DOM型XSS，DOM—based XSS漏洞是基于文档对象模型Document Objeet Model，DOM)的一种漏洞。DOM是一个与平台、编程语言无关的接口，它允许程序或脚本动态地访问和更新文档内容、结构和样式，处理后的结果能够成为显示页面的一部分。DOM中有很多对象，其中一些是用户可以操纵的，如uRI ，location，refelTer等。客户端的脚本程序可以通过DOM动态地检查和修改页面内容，它不依赖于提交数据到服务器端，而从客户端获得DOM中的数据在本地执行，如果DOM中的数据没有经过严格确认，就会产生DOM—based XSS漏洞。
+</p>
+
+<p>
+flash XSS，利用网页上flash文件的缺陷来执行js脚本，一般是反射型XSS。
+</p>
+
+<p>
+mXSS，又被叫做突变XSS，主要被用于绕过XSS过滤。用户所提供的富文本内容通过javascript代码进入innerHTML属性后，一些意外的变化会使得一串看似没有任何危害的HTML代码，最终将进入某个DOM节点的innerHTML中，浏览器的渲染引擎会将本来没有任何危害的HTML代码渲染成具有潜在危险的XSS攻击代码。随后，该段攻击代码可能会被JS代码中的其它一些流程输出到DOM中或是其它方式被再次渲染，从而导致XSS的执行。
+</p>
+
+<p>
+XSS可以在访问了被插入XSS页面的用户的浏览器上执行js，从而进行一系列的操作。常见的攻击方式主要是利用XSS盗取用户未受httponly保护的cookie，再使用盗取的cookie登陆服务器进行操作。
+</p>
+
+<p>
+XSS常与CSRF漏洞结合起来使用，可在用户不知不觉中用用户的账号进行转账，加关注等操作。CSRF漏洞参见<a href="http://wiki.wooyun.org/web:csrf" class="wikilink1" title="web:csrf">Cross-site Request Forgery/CSRF</a>。
+</p>
+
+<p>
+其它一些少见的利用方式包括利用XSS进行DDOS，参考：<a href="http://zone.wooyun.org/content/12009" class="urlextern" title="http://zone.wooyun.org/content/12009"  rel="nofollow">SOHU视频XSS漏洞导致其用户成为DDOS肉鸡</a>。
+</p>
+
+</div>
+
+<h3 class="sectionedit5" id="实际案例">4、实际案例</h3>
+<div class="level3">
+<hr />
+
+<p>
+Dom XSS案例
+</p>
+<ul>
+<li class="level1"><div class="li"><a href="http://www.wooyun.org/bugs/wooyun-2010-019556" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-019556"  rel="nofollow">淘宝主域名下多处Dom XSS</a></div>
+</li>
+<li class="level1"><div class="li"><a href="http://www.wooyun.org/bugs/wooyun-2010-015530" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-015530"  rel="nofollow">腾讯微博一处两用DOM-XSS，能反射，能后门</a></div>
+</li>
+</ul>
+
+<p>
+存储型XSS案例
+</p>
+<ul>
+<li class="level1"><div class="li"><a href="http://www.wooyun.org/bugs/wooyun-2010-020713" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-020713"  rel="nofollow">腾讯群空间存储型XSS</a></div>
+</li>
+</ul>
+
+<p>
+反射型XSS案例
+</p>
+<ul>
+<li class="level1"><div class="li"><a href="http://www.wooyun.org/bugs/wooyun-2010-0103570" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-0103570"  rel="nofollow">新浪微博存在多处反射型XSS漏洞（firefox、chrome均可触发）</a></div>
+</li>
+</ul>
+
+<p>
+mXSS案例
+</p>
+<ul>
+<li class="level1"><div class="li"><a href="http://www.wooyun.org/bugs/wooyun-2010-051536" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-051536"  rel="nofollow">QQ空间某功能缺陷导致日志存储型XSS - 15</a></div>
+</li>
+</ul>
+
+<p>
+flash XSS案例
+</p>
+<ul>
+<li class="level1"><div class="li"><a href="http://www.wooyun.org/bugs/wooyun-2014-057368" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2014-057368"  rel="nofollow">乌云主站存在一处反射型XSS漏洞</a></div>
+</li>
+</ul>
+
+<p>
+flash XSS+存储型XSS案例
+</p>
+<ul>
+<li class="level1"><div class="li"><a href="http://www.wooyun.org/bugs/wooyun-2010-09732" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-09732"  rel="nofollow">百度首页Xss后门-可对用户进行持久劫持</a></div>
+</li>
+</ul>
+
+<p>
+XSS过滤绕过案例
+</p>
+<ul>
+<li class="level1"><div class="li"><a href="http://www.wooyun.org/bugs/wooyun-2010-019578" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-019578"  rel="nofollow">新浪邮箱邮件正文XSS - 富文本过滤策略绕过</a></div>
+</li>
+<li class="level1"><div class="li"><a href="http://www.wooyun.org/bugs/wooyun-2010-0113343" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-0113343"  rel="nofollow">bilibili某子站存在反射型XSS漏洞可成功获取用户权限（XSS auditor bypass技巧）</a></div>
+</li>
+</ul>
+
+<p>
+心伤的瘦子@wooyun 的XSS实例教程
+</p>
+<ul>
+<li class="level1"><div class="li"> <a href="http://wooyun.org/whitehats/心伤的瘦子" class="urlextern" title="http://wooyun.org/whitehats/%E5%BF%83%E4%BC%A4%E7%9A%84%E7%98%A6%E5%AD%90"  rel="nofollow">[腾讯实例教程] 那些年我们一起学XSS</a></div>
+</li>
+</ul>
+
+</div>
+
+<h3 class="sectionedit6" id="修复方案">5、修复方案</h3>
+<div class="level3">
+<hr />
+
+<p>
+对XSS的防御需要根据实际情况对用户的输入进行严格的过滤。基于过滤的XSS防御方式通常可分为两种：基于黑名单的过滤和基于白名单的过滤。后者的防御效果往往更好，对于用户在白名单之外的输入，可以直接忽略。在构造白名单的过程中需要保证在不影响用户体验的同时，尽可能杜绝一切不必要的输入内容。
+</p>
+
+<p>
+Flash XSS的修复需要对相应的flash进行修改或升级替换。
+</p>
+
+<p>
+在cookie中加入httponly属性可以在一定程度上保护用户的cookie，减少出现XSS时损失。
+</p>
+
+</div>
+
+<h3 class="sectionedit7" id="漏洞扫描与发现">6、漏洞扫描与发现</h3>
+<div class="level3">
+
+<p>
+XSScrapy - 快速，彻底的XSS / SQLI蜘蛛扫描
+</p>
+
+<p>
+给它一个URL，它会测试每一个环节可能会发生的跨站攻击和SQL注入漏洞。
+</p>
+
+<p>
+基本使用方法：
+</p>
+<pre class="code bash">.<span class="sy0">/</span>xsscrapy.py <span class="re5">-u</span> http:<span class="sy0">//</span>example.com</pre>
+
+<p>
+如果你想登录以后然后爬行：
+</p>
+<pre class="code bash">.<span class="sy0">/</span>xsscrapy.py <span class="re5">-u</span> http:<span class="sy0">//</span>example.com<span class="sy0">/</span>login_page <span class="re5">-l</span> loginname</pre>
+
+<p>
+XSS结果会保存在xsscrapy-vulns.txt中
+</p>
+
+<p>
+依赖安装包下载：
+</p>
+<pre class="code bash"><span class="kw2">wget</span> <span class="re5">-O</span> https:<span class="sy0">//</span>bootstrap.pypa.io<span class="sy0">/</span>get-pip.py
+python get-pip.py
+pip <span class="kw2">install</span> <span class="re5">-r</span> requirements.txt</pre>
+
+<p>
+github地址：<a href="https://github.com/DanMcInerney/xsscrapy" class="urlextern" title="https://github.com/DanMcInerney/xsscrapy"  rel="nofollow">https://github.com/DanMcInerney/xsscrapy</a>
+</p>
+<hr />
+
+</div>
+
+<h3 class="sectionedit8" id="相关其他安全问题">7、相关其他安全问题</h3>
+<div class="level3">
+<hr />
+
+</div>
+
+<h3 class="sectionedit9" id="相关资源">8、相关资源</h3>
+<div class="level3">
+<hr />
+
+<p>
+<a href="http://drops.wooyun.org/papers/146" class="urlextern" title="http://drops.wooyun.org/papers/146"  rel="nofollow">Browser Security-基本概念</a>
+</p>
+
+<p>
+<a href="http://drops.wooyun.org/tips/147" class="urlextern" title="http://drops.wooyun.org/tips/147"  rel="nofollow">Browser Security-超文本标记语言（HTML）</a>
+</p>
+
+<p>
+<a href="http://drops.wooyun.org/tips/150" class="urlextern" title="http://drops.wooyun.org/tips/150"  rel="nofollow">Browser Security-css、javascript</a>
+</p>
+
+<p>
+<a href="http://drops.wooyun.org/tips/151" class="urlextern" title="http://drops.wooyun.org/tips/151"  rel="nofollow">Browser Security-同源策略、伪URL的域</a>
+</p>
+
+<p>
+<a href="http://drops.wooyun.org/tips/689" class="urlextern" title="http://drops.wooyun.org/tips/689"  rel="nofollow">XSS与字符编码的那些事儿 ---科普文</a>
+</p>
+
+<p>
+<a href="http://drops.wooyun.org/tips/879" class="urlextern" title="http://drops.wooyun.org/tips/879"  rel="nofollow">fuzzing XSS filter</a>
+</p>
+
+<p>
+<a href="http://drops.wooyun.org/papers/948" class="urlextern" title="http://drops.wooyun.org/papers/948"  rel="nofollow">一些你可能不知道的Flash XSS技巧</a>
+</p>
+
+<p>
+<a href="http://drops.wooyun.org/tips/956" class="urlextern" title="http://drops.wooyun.org/tips/956"  rel="nofollow">mXSS攻击的成因及常见种类</a>
+</p>
+
+<p>
+<a href="http://drops.wooyun.org/papers/1327" class="urlextern" title="http://drops.wooyun.org/papers/1327"  rel="nofollow">XSS和字符集的那些事儿</a>
+</p>
+
+<p>
+<a href="http://drops.wooyun.org/tips/1985" class="urlextern" title="http://drops.wooyun.org/tips/1985"  rel="nofollow">一种自动化检测 Flash 中 XSS 方法的探讨</a>
+</p>
+
+<p>
+<a href="http://drops.wooyun.org/tips/2924" class="urlextern" title="http://drops.wooyun.org/tips/2924"  rel="nofollow">常见Flash XSS攻击方式</a>
+</p>
+
+<p>
+<a href="http://drops.wooyun.org/web/5049" class="urlextern" title="http://drops.wooyun.org/web/5049"  rel="nofollow">延长 XSS 生命期</a>
+</p>
+
+</div>
+
+              <!-- wikipage stop -->
+
+                            
+            </div>
+          </div>
+
+        </article>
+
+        
+      </main>
+
+      <footer id="dokuwiki__footer" class="small hidden-print">
+
+        <a href="javascript:void(0)" class="back-to-top hidden-print btn btn-default btn-sm" title="跳至内容>" id="back-to-top"><i class="glyphicon glyphicon-chevron-up"></i></a>
+
+                <div class="text-center">
+          <p id="dw__license">
+                      </p>
+                  </div>
+      </footer>
+
+      
+    </div><!-- /site -->
+
+    <div class="no"><img src="http://wiki.wooyun.org/lib/exe/indexer.php?id=web%3Axss&amp;1449197458" width="2" height="1" alt="" /></div>
+    <div id="screen__mode" class="no">
+      <span class="visible-xs"></span>
+      <span class="visible-sm"></span>
+      <span class="visible-md"></span>
+      <span class="visible-lg"></span>
+    </div>
+  </div>
+  <!--[if ( lte IE 7 | IE 8 ) ]></div><![endif]-->
+</body>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "http://hm.baidu.com/hm.js?2e9369dace9479584f08203285c7cbce";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<!-- Mirrored from wiki.wooyun.org/web:xss by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 02:53:30 GMT -->
+</html>

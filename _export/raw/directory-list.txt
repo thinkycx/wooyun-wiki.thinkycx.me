@@ -1,0 +1,80 @@
+====== 目录遍历 ======
+
+
+==== 1、漏洞简介 ====
+
+----
+当web服务器目录浏览的功能被开启时，若客户端浏览器在请求未指定文档名称且web服务器无法返回默认文档时便会启用目录浏览，显示一个列出目录内容的网页，或者当网站的代码存在缺陷，导致可以获取到服务器目录内容、结构，进而影响网站的敏感信息，威胁系统安全。
+
+
+==== 2、漏洞成因及利用 ====
+
+----
+该漏洞的成因主要包括两类：
+  * web服务器的配置引起的目录遍历
+  * 网站代码缺陷引起的目录遍历
+
+IIS和Nginx默认不开启目录遍历的功能，而Apached默认开启了目录遍历的功能。
+
+当web服务器目录遍历的功能被开启时，若客户端浏览器在请求未指定文档名称且web服务器无法返回默认文档时，便会启用目录浏览，显示一个列出目录内容的网页。
+
+网站代码的缺陷也会引起目录遍历，常见的是一些开源的编辑器的页面未授权访问，以及一些限制被绕过。参见：[[http://drops.wooyun.org/tips/3978|PHP绕过open_basedir列目录的研究]]。
+
+因各种原因导致的目录遍历，将对系统安全形成巨大的威胁。其将造成网站上非可执行文件的泄露，进而可能导致网站的数据库连接信息等泄露。
+
+
+
+==== 3、实际案例 ====
+
+---
+[[http://www.wooyun.org/bugs/wooyun-2010-067409|乌云某处存在可以列目录以及绝对路径泄漏漏洞（第三方应用）]]
+
+[[http://www.wooyun.org/bugs/wooyun-2010-0103565|大庆某教育类网站已被提权]]
+
+[[http://www.wooyun.org/bugs/wooyun-2010-0100286|TCL某重要站点从目录遍历到成功提权]]
+
+==== 4、漏洞修复 ====
+
+----
+**网站代码缺陷引起的目录遍历**
+
+对网站代码进行更新，升级。
+
+**web服务器配置引起的目录遍历**
+
+Apached禁止目录浏览:
+
+配置httpd.conf
+
+将Options Indexes FollowSymLinks改为Options -Indexes FollowSymLinks
+
+Nginx禁止目录浏览:
+
+配置nginx.conf，找到WebServer配置处,删除类似内容:
+
+<code bash>
+location /soft/ {
+root /var/www/;  此处为soft的上一级目录
+autoindex on;
+autoindex_exact_size off;
+autoindex_localtime on;
+}
+</code>
+
+保存退出,重启nginx服务即可。
+<code bash>
+[root@localhost Soft]#ps aux | grep -v grep | grep nginx | awk ‘{print $2}’ | xargs kill -9    #结束进程
+[root@localhost Soft]#nginx  #启动进程
+</code>
+
+IIS禁止列目录
+<code cmd>appcmd set config /section:directoryBrowse /enabled:false</code>
+
+==== 5、相关资源 ====
+
+----
+[[http://drops.wooyun.org/%E8%BF%90%E7%BB%B4%E5%AE%89%E5%85%A8/2727|Apache安全配置]]
+
+[[https://technet.microsoft.com/zh-cn/library/cc731109|在 IIS 7 中启用或禁用目录浏览]]
+
+[[http://drops.wooyun.org/tips/3978|PHP绕过open_basedir列目录的研究]]

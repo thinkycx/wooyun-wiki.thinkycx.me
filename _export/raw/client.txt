@@ -1,0 +1,34 @@
+====== 客户端 ======
+
+
+==== 组件安全 ====
+  * [[client:activity|Activity]]
+  * [[client:Service|Service]]
+  * [[client:Broadcast|Broadcast Reciever]]
+  * [[client:provider|Content Provider]]
+  * WebView [[http://drops.wooyun.org/papers/548|RCE]] [[http://drops.wooyun.org/tools/3186|UXSS]]
+==== 敏感信息 ====
+  * [[http://drops.wooyun.org/tips/3812|logcat]]
+  * private key
+  * 其它文件
+  * 内部存储
+==== 应用加固 ====
+  * 代码混淆/花指令
+  * 反编译保护
+  * 注入[[http://drops.wooyun.org/papers/6045|Smali 注入]]
+  * 完整性验证，防篡改
+==== 安全配置 ====
+  * AllowBackup
+  * debug
+  * 第三方SDK
+  * sdcard加载dex
+  * 编译api/兼容api
+  * so读写权限
+  * Permission and Protection Level
+  * socket接口
+==== 安全策略 ===
+  * 键盘劫持
+  * 屏幕劫持
+  * 更新包传输/存储/验证
+==== 其它 ====
+  * 弱本地加密

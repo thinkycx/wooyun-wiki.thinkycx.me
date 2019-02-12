@@ -1,0 +1,87 @@
+====== squid ======
+==== 1、squid简介 ====
+
+----
+Squid是一种用来缓冲Internet数据的软件。它是这样实现其功能的，接受来自人们需要下载的目标（object）的请求并适当地处理这些请求。也就是说，如果一个人想下载一web页面，他请求Squid为他取得这个页面。Squid随之连接到远程服务器（比如：http://squid.nlanr.net/）并向这个页面发出请求。然后，Squid显式地聚集数据到客户端机器，而且同时复制一份。当下一次有人需要同一页面时，Squid可以简单地从磁盘中读到它，那样数据迅即就会传输到客户机上。当前的Squid可以处理HTTP，FTP，GOPHER，SSL和WAIS等协议。但它不能处理如POP，NNTP，RealAudio以及其它类型的东西。
+
+==== 2、squid服务器架设 ====
+
+----
+测试环境Centos 6.2
+安装squid
+<code bash>
+yum install squid -y
+/etc/init.d/squid start
+</code>
+
+相关配置文件
+<code>
+配置文件目录
+/etc/squid
+主要配置文件
+/etc/squid/squid.conf
+监听端口
+TCP:3128
+</code>
+此时的squid就是一个没有任何保护的，可以被任何人使用。
+配置账户密码
+<code>
+vim /etc/squid/squid.conf
+#在配置文件最上层添加以下内容
+#Add auth
+auth_param basic program /usr/lib64/squid/ncsa_auth /usr/etc/passwd
+acl password proxy_auth REQUIRED
+http_access allow password
+#生成密码文件
+htpasswd -c /usr/etc/passwd test
+#重启服务
+/etc/init.d/squid restart
+</code>
+此时使用浏览器使用该代理时需要输入用户名和密码
+
+==== 3、错误配置及利用 ====
+
+----
+== 3、1 未配置权限直接使用进入内网 ==
+作为一个squid代理服务器，未做任何验证，就可以使用，可以直接访问内网
+
+== 3、2 配置不当导致敏感信息泄露 ==
+访问
+
+    http://ip/cgi-bin/cachemgr.cgi
+或者
+
+    squidclient -h ip -p port mgr:info
+
+在没有做限制的时候，可以查看squid的一些基本信息
+
+
+==== 4、实际案例 ====
+
+----
+http://www.wooyun.org/bugs/wooyun-2010-0181
+
+http://www.wooyun.org/bugs/wooyun-2010-021602
+
+http://www.wooyun.org/bugs/wooyun-2010-025343
+
+
+
+==== 5、修复方案 ====
+
+----
+== 5.1 配置密码 ==
+== 5.2 信息泄露 ==
+对于cachemgr.cgi泄露的话，可以直接删除cgi或者做一个401认证。
+
+==== 6、漏洞扫描及发现 ====
+
+----
+
+
+==== 7、相关资源 ====
+
+----
+http://www.squid-cache.org/
+
+http://home.arcor.de/pangj/squid/

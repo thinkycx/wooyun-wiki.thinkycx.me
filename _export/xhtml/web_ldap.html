@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/web:ldap by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:03:08 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8" />
+  <title>web:ldap</title>
+<meta name="generator" content="DokuWiki"/>
+<meta name="robots" content="index,follow"/>
+<meta name="keywords" content="web,ldap"/>
+<link rel="search" type="application/opensearchdescription+xml" href="../../lib/exe/opensearch.php" title="WooYun WiKi"/>
+<link rel="start" href="../../index.html"/>
+<link rel="contents" href="../../web_ldapdecf.html?do=index" title="网站地图"/>
+<link rel="alternate" type="application/rss+xml" title="最近更改" href="../../feed.php"/>
+<link rel="alternate" type="application/rss+xml" title="当前命名空间" href="../../feed4fbc.php?mode=list&amp;ns=web"/>
+<link rel="alternate" type="text/html" title="纯HTML" href="web_ldap.html"/>
+<link rel="alternate" type="text/plain" title="Wiki Markup 语言" href="../raw/ldap.txt"/>
+<link rel="canonical" href="../../web_ldap.html"/>
+<link rel="stylesheet" type="text/css" href="../../lib/exe/css70b4.css?t=bootstrap3&amp;tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"/>
+<script type="text/javascript">/*<![CDATA[*/var NS='web';var JSINFO = {"id":"web:ldap","namespace":"web","plugin_codeprettify":{"loader_base":"\/lib\/plugins\/codeprettify\/google-code-prettify"}};
+/*!]]>*/</script>
+<script type="text/javascript" charset="utf-8" src="../../lib/exe/js1e16.php?tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"></script>
+<script type="text/javascript" charset="utf-8" src="../../lib/plugins/codeprettify/google-code-prettify/run_prettifyeb11.js?lang=css"></script>
+</head>
+<body>
+<div class="dokuwiki export">
+<pre class="code">  LDAP是轻量目录访问协议，英文全称是Lightweight Directory Access Protocol，一般都简称为LDAP。它是基于X.500标准的，但是简单多了并且可以根据需要定制。与X.500不同，LDAP支持TCP/IP，这对访问Internet是必须的。 </pre>
+
+<p>
+LDAP的核心规范在RFC中都有定义，所有与LDAP相关的RFC都可以在LDAPman RFC网页中找到。LDAP是一个用来发布目录信息到许多不同资源的协议。通常它都作为一个集中的地址本使用，不过根据组织者的需要，它可以做得更加强大。 
+假如一个允许进行LDAP查询的机构存在未校验的输入，那么就会存在LDAP注入，这种威胁可以让攻击者能够从LADP树中提取到很多很重要的信息。  假设有一个网站允许查询     目录服务中的员工的级别： 
+<a href="http://www.test.com/employee.asp" class="urlextern" title="http://www.test.com/employee.asp"  rel="nofollow">http://www.test.com/employee.asp</a>？user=Jeck 
+</p>
+<pre class="code"> 最简单的方法就是将Jeck换成”*”那么，LDAP查询将会返回所有的员工级别信息。 
+ 参考资料[http://drops.wooyun.org/tips/967]</pre>
+</div>
+</body>
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/web:ldap by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:03:08 GMT -->
+</html>

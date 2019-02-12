@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/web:sql by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:03:07 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8" />
+  <title>web:sql</title>
+<meta name="generator" content="DokuWiki"/>
+<meta name="robots" content="index,follow"/>
+<meta name="keywords" content="web,sql"/>
+<link rel="search" type="application/opensearchdescription+xml" href="../../lib/exe/opensearch.php" title="WooYun WiKi"/>
+<link rel="start" href="../../index.html"/>
+<link rel="contents" href="../../web_sqldecf.html?do=index" title="网站地图"/>
+<link rel="alternate" type="application/rss+xml" title="最近更改" href="../../feed.php"/>
+<link rel="alternate" type="application/rss+xml" title="当前命名空间" href="../../feed4fbc.php?mode=list&amp;ns=web"/>
+<link rel="alternate" type="text/html" title="纯HTML" href="web_sql.html"/>
+<link rel="alternate" type="text/plain" title="Wiki Markup 语言" href="../raw/sql.txt"/>
+<link rel="canonical" href="../../web_sql.html"/>
+<link rel="stylesheet" type="text/css" href="../../lib/exe/css70b4.css?t=bootstrap3&amp;tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"/>
+<script type="text/javascript">/*<![CDATA[*/var NS='web';var JSINFO = {"id":"web:sql","namespace":"web","plugin_codeprettify":{"loader_base":"\/lib\/plugins\/codeprettify\/google-code-prettify"}};
+/*!]]>*/</script>
+<script type="text/javascript" charset="utf-8" src="../../lib/exe/js1e16.php?tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"></script>
+<script type="text/javascript" charset="utf-8" src="../../lib/plugins/codeprettify/google-code-prettify/run_prettifyeb11.js?lang=css"></script>
+</head>
+<body>
+<div class="dokuwiki export">
+<!-- TOC START -->
+<div id="dw__toc">
+<h3 class="toggle">目录</h3>
+<div>
+
+<ul class="toc">
+<li class="level1"><div class="li"><a href="#sql注入_sql_injection">SQL注入（SQL Injection）</a></div>
+<ul class="toc">
+<li class="clear">
+<ul class="toc">
+<li class="level3"><div class="li"><a href="#相关背景介绍">1、相关背景介绍</a></div></li>
+<li class="level3"><div class="li"><a href="#成因">2、成因</a></div></li>
+<li class="level3"><div class="li"><a href="#攻击方式和危害">3、攻击方式和危害</a></div></li>
+<li class="level3"><div class="li"><a href="#实际案例">4、实际案例</a></div></li>
+<li class="level3"><div class="li"><a href="#修复方案">5、修复方案</a></div></li>
+<li class="level3"><div class="li"><a href="#漏洞扫描与发现">6、漏洞扫描与发现</a></div></li>
+<li class="level3"><div class="li"><a href="#相关其他安全问题">7、相关其他安全问题</a></div></li>
+<li class="level3"><div class="li"><a href="#相关资源">8、相关资源</a></div></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<!-- TOC END -->
+
+<h1 class="sectionedit1" id="sql注入_sql_injection">SQL注入（SQL Injection）</h1>
+<div class="level1">
+
+</div>
+<!-- EDIT1 SECTION "SQL注入（SQL Injection）" [1-45] -->
+<h3 class="sectionedit2" id="相关背景介绍">1、相关背景介绍</h3>
+<div class="level3">
+<hr />
+
+<p>
+<strong>结构化查询语言（Structured Query Language，缩写：SQL）</strong>，是一种特殊的编程语言，用于数据库中的标准数据查询语言。1986年10月，美国国家标准学会对SQL进行规范后，以此作为关系式数据库管理系统的标准语言（ANSI X3. 135-1986），1987年得到国际标准组织的支持下成为国际标准。不过各种通行的数据库系统在其实践过程中都对SQL规范作了某些编改和扩充。所以，<strong>实际上不同数据库系统之间的SQL不能完全相互通用</strong>。
+</p>
+
+<p>
+<strong>SQL注入（SQL Injection）</strong>是一种常见的Web安全漏洞，攻击者利用这个问题，可以访问或修改数据，或者利用潜在的数据库漏洞进行攻击。
+</p>
+
+</div>
+<!-- EDIT2 SECTION "1、相关背景介绍" [46-816] -->
+<h3 class="sectionedit3" id="成因">2、成因</h3>
+<div class="level3">
+<hr />
+
+<p>
+针对SQL注入的攻击行为可描述为<strong>通过在用户可控参数中注入SQL语法，破坏原有SQL结构，达到编写程序时意料之外结果的攻击行为。</strong>其成因可以归结为以下两个原因叠加造成的：
+</p>
+
+</div>
+
+<h5 id="程序编写者在处理应用程序和数据库交互时_使用字符串拼接的方式构造sql语句">1. 程序编写者在处理应用程序和数据库交互时，使用字符串拼接的方式构造SQL语句</h5>
+<div class="level5">
+
+</div>
+
+<h5 id="未对用户可控参数进行足够的过滤便将参数内容拼接进入到sql语句中">2. 未对用户可控参数进行足够的过滤便将参数内容拼接进入到SQL语句中</h5>
+<div class="level5">
+
+</div>
+<!-- EDIT3 SECTION "2、成因" [817-1296] -->
+<h3 class="sectionedit4" id="攻击方式和危害">3、攻击方式和危害</h3>
+<div class="level3">
+<hr />
+
+<p>
+这里以MySQL为例。
+</p>
+
+</div>
+
+<h4 id="攻击方式">3.1 攻击方式</h4>
+<div class="level4">
+
+<p>
+SQL注入的攻击方式根据应用程序处理数据库返回内容的不同，可以分为可显注入、报错注入和盲注：
+</p>
+<ul>
+<li class="level1"><div class="li">可显注入：攻击者可以直接在当前界面内容中获取想要获得的内容</div>
+</li>
+<li class="level1"><div class="li">报错注入：数据库查询返回结果并没有在页面中显示，但是应用程序将数据库报错信息打印到了页面中，所以攻击者可以构造数据库报错语句，从报错信息中获取想要获得的内容</div>
+</li>
+<li class="level1"><div class="li">盲注：数据库查询结果无法从直观页面中获取，攻击者通过使用数据库逻辑或使数据库库执行延时等方法获取想要获得的内容</div>
+</li>
+</ul>
+
+</div>
+
+<h5 id="可显注入代码示例">3.1.1 可显注入代码示例：</h5>
+<div class="level5">
+<pre class="code sql">http:<span class="sy0">//</span>127<span class="sy0">.</span>0<span class="sy0">.</span>0<span class="sy0">.</span>1<span class="sy0">/</span>sqli<span class="sy0">-</span>labs<span class="sy0">-</span>master<span class="sy0">/</span>Less<span class="sy0">-</span><span class="nu0">1</span><span class="sy0">/</span>?id<span class="sy0">=</span><span class="nu0">1</span><span class="st0">' and 1=0 union select 1,email_id,3 from  emails where id=3 --+</span></pre>
+
+</div>
+
+<h5 id="报错注入代码示例">3.1.2 报错注入代码示例：</h5>
+<div class="level5">
+<pre class="code sql">http:<span class="sy0">//</span>127<span class="sy0">.</span>0<span class="sy0">.</span>0<span class="sy0">.</span>1<span class="sy0">/</span>sqli<span class="sy0">-</span>labs<span class="sy0">-</span>master<span class="sy0">/</span>Less<span class="sy0">-</span><span class="nu0">1</span><span class="sy0">/</span>?id<span class="sy0">=</span><span class="nu0">1</span><span class="st0">' and 1=0 union select 1,count(*),concat((select email_id from emails where id=5),0x2a,floor(rand(0)*2))x from users group by x--+</span></pre>
+
+</div>
+
+<h5 id="盲注代码示例">3.1.3 盲注代码示例：</h5>
+<div class="level5">
+<pre class="code sql">http:<span class="sy0">//</span>127<span class="sy0">.</span>0<span class="sy0">.</span>0<span class="sy0">.</span>1<span class="sy0">/</span>sqli<span class="sy0">-</span>labs<span class="sy0">-</span>master<span class="sy0">/</span>Less<span class="sy0">-</span><span class="nu0">1</span><span class="sy0">/</span>?id<span class="sy0">=</span><span class="nu0">1</span><span class="st0">' and (select substr(email_id,1,1) from emails where id=3) &gt; '</span>a<span class="st0">' --+</span></pre>
+
+</div>
+
+<h4 id="危害">3、2 危害</h4>
+<div class="level4">
+
+<p>
+攻击者利用SQL注入漏洞，可以获取数据库中的多种信息（例如：管理员后台密码），从而脱取数据库中内容（脱库）。在特别情况下还可以修改数据库内容或者插入内容到数据库，如果数据库权限分配存在问题，或者数据库本身存在缺陷，那么攻击者可以通过SQL注入漏洞直接获取webshell或者服务器系统权限。
+</p>
+
+</div>
+<!-- EDIT4 SECTION "3、攻击方式和危害" [1297-3021] -->
+<h3 class="sectionedit5" id="实际案例">4、实际案例</h3>
+<div class="level3">
+<hr />
+
+<p>
+可显注入代码示例：
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2015-0106443" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2015-0106443"  rel="nofollow">乐视云官方接口泄漏(账户信息接口含密码&amp;SQL注入)</a>
+</p>
+
+<p>
+报错注入代码示例：
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2015-099907" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2015-099907"  rel="nofollow">17173游戏某站点MySQL报错注入(不带逗号注入的猜解过程)</a>
+</p>
+
+<p>
+盲注代码示例：
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-083899" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-083899"  rel="nofollow">淘宝网某站点存在MySQL注射(附验证脚本)</a>
+</p>
+
+</div>
+<!-- EDIT5 SECTION "4、实际案例" [3022-3483] -->
+<h3 class="sectionedit6" id="修复方案">5、修复方案</h3>
+<div class="level3">
+<hr />
+<ol>
+<li class="level1"><div class="li">使用参数检查的方式，拦截带有SQL语法的参数传入应用程序
+</div>
+</li>
+<li class="level0"><div class="li">使用预编译的处理方式处理拼接了用户参数的SQL语句
+</div>
+</li>
+<li class="level0"><div class="li">在参数即将进入数据库执行之前，对SQL语句的语义进行完整性检查，确认语义没有发生变化
+</div>
+</li>
+<li class="level0"><div class="li">在出现SQL注入漏洞时，要在出现问题的参数拼接进SQL语句前进行过滤或者校验，不要依赖程序最开始处防护代码
+</div>
+</li>
+<li class="level0"><div class="li">定期审计数据库执行日志，查看是否存在应用程序正常逻辑之外的SQL语句执行</div>
+</li>
+</ol>
+
+</div>
+<!-- EDIT6 SECTION "5、修复方案" [3484-4058] -->
+<h3 class="sectionedit7" id="漏洞扫描与发现">6、漏洞扫描与发现</h3>
+<div class="level3">
+<hr />
+
+<p>
+sqlmap 官方站点: <a href="http://sqlmap.org/" class="urlextern" title="http://sqlmap.org/"  rel="nofollow">http://sqlmap.org/</a>
+</p>
+
+<p>
+介绍和使用：
+</p>
+
+<p>
+<a href="http://drops.wooyun.org/tips/143" class="urlextern" title="http://drops.wooyun.org/tips/143"  rel="nofollow"> sqlmap用户手册</a>
+</p>
+
+<p>
+<a href="http://drops.wooyun.org/tips/401" class="urlextern" title="http://drops.wooyun.org/tips/401"  rel="nofollow"> sqlmap用户手册[续]</a>
+</p>
+
+<p>
+<a href="http://drops.wooyun.org/tips/5254" class="urlextern" title="http://drops.wooyun.org/tips/5254"  rel="nofollow"> SQLMAP进阶使用</a>
+</p>
+
+</div>
+<!-- EDIT7 SECTION "6、漏洞扫描与发现" [4059-4342] -->
+<h3 class="sectionedit8" id="相关其他安全问题">7、相关其他安全问题</h3>
+<div class="level3">
+<hr />
+
+<p>
+无
+</p>
+
+</div>
+<!-- EDIT8 SECTION "7、相关其他安全问题" [4343-4393] -->
+<h3 class="sectionedit9" id="相关资源">8、相关资源</h3>
+<div class="level3">
+<hr />
+
+<p>
+<a href="http://www.w3school.com.cn/sql/sql_syntax.asp" class="urlextern" title="http://www.w3school.com.cn/sql/sql_syntax.asp"  rel="nofollow">w3school：SQL语法系列教程</a>
+</p>
+
+<p>
+<a href="http://drops.wooyun.org/tips/123" class="urlextern" title="http://drops.wooyun.org/tips/123"  rel="nofollow">MySql注入科普</a>
+</p>
+
+<p>
+<a href="http://drops.wooyun.org/tips/2078" class="urlextern" title="http://drops.wooyun.org/tips/2078"  rel="nofollow">利用insert，update和delete注入获取数据</a>
+</p>
+
+<p>
+<a href="http://drops.wooyun.org/tips/1620" class="urlextern" title="http://drops.wooyun.org/tips/1620"  rel="nofollow">MSSQL注射知识库 v 1.0</a>
+</p>
+
+<p>
+<a href="http://drops.wooyun.org/tips/3939" class="urlextern" title="http://drops.wooyun.org/tips/3939"  rel="nofollow">Mongodb注入攻击</a>
+</p>
+
+<p>
+<a href="http://drops.wooyun.org/tips/5283" class="urlextern" title="http://drops.wooyun.org/tips/5283"  rel="nofollow">在SQL注入中使用DNS获取数据</a>
+</p>
+
+<p>
+<a href="http://drops.wooyun.org/tips/5254" class="urlextern" title="http://drops.wooyun.org/tips/5254"  rel="nofollow">SQLMAP进阶使用</a>
+</p>
+
+</div>
+<!-- EDIT9 SECTION "8、相关资源" [4394-] --></div>
+</body>
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/web:sql by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:03:07 GMT -->
+</html>

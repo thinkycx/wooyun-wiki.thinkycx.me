@@ -1,0 +1,40 @@
+# 系统
+
+==== permission绕过 ====
+  * frgment注入
+  * 短信伪造
+  * 短信重发（CVE-2014-8610）
+  * CVE-2014-8597 Android <5.0 SQL injection vulnerability in WAPPushManager
+  * 绕过ADB认证
+  * 电话拨打权限绕过漏洞
+  * BroadAnyWhere
+  * LanuchAnyWhere
+==== root权限提升 ====
+  * CVE-2014-7911
+  * TowellRoot(CVE-2014-3153)
+==== 签名 ====
+  * master key
+  * fake ID
+==== DOS ====
+  * 图标拒绝服务
+  * mainfest拒绝服务
+  * fragment拒绝服务
+  * 浏览器拒绝服务
+  * Denial of App-PackageManager
+  * wifidos
+==== 配置 ====
+  * 文件权限
+  * symbolic link
+==== 零权限访问 ====
+  * [[http://drops.wooyun.org/papers/2736|Voice Attack]]
+  * [[http://drops.wooyun.org/papers/2893|Scheme Attack]]
+  * SD read
+  * 剪贴板
+  * next-intent attack
+==== other ====
+  * 伪随机数生成（PRNG）
+  * 浏览器地址栏欺骗
+  * 邮件伪造/xss
+  * 蓝牙wifi权限缺失
+  * 邮件钓鱼（CVE-2014-4925）
+  * Cross-Device Scripting Attacks

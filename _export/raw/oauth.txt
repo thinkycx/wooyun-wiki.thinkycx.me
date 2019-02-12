@@ -1,0 +1,99 @@
+====== URL redirection/URL重定向 ======
+
+
+
+
+==== 1、相关背景介绍 ====
+
+----
+OAuth（开放授权）是一个开放标准，允许用户让第三方应用访问该用户在某一网站上存储的私密的资源（如照片，视频，联系人列表），而无需将用户名和密码提供给第三方应用。
+
+OAuth允许用户提供一个令牌，而不是用户名和密码来访问他们存放在特定服务提供者的数据。每一个令牌授权一个特定的网站（例如，视频编辑网站)在特定的时段（例如，接下来的2小时内）内访问特定的资源（例如仅仅是某一相册中的视频）。这样，OAuth让用户可以授权第三方网站访问他们存储在另外服务提供者的某些特定信息，而非所有内容。
+
+==== 2、成因 ====
+
+----
+就OAuth协议本身而言是相对比较严谨的，目前常见的OAuth相关漏洞多为开发者在部署、使用OAuth时的疏忽或不规范所致。
+
+==== 3、攻击方式及危害 ====
+
+----
+**授权方**：
+
+**认证服务器redirect\_uri未校验**
+
+若认证服务器不对申请授权请求中的redirect\_uri参数进行验证，攻击者则可以伪造一个redirect\_uri为自己可控地址的请求，通过XSS或CSRF等手段让受害人访问，当获得授权后认证服务器将会带着授权码重定向到攻击者的地址，从而导致授权码泄露。
+
+**利用浏览器的一些特性绕过认证服务器对redirect\_uri的校验**
+
+很多浏览器会将“`\`”转换成“`/`”，如攻击者将redirect\_uri改为`www.b.com\.www.a.com`，认证服务器认为这个地址是www.a.com下的一个子域名，而浏览器经过转换后，实际跳转到的地址则是`www.b.com/.www.a.com`（即www.b.com下的一个地址），成功绕过了redirect\_uri校验。相关漏洞如：[WooYun-2014-59403](http://www.wooyun.org/bugs/wooyun-2014-059403)。
+
+safari浏览器会对url中的full width字符自动转化为常见的字符，攻击者通过将"`/`"等字符替换成full width字符后即可通过上述方法绕过redirect\_uri校验。相关漏洞如：[WooYun-2014-59639](http://www.wooyun.org/bugs/wooyun-2014-059639)。
+
+此外，还可以通过在URL中加入的“`@`”字符绕过redirect\_uri校验。相关漏洞如：[WooYun-2014-59676](http://www.wooyun.org/bugs/wooyun-2014-059676)。
+
+**应用方**：
+
+**利用CSRF进行授权劫持**
+
+因OAuth授权过程中的链接及参数都是已知的，所以攻击者可以预先构造相应链接诱导用户点击，点击后（已登录状态）的用户则在不知情的情况下对某一第三方应用进行了授权。
+
+**利用URL跳转漏洞或引用外部图片等方式通过referer将code带到攻击者的域名**
+
+如果应用方网站可以进行任意的URL跳转或引用的外部的图片等资源，攻击者则可利用跳转到自己网站或请求自己网站资源过程中的referer信息获取token。
+
+==== 4、实际案例 ====
+
+----
+**PiaCa：[WooYun-2012-05804：人人网Oauth 2.0授权可导致用户access_token泄露](http://www.wooyun.org/bugs/wooyun-2012-05804)**
+
+由于简化模式（implicit grant type）的授权请求仅需client\_id和redirect\_uri，人人网并没有对redirect\_uri进行严格检查，导致攻击者可以利用redirect\_uri域下的xss漏洞得到用户token。
+
+**p.z：[WooYun-2014-59403：腾讯OAuth平台redirect_uri过滤不严可能导致用户信息遭窃取](http://www.wooyun.org/bugs/wooyun-2014-059403)**
+
+由于绝大多数浏览器会将\转化为/，所以攻击者成功利用full width字符绕过redirect_uri校验。
+
+**p.z：[WooYun-2014-59639：腾讯OAuth平台redirect_uri过滤不严可能导致用户信息遭窃取（三）](http://www.wooyun.org/bugs/wooyun-2014-059639)**
+
+由于safari会对url中的full width字符自动转化为常见的字符，所以攻击者成功利用full width字符绕过redirect_uri校验。
+
+==== 5、修复方案 ====
+
+----
+**授权方**：
+
+对于OAuth回调污染问题，应严格校验redirect\_uri，在某些情况下可以考虑通过字符串比对的方式进行校验。
+
+**应用方**：
+
+可利用state参数进行防跨站攻击，验证302跳转回来带code参数的这个请求是否是攻击者伪造的，防止攻击者伪造请求。
+
+对于外链攻击，可在支持HTML5浏览器的环境下给所有外部链接加上`rel=noreferrer`属性；对于老版本IE的处理方案是利用一个HTTPS进行跳转达到抹去referer的效果。
+
+==== 6、漏洞扫描与发现 ====
+
+----
+**授权方**：
+
+排查对redirect_uri的域检测是否存在绕过。
+
+**应用方**：
+
+排查网站上是否存在URL跳转漏洞。
+
+
+==== 7、相关其他安全问题 ====
+
+----
+通过OAuth从资源服务器获取数据的时候，应该注意进行相应过滤，防止从资源服务器引入危险代码导致SQLi、XSS等攻击。
+
+==== 8、相关资源 ====
+
+----
+[[http://zhuanlan.zhihu.com/wooyun/19745587|OAuth 漏洞预警]]
+
+[[http://drops.wooyun.org/papers/598|OAuth 2.0安全案例回顾]]
+
+[[http://drops.wooyun.org/papers/1989|OAuth 安全指南]]
+
+[[http://www.ruanyifeng.com/blog/2014/05/oauth_2_0.html|理解OAuth 2.0]]

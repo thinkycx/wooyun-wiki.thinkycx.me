@@ -1,0 +1,33 @@
+ 在很多WEB应用中常常会用XML格式来储存数据（国外占多数），而XPATH就是一个XML文档中解析和提取数据的查询语言（类似于SQL语言）。如果我们能控制一个XAPTH输入点，那么我们可以像注入SQL一样的去注入XPATH，当然你不能用SQL语句以及UNION联合查询。 
+假设有一个XML文档为 
+**1.<users>  
+2. <user>  
+3.  <name>11</name>  
+4.  <username>Murkfox</username>  
+5.  <password>password123!</password>  
+6.  <admin>1</admin>  
+7. </user>  
+8. <user>  
+9.  <name>Chris Stevens</name>  
+10.  <username>ctothes</username>  
+11.  <password>reddit12</password> 
+12.  <admin>0</admin>  
+13. </user>  
+14.</users>  一个非常简单的web表单使用用户名"Murkfox"和密码“password123!”输入到表单中，后台执行的查询语法如下  * ： /*[1]/user[username=”Murkfox”and password=”password123!”]** 
+返回的用户节点 
+1.<user>  
+2.  <name>11</name>  
+3.  <username>Murkfox</username>  
+4.  <password>password123!</password>  
+5.  <admin>1</admin>  
+6. </user>  
+7.假如服务端没有进行输入检查，那么一个XPATH注入就诞生了，它的核心问题和本质同其他注入一样，都是因为用户所能控制的输入被拼接或伪装成了程序的执行命令，而被服务端执行。 
+假设它的认证过程是这样的 
+/*[1]/user[username=”Murkfox”and password=”password123!”] 
+攻击者也可以提交以下内容 
+username: Murkfox"or "1" ="1password: anything 
+表达式为 
+Username=’Murkfox’ or 1=1 or ‘a’=’b’ 
+那么就可以表示为 
+（a or b）or （c and d） 
+由于逻辑操作符and的优先级高于or 所以，如果a或者b为真表达式不管c and d返回什么都是真的，攻击者就可以登录。这就是用XAPTH注入绕过验证机制。x 

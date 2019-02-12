@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/web:execution by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:03:08 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8" />
+  <title>web:execution</title>
+<meta name="generator" content="DokuWiki"/>
+<meta name="robots" content="index,follow"/>
+<meta name="keywords" content="web,execution"/>
+<link rel="search" type="application/opensearchdescription+xml" href="../../lib/exe/opensearch.php" title="WooYun WiKi"/>
+<link rel="start" href="../../index.html"/>
+<link rel="contents" href="../../web_executiondecf.html?do=index" title="网站地图"/>
+<link rel="alternate" type="application/rss+xml" title="最近更改" href="../../feed.php"/>
+<link rel="alternate" type="application/rss+xml" title="当前命名空间" href="../../feed4fbc.php?mode=list&amp;ns=web"/>
+<link rel="alternate" type="text/html" title="纯HTML" href="web_execution.html"/>
+<link rel="alternate" type="text/plain" title="Wiki Markup 语言" href="../raw/execution.txt"/>
+<link rel="canonical" href="../../web_execution.html"/>
+<link rel="stylesheet" type="text/css" href="../../lib/exe/css70b4.css?t=bootstrap3&amp;tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"/>
+<script type="text/javascript">/*<![CDATA[*/var NS='web';var JSINFO = {"id":"web:execution","namespace":"web","plugin_codeprettify":{"loader_base":"\/lib\/plugins\/codeprettify\/google-code-prettify"}};
+/*!]]>*/</script>
+<script type="text/javascript" charset="utf-8" src="../../lib/exe/js1e16.php?tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"></script>
+<script type="text/javascript" charset="utf-8" src="../../lib/plugins/codeprettify/google-code-prettify/run_prettifyeb11.js?lang=css"></script>
+</head>
+<body>
+<div class="dokuwiki export">
+<!-- TOC START -->
+<div id="dw__toc">
+<h3 class="toggle">目录</h3>
+<div>
+
+<ul class="toc">
+<li class="level1"><div class="li"><a href="#顺序执行">顺序执行</a></div>
+<ul class="toc">
+<li class="clear">
+<ul class="toc">
+<li class="level3"><div class="li"><a href="#概述">1、概述</a></div></li>
+<li class="level3"><div class="li"><a href="#常见的顺序执行漏洞">2、常见的顺序执行漏洞</a></div></li>
+<li class="level3"><div class="li"><a href="#漏洞检测方法">3、漏洞检测方法</a></div></li>
+<li class="level3"><div class="li"><a href="#修补措施">4、修补措施</a></div></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<!-- TOC END -->
+
+<h1 class="sectionedit1" id="顺序执行">顺序执行</h1>
+<div class="level1">
+
+</div>
+<!-- EDIT1 SECTION "顺序执行" [1-26] -->
+<h3 class="sectionedit2" id="概述">1、概述</h3>
+<div class="level3">
+<hr />
+
+<p>
+所谓的顺序执行 指的就是某一个逻辑流程中，按照第一步、第二步、第三步这种模式进行一步一步的验证，有顺序的执行逻辑的过程。
+那么如果整个执行过程中的权限控制不够严格的话，就容易产生漏洞。下面说说常见的顺序执行漏洞。
+</p>
+
+</div>
+<!-- EDIT2 SECTION "1、概述" [27-368] -->
+<h3 class="sectionedit3" id="常见的顺序执行漏洞">2、常见的顺序执行漏洞</h3>
+<div class="level3">
+<hr />
+
+<p>
+<strong>2.1 密码找回的顺序执行</strong>
+</p>
+
+<p>
+这种漏洞还是比较常见的，具体流程是这样子。
+</p>
+<pre class="code">1 填写用户名进入下一步
+2 给指定的邮箱或者手机号发url或者短信进行校验
+3 根据邮箱的url或者手机短信进行验证后进入重置密码界面
+4 成功修改重置密码</pre>
+
+<p>
+整个环节中，如果对4的前提过程中验证不够严格，就会导致执行1后直接跳过2和3来执行4这一步，从而导致任意用户密码重置漏洞！
+</p>
+
+<p>
+实例：<a href="http://wooyun.org/bugs/wooyun-2010-070708" class="urlextern" title="http://wooyun.org/bugs/wooyun-2010-070708"  rel="nofollow">http://wooyun.org/bugs/wooyun-2010-070708</a>
+</p>
+
+<p>
+<strong>2.2 支付环节的顺序执行</strong>
+</p>
+
+<p>
+一般支付环节的数序是这样子
+</p>
+<pre class="code">1 下单
+2 确定订单信息
+3 支付订单
+4 支付成功</pre>
+
+<p>
+如果在1或者2过程中，对于正负数没有严格验证的话，那么就可以通过数量输入负数，或者修改价格实现低价购买或者刷钱，不过这种不在本次讨论范围，故这里跳过。
+这里说的顺序执行，如果在4的这一步，没有对前面1、2和3验证严格的话，那么就可以直接跳过前面3步，直接进入4，然后成功支付。
+</p>
+
+<p>
+实例：<a href="http://wooyun.org/bugs/wooyun-2010-042370" class="urlextern" title="http://wooyun.org/bugs/wooyun-2010-042370"  rel="nofollow">http://wooyun.org/bugs/wooyun-2010-042370</a>
+</p>
+
+<p>
+<strong>3 登录验证的顺序执行</strong>
+</p>
+
+<p>
+有的厂商的登录设计是这样，在登录的时候将页面验证码和用户名、密码分开进行了验证。如果验证码正确，进行第二个请求验证帐号和密码，如果验证码错误，直接对用户名和密码就不再进行验证。这种顺序逻辑，如果直接对用户名和密码验证的请求进行爆破，就可以实现扫号、暴力破解的目的。
+</p>
+
+<p>
+实例：<a href="http://wooyun.org/bugs/wooyun-2010-0115492" class="urlextern" title="http://wooyun.org/bugs/wooyun-2010-0115492"  rel="nofollow">http://wooyun.org/bugs/wooyun-2010-0115492</a>
+</p>
+
+</div>
+<!-- EDIT3 SECTION "2、常见的顺序执行漏洞" [369-2056] -->
+<h3 class="sectionedit4" id="漏洞检测方法">3、漏洞检测方法</h3>
+<div class="level3">
+<hr />
+
+<p>
+这种漏洞的检测方法很简单，就是直接对每一步都进行抓包，然后尝试是否可以跳过前面的验证，直接对结果请求进行成功请求即可。
+</p>
+
+</div>
+<!-- EDIT4 SECTION "3、漏洞检测方法" [2057-2273] -->
+<h3 class="sectionedit5" id="修补措施">4、修补措施</h3>
+<div class="level3">
+<hr />
+
+<p>
+对每一步的请求的验证，都要严格，而且要以上一步的结果为依据。可以给请求参数中加入一个随机的key，贯穿验证的始终。
+</p>
+
+</div>
+<!-- EDIT5 SECTION "4、修补措施" [2274-] --></div>
+</body>
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/web:execution by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:03:08 GMT -->
+</html>

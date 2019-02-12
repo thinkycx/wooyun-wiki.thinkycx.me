@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/server:ftp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:02:53 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8" />
+  <title>server:ftp</title>
+<meta name="generator" content="DokuWiki"/>
+<meta name="robots" content="index,follow"/>
+<meta name="keywords" content="server,ftp"/>
+<link rel="search" type="application/opensearchdescription+xml" href="../../lib/exe/opensearch.php" title="WooYun WiKi"/>
+<link rel="start" href="../../index.html"/>
+<link rel="contents" href="../../server_ftpdecf.html?do=index" title="网站地图"/>
+<link rel="alternate" type="application/rss+xml" title="最近更改" href="../../feed.php"/>
+<link rel="alternate" type="application/rss+xml" title="当前命名空间" href="../../feed0688.php?mode=list&amp;ns=server"/>
+<link rel="alternate" type="text/html" title="纯HTML" href="server_ftp.html"/>
+<link rel="alternate" type="text/plain" title="Wiki Markup 语言" href="../raw/ftp.txt"/>
+<link rel="canonical" href="../../server_ftp.html"/>
+<link rel="stylesheet" type="text/css" href="../../lib/exe/css70b4.css?t=bootstrap3&amp;tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"/>
+<script type="text/javascript">/*<![CDATA[*/var NS='server';var JSINFO = {"id":"server:ftp","namespace":"server","plugin_codeprettify":{"loader_base":"\/lib\/plugins\/codeprettify\/google-code-prettify"}};
+/*!]]>*/</script>
+<script type="text/javascript" charset="utf-8" src="../../lib/exe/js1e16.php?tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"></script>
+<script type="text/javascript" charset="utf-8" src="../../lib/plugins/codeprettify/google-code-prettify/run_prettifyeb11.js?lang=css"></script>
+</head>
+<body>
+<div class="dokuwiki export">
+<!-- TOC START -->
+<div id="dw__toc">
+<h3 class="toggle">目录</h3>
+<div>
+
+<ul class="toc">
+<li class="level1"><div class="li"><a href="#ftp服务器安全配置">FTP服务器安全配置</a></div>
+<ul class="toc">
+<li class="clear">
+<ul class="toc">
+<li class="level3"><div class="li"><a href="#ftp简介">1、FTP简介</a></div></li>
+<li class="level3"><div class="li"><a href="#ftp服务器架设">2、FTP服务器架设</a></div></li>
+<li class="level3"><div class="li"><a href="#错误配置及利用">3、错误配置及利用</a></div></li>
+<li class="level3"><div class="li"><a href="#实际案例">4、实际案例</a></div></li>
+<li class="level3"><div class="li"><a href="#修复方案">5、修复方案</a></div></li>
+<li class="level3"><div class="li"><a href="#漏洞扫描与发现">6、漏洞扫描与发现</a></div></li>
+<li class="level3"><div class="li"><a href="#相关资源">7、相关资源</a></div></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<!-- TOC END -->
+
+<h1 class="sectionedit1" id="ftp服务器安全配置">FTP服务器安全配置</h1>
+<div class="level1">
+
+</div>
+<!-- EDIT1 SECTION "FTP服务器安全配置" [1-40] -->
+<h3 class="sectionedit2" id="ftp简介">1、FTP简介</h3>
+<div class="level3">
+<hr />
+
+<p>
+<abbr title="File Transfer Protocol">FTP</abbr> 是File Transfer Protocol（文件传输协议）的英文简称，而中文简称为“文传协议”。用于Internet上的控制文件的双向传输。同时，它也是一个应用程序（Application）。基于不同的操作系统有不同的FTP应用程序，而所有这些应用程序都遵守同一种协议以传输文件。在FTP的使用当中，用户经常遇到两个概念：“下载”（Download）和“上传”（Upload）。“下载”文件就是从远程主机拷贝文件至自己的计算机上；“上传”文件就是将文件从自己的计算机中拷贝至远程主机上。用Internet语言来说，用户可通过客户机程序向（从）远程主机上传（下载）文件。
+</p>
+
+</div>
+<!-- EDIT2 SECTION "1、FTP简介" [41-782] -->
+<h3 class="sectionedit3" id="ftp服务器架设">2、FTP服务器架设</h3>
+<div class="level3">
+<hr />
+
+<p>
+测试环境 centos 6.6，ftp选择vsftp
+</p>
+
+<p>
+安装vsftpd
+</p>
+<pre class="code bash"><span class="kw2">yum install</span> vsftpd <span class="re5">-y</span></pre>
+
+<p>
+运行服务
+</p>
+<pre class="code bash"><span class="sy0">/</span>etc<span class="sy0">/</span>init.d<span class="sy0">/</span>vsftpd <span class="re5">-y</span></pre>
+
+<p>
+初始安装完成，初始安装完成后允许任意用户直接登录，可以下载其中的文件
+</p>
+
+</div>
+<!-- EDIT3 SECTION "2、FTP服务器架设" [783-1080] -->
+<h3 class="sectionedit4" id="错误配置及利用">3、错误配置及利用</h3>
+<div class="level3">
+<hr />
+
+</div>
+
+<h4 id="允许匿名用户直接登录_下载文件">3.1 允许匿名用户直接登录,下载文件</h4>
+<div class="level4">
+
+</div>
+
+<h4 id="配置不当存在弱口令">3.2 配置不当存在弱口令</h4>
+<div class="level4">
+
+</div>
+
+<h4 id="权限配置不当">3.3 权限配置不当</h4>
+<div class="level4">
+
+</div>
+
+<h4 id="proftpd_未授权的文件拷贝_cve-2015-3306">3.4 proFTPd 未授权的文件拷贝(CVE-2015-3306)</h4>
+<div class="level4">
+
+<p>
+在proFTPd版本小于1.3.5的条件下，登陆proftp后(未授权或者爆破)，使用cpfr和cpto，能够拷贝主机中的文件，如果在知道web目录的绝对情况下，有可能写入webshell
+</p>
+
+<p>
+具体攻击方法参考
+</p>
+
+<p>
+<a href="http://zone.wooyun.org/content/19890" class="urlextern" title="http://zone.wooyun.org/content/19890"  rel="nofollow">ProFTPd 1.3.5 - File Copy</a>
+</p>
+
+</div>
+<!-- EDIT4 SECTION "3、错误配置及利用" [1081-1614] -->
+<h3 class="sectionedit5" id="实际案例">4、实际案例</h3>
+<div class="level3">
+<hr />
+
+</div>
+
+<h4 id="ftp未授权访问">4.1 FTP未授权访问</h4>
+<div class="level4">
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-0107341" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-0107341"  rel="nofollow">武汉科技大学某处FTP未授权访问</a>
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-0105901" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-0105901"  rel="nofollow">中国海油FTP未授权导致大量数据泄露</a>
+</p>
+
+</div>
+
+<h4 id="ftp弱口令">4.2 FTP弱口令</h4>
+<div class="level4">
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-0102552" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-0102552"  rel="nofollow">长虹FTP弱口令可导致全网数据泄漏</a>
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-0100787" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-0100787"  rel="nofollow">KONKA康佳某系统服务器FTP弱口令</a>
+</p>
+
+</div>
+<!-- EDIT5 SECTION "4、实际案例" [1615-2098] -->
+<h3 class="sectionedit6" id="修复方案">5、修复方案</h3>
+<div class="level3">
+<hr />
+
+<p>
+修复方案使用vsftp的配置文件作为标准
+</p>
+
+</div>
+
+<h4 id="禁止匿名访问">5.1 禁止匿名访问</h4>
+<div class="level4">
+<pre class="code bash"><span class="kw2">vim</span> <span class="sy0">/</span>etc<span class="sy0">/</span>vsftpd<span class="sy0">/</span>vsftpd.conf
+<span class="re2">anonymous_enable</span>=NO</pre>
+
+</div>
+
+<h4 id="增强口令强度">5.2 增强口令强度</h4>
+<div class="level4">
+
+<p>
+避免弱口令
+</p>
+
+</div>
+
+<h4 id="进行访问限制">5.3 进行访问限制</h4>
+<div class="level4">
+
+<p>
+使用iptables做ACL
+FTP分为主动式和被动式，书写防火墙规则是要注意
+</p>
+
+</div>
+
+<h5 id="主动式">5.3.1 主动式</h5>
+<div class="level5">
+<pre class="code bash">iptables <span class="re5">-A</span> INPUT <span class="re5">-m</span> state <span class="re5">--state</span> ESTABLISHED,RELATED <span class="re5">-j</span> ACCEPT
+iptables <span class="re5">-A</span> INPUT <span class="re5">-p</span> tcp  <span class="re5">-m</span> multiport <span class="re5">--dport</span> <span class="nu0">20</span>,<span class="nu0">21</span>  <span class="re5">-m</span> state <span class="re5">--state</span> NEW <span class="re5">-j</span> ACCEPT</pre>
+
+</div>
+
+<h5 id="被动式">5.3.2 被动式</h5>
+<div class="level5">
+<pre class="code bash"><span class="kw2">vim</span> <span class="sy0">/</span>etc<span class="sy0">/</span>modprobe.conf
+<span class="kw3">alias</span> ip_conntrack ip_conntract_ftp ip_nat_ftp 
+<span class="kw2">vim</span> <span class="sy0">/</span>etc<span class="sy0">/</span>rc.local
+<span class="sy0">/</span>sbin<span class="sy0">/</span>modprobe ip_conntract
+<span class="sy0">/</span>sbin<span class="sy0">/</span>modprobe ip_conntrack_ftp
+<span class="sy0">/</span>sbin<span class="sy0">/</span>modprobe ip_nat_ftp</pre>
+
+<p>
+假设vsftpd.conf中得相关配置如下
+</p>
+<pre class="code bash"><span class="re2">pasv_enable</span>=YES
+<span class="re2">pasv_min_port</span>=<span class="nu0">2222</span>
+<span class="re2">pasv_max_port</span>=<span class="nu0">2225</span></pre>
+
+<p>
+防火墙规则可写为
+</p>
+<pre class="code bash">iptables <span class="re5">-A</span> INPUT <span class="re5">-m</span> state <span class="re5">--state</span> RELATED,ESTABLISHED <span class="re5">-j</span> ACCEPT
+iptables <span class="re5">-A</span> INPUT <span class="re5">-p</span> tcp <span class="re5">-m</span> state <span class="re5">--state</span> NEW <span class="re5">-m</span> tcp <span class="re5">--dport</span> <span class="nu0">21</span> <span class="re5">-j</span> ACCEPT
+iptables <span class="re5">-A</span> INPUT <span class="re5">-p</span> tcp <span class="re5">--dport</span> <span class="nu0">2222</span>:<span class="nu0">2225</span> <span class="re5">-j</span> ACCEPT</pre>
+
+</div>
+<!-- EDIT6 SECTION "5、修复方案" [2099-3218] -->
+<h3 class="sectionedit7" id="漏洞扫描与发现">6、漏洞扫描与发现</h3>
+<div class="level3">
+<hr />
+
+<p>
+先使用nmap对21端口的开放情况进行扫描，然后使用hydra或者medusa进行登陆验证或者暴力破解
+端口扫描
+</p>
+<pre class="code bash"><span class="kw2">nmap</span> <span class="re5">-Pn</span> <span class="re5">-p21</span> <span class="kw2">ip</span></pre>
+
+<p>
+登陆验证或者端口扫描
+</p>
+<pre class="code bash">medusa <span class="re5">-H</span> ip.txt <span class="re5">-U</span> user.txt <span class="re5">-P</span> passwd.txt <span class="re5">-M</span> <span class="kw2">ftp</span>
+<span class="co0">#hydra不支持批量的导入</span>
+hydra <span class="re5">-L</span> username.txt <span class="re5">-P</span> passwd.txt  ftp:<span class="sy0">//</span><span class="kw2">ip</span></pre>
+
+</div>
+<!-- EDIT7 SECTION "6、漏洞扫描与发现" [3219-3608] -->
+<h3 class="sectionedit8" id="相关资源">7、相关资源</h3>
+<div class="level3">
+<hr />
+
+<p>
+<a href="https://security.appspot.com/vsftpd.html" class="urlextern" title="https://security.appspot.com/vsftpd.html"  rel="nofollow">vsftpd官网</a>
+</p>
+
+</div>
+<!-- EDIT8 SECTION "7、相关资源" [3609-] --></div>
+</body>
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/server:ftp by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:02:53 GMT -->
+</html>

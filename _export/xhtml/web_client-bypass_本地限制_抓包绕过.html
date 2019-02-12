@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/web:client-bypass:本地限制_抓包绕过 by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:03:08 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8" />
+  <title>web:client-bypass:本地限制_抓包绕过</title>
+<meta name="generator" content="DokuWiki"/>
+<meta name="robots" content="index,follow"/>
+<meta name="keywords" content="web,client-bypass,本地限制_抓包绕过"/>
+<link rel="search" type="application/opensearchdescription+xml" href="../../lib/exe/opensearch.php" title="WooYun WiKi"/>
+<link rel="start" href="../../index.html"/>
+<link rel="contents" href="../../web_client-bypass_%e6%9c%ac%e5%9c%b0%e9%99%90%e5%88%b6_%e6%8a%93%e5%8c%85%e7%bb%95%e8%bf%87decf.html?do=index" title="网站地图"/>
+<link rel="alternate" type="application/rss+xml" title="最近更改" href="../../feed.php"/>
+<link rel="alternate" type="application/rss+xml" title="当前命名空间" href="../../feedcda0.php?mode=list&amp;ns=web:client-bypass"/>
+<link rel="alternate" type="text/html" title="纯HTML" href="web_client-bypass_%e6%9c%ac%e5%9c%b0%e9%99%90%e5%88%b6_%e6%8a%93%e5%8c%85%e7%bb%95%e8%bf%87.html"/>
+<link rel="alternate" type="text/plain" title="Wiki Markup 语言" href="../raw/%e6%9c%ac%e5%9c%b0%e9%99%90%e5%88%b6_%e6%8a%93%e5%8c%85%e7%bb%95%e8%bf%87.txt"/>
+<link rel="canonical" href="../../web_client-bypass_%e6%9c%ac%e5%9c%b0%e9%99%90%e5%88%b6_%e6%8a%93%e5%8c%85%e7%bb%95%e8%bf%87.html"/>
+<link rel="stylesheet" type="text/css" href="../../lib/exe/css70b4.css?t=bootstrap3&amp;tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"/>
+<script type="text/javascript">/*<![CDATA[*/var NS='web:client-bypass';var JSINFO = {"id":"web:client-bypass:\u672c\u5730\u9650\u5236_\u6293\u5305\u7ed5\u8fc7","namespace":"web:client-bypass","plugin_codeprettify":{"loader_base":"\/lib\/plugins\/codeprettify\/google-code-prettify"}};
+/*!]]>*/</script>
+<script type="text/javascript" charset="utf-8" src="../../lib/exe/js1e16.php?tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"></script>
+<script type="text/javascript" charset="utf-8" src="../../lib/plugins/codeprettify/google-code-prettify/run_prettifyeb11.js?lang=css"></script>
+</head>
+<body>
+<div class="dokuwiki export">
+<!-- TOC START -->
+<div id="dw__toc">
+<h3 class="toggle">目录</h3>
+<div>
+
+<ul class="toc">
+<li class="level1"><div class="li"><a href="#本地限制_抓包绕过">本地限制 抓包绕过</a></div>
+<ul class="toc">
+<li class="clear">
+<ul class="toc">
+<li class="level3"><div class="li"><a href="#背景介绍">1、背景介绍</a></div></li>
+<li class="level3"><div class="li"><a href="#漏洞成因">2、漏洞成因</a></div></li>
+<li class="level3"><div class="li"><a href="#漏洞扫描及利用">3、漏洞扫描及利用</a></div></li>
+<li class="level3"><div class="li"><a href="#漏洞危害">4、漏洞危害</a></div></li>
+<li class="level3"><div class="li"><a href="#实际案例">5、实际案例</a></div></li>
+<li class="level3"><div class="li"><a href="#修复方案">6、修复方案</a></div></li>
+<li class="level3"><div class="li"><a href="#相关资源">7、相关资源</a></div></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<!-- TOC END -->
+
+<h1 class="sectionedit1" id="本地限制_抓包绕过">本地限制 抓包绕过</h1>
+<div class="level1">
+
+</div>
+<!-- EDIT1 SECTION "本地限制 抓包绕过" [2-42] -->
+<h3 class="sectionedit2" id="背景介绍">1、背景介绍</h3>
+<div class="level3">
+<hr />
+
+<p>
+出于各种原因，通常情况下我们需要对用户在网页中的各种操作及输入进行限制，以促使用户的输入符合预期。如限制用户输入邮箱地址，手机号码，限制用户上传的文件类型，要求用户输入正确的验证码等等。
+</p>
+
+<p>
+为了实现这个目的，开发人员一般都会通过在网页中插入特殊的javascript脚本来达到限制用户的输入的作用。但是部分开发人员过分依赖和相信在前端插入javascript脚本的方法，忽视了在后端对用户输入的处理，导致漏洞。
+</p>
+
+</div>
+<!-- EDIT2 SECTION "1、背景介绍" [43-647] -->
+<h3 class="sectionedit3" id="漏洞成因">2、漏洞成因</h3>
+<div class="level3">
+<hr />
+
+<p>
+在服务器后端缺乏对于用户输入的处理和限制或者处理和限制不严格。
+</p>
+
+</div>
+<!-- EDIT3 SECTION "2、漏洞成因" [648-774] -->
+<h3 class="sectionedit4" id="漏洞扫描及利用">3、漏洞扫描及利用</h3>
+<div class="level3">
+<hr />
+
+<p>
+<strong>漏洞扫描</strong>
+</p>
+
+<p>
+无通用的扫描方法
+</p>
+
+<p>
+<strong>漏洞利用</strong>
+</p>
+
+<p>
+本地限制的绕过方法通常有以下几种:
+</p>
+<ul>
+<li class="level1"><div class="li">使用burpsuite等工具代理修改浏览器传输的数据包，或者使用wireshark等工具抓取浏览器的数据包再改包重放（最常见的方法）</div>
+</li>
+<li class="level1"><div class="li">禁用浏览器的javascript使本地限制脚本失效</div>
+</li>
+<li class="level1"><div class="li">使用浏览器的控制台修改网页和代码使本地限制失效</div>
+</li>
+<li class="level1"><div class="li">使用浏览器插件对网页进行修改或者对数据包进行修改使限制失效</div>
+</li>
+</ul>
+
+</div>
+<!-- EDIT4 SECTION "3、漏洞扫描及利用" [775-1323] -->
+<h3 class="sectionedit5" id="漏洞危害">4、漏洞危害</h3>
+<div class="level3">
+<hr />
+
+<p>
+本地限制不严多数情况下危害较小，但某些情况下影响重大：
+</p>
+<ul>
+<li class="level1"><div class="li"> 文件上传限制不严可导致用户上传任意文件，如果带有恶意代码的可执行文件被上传到服务器上可以导致服务器被入侵。</div>
+</li>
+<li class="level1"><div class="li"> 验证码限制被绕过可以导致用户密码被爆破或者撞库，可以导致用户账户被盗取。</div>
+</li>
+</ul>
+
+</div>
+<!-- EDIT5 SECTION "4、漏洞危害" [1324-1716] -->
+<h3 class="sectionedit6" id="实际案例">5、实际案例</h3>
+<div class="level3">
+<hr />
+
+<p>
+<strong>绕过文件上传限制</strong>
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-027438" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-027438"  rel="nofollow">联想某分站文件上传绕过可获得root权限（可导致内部员工信息泄漏）</a>
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-020471" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-020471"  rel="nofollow">大地数字影院本地验证上传任意文件，已shell大量vip信息泄露</a>
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-012188" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-012188"  rel="nofollow">河北、天津、山西电信商务领航绕过javascript本地验证上传漏洞</a>
+</p>
+
+<p>
+<strong>验证码绕过</strong>
+</p>
+
+<p>
+<a href="http://wooyun.org/bugs/wooyun-2010-095639" class="urlextern" title="http://wooyun.org/bugs/wooyun-2010-095639"  rel="nofollow">傲游游戏某接口设计不当可绕过验证码暴力破解用户可撞库#2（洗号神马的你懂得）</a>
+</p>
+
+<p>
+<a href="http://wooyun.org/bugs/wooyun-2010-092753" class="urlextern" title="http://wooyun.org/bugs/wooyun-2010-092753"  rel="nofollow">PPTV又又又一接口设计不当导致可暴力破解可撞库#4（账号主站通用+验证码绕过）</a>
+</p>
+
+</div>
+<!-- EDIT6 SECTION "5、实际案例" [1717-2521] -->
+<h3 class="sectionedit7" id="修复方案">6、修复方案</h3>
+<div class="level3">
+<hr />
+
+<p>
+在服务器的后端对用户数输入进行严格限制并对用户权限进行验证。
+</p>
+
+</div>
+<!-- EDIT7 SECTION "6、修复方案" [2522-2645] -->
+<h3 class="sectionedit8" id="相关资源">7、相关资源</h3>
+<div class="level3">
+<hr />
+
+</div>
+<!-- EDIT8 SECTION "7、相关资源" [2646-] --></div>
+</body>
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/web:client-bypass:本地限制_抓包绕过 by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:03:08 GMT -->
+</html>

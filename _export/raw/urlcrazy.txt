@@ -1,0 +1,151 @@
+====== urlcrazy使用说明 ======
+
+==== 1、工具简介 ====
+
+----
+提供检查域名可能用于注册钓鱼网站的相关域名等功能。
+
+==== 2、使用方法 ====
+
+----
+终端直接输入“urlcrazy -h”可以查看其相关参数用法：
+<code bash>
+light@kali:~# urlcrazy -h
+URLCrazy version 0.5
+by Andrew Horton (urbanadventurer)
+http://www.morningstarsecurity.com/research/urlcrazy
+
+Generate and test domain typos and variations to detect and perform typo squatting, URL hijacking,
+phishing, and corporate espionage.
+
+Supports the following domain variations:
+Character omission, character repeat, adjacent character swap, adjacent character replacement, double 
+character replacement, adjacent character insertion, missing dot, strip dashes, singular or pluralise,
+common misspellings, vowel swaps, homophones, bit flipping (cosmic rays), homoglyphs, wrong top level 
+domain, and wrong second level domain.
+
+Usage: /usr/bin/urlcrazy [options] domain
+
+Options
+ -k, --keyboard=LAYOUT	Options are: qwerty, azerty, qwertz, dvorak (default: qwerty)
+ -p, --popularity	Check domain popularity with Google
+ -r, --no-resolve	Do not resolve DNS
+ -i, --show-invalid	Show invalid domain names
+ -f, --format=TYPE	Human readable or CSV (default: human readable)
+ -o, --output=FILE	Output file
+ -h, --help		This help
+ -v, --version   	Print version information. This version is 0.5
+
+</code>
+
+ 
+==== 3、使用示范 ====
+
+----
+查询[[http://www.wooyun.org|乌云]]的相关可能注册钓鱼域名信息：
+<code bash>
+light@kali:~# urlcrazy wooyun.org
+URLCrazy Domain Report
+Domain    : wooyun.org
+Keyboard  : qwerty
+At        : 2015-06-08 01:40:33 -0400
+
+# Please wait. 88 hostnames to process
+
+Typo Type                     Typo           DNS-A          CC-A                  DNS-MX                           Extn  
+-------------------------------------------------------------------------------------------------------------------------
+Character Omission            wooun.org                     ?                                                      org   
+Character Omission            wooyn.org                     ?                                                      org   
+Character Omission            wooyu.org                     ?                     eforward1.registrar-servers.com  org   
+Character Omission            woyun.org      61.153.19.102  CN,CHINA                                               org   
+Character Repeat              woooyun.org    63.223.64.165  US,UNITED STATES                                       org   
+Character Repeat              wooyunn.org                   ?                                                      org   
+Character Repeat              wooyuun.org                   ?                                                      org   
+Character Repeat              wooyyun.org                   ?                                                      org   
+Character Repeat              wwooyun.org                   ?                                                      org   
+Character Swap                owoyun.org                    ?                                                      org   
+Character Swap                woouyn.org                    ?                                                      org   
+Character Swap                wooynu.org                    ?                                                      org   
+Character Swap                woyoun.org                    ?                                                      org   
+Character Replacement         eooyun.org                    ?                                                      org   
+Character Replacement         qooyun.org                    ?                                                      org   
+Character Replacement         wioyun.org                    ?                                                      org   
+Character Replacement         woiyun.org                    ?                                                      org   
+Character Replacement         wootun.org                    ?                                                      org   
+Character Replacement         woouun.org                    ?                                                      org   
+Character Replacement         wooyin.org                    ?                                                      org   
+Character Replacement         wooyub.org                    ?                                                      org   
+Character Replacement         wooyum.org                    ?                                                      org   
+Character Replacement         wooyyn.org                    ?                                                      org   
+Character Replacement         wopyun.org                    ?                                                      org   
+Character Replacement         wpoyun.org                    ?                                                      org   
+Double Character Replacement  wiiyun.org                    ?                                                      org   
+Double Character Replacement  wppyun.org                    ?                                                      org   
+Character Insertion           weooyun.org                   ?                                                      org   
+Character Insertion           woioyun.org                   ?                                                      org   
+Character Insertion           wooiyun.org                   ?                                                      org   
+Character Insertion           woopyun.org                   ?                                                      org   
+Character Insertion           wooytun.org                   ?                                                      org   
+Character Insertion           wooyuin.org                   ?                                                      org   
+Character Insertion           wooyunb.org                   ?                                                      org   
+Character Insertion           wooyunm.org                   ?                                                      org   
+Character Insertion           wooyuyn.org                   ?                                                      org   
+Character Insertion           wopoyun.org                   ?                                                      org   
+Character Insertion           wqooyun.org                   ?                                                      org   
+Missing Dot                   wooyunorg.com                 ?                                                      com   
+Missing Dot                   wwwwooyun.org                 ?                                                      org   
+Singular or Pluralise         wooyuns.org                   ?                                                      org   
+Vowel Swap                    wooyan.org                    ?                                                      org   
+Vowel Swap                    wooyen.org                    ?                                                      org   
+Vowel Swap                    wooyon.org                    ?                                                      org   
+Bit Flipping                  7ooyun.org                    ?                                                      org   
+Bit Flipping                  gooyun.org                    ?                                                      org   
+Bit Flipping                  sooyun.org                    ?                                                      org   
+Bit Flipping                  uooyun.org                    ?                                                      org   
+Bit Flipping                  vooyun.org                    ?                                                      org   
+Bit Flipping                  wgoyun.org                    ?                                                      org   
+Bit Flipping                  wkoyun.org                    ?                                                      org   
+Bit Flipping                  wmoyun.org                    ?                                                      org   
+Bit Flipping                  wnoyun.org                    ?                                                      org   
+Bit Flipping                  wogyun.org                    ?                                                      org   
+Bit Flipping                  wokyun.org                    ?                                                      org   
+Bit Flipping                  womyun.org                    ?                                                      org   
+Bit Flipping                  wonyun.org                    ?                                                      org   
+Bit Flipping                  woo9un.org                    ?                                                      org   
+Bit Flipping                  wooiun.org                    ?                                                      org   
+Bit Flipping                  wooqun.org                    ?                                                      org   
+Bit Flipping                  wooxun.org                    ?                                                      org   
+Bit Flipping                  wooy5n.org                    ?                                                      org   
+Bit Flipping                  wooyqn.org                    ?                                                      org   
+Bit Flipping                  wooytn.org                    ?                                                      org   
+Bit Flipping                  wooyuf.org                    ?                                                      org   
+Bit Flipping                  wooyuj.org                    ?                                                      org   
+Bit Flipping                  wooyul.org                    ?                                                      org   
+Bit Flipping                  wooyuo.org                    ?                                                      org   
+Bit Flipping                  wooywn.org                    ?                                                      org   
+Homoglyphs                    vvooyun.org                   ?                                                      org   
+Homoglyphs                    w00yun.org                    ?                                                      org   
+Homoglyphs                    w0oyun.org                    ?                                                      org   
+Homoglyphs                    wo0yun.org                    ?                                                      org   
+Wrong TLD                     wooyun.ca                     ?                                                      ca    
+Wrong TLD                     wooyun.ch                     ?                                                      ch    
+Wrong TLD                     wooyun.com     61.36.239.14   KR,KOREA REPUBLIC OF  mail.wooyun.com                  com   
+Wrong TLD                     wooyun.de                     ?                                                      de    
+Wrong TLD                     wooyun.edu                    ?                                                      edu   
+Wrong TLD                     wooyun.es                     ?                                                      es    
+Wrong TLD                     wooyun.fr                     ?                                                      fr    
+Wrong TLD                     wooyun.it                     ?                                                      it    
+Wrong TLD                     wooyun.jp                     ?                                                      jp    
+Wrong TLD                     wooyun.net     61.36.239.4    KR,KOREA REPUBLIC OF                                   net   
+Wrong TLD                     wooyun.nl                     ?                                                      nl    
+Wrong TLD                     wooyun.no                     ?                                                      no    
+Wrong TLD                     wooyun.ru                     ?                                                      ru    
+Wrong TLD                     wooyun.se                     ?                                                      se    
+Wrong TLD                     wooyun.us                     ?                                                      us    
+
+</code>
+
+==== 4、相关资源 ====
+
+----
+[[http://www.morningstarsecurity.com/|工具详解]]

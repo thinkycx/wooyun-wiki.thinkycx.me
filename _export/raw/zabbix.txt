@@ -1,0 +1,148 @@
+====== Zabbix安全配置 ======
+
+
+==== 1、zabbix简介 ====
+
+----
+
+zabbix是一个基于WEB界面的提供分布式系统监视以及网络监视功能的企业级的开源解决方案。
+
+zabbix能监视各种网络参数，保证服务器系统的安全运营；并提供灵活的通知机制以让系统管理员快速定位/解决存在的各种问题。
+
+zabbix由2部分构成，zabbix server与可选组件zabbix agent。
+
+zabbix server可以通过SNMP，zabbix agent，ping，端口监视等方法提供对远程服务器/网络状态的监视，数据收集等功能，它可以运行在Linux，Solaris，HP-UX，AIX，Free BSD，Open BSD，OS X等平台上。
+==== 2、zabbix服务架设 ====
+
+----
+
+=== 2.1 zabbix-server安装 ===
+
+rpm安装的方式
+<code bash>
+rpm -ivh http://repo.zabbix.com/zabbix/2.4/rhel/6/x86_64/zabbix-release-2.4-1.el6.noarch.rpm
+yum install zabbix-server zabbix-web-mysql zabbix-zabbix-web zabbix-agent zabbix-get http mysql-server -y
+</code>
+配置mysql数据库:
+<code bash>
+vim /etc/my.cnf
+#默认字符集为utf-8
+default-character-set = utf8
+#innodb的每个表文件单独存储
+innodb_file_per_table = 1
+</code>
+创建相关的表
+<code bash>
+mysql> create database zabbix character set utf8;
+mysql> grant all privileges on zabbix.* to zabbix@localhost identified by 'zabbix';
+</code>
+导入表结构
+<code bash>
+cd /usr/share/doc/zabbix-server-mysql-2.4.4/create
+mysql -uroot -Dzabbix < schema.sql
+mysql -uroot -Dzabbix < images.sql
+mysql -uroot -Dzabbix < data.sql
+</code>
+配置zabbix-server
+<code bash>
+vim /etc/zabbix/zabbix_server.conf
+LogFile=/var/log/zabbix/zabbix_server.log
+LogFileSize=0
+PidFile=/var/run/zabbix/zabbix_server.pid
+DBHost=localhost
+DBName=zabbix
+DBUser=zabbix
+DBPassword=zabbix
+DBSocket=/var/lib/mysql/mysql.sock
+DBPort=3306
+StartPollers=5
+SNMPTrapperFile=/var/log/snmptt/snmptt.log
+CacheSize=256M
+AlertScriptsPath=/etc/zabbix/script/alertscripts
+ExternalScripts=/etc/zabbix/script/externalscripts
+/etc/init.d/zabbix-server start
+/etc/init.d/mysqld start
+/etc/init.d/httpd start
+</code>
+浏览器http://ip/zabbix　按照提示配置
+=== 2.2 zabbix-agent安装 ===
+<code bash>
+rpm -ivh http://repo.zabbix.com/zabbix/2.4/rhel/6/x86_64/zabbix-release-2.4-1.el6.noarch.rpm
+yum install zabbix zabbix-agent -y
+</code>
+
+配置zabbix-agent
+<code bash>
+vim /etc/zabbix/zabbix_agentd.conf
+PidFile=/var/run/zabbix/zabbix_agentd.pid
+LogFile=/var/log/zabbix/zabbix_agentd.log
+LogFileSize=0
+Server=服务端IP
+ServerActive=服务端IP
+Hostname=主机名
+</code>
+
+==== 3、错误配置以及利用 ====
+
+----
+
+=== 3.1 默认密码或者弱口令 ===
+
+zabbix默认的口令为Admin:zabbix，或者存在弱口令，可以登录，登录后可以在后台自定义脚本，执行命令。
+=== 3.2 开启guest账户 ===
+
+默认安装后是开启了guest账户的，如果没有禁止，可以通过guest账户登录，查看信息
+=== 3.3 开启了guest同时版本号<= 2.0.8 ===
+
+zabbix版本<=2.0.8的时候，httpmon.php页面存在注入;开启了guest账户后可以直接访问，进行sql注入攻击。
+
+具体攻击方法参考:
+
+[[http://drops.wooyun.org/papers/680|Zabbix SQL Injection/RCE – CVE-2013-5743]]
+
+### 3.4 zabbix前台注入
+漏洞具体利用方法:
+
+[[http://www.wooyun.org/bugs/wooyun-2010-072075|Zabbix的前台SQL注射漏洞0day一枚（官方测试受到影响）]]
+
+==== 4、实际案例 ====
+
+----
+
+=== 4.1 zabbix弱口令 ===
+
+[[http://www.wooyun.org/bugs/wooyun-2010-069679|土豆某zabbix弱口令]]
+
+[[http://www.wooyun.org/bugs/wooyun-2010-084596|中国科学院计算机网络信息中心zabbix弱口令，导致命令执行]]
+
+=== 4.2 zabbix的httpmon.php页面注入 ===
+
+[[http://www.wooyun.org/bugs/wooyun-2010-086349|京东某站shell直入jae内网物理机内核版本过低]]
+
+[[http://www.wooyun.org/bugs/wooyun-2010-053420|乐视ZabbbixSQL注入导致命令执行]]
+
+==== 5、修复方案 ====
+
+----
+
+zabbix最好不要放在外网
+
+修改默认账户密码，同时禁用guest用户
+
+对于重点的zabbix-server，最好能够做ACL访问限制
+
+==== 6、发现问题 ====
+
+----
+
+收集企业WEB应用，是否包含Zabbix。
+
+==== 7、相关资源 ====
+
+----
+
+[[http://drops.wooyun.org/papers/680|Zabbix SQL Injection/RCE – CVE-2013-5743]]
+
+[[http://drops.wooyun.org/tips/68|当渗透遇到zabbix--小谈zabbix安全]]
+
+[[http://www.wooyun.org/bugs/wooyun-2010-072075|Zabbix的前台SQL注射漏洞0day一枚（官方测试受到影响）]]

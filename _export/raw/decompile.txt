@@ -1,0 +1,8 @@
+====== 反编译 ======
+
+  * [[tools:jad|jad]]
+  * [[tools:rabin2|rabin2]]
+  * [[tools:radiff2|radiff2]]
+  * [[tools:rasm2|rasm2]]
+  * [[tools:recstudio|recstudio]]
+  * [[tools:recstudio-cli|recstudio-cli]]

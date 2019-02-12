@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh"
+  lang="zh" dir="ltr" class="no-js">
+
+<!-- Mirrored from wiki.wooyun.org/server:mssql by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 02:52:21 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>server:mssql [WooYun WiKi]</title>
+  <script>(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)</script>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="shortcut icon" href="lib/tpl/bootstrap3/images/favicon.ico" />
+<link rel="apple-touch-icon" href="lib/tpl/bootstrap3/images/apple-touch-icon.png" />
+      <link type="text/css" rel="stylesheet" href="lib/tpl/bootstrap3/assets/bootstrap/css/bootstrap.min.css" />
+    <script type="text/javascript">/*<![CDATA[*/
+    var TPL_CONFIG = {"tableFullWidth":1};
+  /*!]]>*/</script>
+  <meta name="generator" content="DokuWiki"/>
+<meta name="robots" content="index,follow"/>
+<meta name="keywords" content="server,mssql"/>
+<link rel="search" type="application/opensearchdescription+xml" href="lib/exe/opensearch.php" title="WooYun WiKi"/>
+<link rel="start" href="index.html"/>
+<link rel="contents" href="server_mssqldecf.html?do=index" title="网站地图"/>
+<link rel="alternate" type="application/rss+xml" title="最近更改" href="feed.php"/>
+<link rel="alternate" type="application/rss+xml" title="当前命名空间" href="feed0688.php?mode=list&amp;ns=server"/>
+<link rel="alternate" type="text/html" title="纯HTML" href="_export/xhtml/server_mssql.html"/>
+<link rel="alternate" type="text/plain" title="Wiki Markup 语言" href="_export/raw/mssql.txt"/>
+<link rel="canonical" href="server_mssql.html"/>
+<link rel="stylesheet" type="text/css" href="lib/exe/css70b4.css?t=bootstrap3&amp;tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"/>
+<script type="text/javascript">/*<![CDATA[*/var NS='server';var JSINFO = {"id":"server:mssql","namespace":"server","plugin_codeprettify":{"loader_base":"\/lib\/plugins\/codeprettify\/google-code-prettify"}};
+/*!]]>*/</script>
+<script type="text/javascript" charset="utf-8" src="lib/exe/js1e16.php?tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"></script>
+<script type="text/javascript" charset="utf-8" src="lib/plugins/codeprettify/google-code-prettify/run_prettifyeb11.js?lang=css"></script>
+  <script type="text/javascript" src="lib/tpl/bootstrap3/assets/bootstrap/js/bootstrap.min.js"></script>
+  <style type="text/css">
+    body { padding-top: 20px; }
+  </style>
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script type="text/javascript" src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+  <script type="text/javascript" src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body class="default page-on-panel">
+  <!--[if lte IE 7 ]><div id="IE7"><![endif]--><!--[if IE 8 ]><div id="IE8"><![endif]-->
+
+  <div id="dokuwiki__site" class="container">
+    <div id="dokuwiki__top" class="site dokuwiki mode_show tpl_bootstrap3    hasSidebar">
+
+      
+      <!-- header -->
+      <div id="dokuwiki__header">
+        <nav class="navbar  navbar-default" role="navigation">
+
+  <div class="container-fluid">
+
+    <div class="navbar-header">
+
+      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      <a href="WooYun%20WiKi.html"  accesskey="h" title="[H]" class="navbar-brand"><img src="lib/tpl/bootstrap3/images/logo.png" alt="WooYun WiKi" class="pull-left" id="dw__logo" width="20" height="20" /> <span id="dw__title" >WooYun WiKi</span></a>
+    </div>
+
+    <div class="collapse navbar-collapse">
+
+      <ul class="nav navbar-nav" id="dw__navbar">
+        <li class="active">
+  <a href="WooYun%20WiKi.html" ><i class="glyphicon glyphicon-home"></i> Home</a></li>
+      </ul>
+
+      <div class="navbar-right">
+
+        <form action="http://wiki.wooyun.org/WooYun WiKi" accept-charset="utf-8" class="search" id="dw__search" method="get" role="search"><div class="no"><input type="hidden" name="do" value="search" /><input type="text" id="qsearch__in" accesskey="f" name="id" class="edit" title="[F]" /><input type="submit" value="搜索" class="button" title="搜索" /><div id="qsearch__out" class="ajax_qsearch JSpopup"></div></div></form>
+        <ul class="nav navbar-nav" id="dw__tools">
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="工具"><i class="glyphicon glyphicon-wrench"></i> <span class="hidden-lg hidden-md hidden-sm">工具</span> <span class="caret"></span></a>
+    <ul class="dropdown-menu tools" role="menu">
+
+      <!-- dokuwiki__usertools -->
+      <li class="dropdown-header"><i class="glyphicon glyphicon-user"></i> 用户工具</li>
+      
+      <li class="divider"></li>
+
+      <!-- dokuwiki__sitetools -->
+      <li class="dropdown-header"><i class="glyphicon glyphicon-cog"></i> 站点工具</li>
+      <li><a href="server_mssql810b.html?do=recent"  class="action recent" accesskey="r" rel="nofollow" title="最近更改 [R]"><i class="glyphicon glyphicon-list-alt"></i> 最近更改</a></li><li><a href="server_mssql6aa6.html?do=media&amp;ns=server"  class="action media" rel="nofollow" title="媒体管理器"><i class="glyphicon glyphicon-picture"></i> 媒体管理器</a></li><li><a href="server_mssqldecf.html?do=index"  class="action index" accesskey="x" rel="nofollow" title="网站地图 [X]"><i class="glyphicon glyphicon-list"></i> 网站地图</a></li>
+      <li class="divider"></li>
+
+      <!-- dokuwiki__pagetools -->
+      <li class="dropdown-header"><i class="glyphicon glyphicon-file"></i> 页面工具</li>
+      <li><a href="server_mssql39b4.html?do=edit"  class="action source" accesskey="v" rel="nofollow" title="显示源文件 [V]"><i class="glyphicon glyphicon-edit"></i> 显示源文件</a></li><li><a href="server_mssql5f35.html?do=revisions"  class="action revs" accesskey="o" rel="nofollow" title="修订记录 [O]"><i class="glyphicon glyphicon-time"></i> 修订记录</a></li><li><a href="server_mssql2271.html?do=backlink"  class="action backlink" rel="nofollow" title="反向链接"><i class="glyphicon glyphicon-link"></i> 反向链接</a></li><li><a href="#dokuwiki__top"  class="action top" accesskey="t" rel="nofollow" title="回到顶部 [T]"><i class="glyphicon glyphicon-chevron-up"></i> 回到顶部</a></li>
+    </ul>
+  </li>
+</ul>
+
+        <ul class="nav navbar-nav">
+          <li>
+                      </li>
+                    <li><a href="http://api.wooyun.org/login?client_id=Af29c304"  class="action login" rel="nofollow" title="登录"><i class="glyphicon glyphicon-log-in"></i> 登录</a></li>        </ul>
+
+      </div>
+
+    </div>
+  </div>
+</nav>
+      </div>
+      <!-- /header -->
+
+      
+            <div id="dw__breadcrumbs">
+        <hr/>
+                        <div class="breadcrumb hidden-print"><span class="bchead">您的足迹:</span> <span class="bcsep">•</span> <bdi><a href="wooyun_wiki.html"  class="breadcrumbs" title="wooyun_wiki">wooyun_wiki</a></bdi> <span class="bcsep">•</span> <bdi><a href="information_domain.html"  class="breadcrumbs" title="information:domain">domain</a></bdi> <span class="bcsep">•</span> <bdi><a href="information_ip.html"  class="breadcrumbs" title="information:ip">ip</a></bdi> <span class="bcsep">•</span> <bdi><a href="information_port.html"  class="breadcrumbs" title="information:port">port</a></bdi> <span class="bcsep">•</span> <bdi><a href="information_web.html"  class="breadcrumbs" title="information:web">web</a></bdi> <span class="bcsep">•</span> <bdi><a href="information_human.html"  class="breadcrumbs" title="information:human">human</a></bdi> <span class="bcsep">•</span> <bdi><a href="information_service.html"  class="breadcrumbs" title="information:service">service</a></bdi> <span class="bcsep">•</span> <bdi><a href="server_ftp.html"  class="breadcrumbs" title="server:ftp">ftp</a></bdi> <span class="bcsep">•</span> <bdi><a href="server_mysql.html"  class="breadcrumbs" title="server:mysql">mysql</a></bdi> <span class="bcsep">•</span> <span class="curid"><bdi><a href="server_mssql.html"  class="breadcrumbs" title="server:mssql">mssql</a></bdi></span></div>
+                <hr/>
+      </div>
+      
+      <p class="pageId text-right">
+        <span class="label label-default">server:mssql</span>
+      </p>
+
+      <div id="dw__msgarea">
+              </div>
+
+      <main class="main row" role="main">
+
+        <!-- ********** ASIDE ********** -->
+<aside id="dokuwiki__aside" class="dw__sidebar col-sm-3 col-md-2 hidden-print">
+  <div class="content">
+    <div class="toogle hidden-lg hidden-md hidden-sm" data-toggle="collapse" data-target="#dokuwiki__aside .collapse">
+      <i class="glyphicon glyphicon-th-list"></i> 侧边栏    </div>
+    <div class="collapse in">
+            
+<h4 id="企业安全">企业安全</h4>
+<div class="level4">
+<ul>
+<li class="level1"><div class="li"><a href="enterprise_information.html" class="wikilink1" title="enterprise:information">信息收集</a></div>
+</li>
+<li class="level1"><div class="li"><a href="enterprise_server.html" class="wikilink1" title="enterprise:server">服务配置</a></div>
+</li>
+<li class="level1"><div class="li"><a href="enterprise_web.html" class="wikilink1" title="enterprise:web">Web应用</a></div>
+</li>
+<li class="level1"><div class="li"><a href="enterprise_tools.html" class="wikilink1" title="enterprise:tools">安全工具</a></div>
+</li>
+<li class="level1"><div class="li"><a href="enterprise_defence.html" class="wikilink1" title="enterprise:defence">安全防御</a></div>
+</li>
+<li class="level1"><div class="li"><a href="enterprise_pentest.html" class="wikilink1" title="enterprise:pentest">渗透技巧</a></div>
+</li>
+</ul>
+
+</div>
+
+<h4 id="android_安全">Android 安全</h4>
+<div class="level4">
+<ul>
+<li class="level1"><div class="li"><a href="android_client.html" class="wikilink1" title="android:client">客户端</a></div>
+</li>
+<li class="level1"><div class="li"><a href="android_system.html" class="wikilink1" title="android:system">系统</a></div>
+</li>
+<li class="level1"><div class="li"><a href="android_communicate.html" class="wikilink1" title="android:communicate">通信</a></div>
+</li>
+<li class="level1"><div class="li"><a href="android_server.html" class="wikilink1" title="android:server">服务端</a></div>
+</li>
+<li class="level1"><div class="li"><a href="android_tools.html" class="wikilink1" title="android:tools">常用工具</a></div>
+</li>
+</ul>
+
+</div>
+
+<h4 id="乌云">乌云</h4>
+<div class="level4">
+<ul>
+<li class="level1"><div class="li"><a href="wooyun_route.html" class="wikilink1" title="wooyun:route">乌云路由</a></div>
+</li>
+<li class="level1"><div class="li"><span class="curid"><a href="wooyun_woobuntu.html" class="wikilink1" title="wooyun:woobuntu">Woobuntu</a></span></div>
+</li>
+</ul>
+
+</div>
+
+<h4 id="apt">APT</h4>
+<div class="level4">
+<ul>
+<li class="level1"><div class="li"><a href="apt_organization.html" class="wikilink1" title="apt:organization">组织</a></div>
+</li>
+</ul>
+
+</div>
+
+<h4 id="find_us">Find Us</h4>
+<div class="level4">
+<ul>
+<li class="level1"><div class="li">Email: <a class="__cf_email__" href="cdn-cgi/l/email-protection.html" data-cfemail="94e3fdfffdd4e3fbfbede1fabafbe6f3">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">
+/* <![CDATA[ */!function(){try{var t="currentScript"in document?document.currentScript:function(){for(var t=document.getElementsByTagName("script"),e=t.length;e--;)if(t[e].getAttribute("data-cfhash"))return t[e]}();if(t&&t.previousSibling){var e,r,n,i,c=t.previousSibling,a=c.getAttribute("data-cfemail");if(a){for(e="",r=parseInt(a.substr(0,2),16),n=2;a.length-n;n+=2)i=parseInt(a.substr(n,2),16)^r,e+=String.fromCharCode(i);e=document.createTextNode(e),c.parentNode.replaceChild(e,c)}t.parentNode.removeChild(t);}}catch(u){}}()/* ]]> */</script>
+</div>
+</li>
+</ul>
+
+</div>
+          </div>
+  </div>
+</aside>
+
+        <!-- ********** CONTENT ********** -->
+        <article id="dokuwiki__content" class="col-sm-9 col-md-10" >
+
+          <div class="panel panel-default" > 
+            <div class="page group panel-body">
+
+                                          
+              <div class="pull-right hidden-print" data-spy="affix" data-offset-top="150" style="z-index:1024; top:10px; right:10px;">
+                <!-- TOC START -->
+<div id="dw__toc">
+<h3 class="toggle">目录</h3>
+<div>
+
+<ul class="toc">
+<li class="level1"><div class="li"><a href="#mssql安全配置">MSSQL安全配置</a></div>
+<ul class="toc">
+<li class="clear">
+<ul class="toc">
+<li class="level3"><div class="li"><a href="#mssql简介">1、MSSQL简介</a></div></li>
+<li class="level3"><div class="li"><a href="#mssql服务器架设">2、MSSQL服务器架设</a></div></li>
+<li class="level3"><div class="li"><a href="#错误配置及利用">3、错误配置及利用</a></div></li>
+<li class="level3"><div class="li"><a href="#实际案例">4、实际案例</a></div></li>
+<li class="level3"><div class="li"><a href="#修复方案">5、修复方案</a></div></li>
+<li class="level3"><div class="li"><a href="#漏洞扫描及发现">6、漏洞扫描及发现</a></div></li>
+<li class="level3"><div class="li"><a href="#相关资源">7、相关资源</a></div></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<!-- TOC END -->
+              </div>
+
+              <!-- wikipage start -->
+              
+<h1 class="sectionedit1" id="mssql安全配置">MSSQL安全配置</h1>
+<div class="level1">
+
+</div>
+
+<h3 class="sectionedit2" id="mssql简介">1、MSSQL简介</h3>
+<div class="level3">
+<hr />
+
+<p>
+Microsoft SQL Server是由美国微软公司所推出的关系数据库解决方案。 数据库的内置语言原本是采用美国标准局（ANSI）和国际标准组织（ISO）所定义的SQL语言，但是微软公司对它进行了部分扩充而成为作业用SQL（Transact-SQL）。 
+</p>
+
+<p>
+SQL Server一开始并不是微软自己研发的产品，而是当时为了要和IBM竞争时，与Sybase合作所产生的，其最早的发展者是Sybase，同时微软也和Sybase合作过SQL Server 4.2版本的研发，微软亦将SQL Server 4.2移植到Windows NT（当时为3.1版），在与Sybase终止合作关系后，自力开发出SQL Server 6.0版，往后的SQL Server即均由微软自行研发。
+</p>
+
+<p>
+在与微软终止合作关系后，Sybase在Windows NT上的数据库产品原本称为Sybase SQL Server，后来改为现在的Sybase Adaptive Server Enterprise。
+</p>
+
+</div>
+
+<h3 class="sectionedit3" id="mssql服务器架设">2、MSSQL服务器架设</h3>
+<div class="level3">
+<hr />
+
+<p>
+Mssql试用版的下载地址可在<a href="https://www.microsoft.com/zh-cn/server-cloud/products/sql-server/Try.aspx" class="urlextern" title="https://www.microsoft.com/zh-cn/server-cloud/products/sql-server/Try.aspx"  rel="nofollow">Mssql试用版官方下载地址</a>找到。
+</p>
+
+<p>
+Mssql的安装有使用安装向导进行安装还有使用命令行进行安装两种方法，具体安装方法请参见官方文档。
+</p>
+
+<p>
+使用安装向导的请参见<a href="https://technet.microsoft.com/zh-cn/library/ms143219(v=sql.110)" class="urlextern" title="https://technet.microsoft.com/zh-cn/library/ms143219(v=sql.110)"  rel="nofollow">使用安装向导安装 SQL Server 2012（安装程序）</a>。
+</p>
+
+<p>
+使用命令行进行安装请参见<a href="https://technet.microsoft.com/zh-cn/library/ms144259(v=sql.110)" class="urlextern" title="https://technet.microsoft.com/zh-cn/library/ms144259(v=sql.110)"  rel="nofollow">从命令提示符安装 SQL Server 2012</a>。
+</p>
+
+</div>
+
+<h3 class="sectionedit4" id="错误配置及利用">3、错误配置及利用</h3>
+<div class="level3">
+<hr />
+
+<p>
+<strong>使用了旧版本的Mssql</strong>
+</p>
+
+<p>
+Mssql并不是一款免费的数据库解决方案，许多网站所使用的都不是最新版本的Mssql数据库，这些旧版本中存在着许多公开的漏洞，威胁着服务器的安全。
+</p>
+
+<p>
+<strong>sa用户弱口令且Mssql端口对外开放</strong>
+</p>
+
+<p>
+Mssql默认端口为1433端口，当该端口对外开放时，攻击者便可尝试对Mssql的账号密码进行爆破，此时若服务器使用了常用的用户名（如administrator）或默认用户名（Mssql默认用户为sa）且密码为弱口令或者默认的空口令则极易造成服务器被攻击者登陆，并进一步利用。参考<a href="http://drops.wooyun.org/tips/1620" class="urlextern" title="http://drops.wooyun.org/tips/1620"  rel="nofollow">MSSQL注射知识库 v 1.0</a>中MSSQL 2000密码破解部分的内容。在攻击者获取到Mssql服务器数据库操作权限的时候服务器中缺少对用户权限的限制就极易导致服务器沦陷，参考<a href="http://drops.wooyun.org/tips/1620" class="urlextern" title="http://drops.wooyun.org/tips/1620"  rel="nofollow">MSSQL注射知识库 v 1.0</a>中Get WebShell和系统命令执行部分的内容。
+</p>
+
+<p>
+<strong>启用了xp_cmdshell等危险扩展命令</strong>
+</p>
+
+<p>
+Mssql中有许多类似于xp_cmdshell的扩展命令，当攻击者获取到Mssql的数据库操作权限时，这些扩展命令非常容易被攻击者利用，最终导致服务器沦陷。因此，在使用Mssql时应尽量禁用这些扩展命令。常被利用的扩展命令有
+</p>
+<pre class="code">Sp_OACreate
+Sp_OADestroy
+Sp_OAGetErrorInfo
+Sp_OAGetProperty
+Sp_OAMethod
+Sp_OASetProperty
+Sp_OAStop
+Xp_regaddmultistring
+Xp_regdeletekey
+Xp_regdeletevalue
+Xp_regenumvalues
+Xp_regremovemultistring
+xp_sdidebug
+xp_availablemedia
+xp_cmdshell
+xp_deletemail
+xp_dirtree
+xp_dropwebtask
+xp_dsninfo
+xp_enumdsn
+xp_enumerrorlogs
+xp_enumgroups
+xp_enumqueuedtasks
+xp_eventlog
+xp_findnextmsg
+xp_fixeddrives
+xp_getfiledetails
+xp_getnetname
+xp_grantlogin
+xp_logevent
+xp_loginconfig
+xp_logininfo
+xp_makewebtask
+xp_msver
+xp_perfend
+xp_perfmonitor
+xp_perfsample
+xp_perfstart
+xp_readerrorlog
+xp_readmail
+xp_revokelogin
+xp_runwebtask
+xp_schedulersignal
+xp_sendmail
+xp_servicecontrol
+xp_snmp_getstate
+xp_snmp_raisetrap
+xp_sprintf
+xp_sqlinventory
+xp_sqlregister
+xp_sqltrace
+xp_sscanf
+xp_startmail
+xp_stopmail
+xp_subdirs
+xp_unc_to_drive
+xp_dirtree</pre>
+
+<p>
+以下是使用xp_cmdshell执行系统命令的示例：
+</p>
+<pre class="code">exec xp_cmdshell &#039;whoami&#039;</pre>
+
+</div>
+
+<h3 class="sectionedit5" id="实际案例">4、实际案例</h3>
+<div class="level3">
+<hr />
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2015-0104036" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2015-0104036"  rel="nofollow">四川烟草网MSSQL遇SA权限能执行0S-SHELL成功提权服务器（可内网渗透）</a>
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2014-061080" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2014-061080"  rel="nofollow">用友协作办公平台再次通杀SQL注入</a>
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-0109828" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-0109828"  rel="nofollow">青岛科技大学某系统后台post注入</a>
+</p>
+
+</div>
+
+<h3 class="sectionedit6" id="修复方案">5、修复方案</h3>
+<div class="level3">
+
+<p>
+<strong>使用了旧版本的Mssql</strong>
+</p>
+
+<p>
+升级Mssql，或者使用其他的数据库解决方案。
+</p>
+
+<p>
+<strong>sa用户弱口令且Mssql端口对外开放</strong>
+</p>
+<pre class="code sql">#查看口令为空的用户 
+<span class="kw1">SELECT</span> <span class="sy0">*</span> <span class="kw1">FROM</span> sysusers
+<span class="kw1">SELECT</span> name<span class="sy0">,</span>Password <span class="kw1">FROM</span> syslogins <span class="kw1">WHERE</span> password <span class="kw1">IS</span> <span class="kw1">NULL</span> <span class="kw1">ORDER</span> <span class="kw1">BY</span> name
+&nbsp;
+#更改口令
+<span class="kw1">USE</span> master <span class="kw1">EXEC</span> sp_password ‘旧口令’，‘新口令’<span class="sy0">,</span>用户名</pre>
+
+<p>
+管理用户权限：
+</p>
+<ol>
+<li class="level1"><div class="li"> 企业管理器-〉数据库-〉对应数据库-〉角色-中创建新角色；</div>
+</li>
+<li class="level1"><div class="li"> 调整角色属性中的权限，赋予角色中拥有对象对应的SELECT、INSERT、UPDATE、DELETE、EXEC、DRI权限</div>
+</li>
+</ol>
+
+<p>
+<strong>启用了xp_cmdshell等危险扩展命令</strong>
+</p>
+<pre class="code sql">#删除xp_cmdshell扩展命令，删除其它扩展命令同理
+<span class="kw1">USE</span> master  sp_dropextendedproc <span class="st0">'xp_cmdshell'</span> </pre>
+
+</div>
+
+<h3 class="sectionedit7" id="漏洞扫描及发现">6、漏洞扫描及发现</h3>
+<div class="level3">
+
+<p>
+Mssql默认端口为1433，当数据库允许远程连接时该端口会对外开放。 通过对1433端口进行扫描就可以找到对外开放的Mssql服务器。
+</p>
+<pre class="code bash"><span class="sy0">//</span>扫描
+<span class="kw2">nmap</span> <span class="re5">-n</span> <span class="re5">--open</span> <span class="re5">-p</span> <span class="nu0">1433</span> X.X.X.X<span class="sy0">/</span><span class="nu0">24</span>
+&nbsp;
+<span class="sy0">//</span>使用<span class="kw2">nmap</span>进行暴力破解
+<span class="kw2">nmap</span> <span class="re5">-p1433</span> <span class="re5">--script</span>=ms-sql-brute <span class="re5">--script-args</span>=<span class="re2">userdb</span>=<span class="sy0">/</span>var<span class="sy0">/</span><span class="kw2">passwd</span>,<span class="re2">passdb</span>=<span class="sy0">/</span>var<span class="sy0">/</span><span class="kw2">passwd</span> 192.168.5.1</pre>
+
+<p>
+找到开放1433端口的服务器后便可尝试用Mssql数据库管理工具进行连接。
+</p>
+
+</div>
+
+<h3 class="sectionedit8" id="相关资源">7、相关资源</h3>
+<div class="level3">
+<hr />
+
+<p>
+<a href="https://www.microsoft.com/zh-cn/server-cloud/products/sql-server/Try.aspx" class="urlextern" title="https://www.microsoft.com/zh-cn/server-cloud/products/sql-server/Try.aspx"  rel="nofollow">Mssql试用版官方下载地址</a>
+</p>
+
+<p>
+<a href="https://technet.microsoft.com/zh-cn/library/ms143219(v=sql.110)" class="urlextern" title="https://technet.microsoft.com/zh-cn/library/ms143219(v=sql.110)"  rel="nofollow">使用安装向导安装 SQL Server 2012（安装程序）</a>
+</p>
+
+<p>
+<a href="https://technet.microsoft.com/zh-cn/library/ms144259(v=sql.110)" class="urlextern" title="https://technet.microsoft.com/zh-cn/library/ms144259(v=sql.110)"  rel="nofollow">从命令提示符安装 SQL Server 2012</a>
+</p>
+
+<p>
+<a href="http://drops.wooyun.org/tips/1670" class="urlextern" title="http://drops.wooyun.org/tips/1670"  rel="nofollow">SQL SERVER 2008安全配置</a>
+</p>
+
+<p>
+<a href="http://drops.wooyun.org/tips/1620" class="urlextern" title="http://drops.wooyun.org/tips/1620"  rel="nofollow">MSSQL注射知识库 v 1.0</a>
+</p>
+
+</div>
+
+              <!-- wikipage stop -->
+
+                            
+            </div>
+          </div>
+
+        </article>
+
+        
+      </main>
+
+      <footer id="dokuwiki__footer" class="small hidden-print">
+
+        <a href="javascript:void(0)" class="back-to-top hidden-print btn btn-default btn-sm" title="跳至内容>" id="back-to-top"><i class="glyphicon glyphicon-chevron-up"></i></a>
+
+                <div class="text-center">
+          <p id="dw__license">
+                      </p>
+                  </div>
+      </footer>
+
+      
+    </div><!-- /site -->
+
+    <div class="no"><img src="lib/exe/indexerb98b.gif?id=server%3Amssql&amp;1449197443" width="2" height="1" alt="" /></div>
+    <div id="screen__mode" class="no">
+      <span class="visible-xs"></span>
+      <span class="visible-sm"></span>
+      <span class="visible-md"></span>
+      <span class="visible-lg"></span>
+    </div>
+  </div>
+  <!--[if ( lte IE 7 | IE 8 ) ]></div><![endif]-->
+</body>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "http://hm.baidu.com/hm.js?2e9369dace9479584f08203285c7cbce";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<!-- Mirrored from wiki.wooyun.org/server:mssql by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 02:52:23 GMT -->
+</html>

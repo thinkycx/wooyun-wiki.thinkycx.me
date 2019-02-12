@@ -1,0 +1,51 @@
+====== dnsmap使用说明 ======
+
+==== 1、工具简介 ====
+
+----
+Dnsmap也是一款搜集信息的工具，它和Dnsenum一样是用于获得子域名的强有力的工具。
+
+==== 2、使用方法 ====
+
+----
+kali终端直接输入“dnsmap”可以查看其相关参数用法：
+<code bash>
+light@kali:~# dnsmap
+dnsmap 0.30 - DNS Network Mapper by pagvac (gnucitizen.org)
+
+usage: dnsmap <target-domain> [options]
+options:
+-w <wordlist-file>
+-r <regular-results-file>
+-c <csv-results-file>
+-d <delay-millisecs>
+-i <ips-to-ignore> (useful if you're obtaining false positives)
+
+e.g.:
+dnsmap target-domain.foo
+dnsmap target-domain.foo -w yourwordlist.txt -r /tmp/domainbf_results.txt
+dnsmap target-fomain.foo -r /tmp/ -d 3000
+dnsmap target-fomain.foo -r ./domainbf_results.txt
+
+</code>
+参数解释：
+  * -w：wordlist_TLAs.txt 指定字典文件
+  * -c：cisco.csv 输出文件
+
+==== 3、使用示范 ====
+
+----
+查询[[http://1ight.co|1ight.co]]的子域名信息：
+<code bash>
+light@kali:~# dnsmap 1ight.co -c Desktop/result.csv
+dnsmap 0.30 - DNS Network Mapper by pagvac (gnucitizen.org)
+
+[+] searching (sub)domains for 1ight.co using built-in wordlist
+[+] using maximum random delay of 10 millisecond(s) between requests
+....
+</code>
+
+==== 4、相关资源 ====
+
+----
+[[https://code.google.com/p/dnsmap/|dnsmap google code]]

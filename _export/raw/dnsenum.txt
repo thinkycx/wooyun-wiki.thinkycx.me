@@ -1,0 +1,117 @@
+====== dnsenum使用说明 ======
+
+==== 1、工具简介 ====
+
+----
+Dnsenum是一款非常强大的perl语言编写的多线程域名信息收集工具，它是由参与backtrack 开发项目的程序员所设计，设计者名叫Fillp (barbsie) Waeythens 。
+dnsenum的目的是尽可能收集一个域的信息，它能够通过谷歌或者字典文件猜测可能存在的域名，以及对一个网段进行反向查询。它可以查询网站的主机地址信息、域名服务器、mx record（函件交换记录），在域名服务器上执行axfr请求，通过谷歌脚本得到扩展域名信息（google hacking），提取自域名并查询，计算C类地址并执行whois查询，执行反向查询，把地址段写入文件。
+
+==== 2、使用方法 ====
+
+----
+终端直接输入“dnsenum -h”可以查看其相关参数用法：
+<code bash>
+light@kali:~# dnsenum -h
+dnsenum.pl VERSION:1.2.3
+Usage: dnsenum.pl [Options] <domain> 
+[Options]:
+Note: the brute force -f switch is obligatory.
+GENERAL OPTIONS:
+  --dnsserver 	<server>
+			Use this DNS server for A, NS and MX queries.
+  --enum		Shortcut option equivalent to --threads 5 -s 15 -w.
+  -h, --help		Print this help message.
+  --noreverse		Skip the reverse lookup operations.
+  --nocolor		Disable ANSIColor output.
+  --private		Show and save private ips at the end of the file domain_ips.txt.
+  --subfile <file>	Write all valid subdomains to this file.
+  -t, --timeout <value>	The tcp and udp timeout values in seconds (default: 10s).
+  --threads <value>	The number of threads that will perform different queries.
+  -v, --verbose		Be verbose: show all the progress and all the error messages.
+GOOGLE SCRAPING OPTIONS:
+  -p, --pages <value>	The number of google search pages to process when scraping names, 
+			the default is 5 pages, the -s switch must be specified.
+  -s, --scrap <value>	The maximum number of subdomains that will be scraped from Google (default 15).
+BRUTE FORCE OPTIONS:
+  -f, --file <file>	Read subdomains from this file to perform brute force.
+  -u, --update	<a|g|r|z>
+			Update the file specified with the -f switch with valid subdomains.
+	a (all)		Update using all results.
+	g		Update using only google scraping results.
+	r		Update using only reverse lookup results.
+	z		Update using only zonetransfer results.
+  -r, --recursion	Recursion on subdomains, brute force all discovred subdomains that have an NS record.
+WHOIS NETRANGE OPTIONS:
+  -d, --delay <value>	The maximum value of seconds to wait between whois queries, the value is defined randomly, default: 3s.
+  -w, --whois		Perform the whois queries on c class network ranges.
+			 **Warning**: this can generate very large netranges and it will take lot of time to performe reverse lookups.
+REVERSE LOOKUP OPTIONS:
+  -e, --exclude	<regexp>
+			Exclude PTR records that match the regexp expression from reverse lookup results, useful on invalid hostnames.
+OUTPUT OPTIONS:
+  -o --output <file>	Output in XML format. Can be imported in MagicTree (www.gremwell.com)
+
+</code>
+
+参数解释：
+  * -f dns.txt ：指定字典文件，可以换成 dns-big.txt 也可以自定义字典
+  * -dnsserver 8.8.8.8 ：指定dns服务器，一般可以直接使用目标dns服务器，（PS：8.8.8.8 是一个IP地址，是Google提供的免费dns服务器的IP地址，另一个是：8.8.4.4）
+  * -o output.txt ：结果在 output.txt文档里
+==== 3、使用示范 ====
+
+----
+查询[[http://1ight.co|1ight.co]]的DNS信息：
+<code bash>
+light@kali:~# dnsenum 1ight.co
+dnsenum.pl VERSION:1.2.3
+
+-----   1ight.co   -----
+
+
+Host's addresses:
+__________________
+
+1ight.co.                                5        IN    A        112.74.102.78
+
+
+Name Servers:
+______________
+
+f1g1ns1.dnspod.net.                      5        IN    A        111.30.132.180
+f1g1ns1.dnspod.net.                      5        IN    A        125.39.208.193
+f1g1ns1.dnspod.net.                      5        IN    A        180.153.9.189
+f1g1ns1.dnspod.net.                      5        IN    A        182.140.167.166
+f1g1ns1.dnspod.net.                      5        IN    A        113.108.80.138
+f1g1ns2.dnspod.net.                      5        IN    A        182.140.167.188
+f1g1ns2.dnspod.net.                      5        IN    A        115.236.137.40
+f1g1ns2.dnspod.net.                      5        IN    A        115.236.151.191
+f1g1ns2.dnspod.net.                      5        IN    A        112.90.82.194
+f1g1ns2.dnspod.net.                      5        IN    A        101.226.30.224
+
+
+Mail (MX) Servers:
+___________________
+
+mxbiz2.qq.com.                           5        IN    A        183.60.15.245
+mxbiz2.qq.com.                           5        IN    A        183.57.48.34
+mxbiz1.qq.com.                           5        IN    A        183.57.48.34
+mxbiz1.qq.com.                           5        IN    A        183.60.15.245
+
+
+Trying Zone Transfers and getting Bind Versions:
+_________________________________________________
+
+
+Trying Zone Transfer for 1ight.co on f1g1ns1.dnspod.net ... 
+AXFR record query failed: connection failed
+
+Trying Zone Transfer for 1ight.co on f1g1ns2.dnspod.net ... 
+AXFR record query failed: connection failed
+
+brute force file not specified, bay.
+</code>
+
+==== 4、相关资源 ====
+
+----
+[[https://github.com/fwaeytens/dnsenum|dnsenum git]]

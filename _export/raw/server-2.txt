@@ -1,0 +1,9 @@
+====== 服务端 ======
+
+
+- 常见的android服务端使用http/https协议，调用web服务器上的api进行工作。android服务端上的漏洞请参考[[enterprise:web|WEB应用]]节点。
+
+- 其他协议
+    + tcp
+    + xmpp
+    

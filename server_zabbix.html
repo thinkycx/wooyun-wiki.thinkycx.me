@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh"
+  lang="zh" dir="ltr" class="no-js">
+
+<!-- Mirrored from wiki.wooyun.org/server:zabbix by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 02:52:45 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>server:zabbix [WooYun WiKi]</title>
+  <script>(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)</script>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="shortcut icon" href="lib/tpl/bootstrap3/images/favicon.ico" />
+<link rel="apple-touch-icon" href="lib/tpl/bootstrap3/images/apple-touch-icon.png" />
+      <link type="text/css" rel="stylesheet" href="lib/tpl/bootstrap3/assets/bootstrap/css/bootstrap.min.css" />
+    <script type="text/javascript">/*<![CDATA[*/
+    var TPL_CONFIG = {"tableFullWidth":1};
+  /*!]]>*/</script>
+  <meta name="generator" content="DokuWiki"/>
+<meta name="robots" content="index,follow"/>
+<meta name="keywords" content="server,zabbix"/>
+<link rel="search" type="application/opensearchdescription+xml" href="lib/exe/opensearch.php" title="WooYun WiKi"/>
+<link rel="start" href="index.html"/>
+<link rel="contents" href="server_zabbixdecf.html?do=index" title="网站地图"/>
+<link rel="alternate" type="application/rss+xml" title="最近更改" href="feed.php"/>
+<link rel="alternate" type="application/rss+xml" title="当前命名空间" href="feed0688.php?mode=list&amp;ns=server"/>
+<link rel="alternate" type="text/html" title="纯HTML" href="_export/xhtml/server_zabbix.html"/>
+<link rel="alternate" type="text/plain" title="Wiki Markup 语言" href="_export/raw/zabbix.txt"/>
+<link rel="canonical" href="server_zabbix.html"/>
+<link rel="stylesheet" type="text/css" href="lib/exe/css70b4.css?t=bootstrap3&amp;tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"/>
+<script type="text/javascript">/*<![CDATA[*/var NS='server';var JSINFO = {"id":"server:zabbix","namespace":"server","plugin_codeprettify":{"loader_base":"\/lib\/plugins\/codeprettify\/google-code-prettify"}};
+/*!]]>*/</script>
+<script type="text/javascript" charset="utf-8" src="lib/exe/js1e16.php?tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"></script>
+<script type="text/javascript" charset="utf-8" src="lib/plugins/codeprettify/google-code-prettify/run_prettifyeb11.js?lang=css"></script>
+  <script type="text/javascript" src="lib/tpl/bootstrap3/assets/bootstrap/js/bootstrap.min.js"></script>
+  <style type="text/css">
+    body { padding-top: 20px; }
+  </style>
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script type="text/javascript" src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+  <script type="text/javascript" src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body class="default page-on-panel">
+  <!--[if lte IE 7 ]><div id="IE7"><![endif]--><!--[if IE 8 ]><div id="IE8"><![endif]-->
+
+  <div id="dokuwiki__site" class="container">
+    <div id="dokuwiki__top" class="site dokuwiki mode_show tpl_bootstrap3    hasSidebar">
+
+      
+      <!-- header -->
+      <div id="dokuwiki__header">
+        <nav class="navbar  navbar-default" role="navigation">
+
+  <div class="container-fluid">
+
+    <div class="navbar-header">
+
+      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      <a href="WooYun%20WiKi.html"  accesskey="h" title="[H]" class="navbar-brand"><img src="lib/tpl/bootstrap3/images/logo.png" alt="WooYun WiKi" class="pull-left" id="dw__logo" width="20" height="20" /> <span id="dw__title" >WooYun WiKi</span></a>
+    </div>
+
+    <div class="collapse navbar-collapse">
+
+      <ul class="nav navbar-nav" id="dw__navbar">
+        <li class="active">
+  <a href="WooYun%20WiKi.html" ><i class="glyphicon glyphicon-home"></i> Home</a></li>
+      </ul>
+
+      <div class="navbar-right">
+
+        <form action="http://wiki.wooyun.org/WooYun WiKi" accept-charset="utf-8" class="search" id="dw__search" method="get" role="search"><div class="no"><input type="hidden" name="do" value="search" /><input type="text" id="qsearch__in" accesskey="f" name="id" class="edit" title="[F]" /><input type="submit" value="搜索" class="button" title="搜索" /><div id="qsearch__out" class="ajax_qsearch JSpopup"></div></div></form>
+        <ul class="nav navbar-nav" id="dw__tools">
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="工具"><i class="glyphicon glyphicon-wrench"></i> <span class="hidden-lg hidden-md hidden-sm">工具</span> <span class="caret"></span></a>
+    <ul class="dropdown-menu tools" role="menu">
+
+      <!-- dokuwiki__usertools -->
+      <li class="dropdown-header"><i class="glyphicon glyphicon-user"></i> 用户工具</li>
+      
+      <li class="divider"></li>
+
+      <!-- dokuwiki__sitetools -->
+      <li class="dropdown-header"><i class="glyphicon glyphicon-cog"></i> 站点工具</li>
+      <li><a href="server_zabbix810b.html?do=recent"  class="action recent" accesskey="r" rel="nofollow" title="最近更改 [R]"><i class="glyphicon glyphicon-list-alt"></i> 最近更改</a></li><li><a href="server_zabbix6aa6.html?do=media&amp;ns=server"  class="action media" rel="nofollow" title="媒体管理器"><i class="glyphicon glyphicon-picture"></i> 媒体管理器</a></li><li><a href="server_zabbixdecf.html?do=index"  class="action index" accesskey="x" rel="nofollow" title="网站地图 [X]"><i class="glyphicon glyphicon-list"></i> 网站地图</a></li>
+      <li class="divider"></li>
+
+      <!-- dokuwiki__pagetools -->
+      <li class="dropdown-header"><i class="glyphicon glyphicon-file"></i> 页面工具</li>
+      <li><a href="server_zabbix39b4.html?do=edit"  class="action source" accesskey="v" rel="nofollow" title="显示源文件 [V]"><i class="glyphicon glyphicon-edit"></i> 显示源文件</a></li><li><a href="server_zabbix5f35.html?do=revisions"  class="action revs" accesskey="o" rel="nofollow" title="修订记录 [O]"><i class="glyphicon glyphicon-time"></i> 修订记录</a></li><li><a href="server_zabbix2271.html?do=backlink"  class="action backlink" rel="nofollow" title="反向链接"><i class="glyphicon glyphicon-link"></i> 反向链接</a></li><li><a href="#dokuwiki__top"  class="action top" accesskey="t" rel="nofollow" title="回到顶部 [T]"><i class="glyphicon glyphicon-chevron-up"></i> 回到顶部</a></li>
+    </ul>
+  </li>
+</ul>
+
+        <ul class="nav navbar-nav">
+          <li>
+                      </li>
+                    <li><a href="http://api.wooyun.org/login?client_id=Af29c304"  class="action login" rel="nofollow" title="登录"><i class="glyphicon glyphicon-log-in"></i> 登录</a></li>        </ul>
+
+      </div>
+
+    </div>
+  </div>
+</nav>
+      </div>
+      <!-- /header -->
+
+      
+            <div id="dw__breadcrumbs">
+        <hr/>
+                        <div class="breadcrumb hidden-print"><span class="bchead">您的足迹:</span> <span class="bcsep">•</span> <bdi><a href="server_ftp.html"  class="breadcrumbs" title="server:ftp">ftp</a></bdi> <span class="bcsep">•</span> <bdi><a href="server_mysql.html"  class="breadcrumbs" title="server:mysql">mysql</a></bdi> <span class="bcsep">•</span> <bdi><a href="server_mssql.html"  class="breadcrumbs" title="server:mssql">mssql</a></bdi> <span class="bcsep">•</span> <bdi><a href="server_memcached.html"  class="breadcrumbs" title="server:memcached">memcached</a></bdi> <span class="bcsep">•</span> <bdi><a href="server_mongodb.html"  class="breadcrumbs" title="server:mongodb">mongodb</a></bdi> <span class="bcsep">•</span> <bdi><a href="server_redis.html"  class="breadcrumbs" title="server:redis">redis</a></bdi> <span class="bcsep">•</span> <bdi><a href="server_nagios.html"  class="breadcrumbs" title="server:nagios">nagios</a></bdi> <span class="bcsep">•</span> <bdi><a href="server_rsync.html"  class="breadcrumbs" title="server:rsync">rsync</a></bdi> <span class="bcsep">•</span> <bdi><a href="server_snmp.html"  class="breadcrumbs" title="server:snmp">snmp</a></bdi> <span class="bcsep">•</span> <span class="curid"><bdi><a href="server_zabbix.html"  class="breadcrumbs" title="server:zabbix">zabbix</a></bdi></span></div>
+                <hr/>
+      </div>
+      
+      <p class="pageId text-right">
+        <span class="label label-default">server:zabbix</span>
+      </p>
+
+      <div id="dw__msgarea">
+              </div>
+
+      <main class="main row" role="main">
+
+        <!-- ********** ASIDE ********** -->
+<aside id="dokuwiki__aside" class="dw__sidebar col-sm-3 col-md-2 hidden-print">
+  <div class="content">
+    <div class="toogle hidden-lg hidden-md hidden-sm" data-toggle="collapse" data-target="#dokuwiki__aside .collapse">
+      <i class="glyphicon glyphicon-th-list"></i> 侧边栏    </div>
+    <div class="collapse in">
+            
+<h4 id="企业安全">企业安全</h4>
+<div class="level4">
+<ul>
+<li class="level1"><div class="li"><a href="enterprise_information.html" class="wikilink1" title="enterprise:information">信息收集</a></div>
+</li>
+<li class="level1"><div class="li"><a href="enterprise_server.html" class="wikilink1" title="enterprise:server">服务配置</a></div>
+</li>
+<li class="level1"><div class="li"><a href="enterprise_web.html" class="wikilink1" title="enterprise:web">Web应用</a></div>
+</li>
+<li class="level1"><div class="li"><a href="enterprise_tools.html" class="wikilink1" title="enterprise:tools">安全工具</a></div>
+</li>
+<li class="level1"><div class="li"><a href="enterprise_defence.html" class="wikilink1" title="enterprise:defence">安全防御</a></div>
+</li>
+<li class="level1"><div class="li"><a href="enterprise_pentest.html" class="wikilink1" title="enterprise:pentest">渗透技巧</a></div>
+</li>
+</ul>
+
+</div>
+
+<h4 id="android_安全">Android 安全</h4>
+<div class="level4">
+<ul>
+<li class="level1"><div class="li"><a href="android_client.html" class="wikilink1" title="android:client">客户端</a></div>
+</li>
+<li class="level1"><div class="li"><a href="android_system.html" class="wikilink1" title="android:system">系统</a></div>
+</li>
+<li class="level1"><div class="li"><a href="android_communicate.html" class="wikilink1" title="android:communicate">通信</a></div>
+</li>
+<li class="level1"><div class="li"><a href="android_server.html" class="wikilink1" title="android:server">服务端</a></div>
+</li>
+<li class="level1"><div class="li"><a href="android_tools.html" class="wikilink1" title="android:tools">常用工具</a></div>
+</li>
+</ul>
+
+</div>
+
+<h4 id="乌云">乌云</h4>
+<div class="level4">
+<ul>
+<li class="level1"><div class="li"><a href="wooyun_route.html" class="wikilink1" title="wooyun:route">乌云路由</a></div>
+</li>
+<li class="level1"><div class="li"><span class="curid"><a href="wooyun_woobuntu.html" class="wikilink1" title="wooyun:woobuntu">Woobuntu</a></span></div>
+</li>
+</ul>
+
+</div>
+
+<h4 id="apt">APT</h4>
+<div class="level4">
+<ul>
+<li class="level1"><div class="li"><a href="apt_organization.html" class="wikilink1" title="apt:organization">组织</a></div>
+</li>
+</ul>
+
+</div>
+
+<h4 id="find_us">Find Us</h4>
+<div class="level4">
+<ul>
+<li class="level1"><div class="li">Email: <a class="__cf_email__" href="cdn-cgi/l/email-protection.html" data-cfemail="7106181a1831061e1e08041f5f1e0316">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">
+/* <![CDATA[ */!function(){try{var t="currentScript"in document?document.currentScript:function(){for(var t=document.getElementsByTagName("script"),e=t.length;e--;)if(t[e].getAttribute("data-cfhash"))return t[e]}();if(t&&t.previousSibling){var e,r,n,i,c=t.previousSibling,a=c.getAttribute("data-cfemail");if(a){for(e="",r=parseInt(a.substr(0,2),16),n=2;a.length-n;n+=2)i=parseInt(a.substr(n,2),16)^r,e+=String.fromCharCode(i);e=document.createTextNode(e),c.parentNode.replaceChild(e,c)}t.parentNode.removeChild(t);}}catch(u){}}()/* ]]> */</script>
+</div>
+</li>
+</ul>
+
+</div>
+          </div>
+  </div>
+</aside>
+
+        <!-- ********** CONTENT ********** -->
+        <article id="dokuwiki__content" class="col-sm-9 col-md-10" >
+
+          <div class="panel panel-default" > 
+            <div class="page group panel-body">
+
+                                          
+              <div class="pull-right hidden-print" data-spy="affix" data-offset-top="150" style="z-index:1024; top:10px; right:10px;">
+                <!-- TOC START -->
+<div id="dw__toc">
+<h3 class="toggle">目录</h3>
+<div>
+
+<ul class="toc">
+<li class="level1"><div class="li"><a href="#zabbix安全配置">Zabbix安全配置</a></div>
+<ul class="toc">
+<li class="clear">
+<ul class="toc">
+<li class="level3"><div class="li"><a href="#zabbix简介">1、zabbix简介</a></div></li>
+<li class="level3"><div class="li"><a href="#zabbix服务架设">2、zabbix服务架设</a></div></li>
+<li class="level3"><div class="li"><a href="#错误配置以及利用">3、错误配置以及利用</a></div></li>
+<li class="level3"><div class="li"><a href="#zabbix前台注入">3.4 zabbix前台注入</a></div></li>
+<li class="level3"><div class="li"><a href="#实际案例">4、实际案例</a></div></li>
+<li class="level3"><div class="li"><a href="#修复方案">5、修复方案</a></div></li>
+<li class="level3"><div class="li"><a href="#发现问题">6、发现问题</a></div></li>
+<li class="level3"><div class="li"><a href="#相关资源">7、相关资源</a></div></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<!-- TOC END -->
+              </div>
+
+              <!-- wikipage start -->
+              
+<h1 class="sectionedit1" id="zabbix安全配置">Zabbix安全配置</h1>
+<div class="level1">
+
+</div>
+
+<h3 class="sectionedit2" id="zabbix简介">1、zabbix简介</h3>
+<div class="level3">
+<hr />
+
+<p>
+zabbix是一个基于WEB界面的提供分布式系统监视以及网络监视功能的企业级的开源解决方案。
+</p>
+
+<p>
+zabbix能监视各种网络参数，保证服务器系统的安全运营；并提供灵活的通知机制以让系统管理员快速定位/解决存在的各种问题。
+</p>
+
+<p>
+zabbix由2部分构成，zabbix server与可选组件zabbix agent。
+</p>
+
+<p>
+zabbix server可以通过SNMP，zabbix agent，ping，端口监视等方法提供对远程服务器/网络状态的监视，数据收集等功能，它可以运行在Linux，Solaris，HP-UX，AIX，Free BSD，Open BSD，OS X等平台上。
+</p>
+
+</div>
+
+<h3 class="sectionedit3" id="zabbix服务架设">2、zabbix服务架设</h3>
+<div class="level3">
+<hr />
+
+</div>
+
+<h4 id="zabbix-server安装">2.1 zabbix-server安装</h4>
+<div class="level4">
+
+<p>
+rpm安装的方式
+</p>
+<pre class="code bash">rpm <span class="re5">-ivh</span> http:<span class="sy0">//</span>repo.zabbix.com<span class="sy0">/</span>zabbix<span class="sy0">/</span><span class="nu0">2.4</span><span class="sy0">/</span>rhel<span class="sy0">/</span><span class="nu0">6</span><span class="sy0">/</span>x86_64<span class="sy0">/</span>zabbix-release-<span class="nu0">2.4</span>-<span class="nu0">1</span>.el6.noarch.rpm
+<span class="kw2">yum install</span> zabbix-server zabbix-web-mysql zabbix-zabbix-web zabbix-agent zabbix-get http mysql-server <span class="re5">-y</span></pre>
+
+<p>
+配置mysql数据库:
+</p>
+<pre class="code bash"><span class="kw2">vim</span> <span class="sy0">/</span>etc<span class="sy0">/</span>my.cnf
+<span class="co0">#默认字符集为utf-8</span>
+default-character-set = utf8
+<span class="co0">#innodb的每个表文件单独存储</span>
+innodb_file_per_table = <span class="nu0">1</span></pre>
+
+<p>
+创建相关的表
+</p>
+<pre class="code bash">mysql<span class="sy0">&gt;</span> create database zabbix character <span class="kw1">set</span> utf8;
+mysql<span class="sy0">&gt;</span> grant all privileges on zabbix.<span class="sy0">*</span> to zabbix<span class="sy0">@</span>localhost identified by <span class="st_h">'zabbix'</span>;</pre>
+
+<p>
+导入表结构
+</p>
+<pre class="code bash"><span class="kw3">cd</span> <span class="sy0">/</span>usr<span class="sy0">/</span>share<span class="sy0">/</span>doc<span class="sy0">/</span>zabbix-server-mysql-2.4.4<span class="sy0">/</span>create
+mysql <span class="re5">-uroot</span> <span class="re5">-Dzabbix</span> <span class="sy0">&lt;</span> schema.sql
+mysql <span class="re5">-uroot</span> <span class="re5">-Dzabbix</span> <span class="sy0">&lt;</span> images.sql
+mysql <span class="re5">-uroot</span> <span class="re5">-Dzabbix</span> <span class="sy0">&lt;</span> data.sql</pre>
+
+<p>
+配置zabbix-server
+</p>
+<pre class="code bash"><span class="kw2">vim</span> <span class="sy0">/</span>etc<span class="sy0">/</span>zabbix<span class="sy0">/</span>zabbix_server.conf
+<span class="re2">LogFile</span>=<span class="sy0">/</span>var<span class="sy0">/</span>log<span class="sy0">/</span>zabbix<span class="sy0">/</span>zabbix_server.log
+<span class="re2">LogFileSize</span>=<span class="nu0">0</span>
+<span class="re2">PidFile</span>=<span class="sy0">/</span>var<span class="sy0">/</span>run<span class="sy0">/</span>zabbix<span class="sy0">/</span>zabbix_server.pid
+<span class="re2">DBHost</span>=localhost
+<span class="re2">DBName</span>=zabbix
+<span class="re2">DBUser</span>=zabbix
+<span class="re2">DBPassword</span>=zabbix
+<span class="re2">DBSocket</span>=<span class="sy0">/</span>var<span class="sy0">/</span>lib<span class="sy0">/</span>mysql<span class="sy0">/</span>mysql.sock
+<span class="re2">DBPort</span>=<span class="nu0">3306</span>
+<span class="re2">StartPollers</span>=<span class="nu0">5</span>
+<span class="re2">SNMPTrapperFile</span>=<span class="sy0">/</span>var<span class="sy0">/</span>log<span class="sy0">/</span>snmptt<span class="sy0">/</span>snmptt.log
+<span class="re2">CacheSize</span>=256M
+<span class="re2">AlertScriptsPath</span>=<span class="sy0">/</span>etc<span class="sy0">/</span>zabbix<span class="sy0">/</span>script<span class="sy0">/</span>alertscripts
+<span class="re2">ExternalScripts</span>=<span class="sy0">/</span>etc<span class="sy0">/</span>zabbix<span class="sy0">/</span>script<span class="sy0">/</span>externalscripts
+<span class="sy0">/</span>etc<span class="sy0">/</span>init.d<span class="sy0">/</span>zabbix-server start
+<span class="sy0">/</span>etc<span class="sy0">/</span>init.d<span class="sy0">/</span>mysqld start
+<span class="sy0">/</span>etc<span class="sy0">/</span>init.d<span class="sy0">/</span>httpd start</pre>
+
+<p>
+浏览器<a href="http://ip/zabbix" class="urlextern" title="http://ip/zabbix"  rel="nofollow">http://ip/zabbix</a>　按照提示配置
+</p>
+
+</div>
+
+<h4 id="zabbix-agent安装">2.2 zabbix-agent安装</h4>
+<div class="level4">
+<pre class="code bash">rpm <span class="re5">-ivh</span> http:<span class="sy0">//</span>repo.zabbix.com<span class="sy0">/</span>zabbix<span class="sy0">/</span><span class="nu0">2.4</span><span class="sy0">/</span>rhel<span class="sy0">/</span><span class="nu0">6</span><span class="sy0">/</span>x86_64<span class="sy0">/</span>zabbix-release-<span class="nu0">2.4</span>-<span class="nu0">1</span>.el6.noarch.rpm
+<span class="kw2">yum install</span> zabbix zabbix-agent <span class="re5">-y</span></pre>
+
+<p>
+配置zabbix-agent
+</p>
+<pre class="code bash"><span class="kw2">vim</span> <span class="sy0">/</span>etc<span class="sy0">/</span>zabbix<span class="sy0">/</span>zabbix_agentd.conf
+<span class="re2">PidFile</span>=<span class="sy0">/</span>var<span class="sy0">/</span>run<span class="sy0">/</span>zabbix<span class="sy0">/</span>zabbix_agentd.pid
+<span class="re2">LogFile</span>=<span class="sy0">/</span>var<span class="sy0">/</span>log<span class="sy0">/</span>zabbix<span class="sy0">/</span>zabbix_agentd.log
+<span class="re2">LogFileSize</span>=<span class="nu0">0</span>
+<span class="re2">Server</span>=服务端IP
+<span class="re2">ServerActive</span>=服务端IP
+<span class="re2">Hostname</span>=主机名</pre>
+
+</div>
+
+<h3 class="sectionedit4" id="错误配置以及利用">3、错误配置以及利用</h3>
+<div class="level3">
+<hr />
+
+</div>
+
+<h4 id="默认密码或者弱口令">3.1 默认密码或者弱口令</h4>
+<div class="level4">
+
+<p>
+zabbix默认的口令为Admin:zabbix，或者存在弱口令，可以登录，登录后可以在后台自定义脚本，执行命令。
+</p>
+
+</div>
+
+<h4 id="开启guest账户">3.2 开启guest账户</h4>
+<div class="level4">
+
+<p>
+默认安装后是开启了guest账户的，如果没有禁止，可以通过guest账户登录，查看信息
+</p>
+
+</div>
+
+<h4 id="开启了guest同时版本号_208">3.3 开启了guest同时版本号&lt;= 2.0.8</h4>
+<div class="level4">
+
+<p>
+zabbix版本⇐2.0.8的时候，httpmon.php页面存在注入;开启了guest账户后可以直接访问，进行sql注入攻击。
+</p>
+
+<p>
+具体攻击方法参考:
+</p>
+
+<p>
+<a href="http://drops.wooyun.org/papers/680" class="urlextern" title="http://drops.wooyun.org/papers/680"  rel="nofollow">Zabbix SQL Injection/RCE – CVE-2013-5743</a>
+</p>
+
+</div>
+
+<h3 class="sectionedit5" id="zabbix前台注入">3.4 zabbix前台注入</h3>
+<div class="level3">
+
+<p>
+漏洞具体利用方法:
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-072075" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-072075"  rel="nofollow">Zabbix的前台SQL注射漏洞0day一枚（官方测试受到影响）</a>
+</p>
+
+</div>
+
+<h3 class="sectionedit6" id="实际案例">4、实际案例</h3>
+<div class="level3">
+<hr />
+
+</div>
+
+<h4 id="zabbix弱口令">4.1 zabbix弱口令</h4>
+<div class="level4">
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-069679" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-069679"  rel="nofollow">土豆某zabbix弱口令</a>
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-084596" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-084596"  rel="nofollow">中国科学院计算机网络信息中心zabbix弱口令，导致命令执行</a>
+</p>
+
+</div>
+
+<h4 id="zabbix的httpmonphp页面注入">4.2 zabbix的httpmon.php页面注入</h4>
+<div class="level4">
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-086349" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-086349"  rel="nofollow">京东某站shell直入jae内网物理机内核版本过低</a>
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-053420" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-053420"  rel="nofollow">乐视ZabbbixSQL注入导致命令执行</a>
+</p>
+
+</div>
+
+<h3 class="sectionedit7" id="修复方案">5、修复方案</h3>
+<div class="level3">
+<hr />
+
+<p>
+zabbix最好不要放在外网
+</p>
+
+<p>
+修改默认账户密码，同时禁用guest用户
+</p>
+
+<p>
+对于重点的zabbix-server，最好能够做ACL访问限制
+</p>
+
+</div>
+
+<h3 class="sectionedit8" id="发现问题">6、发现问题</h3>
+<div class="level3">
+<hr />
+
+<p>
+收集企业WEB应用，是否包含Zabbix。
+</p>
+
+</div>
+
+<h3 class="sectionedit9" id="相关资源">7、相关资源</h3>
+<div class="level3">
+<hr />
+
+<p>
+<a href="http://drops.wooyun.org/papers/680" class="urlextern" title="http://drops.wooyun.org/papers/680"  rel="nofollow">Zabbix SQL Injection/RCE – CVE-2013-5743</a>
+</p>
+
+<p>
+<a href="http://drops.wooyun.org/tips/68" class="urlextern" title="http://drops.wooyun.org/tips/68"  rel="nofollow">当渗透遇到zabbix--小谈zabbix安全</a>
+</p>
+
+<p>
+<a href="http://www.wooyun.org/bugs/wooyun-2010-072075" class="urlextern" title="http://www.wooyun.org/bugs/wooyun-2010-072075"  rel="nofollow">Zabbix的前台SQL注射漏洞0day一枚（官方测试受到影响）</a>
+</p>
+
+</div>
+
+              <!-- wikipage stop -->
+
+                            
+            </div>
+          </div>
+
+        </article>
+
+        
+      </main>
+
+      <footer id="dokuwiki__footer" class="small hidden-print">
+
+        <a href="javascript:void(0)" class="back-to-top hidden-print btn btn-default btn-sm" title="跳至内容>" id="back-to-top"><i class="glyphicon glyphicon-chevron-up"></i></a>
+
+                <div class="text-center">
+          <p id="dw__license">
+                      </p>
+                  </div>
+      </footer>
+
+      
+    </div><!-- /site -->
+
+    <div class="no"><img src="lib/exe/indexer9d20.gif?id=server%3Azabbix&amp;1449197450" width="2" height="1" alt="" /></div>
+    <div id="screen__mode" class="no">
+      <span class="visible-xs"></span>
+      <span class="visible-sm"></span>
+      <span class="visible-md"></span>
+      <span class="visible-lg"></span>
+    </div>
+  </div>
+  <!--[if ( lte IE 7 | IE 8 ) ]></div><![endif]-->
+</body>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "http://hm.baidu.com/hm.js?2e9369dace9479584f08203285c7cbce";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<!-- Mirrored from wiki.wooyun.org/server:zabbix by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 02:52:47 GMT -->
+</html>

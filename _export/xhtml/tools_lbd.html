@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/tools:lbd by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:25:28 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8" />
+  <title>tools:lbd</title>
+<meta name="generator" content="DokuWiki"/>
+<meta name="robots" content="index,follow"/>
+<meta name="keywords" content="tools,lbd"/>
+<link rel="search" type="application/opensearchdescription+xml" href="../../lib/exe/opensearch.php" title="WooYun WiKi"/>
+<link rel="start" href="../../index.html"/>
+<link rel="contents" href="../../tools_lbddecf.html?do=index" title="网站地图"/>
+<link rel="alternate" type="application/rss+xml" title="最近更改" href="../../feed.php"/>
+<link rel="alternate" type="application/rss+xml" title="当前命名空间" href="../../feed022e.php?mode=list&amp;ns=tools"/>
+<link rel="alternate" type="text/html" title="纯HTML" href="tools_lbd.html"/>
+<link rel="alternate" type="text/plain" title="Wiki Markup 语言" href="../raw/lbd.txt"/>
+<link rel="canonical" href="../../tools_lbd.html"/>
+<link rel="stylesheet" type="text/css" href="../../lib/exe/css70b4.css?t=bootstrap3&amp;tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"/>
+<script type="text/javascript">/*<![CDATA[*/var NS='tools';var JSINFO = {"id":"tools:lbd","namespace":"tools","plugin_codeprettify":{"loader_base":"\/lib\/plugins\/codeprettify\/google-code-prettify"}};
+/*!]]>*/</script>
+<script type="text/javascript" charset="utf-8" src="../../lib/exe/js1e16.php?tseed=6dcbf66232c3759c28d0e8f6d9cdfd22"></script>
+<script type="text/javascript" charset="utf-8" src="../../lib/plugins/codeprettify/google-code-prettify/run_prettifyeb11.js?lang=css"></script>
+</head>
+<body>
+<div class="dokuwiki export">
+<!-- TOC START -->
+<div id="dw__toc">
+<h3 class="toggle">目录</h3>
+<div>
+
+<ul class="toc">
+<li class="level1"><div class="li"><a href="#lbd使用说明">lbd使用说明</a></div>
+<ul class="toc">
+<li class="clear">
+<ul class="toc">
+<li class="level3"><div class="li"><a href="#工具简介">1、工具简介</a></div></li>
+<li class="level3"><div class="li"><a href="#使用方法">2、使用方法</a></div></li>
+<li class="level3"><div class="li"><a href="#使用示范">3、使用示范</a></div></li>
+<li class="level3"><div class="li"><a href="#相关资源">4、相关资源</a></div></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<!-- TOC END -->
+
+<h1 class="sectionedit1" id="lbd使用说明">lbd使用说明</h1>
+<div class="level1">
+
+</div>
+<!-- EDIT1 SECTION "lbd使用说明" [1-31] -->
+<h3 class="sectionedit2" id="工具简介">1、工具简介</h3>
+<div class="level3">
+<hr />
+
+<p>
+一款负载均衡探测器，检查目标站点是否使用了负载均衡。
+</p>
+
+</div>
+<!-- EDIT2 SECTION "1、工具简介" [32-144] -->
+<h3 class="sectionedit3" id="使用方法">2、使用方法</h3>
+<div class="level3">
+<hr />
+
+<p>
+终端直接输入“lbd”可以查看其相关参数用法：
+</p>
+<pre class="code bash">options:
+	<span class="re5">-c</span> shell commands	<span class="kw2">as</span> <span class="sy0">`</span>-e<span class="st_h">'; use /bin/sh to exec [dangerous!!]
+	-e filename		program to exec after connect [dangerous!!]
+	-b			allow broadcasts
+	-g gateway		source-routing hop point[s], up to 8
+	-G num			source-routing pointer: 4, 8, 12, ...
+	-h			this cruft
+	-i secs			delay interval for lines sent, ports scanned
+        -k                      set keepalive option on socket
+	-l			listen mode, for inbound connects
+	-n			numeric-only IP addresses, no DNS
+	-o file			hex dump of traffic
+	-p port			local port number
+	-r			randomize local and remote ports
+	-q secs			quit after EOF on stdin and delay of secs
+	-s addr			local source address
+	-T tos			set Type Of Service
+	-t			answer TELNET negotiation
+	-u			UDP mode
+	-v			verbose [use twice to be more verbose]
+	-w secs			timeout for connects and final net reads
+	-z			zero-I/O mode [used for scanning]</span></pre>
+
+</div>
+<!-- EDIT3 SECTION "2、使用方法" [145-1128] -->
+<h3 class="sectionedit4" id="使用示范">3、使用示范</h3>
+<div class="level3">
+<hr />
+
+<p>
+查询<a href="http://wooyun.org/" class="urlextern" title="http://wooyun.org"  rel="nofollow">wooyun.org</a>是否使用了负载均衡：
+</p>
+<pre class="code bash"><span class="co4">light@kali:~# </span>lbd wooyun.org
+&nbsp;
+lbd - load balancing detector <span class="nu0">0.1</span> - Checks <span class="kw1">if</span> a given domain uses load-balancing.
+                                    Written by Stefan Behte <span class="br0">&#40;</span>http:<span class="sy0">//</span>ge.mine.nu<span class="br0">&#41;</span>
+                                    Proof-of-concept<span class="sy0">!</span> Might give <span class="kw2">false</span> positives.
+&nbsp;
+Checking <span class="kw1">for</span> DNS-Loadbalancing: NOT FOUND
+Checking <span class="kw1">for</span> HTTP-Loadbalancing <span class="br0">&#91;</span>Server<span class="br0">&#93;</span>: 
+ yunjiasu-nginx
+ NOT FOUND
+&nbsp;
+Checking <span class="kw1">for</span> HTTP-Loadbalancing <span class="br0">&#91;</span>Date<span class="br0">&#93;</span>: 05:<span class="nu0">42</span>:<span class="nu0">50</span>, 05:<span class="nu0">42</span>:<span class="nu0">50</span>, 05:<span class="nu0">42</span>:<span class="nu0">51</span>, 05:<span class="nu0">42</span>:<span class="nu0">51</span>, 05:<span class="nu0">42</span>:<span class="nu0">51</span>, 05:<span class="nu0">42</span>:<span class="nu0">51</span>, 05:<span class="nu0">42</span>:<span class="nu0">51</span>, 05:<span class="nu0">42</span>:<span class="nu0">51</span>, 05:<span class="nu0">42</span>:<span class="nu0">51</span>, 05:<span class="nu0">42</span>:<span class="nu0">51</span>, 05:<span class="nu0">42</span>:<span class="nu0">51</span>, 05:<span class="nu0">42</span>:<span class="nu0">51</span>, 05:<span class="nu0">42</span>:<span class="nu0">52</span>, 05:<span class="nu0">42</span>:<span class="nu0">52</span>, 05:<span class="nu0">42</span>:<span class="nu0">52</span>, 05:<span class="nu0">42</span>:<span class="nu0">52</span>, 05:<span class="nu0">42</span>:<span class="nu0">52</span>, 05:<span class="nu0">42</span>:<span class="nu0">52</span>, 05:<span class="nu0">42</span>:<span class="nu0">52</span>, 05:<span class="nu0">42</span>:<span class="nu0">52</span>, 05:<span class="nu0">42</span>:<span class="nu0">52</span>, 05:<span class="nu0">42</span>:<span class="nu0">52</span>, 05:<span class="nu0">42</span>:<span class="nu0">53</span>, 05:<span class="nu0">42</span>:<span class="nu0">53</span>, 05:<span class="nu0">42</span>:<span class="nu0">53</span>, 05:<span class="nu0">42</span>:<span class="nu0">53</span>, 05:<span class="nu0">42</span>:<span class="nu0">53</span>, 05:<span class="nu0">42</span>:<span class="nu0">53</span>, 05:<span class="nu0">42</span>:<span class="nu0">53</span>, 05:<span class="nu0">42</span>:<span class="nu0">53</span>, 05:<span class="nu0">42</span>:<span class="nu0">53</span>, 05:<span class="nu0">42</span>:<span class="nu0">53</span>, 05:<span class="nu0">42</span>:<span class="nu0">54</span>, 05:<span class="nu0">42</span>:<span class="nu0">54</span>, 05:<span class="nu0">42</span>:<span class="nu0">54</span>, 05:<span class="nu0">42</span>:<span class="nu0">55</span>, 05:<span class="nu0">42</span>:<span class="nu0">55</span>, 05:<span class="nu0">42</span>:<span class="nu0">56</span>, 05:<span class="nu0">42</span>:<span class="nu0">57</span>, 05:<span class="nu0">42</span>:<span class="nu0">58</span>, 05:<span class="nu0">42</span>:<span class="nu0">58</span>, 05:<span class="nu0">42</span>:<span class="nu0">59</span>, 05:<span class="nu0">42</span>:<span class="nu0">59</span>, 05:<span class="nu0">42</span>:<span class="nu0">59</span>, 05:<span class="nu0">42</span>:<span class="nu0">59</span>, 05:<span class="nu0">42</span>:<span class="nu0">59</span>, 05:<span class="nu0">42</span>:<span class="nu0">59</span>, 05:<span class="nu0">42</span>:<span class="nu0">59</span>, 05:<span class="nu0">42</span>:<span class="nu0">59</span>, 05:<span class="nu0">43</span>:00, NOT FOUND
+&nbsp;
+Checking <span class="kw1">for</span> HTTP-Loadbalancing <span class="br0">&#91;</span>Diff<span class="br0">&#93;</span>: FOUND
+<span class="sy0">&lt;</span> CF-RAY: 20297812c9eb174c-SZX
+<span class="sy0">&gt;</span> CF-RAY: 20297813828e1740-SZX
+&nbsp;
+wooyun.org does Load-balancing. Found via Methods: HTTP<span class="br0">&#91;</span>Diff<span class="br0">&#93;</span></pre>
+
+</div>
+<!-- EDIT4 SECTION "3、使用示范" [1129-2362] -->
+<h3 class="sectionedit5" id="相关资源">4、相关资源</h3>
+<div class="level3">
+<hr />
+
+<p>
+暂无
+</p>
+
+</div>
+<!-- EDIT5 SECTION "4、相关资源" [2363-] --></div>
+</body>
+
+<!-- Mirrored from wiki.wooyun.org/_export/xhtml/tools:lbd by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Dec 2015 03:25:28 GMT -->
+</html>

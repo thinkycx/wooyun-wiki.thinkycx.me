@@ -1,0 +1,45 @@
+#WEB-INF/web.xml泄露
+##1、web.xml简介
+WEB-INF是Java的WEB应用的安全目录。如果想在页面中直接访问其中的文件，必须通过web.xml文件对要访问的文件进行相应映射才能访问。
+
+WEB-INF主要包含一下文件或目录：
+
+	/WEB-INF/web.xml：Web应用程序配置文件，描述了 servlet 和其他的应用组件配置及命名规则。
+	/WEB-INF/classes/：含了站点所有用的 class 文件，包括 servlet class 和非servlet class，他们不能包含在 .jar文件中
+	/WEB-INF/lib/：存放web应用需要的各种JAR文件，放置仅在这个应用中要求使用的jar文件,如数据库驱动jar文件
+	/WEB-INF/src/：源码目录，按照包名结构放置各个java文件。
+	/WEB-INF/database.properties：数据库配置文件
+
+
+##2、漏洞成因
+通常一些web应用我们会使用多个web服务器搭配使用，解决其中的一个web服务器的性能缺陷以及做均衡负载的优点和完成一些分层结构的安全策略等。在使用这种架构的时候，由于对静态资源的目录或文件的映射配置不当，可能会引发一些的安全问题，导致web.xml等文件能够被读取。
+
+
+##3、漏洞检测以及利用方法
+通过找到web.xml文件，推断class文件的路径，最后直接class文件，在通过反编译class文件，得到网站源码。
+
+
+##4、实际案例
+
+[[http://www.wooyun.org/bugs/wooyun-2010-094544|欧朋浏览器多站配置不当泄漏敏感信息]]
+
+[[http://www.wooyun.org/bugs/wooyun-2012-07329|去哪儿任意文件读取（基本可重构该系统原工程）]]
+
+[[http://www.wooyun.org/bugs/wooyun-2010-091995|tcl某站一种类型配置不当可getshell入内网]]
+
+[[http://www.wooyun.org/bugs/wooyun-2010-061490|从一个小缺陷看某金融支付机构存在的安全隐患]]
+
+[[http://www.wooyun.org/bugs/wooyun-2012-011730|百度某应用beidou（北斗）架构遍历]]
+
+##5、修复漏洞
+通过Nginx配置禁止访问一些铭感目录
+
+	location ~ ^/WEB-INF/* { deny all; }
+
+##6、相关资源
+
+[[http://drops.wooyun.org/papers/60|web服务器分层架构的资源文件映射安全以及在J2EE应用中的利用与危害]]
+
+[[http://baike.baidu.com/view/1745468.htm|WEB-INF简介]]
+
+[[http://drops.wooyun.org/tips/163|攻击JavaWeb应用[1]-JavaEE 基础]]

